@@ -2047,7 +2047,7 @@ namespace WindowsFormsApp1
                     int hold_max_update = Convert.ToInt32(hold_status_update[1]);
                     max_hoid.Text = (hold_update + 1) + "/" + hold_max_update;
 
-                    //매매 횟수업데이트
+                    //매매 횟수업데이트(Independent Mode)
                     if (utility.buy_INDEPENDENT)
                     {
                         string[] trade_status = maxbuy_acc.Text.Split('/');
@@ -2539,7 +2539,6 @@ namespace WindowsFormsApp1
                         Transaction_Detail(order_number);
 
                         System.Threading.Thread.Sleep(200);
-
 
                         //
                         row["보유수량"] = $"{left_Acc}/0";
