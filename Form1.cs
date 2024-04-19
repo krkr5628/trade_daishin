@@ -22,10 +22,34 @@ namespace WindowsFormsApp1
     {
         //-----------------------------------공용 신호----------------------------------------
 
-        static public string[] arrCondition = { };
-        static public string[] account;
+        public static string[] arrCondition = { };
+        public static string[] account;
         public int login_check = 1;
         private bool isRunned = false;
+
+        //-----------------------------------공통 Obj----------------------------------------
+
+        private CPUTILLib.CpCybos CpCybos; //?
+        private CPUTILLib.CpStockCode CpStockCode; //?
+        private CPUTILLib.CpCodeMgr CpCodeMgr; //?
+        private CPTRADELib.CpTdUtil CpTdUtil; //?
+        private CPTRADELib.CpTd6033 CpTd6033;
+        private CPTRADELib.CpTd6032 CpTd6032; //매도실현손익(제세금, 수수료 포함)
+        private CPTRADELib.CpTd5341 CpTd5341; //매매내역
+        private CPSYSDIBLib.CssStgList CssStgList; //조건식 받기
+        private CPSYSDIBLib.CssWatchStgControl CssWatchStgControl; // 실시간 조건식 등록 및 해제
+        private CPSYSDIBLib.CssStgFind CssStgFind; //초기 종목 검색 리스트
+        private CPSYSDIBLib.MarketEye MarketEye; //초기 종목 검색 정보
+        private CPSYSDIBLib.CssWatchStgSubscribe CssWatchStgSubscribe; // 일련번호 받기
+        private CPSYSDIBLib.CssAlert CssAlert; // 종목 편출입
+        private DSCBO1Lib.StockCur StockCur; // 실시간 종목 시세(관심종목)
+        private CPTRADELib.CpTd0311 CpTd0311; //현금주문
+        private DSCBO1Lib.CpConclusion CpConclusion; //실시간 체결 내역
+
+        //-----------------------------------전용 신호j----------------------------------------
+
+        private string Master_code = "01";
+        private string ISA_code = "11";
 
         //-----------------------------------------------Main------------------------------------------------
         public Trade_Auto()

@@ -11,10 +11,14 @@ namespace WindowsFormsApp1
     class utility
     {
         //check 변수
-        public static string system_route = "C:\\Users\\krkr5\\OneDrive\\바탕 화면\\project\\password\\setting.txt";
+        public static string system_route = "C:\\Users\\krkr5\\OneDrive\\바탕 화면\\project\\password\\setting_daishin.txt";
         public static bool load_check = false;
 
         //global 변수
+        public static string real_id; //아이디
+        public static string real_password; //비밀번호
+        public static string real_cert_password; //공인인증서 비밀번호
+
         public static bool auto_trade_allow; //자동실행 여부
         public static string market_start_time; //자동 운영 시간
         public static string market_end_time; //계좌 번호
@@ -144,9 +148,21 @@ namespace WindowsFormsApp1
         {
             StreamReader reader = new StreamReader(filepath);
 
-            //자동실행
+            //아이디
+            String[] real_id_tmp = reader.ReadLine().Split('/');
+            real_id = real_id_tmp[1];
+
+            //비밀번호
+            String[] real_password_tmp = reader.ReadLine().Split('/');
+            real_password = real_password_tmp[1];
+
+            //공인인증서 비밀번호
             String[] auto_trade_allow_tmp = reader.ReadLine().Split('/');
             auto_trade_allow = Convert.ToBoolean(auto_trade_allow_tmp[1]);
+
+            //자동실행
+            String[] real_cert_password_tmp = reader.ReadLine().Split('/');
+            real_cert_password = real_cert_password_tmp[1];
 
             //자동 운영 시간
             String[] time_tmp = reader.ReadLine().Split('/');

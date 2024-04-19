@@ -656,6 +656,9 @@ namespace WindowsFormsApp1
                     //임시저장
                     List<String> tmp = new List<String>();
 
+                    tmp.Add("아이디/" + real_id_text.Text);
+                    tmp.Add("비밀번호/" + real_password_text.Text);
+                    tmp.Add("공인인증서/" + real_cert_password_text.Text);
                     tmp.Add("자동실행/" + Convert.ToString(auto_trade_allow.Checked));
                     tmp.Add("자동운영시간/" + market_start_time.Text + "/" + market_end_time.Text);
                     tmp.Add("계좌번호/" + account_list.Text);
@@ -750,6 +753,18 @@ namespace WindowsFormsApp1
 
             //파일 주소 확인
             setting_name.Text = filepath;
+
+            //아이디
+            String[] real_id_tmp = reader.ReadLine().Split('/');
+            real_id_text.Text = real_id_tmp[1];
+
+            //비밀번호
+            String[] real_password_tmp = reader.ReadLine().Split('/');
+            real_password_text.Text = real_password_tmp[1];
+
+            //공인인증서 비밀번호
+            String[] real_cert_password_tmp = reader.ReadLine().Split('/');
+            real_cert_password_text.Text = real_cert_password_tmp[1];
 
             //자동실행
             String[] auto_trade_allow_tmp = reader.ReadLine().Split('/');
