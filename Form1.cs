@@ -16,6 +16,10 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using System.Windows.Forms;
 
+using Microsoft.Win32;
+using System.Diagnostics;
+using System.Security.Principal;
+
 namespace WindowsFormsApp1
 {
     public partial class Trade_Auto : Form
@@ -50,6 +54,7 @@ namespace WindowsFormsApp1
 
         private string Master_code = "01";
         private string ISA_code = "11";
+        private bool Checked_Trade_Init; //?
 
         //-----------------------------------------------Main------------------------------------------------
         public Trade_Auto()
@@ -64,12 +69,11 @@ namespace WindowsFormsApp1
             //기존 세팅 로드
             utility.setting_load_auto();
 
+            //초기 선언
+            initial_load();
+
             //메인 시간 동작
             timer1.Start(); //시간 표시 - 1000ms
-
-            //-------------------로그인 이벤트 동작-------------------
-            axKHOpenAPI1.OnEventConnect += onEventConnect; //로그인 상태 확인(ID,NAME,계좌번호,KEYBOARD,FIREWALL,조건식)
-            axKHOpenAPI1.OnReceiveConditionVer += onReceiveConditionVer; //조건식 조회
 
             //-------------------버튼-------------------
             Login_btn.Click += login_btn; //로그인
@@ -86,13 +90,6 @@ namespace WindowsFormsApp1
             All_clear_btn.Click += All_clear_btn_Click;
             profit_clear_btn.Click += Profit_clear_btn_Click;
             loss_clear_btn.Click += Loss_clear_btn_Click;
-
-            //----------------데이터 조회 이벤트 동작-------------------
-            axKHOpenAPI1.OnReceiveTrData += onReceiveTrData; //TR조회
-            axKHOpenAPI1.OnReceiveTrCondition += onReceiveTrCondition; //매도 및 실시간 조건식 종목 정보 받기
-            axKHOpenAPI1.OnReceiveRealCondition += onReceiveRealCondition; //실시간 조건식 편출입 종목 받기
-            axKHOpenAPI1.OnReceiveRealData += onReceiveRealData; //실시간 조건식 시세 받기
-            axKHOpenAPI1.OnReceiveChejanData += onReceiveChejanData; //매매 정보 받기
         }
 
         //-----------------------------------storage----------------------------------------
@@ -119,83 +116,36 @@ namespace WindowsFormsApp1
 
         //------------------------------------------공용기능-------------------------------------------
 
-        //timer1(1000ms) : 주기 고정
-        private void ClockEvent(object sender, EventArgs e)
+        //모든주문오브젝트는사용하기전에, 필수적으로 TradeInit을호출
+        private bool TradeInit()
         {
-            //시간표시
-            timetimer.Text = DateTime.Now.ToString("yy MM-dd (ddd) HH:mm:ss");
+            if (Checked_Trade_Init)
+                return true;
 
-            //Telegram 전송
-            if (utility.load_check && utility.Telegram_Allow && telegram_chat.Count > 0)
+            int rv = CpTdUtil.TradeInit(0);
+
+            if (rv == 0)
             {
-                telegram_send(telegram_chat.Dequeue());
+                Checked_Trade_Init = true;
+                return true;
             }
-
-            if (utility.load_check) Opeartion_Time();
-
-        }
-
-        //운영시간 확인
-        private async void Opeartion_Time()
-        {
-            //운영시간 확인
-            DateTime t_now = DateTime.Now;
-            DateTime t_start = DateTime.Parse(utility.market_start_time);
-            DateTime t_end = DateTime.Parse(utility.market_end_time);
-
-            //운영시간 아님
-            if (!isRunned && t_now >= t_start && t_now <= t_end)
+            else if (rv == -1)
             {
-                isRunned = true;
-                //초기 설정 반영
-                await initial_allow();
-
-                //로그인
-                await Task.Run(() =>
-                {
-                    axKHOpenAPI1.CommConnect();
-                });
-
-                timer3.Start(); //편입 종목 감시 - 200ms
-
+                MessageBox.Show("계좌 비밀번호 오류 포함 에러.");
+                Checked_Trade_Init = false;
+                return false;
             }
-            else if (isRunned && t_now > t_end)
+            else if (rv == 1)
             {
-                isRunned = false;
-                real_time_stop(true);
+                MessageBox.Show("OTP/보안카드키가 잘못되었습니다.");
+                Checked_Trade_Init = false;
+                return false;
             }
-        }
-
-        //화면번호
-        private int _screenNo = 1001;
-        private string GetScreenNo()
-        {
-            //화면번호 : 조회나 주문등 필요한 기능을 요청할때 이를 구별하기 위한 키값
-            //0000(혹은 0)을 제외한 임의의 네자리 숫자
-            //개수가 200개로 한정, 이 개수를 넘지 않도록 관리
-            //200개를 넘는 경우 조회 결과나 주문 결과에 다른 데이터가 섞이거나 원하지 않는 결과가 나타날 수 있다.
-            if (_screenNo < 1200)
-                _screenNo++;
             else
-                _screenNo = 1001;
-            return _screenNo.ToString();
-        }
-
-
-        //CommRqData 에러 목록
-        private void GetErrorMessage(int errorcode)
-        {
-            switch (errorcode)
             {
-                case 0:
-                    WriteLog_System("정상조회\n");
-                    break;
-                case 200:
-                    WriteLog_System("시세과부화\n");
-                    break;
-                case 201:
-                    WriteLog_System("조회전문작성 에러\n");
-                    break;
+                MessageBox.Show("Error");
+                Checked_Trade_Init = false;
+                return false;
             }
         }
 
@@ -370,6 +320,207 @@ namespace WindowsFormsApp1
             //
             WriteLog_System("세팅 반영 완료\n");
             telegram_message("세팅 반영 완료\n");
+        }
+
+        //초기선언
+        private void initial_load()
+        {
+            CpCybos = new CPUTILLib.CpCybos();
+            CpTdUtil = new CPTRADELib.CpTdUtil();
+            CpTd6033 = new CPTRADELib.CpTd6033();
+            CpTd6032 = new CPTRADELib.CpTd6032();//매도실현손익(제세금, 수수료 포함)
+            CpTd5341 = new CPTRADELib.CpTd5341(); //매매내역
+            CssStgList = new CPSYSDIBLib.CssStgList(); //조건식 받기
+            CssWatchStgControl = new CPSYSDIBLib.CssWatchStgControl(); // 실시간 조건식 등록 및 해제
+            CssStgFind = new CPSYSDIBLib.CssStgFind(); //초기 종목 검색 리스트
+            MarketEye = new CPSYSDIBLib.MarketEye(); //초기 종목 검색 정보
+            CssWatchStgSubscribe = new CPSYSDIBLib.CssWatchStgSubscribe(); // 일련번호 받기
+            CssAlert = new CPSYSDIBLib.CssAlert(); // 종목 편출입
+            CssAlert.Received += new CPSYSDIBLib._ISysDibEvents_ReceivedEventHandler(stock_in_out);
+            StockCur = new DSCBO1Lib.StockCur(); // 실시간 종목 시세(관심종목)
+            StockCur.Received += new DSCBO1Lib._IDibEvents_ReceivedEventHandler(stock_real_price);
+            //
+            CpTd0311 = new CPTRADELib.CpTd0311(); //현금주문
+            //
+            CpConclusion = new DSCBO1Lib.CpConclusion(); //실시간 체결 내역
+            CpConclusion.Subscribe(); //실시간 체결 등록
+            CpConclusion.Received += new DSCBO1Lib._IDibEvents_ReceivedEventHandler(trade_check);
+            //
+            Checked_Trade_Init = false;
+        }
+
+        //------------------------------------Main_Start---------------------------------
+        //timer1(1000ms) : 주기 고정
+        private void ClockEvent(object sender, EventArgs e)
+        {
+            //시간표시
+            timetimer.Text = DateTime.Now.ToString("yy MM-dd (ddd) HH:mm:ss");
+
+            //Telegram 전송
+            if (utility.load_check && utility.Telegram_Allow && telegram_chat.Count > 0)
+            {
+                telegram_send(telegram_chat.Dequeue());
+            }
+
+            if (utility.load_check) Opeartion_Time();
+
+        }
+
+        //운영시간 확인
+        private async void Opeartion_Time()
+        {
+            //운영시간 확인
+            DateTime t_now = DateTime.Now;
+            DateTime t_start = DateTime.Parse(utility.market_start_time);
+            DateTime t_end = DateTime.Parse(utility.market_end_time);
+
+            //운영시간 아님
+            if (!isRunned && t_now >= t_start && t_now <= t_end)
+            {
+                isRunned = true;
+                //초기 설정 반영
+                await initial_allow();
+
+                //로그인
+                await Task.Run(() =>
+                {
+                    Initial_Daishin();
+                });
+
+                timer3.Start(); //편입 종목 감시 - 200ms
+
+            }
+            else if (isRunned && t_now > t_end)
+            {
+                isRunned = false;
+                real_time_stop(true);
+            }
+        }
+
+        //------------------------------------Login---------------------------------
+
+        //관리자 권한 실행 및 프로그램 설치 확인
+        private void Initial_Daishin()
+        {
+
+            //관리자권한 실행 확인
+            WindowsIdentity identity = WindowsIdentity.GetCurrent();
+            WindowsPrincipal principal = new WindowsPrincipal(identity);
+            if (principal.IsInRole(WindowsBuiltInRole.Administrator))
+            {
+                WriteLog_System("[실행/정상] 관리자 권한 실행\n");
+            }
+            else
+            {
+                MessageBox.Show("관리자 권한 실행 요망");
+                return;
+            }
+
+            //CreaonApi 실행
+            RegistryKey key = Registry.CurrentUser.OpenSubKey("Software\\Creon\\dstarter");
+            string path = key.GetValue("path").ToString();
+            if (path == "")
+            {
+                WriteLog_System("[설치/실패] 크레온 플러스 설치 요망\n");
+            }
+            else
+            {
+                //프로세스 명 얻기
+                string programName = System.IO.Path.GetFileNameWithoutExtension("C:\\daishin\\CYBOSPLUS\\CpStart.exe");
+                //프로세스 실행중인지 확인
+                if (Process.GetProcessesByName(programName).Length > 0)
+                {
+                    RequestConnection();
+                }
+                else
+                {
+                    Process.Start(path + "\\coStarter.exe", $"/prj:cp /id:{real_id} /pwd:{real_password} /pwdcert:{real_cert_password} /autostart");
+                    RequestConnection();
+                }
+            }
+
+        }
+
+        //타이머 생성
+        private System.Timers.Timer Timer_Connection;
+        private int Timer_Count;
+
+        //연결 시간 체크를 위한 타이머 생성
+        public void RequestConnection()
+        {
+            Timer_Connection = new System.Timers.Timer();
+            Timer_Connection.Interval = 1000;
+            //타이머가 지정된 시간 간격이 지나고 난 후 발생하는 이벤트
+            Timer_Connection.Elapsed += new ElapsedEventHandler(TimerConnection_Elapsed);
+            Timer_Connection.Start();
+            Timer_Count = 0;
+        }
+
+        //연결 시간 체크
+        private void TimerConnection_Elapsed(object sender, ElapsedEventArgs e)
+        {
+            if (Timer_Count > 180)
+            {
+                Timer_Connection.Stop();
+                Timer_Connection.Dispose();
+                Timer_Connection = null;
+                Timer_Count = 0;
+            }
+
+            Timer_Count += 1;
+
+            // UI 스레드로 작업을 전달
+            this.Invoke((MethodInvoker)delegate
+            {
+                Connection_Check();
+            });
+        }
+
+        //연결확인
+        private void Connection_Check()
+        {
+            //공통 Object?
+            CpCybos = new CPUTILLib.CpCybos();
+
+            //연결 확인
+            if (CpCybos.IsConnect != 0)
+            {
+                Timer_Connection.Stop();
+                Timer_Connection.Dispose();
+                Timer_Connection = null;
+                Timer_Count = 0;
+                WriteLog_System("[연결/정상] 연결\n");
+                //
+                initial_process();
+            }
+        }
+
+        //------------------------------------Login이후 동작---------------------------------
+        //------------------------------------Login이후 동작---------------------------------
+        //------------------------------------Login이후 동작---------------------------------
+        //------------------------------------Login이후 동작---------------------------------
+
+        private void initial_process()
+        {
+            account(); //계좌 번호
+            User_Money(); //D+2 예수금 + 계좌 보유 종목
+            Profit(); //매도실현손익(제세금, 수수료 포함)
+            trade_detail(); //매매내역
+            condition_load(); //조건식 로드
+        }
+
+        //계좌번호목록(마스터계좌)
+        private void account()
+        {
+            if (TradeInit())
+            {
+                string[] arrAccount = (string[])CpTdUtil.AccountNumber;
+                if (arrAccount.Length > 0)
+                {
+                    account_num = arrAccount[0];
+                    WriteLog_System("[계좌번호] : " + account_num + "\n");
+                }
+            }
         }
 
         //
@@ -708,8 +859,6 @@ namespace WindowsFormsApp1
             int result = axKHOpenAPI1.CommRqData("계좌별주문체결내역상세요청/" + order_number, "OPW00007", 0, GetScreenNo());
             WriteLog_System("[계좌별주문체결내역상세요청/에러확인] : " + result + "\n");
         }
-
-        //전체 종목 업데이트
 
         //--------------------------------TR TABLE--------------------------------------------
 
