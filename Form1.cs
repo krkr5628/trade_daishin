@@ -661,7 +661,8 @@ namespace WindowsFormsApp1
             WriteLog_System("[당일매매일지요청/에러확인] : " + result + "\n");
         }
 
-        //체결내역업데이트(주문번호)
+        //체결내역업데이트(주문번호) => 매매내역 정보
+        //https://money2.daishin.com/e5/mboard/ptype_basic/HTS_Plus_Helper/DW_Basic_Read.aspx?boardseq=291&seq=174&page=2&searchString=&p=&v=&m=
         private void Transaction_Detail(string order_number)
         {
             //초기값 세팅
@@ -692,7 +693,7 @@ namespace WindowsFormsApp1
 
                 for (int i = 0; i < Convert.ToInt32(CpTd5341.GetHeaderValue(6)); i++)
                 {
-                    string transaction_number = axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, i, "주문번호").Trim();
+                    string transaction_number = Convert.ToString(CpTd5341.GetDataValue(1, i)).Trim(); //주문번호
                     string average_price = string.Format("{0:#,##0}", Convert.ToDecimal(axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, i, "체결단가").Trim().TrimStart('0') == "" ? "0" : axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, i, "체결단가").Trim().TrimStart('0')));
                     string gubun = axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, i, "매매구분").Trim();
 
