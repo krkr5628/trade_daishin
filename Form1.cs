@@ -225,6 +225,7 @@ namespace WindowsFormsApp1
             dataGridView1.DataSource = dtCondStock;
 
             DataTable dataTable2 = new DataTable();
+            dataTable2.Columns.Add("구분코드", typeof(string));
             dataTable2.Columns.Add("종목코드", typeof(string)); //고정
             dataTable2.Columns.Add("종목명", typeof(string)); //고정
             dataTable2.Columns.Add("현재가", typeof(string)); //실시간 변경
@@ -238,6 +239,7 @@ namespace WindowsFormsApp1
             dataGridView2.DataSource = dtCondStock_hold;
 
             DataTable dataTable3 = new DataTable();
+            dataTable3.Columns.Add("구분코드", typeof(string));
             dataTable3.Columns.Add("종목번호", typeof(string));
             dataTable3.Columns.Add("종목명", typeof(string));
             dataTable3.Columns.Add("주문시간", typeof(string));
@@ -563,6 +565,7 @@ namespace WindowsFormsApp1
                     
                     //보유계좌 테이블
                     DataTable dataTable2 = new DataTable();
+                    dataTable2.Columns.Add("구분코드", typeof(string));
                     dataTable2.Columns.Add("종목코드", typeof(string));
                     dataTable2.Columns.Add("종목명", typeof(string));
                     dataTable2.Columns.Add("현재가", typeof(string));
@@ -578,6 +581,7 @@ namespace WindowsFormsApp1
                     {
                         string average_price = string.Format("{0:#,##0}", Convert.ToInt32(axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, i, "평균단가").Trim()));
                         dataTable2.Rows.Add(
+                            "01",
                             CpTd5341.GetDataValue(12, i).Trim(); //종목코드(A Type) => string
                             CpTd5341.GetDataValue(0, i).Trim(); //종목명 => string
                             "0", //현재가
@@ -681,6 +685,7 @@ namespace WindowsFormsApp1
             {
                 //테이블 생성
                 DataTable dataTable3 = new DataTable();
+                dataTable3.Columns.Add("구분코드", typeof(string));
                 dataTable3.Columns.Add("종목번호", typeof(string));
                 dataTable3.Columns.Add("종목명", typeof(string));
                 dataTable3.Columns.Add("주문시간", typeof(string));
@@ -693,9 +698,9 @@ namespace WindowsFormsApp1
 
                 for (int i = 0; i < Convert.ToInt32(CpTd5341.GetHeaderValue(6)); i++)
                 {
-                    string transaction_number = Convert.ToString(CpTd5341.GetDataValue(1, i)).Trim(); //주문번호
-                    string average_price = string.Format("{0:#,##0}", Convert.ToDecimal(axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, i, "체결단가").Trim().TrimStart('0') == "" ? "0" : axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, i, "체결단가").Trim().TrimStart('0')));
-                    string gubun = axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, i, "매매구분").Trim();
+                    string transaction_number = Convert.ToString(CpTd5341.GetDataValue(1, i)).Trim(); //주문번호 => long
+                    string average_price = string.Format("{0:#,##0}", Convert.ToDecimal(CpTd5341.GetDataValue(11, i))); => long
+                    string gubun = axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, i, "매매구분").Trim(); => string
 
                     //매수완료 후 실제 편입가 업데이트
                     if (transaction_number.Equals(condition_nameORcode))
@@ -717,8 +722,9 @@ namespace WindowsFormsApp1
 
                     //기본동작
                     dataTable3.Rows.Add(
-                        axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, i, "종목번호").Trim().Replace("A", ""),
-                        axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, i, "종목명").Trim(),
+                        CpTd5341.GetDataValue(0, i), //상품관리구분코드 => string
+                        CpTd5341.GetDataValue(3, i), //종목코드 => string
+                        CpTd5341.GetDataValue(4, i), //종목명 => string
                         axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, i, "주문시간").Trim(),
                         transaction_number,
                         gubun,
@@ -733,8 +739,6 @@ namespace WindowsFormsApp1
                     dataGridView1.DataSource = dtCondStock;   
 
                     //
-                    string tmp1 = CpTd5341.GetDataValue(0, i); //상품관리구분코드
-                    string tmp2 = Convert.ToString(CpTd5341.GetDataValue(1, i)); //주문번호
                     string tmp3 = CpTd5341.GetDataValue(3, i); //종목코드
                     string tmp4 = CpTd5341.GetDataValue(4, i); //종목이름
                     string tmp5 = Convert.ToString(CpTd5341.GetDataValue(7, i)); //주문수량
