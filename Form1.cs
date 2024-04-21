@@ -1101,33 +1101,66 @@ namespace WindowsFormsApp1
             if (result == 0)
             {
                 //
+                int Native_Price = Convert.ToInt32(MarketEye.GetDataValue(2, 0)); //현재가 => long or float
+                string Current_Price = string.Format("{0:#,##0}", Native_Price); //현재가 => long or float
+                string time = DateTime.Now.ToString("HH:mm:ss");
                 string Code_name = MarketEye.GetDataValue(4, 0); //종목명 => string
+                string Status = "매수완료";
+                string now_hold = hold_num;
+                string high = Convert.ToInt32(MarketEye.GetDataValue(5, 0));
                 //
                 DataRow[] findRows = dtCondStock_hold.Select($"종목코드 = {Code}");
                 //
-                WriteLog_Stock($"[기존종목/편입] : {Code_name}({Code})\n");
-                telegram_message($"[기존종목/편입] : {Code_name}({Code})\n");
+                if(condition_name != "HTS매매" && condition_name != "전일보유")
+                {
+                    //
+                    Status = utility.buy_AND ? "호출" : "대기";
+
+                    //최소 및 최대 매수가 확인
+                    if (Native_Price < Convert.ToInt32(utility.min_price) || Native_Price > Convert.ToInt32(utility.max_price)) return;
+
+                    //기존 보유 종목으로 인하여 포함된게 있을 경우 이탈
+                    if (dtCondStock.Select($"종목코드 = {Code}").Length == 1) return;
+
+                    //
+                    lock (buy_lock)
+                    {
+                        if (!buy_runningCodes.ContainsKey(Code) && !utility.buy_AND)
+                        {
+                            Status = buy_check(Code, Code_name, string.Format("{0:#,##0}", Current_Price), time, high, false, condition_name);
+                        }
+                    }
+                }
+                //
+                if (Status.StartsWith("매수중"))
+                {
+                    now_hold = Status.Split('/')[1];
+                    Status = "매수중";
+                }
+                //
+                WriteLog_Stock($"[{condition_name}/편입] : {Code_name}({Code})\n");
+                telegram_message($"[{condition_name}/편입] : {Code_name}({Code})\n");
                 //
                 dtCondStock.Rows.Add(
                     "편입",
-                    "매수완료",
+                    Status,
                     Code,
                     Code_name,
-                    string.Format("{0:#,##0}", Convert.ToInt32(MarketEye.GetDataValue(2, 0))), //현재가 => long or float
+                    Current_Price,
                     string.Format("{0:#,##0.00}%", "00.00"), //전일대비
                     string.Format("{0:#,##0}", Convert.ToInt32(MarketEye.GetDataValue(3, 0))), //거래량 => ulong
-                    "실매입",
-                    findRows[0]["평균단가"].ToString(),
+                    condition_name == "HTS매매" || condition_name == "전일보유" ? "실매입" : "진입가",
+                    condition_name == "HTS매매" || condition_name == "전일보유" ? findRows[0]["평균단가"].ToString() : Current_Price,
                     "-",
                     "0.00%",
-                    hold_num + "/" + hold_num,
+                    hold_num + "/" + now_hold,
                     condition_name,
-                    DateTime.Now.ToString("HH:mm:ss"),
+                    time,
                     "-",
-                    "-",
+                    condition_name == "HTS매매" ? time : "-",
                     "-",
                     Code,
-                    string.Format("{0:#,##0}", Convert.ToInt32(MarketEye.GetDataValue(5, 0))) //상한가 => long or float)
+                    string.Format("{0:#,##0}", high) //상한가 => long or float)
                 );
                 dataGridView1.DataSource = dtCondStock;
                 
@@ -1703,7 +1736,6 @@ namespace WindowsFormsApp1
                         return;
                     }
 
-                    //
                     Stock_info(Condition_Name, Stock_Code, "");
                     break;
 
