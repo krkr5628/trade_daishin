@@ -675,8 +675,8 @@ namespace WindowsFormsApp1
                     tmp.Add("매수시간전검출매수금지/" + Convert.ToString(before_time_deny.Checked));
                     tmp.Add("보유종목매수금지/" + Convert.ToString(hold_deny.Checked));
                     //
-                    tmp.Add("매수조건/" + Convert.ToString(buy_condition.Checked) + "/" + buy_condition_start.Text + "/" + buy_condition_end.Text + "/" + (Fomula_list_buy.Text.Equals("") ? "9999" : Fomula_list_buy.Text) + "/" + Convert.ToString(buy_mode_or.Checked) + "/" + Convert.ToString(buy_mode_and.Checked) + "/" + Convert.ToString(buy_mode_independent.Checked));
-                    tmp.Add("매도조건/" + Convert.ToString(sell_condition.Checked) + "/" + sell_condition_start.Text + "/" + sell_condition_end.Text + "/" + Convert.ToString(Fomula_list_sell.SelectedIndex) + "/" + Fomula_list_sell.Text);
+                    tmp.Add("매수조건;" + Convert.ToString(buy_condition.Checked) + ";" + buy_condition_start.Text + ";" + buy_condition_end.Text + ";" + (Fomula_list_buy.Text.Equals("") ? "9999" : Fomula_list_buy.Text) + ";" + Convert.ToString(buy_mode_or.Checked) + ";" + Convert.ToString(buy_mode_and.Checked) + ";" + Convert.ToString(buy_mode_independent.Checked));
+                    tmp.Add("매도조건;" + Convert.ToString(sell_condition.Checked) + ";" + sell_condition_start.Text + ";" + sell_condition_end.Text + ";" + Convert.ToString(Fomula_list_sell.SelectedIndex) + ";" + Fomula_list_sell.Text);
                     tmp.Add("익절/" + Convert.ToString(profit_percent.Checked) + "/" + profit_percent_text.Text);
                     tmp.Add("익절원/" + Convert.ToString(profit_won.Checked) + "/" + profit_won_text.Text);
                     tmp.Add("익절TS/" + Convert.ToString(profit_ts.Checked) + "/" + profit_ts_text.Text);
@@ -832,7 +832,7 @@ namespace WindowsFormsApp1
             hold_deny.Checked = Convert.ToBoolean(hold_deny_tmp[1]);
 
             //매수조건
-            String[] buy_condition_tmp = reader.ReadLine().Split('/');
+            String[] buy_condition_tmp = reader.ReadLine().Split(';');
             buy_condition.Checked = Convert.ToBoolean(buy_condition_tmp[1]);
             buy_condition_start.Text = buy_condition_tmp[2];
             buy_condition_end.Text = buy_condition_tmp[3];
@@ -862,7 +862,7 @@ namespace WindowsFormsApp1
             buy_mode_independent.Checked = Convert.ToBoolean(buy_condition_tmp[7]);
 
             //매도조건
-            String[] sell_condition_tmp = reader.ReadLine().Split('/');
+            String[] sell_condition_tmp = reader.ReadLine().Split(';');
             sell_condition.Checked = Convert.ToBoolean(sell_condition_tmp[1]);
             sell_condition_start.Text = sell_condition_tmp[2];
             sell_condition_end.Text = sell_condition_tmp[3];

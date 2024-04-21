@@ -157,12 +157,12 @@ namespace WindowsFormsApp1
             real_password = real_password_tmp[1];
 
             //공인인증서 비밀번호
-            String[] auto_trade_allow_tmp = reader.ReadLine().Split('/');
-            auto_trade_allow = Convert.ToBoolean(auto_trade_allow_tmp[1]);
-
-            //자동실행
             String[] real_cert_password_tmp = reader.ReadLine().Split('/');
             real_cert_password = real_cert_password_tmp[1];
+
+            //자동실행
+            String[] auto_trade_allow_tmp = reader.ReadLine().Split('/');
+            auto_trade_allow = Convert.ToBoolean(auto_trade_allow_tmp[1]);
 
             //자동 운영 시간
             String[] time_tmp = reader.ReadLine().Split('/');
@@ -226,7 +226,7 @@ namespace WindowsFormsApp1
             hold_deny = Convert.ToBoolean(hold_deny_tmp[1]);
 
             //매수조건
-            String[] buy_condition_tmp = reader.ReadLine().Split('/');
+            String[] buy_condition_tmp = reader.ReadLine().Split(';');
             buy_condition = Convert.ToBoolean(buy_condition_tmp[1]);
             buy_condition_start = buy_condition_tmp[2];
             buy_condition_end = buy_condition_tmp[3];
@@ -236,7 +236,7 @@ namespace WindowsFormsApp1
             buy_INDEPENDENT = Convert.ToBoolean(buy_condition_tmp[7]);
 
             //매도조건
-            String[] sell_condition_tmp = reader.ReadLine().Split('/');
+            String[] sell_condition_tmp = reader.ReadLine().Split(';');
             sell_condition = Convert.ToBoolean(sell_condition_tmp[1]);
             sell_condition_start = sell_condition_tmp[2];
             sell_condition_end = sell_condition_tmp[3];

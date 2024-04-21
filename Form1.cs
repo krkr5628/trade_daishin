@@ -349,7 +349,6 @@ namespace WindowsFormsApp1
             CpTd0311 = new CPTRADELib.CpTd0311(); //현금주문
             //
             CpConclusion = new DSCBO1Lib.CpConclusion(); //실시간 체결 내역
-            CpConclusion.Subscribe(); //실시간 체결 등록
             CpConclusion.Received += new DSCBO1Lib._IDibEvents_ReceivedEventHandler(Trade_Check);
             //
             Checked_Trade_Init = false;
@@ -707,7 +706,7 @@ namespace WindowsFormsApp1
                 await initial_allow();
 
                 //로그인
-                await Task.Run(() =>
+                this.Invoke((MethodInvoker)delegate
                 {
                     Initial_Daishin();
                 });
@@ -737,7 +736,7 @@ namespace WindowsFormsApp1
             }
             else
             {
-                MessageBox.Show("관리자 권한 실행 요망");
+                WriteLog_System("관리자 권한 실행 요망");
                 return;
             }
 
@@ -833,6 +832,7 @@ namespace WindowsFormsApp1
             Transaction_Detail(""); //매매내역
             Condition_load(); //조건식 로드
             CssAlert.Subscribe(); //실시간 편출입 받기
+            CpConclusion.Subscribe(); //실시간 체결 등록
         }
 
         //계좌번호목록(마스터계좌)
@@ -1364,19 +1364,24 @@ namespace WindowsFormsApp1
             //
             if (result == 0)
             {
+                List<String> condi_tmp = new List<string>();
                 //초기화
                 conditionInfo.Clear();
                 //
                 for (int i = 0; i < Convert.ToInt32(CssStgList.GetHeaderValue(0)); i++)
                 {
+                    string index_tmp = CssStgList.GetDataValue(1, i); //전략ID
+                    string name_tmp = CssStgList.GetDataValue(0, i); //전략명
                     conditionInfo.Add(new ConditionInfo
                     {
-                        Index = CssStgList.GetDataValue(1, i), //전략ID
-                        Name = CssStgList.GetDataValue(0, i) //전략명
+                        Index = index_tmp,
+                        Name = name_tmp
                     });
+                    condi_tmp.Add(index_tmp + "^" + name_tmp);
                 }
                 //
                 WriteLog_System("조건식 조회 성공\n");
+                arrCondition = condi_tmp.ToArray();
             }
             //
             auto_allow();
@@ -1432,6 +1437,8 @@ namespace WindowsFormsApp1
 
         //------------------------------실시간 실행 초기 시작 모음-------------------------------------
 
+        private int prober = 1;
+
         //매도 전용 조건식 검색
         private void normal_search(object sender, EventArgs e)
         {
@@ -1482,7 +1489,7 @@ namespace WindowsFormsApp1
 
                 //종목 검색 요청
                 CssWatchStgControl.SetInputValue(0, condition[0]); //전략ID
-                CssWatchStgControl.SetInputValue(1, 1); //감시 일련번호
+                CssWatchStgControl.SetInputValue(1, prober++); //감시 일련번호
                 CssWatchStgControl.SetInputValue(2, '1'); //감시시작
                                                           //
                 int result = CssWatchStgControl.BlockRequest();
@@ -1566,11 +1573,13 @@ namespace WindowsFormsApp1
                 //마지막 조건식 검색 시각 업데이트
                 condInfo.LastRequestTime = DateTime.Now;
 
+                System.Threading.Thread.Sleep(500);
+
                 //종목 검색 요청
                 CssWatchStgControl.SetInputValue(0, condition[0]); //전략ID
-                CssWatchStgControl.SetInputValue(1, 1); //감시 일련번호
+                CssWatchStgControl.SetInputValue(1, prober++); //감시 일련번호
                 CssWatchStgControl.SetInputValue(2, '1'); //감시시작
-                                                          //
+
                 int result = CssWatchStgControl.BlockRequest();
                 //
                 if (result == 0)
