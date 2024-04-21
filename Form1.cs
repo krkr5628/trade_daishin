@@ -350,7 +350,7 @@ namespace WindowsFormsApp1
             //
             CpConclusion = new DSCBO1Lib.CpConclusion(); //실시간 체결 내역
             CpConclusion.Subscribe(); //실시간 체결 등록
-            CpConclusion.Received += new DSCBO1Lib._IDibEvents_ReceivedEventHandler(trade_check);
+            CpConclusion.Received += new DSCBO1Lib._IDibEvents_ReceivedEventHandler(Trade_Check);
             //
             Checked_Trade_Init = false;
         }
@@ -401,27 +401,26 @@ namespace WindowsFormsApp1
                 return;
             }
 
-            if (axKHOpenAPI1.GetConnectState() == 0)
-            {
-                MessageBox.Show("Open API 연결되어 있지 않습니다.", "알림", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return;
-            }
-
             if (string.IsNullOrEmpty(Stock_code.Text.Trim()))
             {
-                MessageBox.Show("종목코드를 입력해주세요.", "알림", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                WriteLog_System($"[종목검색] : 종목코드를 입력해주세요\n");
                 return;
             }
-
-            WriteLog_System("[종목 조회]\n");
-            SearchStockInfo(Stock_code.Text.Trim());
-
-        }
-
-        private void SearchStockInfo(string code)
-        {
-            axKHOpenAPI1.SetInputValue("종목코드", code);
-            int result = axKHOpenAPI1.CommRqData("주식기본정보", "OPT10001", 0, GetScreenNo());
+            //종목코드, 시간, 현재가, 거래량, 종목명, 상한가
+            int[] items = { 0, 1, 4, 10, 17, 33 };
+            MarketEye.SetInputValue(0, items);
+            MarketEye.SetInputValue(1, Stock_code.Text.Trim());
+            //
+            int result = MarketEye.BlockRequest();
+            //
+            if (result == 0)
+            {
+                string tmp1 = MarketEye.GetDataValue(4, 0); //종목명 => string
+                string tmp2 = Convert.ToInt32(MarketEye.GetDataValue(2, 0)); //현재가 => long or float
+                string tmp3 = Convert.ToInt32(MarketEye.GetDataValue(3, 0)); //거래량 => ulong
+                string tmp4 = Convert.ToInt32(MarketEye.GetDataValue(5, 0)); //상한가 => long or float)
+                WriteLog_System($"[종목검색] : {tmp1}/{tmp2}/{tmp3}/{tmp4})\n");
+            }
         }
 
         private void real_time_search_btn(object sender, EventArgs e)
@@ -465,14 +464,48 @@ namespace WindowsFormsApp1
                     for (int i = 0; i < condition.Length; i++)
                     {
                         string[] tmp = condition[i].Split('^');
-                        axKHOpenAPI1.SendConditionStop(GetScreenNo(), tmp[1], Convert.ToInt32(tmp[0])); //조건검색 중지
+                        //
+                        int conditon_SubCode = condition_sub_code(tmp[0]);
+                        if (conditon_SubCode == -1)
+                        {
+                            WriteLog_System($"[Condition/{tmp[1]}] : 일련번호 없음 \n");
+                            return;
+                        }
+                        CssWatchStgControl.SetInputValue(0, tmp[0]); //전략ID
+                        CssWatchStgControl.SetInputValue(1, conditon_SubCode); //감시 일련번호
+                        CssWatchStgControl.SetInputValue(2, '3'); //감시 취소
+                                                                  //
+                        int result = CssWatchStgControl.BlockRequest();
+                        //
+                        if (result == 0)
+                        {
+                            int result_type = Convert.ToInt32(CssWatchStgControl.GetHeaderValue(0));
+                            if (result_type == 0)
+                            {
+                                WriteLog_System($"[실시간매수조건/{tmp[1]}] : 초기상태 \n");
+                                telegram_message($"[실시간매수조건/{tmp[1]}] : 초기상태 \n");
+                            }
+                            else if (result_type == 1)
+                            {
+                                WriteLog_System($"[실시간매수조건/{tmp[1]}] : 감시중 \n");
+                                telegram_message($"[실시간매수조건/{tmp[1]}] : 감시중 \n");
+                            }
+                            else if (result_type == 2)
+                            {
+                                WriteLog_System($"[실시간매수조건/{tmp[1]}] : 감시중단 \n");
+                                telegram_message($"[실시간매수조건/{tmp[1]}] : 감시중단 \n");
+                            }
+                            else
+                            {
+                                WriteLog_System($"[실시간매수조건/{tmp[1]}] : 등록취소 \n");
+                                telegram_message($"[실시간매수조건/{tmp[1]}] : 등록취소 \n");
+                            }
+                        }
                     }
-                    WriteLog_System("[실시간매수조건/중단]\n");
-                    telegram_message("[실시간매수조건/중단]\n");
                 }
             }
 
-            //매수 조건식 중단
+            //매도 조건식 중단
             if (utility.sell_condition)
             {
                 // 검색된 조건식이 없을시
@@ -490,21 +523,75 @@ namespace WindowsFormsApp1
                     for (int i = 0; i < condition.Length; i++)
                     {
                         string[] tmp = condition[i].Split('^');
-                        axKHOpenAPI1.SendConditionStop(GetScreenNo(), tmp[1], Convert.ToInt32(tmp[0])); //조건검색 중지
+                        //
+                        int conditon_SubCode = condition_sub_code(tmp[0]);
+                        if (conditon_SubCode == -1)
+                        {
+                            WriteLog_System($"[Condition/{tmp[1]}] : 일련번호 없음 \n");
+                            return;
+                        }
+                        CssWatchStgControl.SetInputValue(0, tmp[0]); //전략ID
+                        CssWatchStgControl.SetInputValue(1, conditon_SubCode); //감시 일련번호
+                        CssWatchStgControl.SetInputValue(2, '3'); //감시 취소
+                                                                  //
+                        int result = CssWatchStgControl.BlockRequest();
+                        //
+                        if (result == 0)
+                        {
+                            int result_type = Convert.ToInt32(CssWatchStgControl.GetHeaderValue(0));
+                            if (result_type == 0)
+                            {
+                                WriteLog_System($"[실시간매수조건/{tmp[1]}] : 초기상태 \n");
+                                telegram_message($"[실시간매수조건/{tmp[1]}] : 초기상태 \n");
+                            }
+                            else if (result_type == 1)
+                            {
+                                WriteLog_System($"[실시간매수조건/{tmp[1]}] : 감시중 \n");
+                                telegram_message($"[실시간매수조건/{tmp[1]}] : 감시중 \n");
+                            }
+                            else if (result_type == 2)
+                            {
+                                WriteLog_System($"[실시간매수조건/{tmp[1]}] : 감시중단 \n");
+                                telegram_message($"[실시간매수조건/{tmp[1]}] : 감시중단 \n");
+                            }
+                            else
+                            {
+                                WriteLog_System($"[실시간매수조건/{tmp[1]}] : 등록취소 \n");
+                                telegram_message($"[실시간매수조건/{tmp[1]}] : 등록취소 \n");
+                            }
+                        }
                     }
-                    WriteLog_System("[실시간매도조건/중단]\n");
-                    telegram_message("[실시간매도조건/중단]\n");
                 }
             }
 
             //완전 전체 중단
             if (real_price_all_stop)
             {
-                axKHOpenAPI1.SetRealRemove("ALL", "ALL"); //실시간 시세 중지
+                if (dtCondStock.Rows.Count > 0)
+                {
+                    foreach (DataRow row in dtCondStock.Rows)
+                    {
+                        StockCur.SetInputValue(0, row["종목코드"].ToString());
+                        StockCur.Unsubscribe();
+                    }
+                }
                 timer3.Stop();//계좌 탐색 중단
                 WriteLog_System("[실시간시세/중단]\n");
                 telegram_message("[실시간시세/중단]\n");
             }
+        }
+
+        //일련번호 받기
+        private int condition_sub_code(string condition_code)
+        {
+            CssWatchStgSubscribe.SetInputValue(0, condition_code);
+            //
+            int result = CssWatchStgSubscribe.BlockRequest();
+            if (result == 0)
+            {
+                return CssWatchStgSubscribe.GetHeaderValue(0);
+            }
+            return -1;
         }
 
         //전체 청산 버튼
@@ -873,7 +960,7 @@ namespace WindowsFormsApp1
                 string Code = row["종목코드"].ToString();
                 string Hold_num = row["보유수량"].ToString();
                 //
-                Stock_info("기존보유", Code, Hold_num);
+                Stock_info("전일보유", Code, Hold_num);
             }
 
             //
@@ -1000,7 +1087,7 @@ namespace WindowsFormsApp1
 
         //------------------------------------종목 정보 받기 및 시세 등록---------------------------------
 
-        //종목 정보 받기
+        //종목 정보 받기(전일, 초기, 편출입)
         //https://money2.daishin.com/e5/mboard/ptype_basic/HTS_Plus_Helper/DW_Basic_Read.aspx?boardseq=285&seq=131&page=1&searchString=MarketEye&p=&v=&m=
         private void Stock_info(string condition_name, string Code, string hold_num)
         {
@@ -2291,7 +2378,7 @@ namespace WindowsFormsApp1
         }
 
         //------------주문 상태 확인 및 정정---------------------
-        private void onReceiveChejanData(object sender, AxKHOpenAPILib._DKHOpenAPIEvents_OnReceiveChejanDataEvent e)
+        private void Trade_Check()
         {
             /*
             e.sGubun 0 신규주문
