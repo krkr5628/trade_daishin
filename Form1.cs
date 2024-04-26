@@ -46,7 +46,7 @@ namespace WindowsFormsApp1
         private CPTRADELib.CpTd6032 CpTd6032; //매도실현손익(제세금, 수수료 포함)
         private CPTRADELib.CpTd5341 CpTd5341; //매매내역
         private CPSYSDIBLib.CssStgList CssStgList; //조건식 받기
-        private CPSYSDIBLib.CssWatchStgControl CssWatchStgControl; // 실시간 조건식 등록 및 해제
+        //private CPSYSDIBLib.CssWatchStgControl CssWatchStgControl; // 실시간 조건식 등록 및 해제
         private CPSYSDIBLib.CssStgFind CssStgFind; //초기 종목 검색 리스트
         private CPSYSDIBLib.MarketEye MarketEye; //초기 종목 검색 정보
         private CPSYSDIBLib.CssWatchStgSubscribe CssWatchStgSubscribe; // 일련번호 받기
@@ -200,6 +200,20 @@ namespace WindowsFormsApp1
             }
         }
 
+        //일련번호 받기
+        //https://money2.creontrade.com/e5/mboard/ptype_basic/HTS_Plus_Helper/DW_Basic_Read_Page.aspx?boardseq=284&seq=239&page=1&searchString=CssWatchStgSubscribe&p=8841&v=8643&m=9505
+        private int condition_sub_code(string condition_code)
+        {
+            CssWatchStgSubscribe.SetInputValue(0, condition_code);
+            //
+            int result = CssWatchStgSubscribe.BlockRequest();
+            if (result == 0)
+            {
+                return CssWatchStgSubscribe.GetHeaderValue(0);
+            }
+            return -1;
+        }
+
         //-----------------------------------------initial-------------------------------------
 
 
@@ -337,7 +351,7 @@ namespace WindowsFormsApp1
             CpTd6032 = new CPTRADELib.CpTd6032();//매도실현손익(제세금, 수수료 포함)
             CpTd5341 = new CPTRADELib.CpTd5341(); //매매내역
             CssStgList = new CPSYSDIBLib.CssStgList(); //조건식 받기
-            CssWatchStgControl = new CPSYSDIBLib.CssWatchStgControl(); // 실시간 조건식 등록 및 해제
+            //CssWatchStgControl = new CPSYSDIBLib.CssWatchStgControl(); // 실시간 조건식 등록 및 해제
             CssStgFind = new CPSYSDIBLib.CssStgFind(); //초기 종목 검색 리스트
             MarketEye = new CPSYSDIBLib.MarketEye(); //초기 종목 검색 정보
             CssWatchStgSubscribe = new CPSYSDIBLib.CssWatchStgSubscribe(); // 일련번호 받기
@@ -462,6 +476,8 @@ namespace WindowsFormsApp1
                     string[] condition = utility.Fomula_list_buy_text.Split(',');
                     for (int i = 0; i < condition.Length; i++)
                     {
+                        CPSYSDIBLib.CssWatchStgControl CssWatchStgControl = Condition_Profile[i];
+                        //
                         string[] tmp = condition[i].Split('^');
                         //
                         int conditon_SubCode = condition_sub_code(tmp[0]);
@@ -521,6 +537,8 @@ namespace WindowsFormsApp1
                     string[] condition = utility.Fomula_list_sell_text.Split(',');
                     for (int i = 0; i < condition.Length; i++)
                     {
+                        CPSYSDIBLib.CssWatchStgControl CssWatchStgControl = Condition_Profile2[i];
+                        //
                         string[] tmp = condition[i].Split('^');
                         //
                         int conditon_SubCode = condition_sub_code(tmp[0]);
@@ -578,19 +596,6 @@ namespace WindowsFormsApp1
                 WriteLog_System("[실시간시세/중단]\n");
                 telegram_message("[실시간시세/중단]\n");
             }
-        }
-
-        //일련번호 받기
-        private int condition_sub_code(string condition_code)
-        {
-            CssWatchStgSubscribe.SetInputValue(0, condition_code);
-            //
-            int result = CssWatchStgSubscribe.BlockRequest();
-            if (result == 0)
-            {
-                return CssWatchStgSubscribe.GetHeaderValue(0);
-            }
-            return -1;
         }
 
         //전체 청산 버튼
@@ -831,6 +836,7 @@ namespace WindowsFormsApp1
             today_profit_tax_load(""); //매도실현손익(제세금, 수수료 포함)
             Transaction_Detail(""); //매매내역
             Condition_load(); //조건식 로드
+            //
             CssAlert.Subscribe(); //실시간 편출입 받기
             CpConclusion.Subscribe(); //실시간 체결 등록
         }
@@ -1437,7 +1443,8 @@ namespace WindowsFormsApp1
 
         //------------------------------실시간 실행 초기 시작 모음-------------------------------------
 
-        private int prober = 1;
+        //조건식 감시 등록 목록
+        private List<CPSYSDIBLib.CssWatchStgControl> Condition_Profile2 = new List<CPSYSDIBLib.CssWatchStgControl>();
 
         //매도 전용 조건식 검색
         private void normal_search(object sender, EventArgs e)
@@ -1487,11 +1494,23 @@ namespace WindowsFormsApp1
                 //마지막 조건식 검색 시각 업데이트
                 condInfo.LastRequestTime = DateTime.Now;
 
+                //실시간 조건식 등록 및 해제
+                CPSYSDIBLib.CssWatchStgControl CssWatchStgControl = new CPSYSDIBLib.CssWatchStgControl();
+                Condition_Profile2.Add(CssWatchStgControl);
+
+                //초기종목받기
+                stock_initial(condition[0], condition[1]);
+
+                //일련번호
+                int condition_serial = condition_sub_code(condition[0]);
+
+                System.Threading.Thread.Sleep(500);
+
                 //종목 검색 요청
                 CssWatchStgControl.SetInputValue(0, condition[0]); //전략ID
-                CssWatchStgControl.SetInputValue(1, prober++); //감시 일련번호
+                CssWatchStgControl.SetInputValue(1, condition_serial); //감시 일련번호
                 CssWatchStgControl.SetInputValue(2, '1'); //감시시작
-                                                          //
+                //                                          //
                 int result = CssWatchStgControl.BlockRequest();
                 //
                 if (result == 0)
@@ -1499,19 +1518,19 @@ namespace WindowsFormsApp1
                     int result_type = Convert.ToInt32(CssWatchStgControl.GetHeaderValue(0));
                     if (result_type == 0)
                     {
-                        WriteLog_Stock($"[조건식/등록/{condition[1]}] : 초기상태 \n");
+                        WriteLog_System($"[조건식/등록/{condition[1]}] : 초기상태 \n");
                     }
                     else if (result_type == 1)
                     {
-                        WriteLog_Stock($"[조건식/등록/{condition[1]}] : 감시중 \n");
+                        WriteLog_System($"[조건식/등록/{condition[1]}] : 감시중 \n");
                     }
                     else if (result_type == 2)
                     {
-                        WriteLog_Stock($"[조건식/등록/{condition[1]}] : 감시중단 \n");
+                        WriteLog_System($"[조건식/등록/{condition[1]}] : 감시중단 \n");
                     }
                     else
                     {
-                        WriteLog_Stock($"[조건식/등록/{condition[1]}] : 등록취소 \n");
+                        WriteLog_System($"[조건식/등록/{condition[1]}] : 등록취소 \n");
                     }
                 }
                 else
@@ -1519,11 +1538,11 @@ namespace WindowsFormsApp1
                     WriteLog_System("[실시간조건식/등록실패/" + Fomula + "] : 고유번호 및 이름 확인\n");
                     telegram_message("[실시간조건식/등록실패/" + Fomula + "] : 고유번호 및 이름 확인\n");
                 }
-
-                //
-                stock_initial(condition[0], condition[1]);
             }
         }
+
+        //조건식 감시 등록 목록
+        private List<CPSYSDIBLib.CssWatchStgControl> Condition_Profile = new List<CPSYSDIBLib.CssWatchStgControl>();
 
         //실시간 검색(조건식 로드 후 사용가능하다)
         private void real_time_search(object sender, EventArgs e)
@@ -1573,11 +1592,21 @@ namespace WindowsFormsApp1
                 //마지막 조건식 검색 시각 업데이트
                 condInfo.LastRequestTime = DateTime.Now;
 
-                System.Threading.Thread.Sleep(500);
+                //실시간 조건식 등록 및 해제
+                CPSYSDIBLib.CssWatchStgControl CssWatchStgControl = new CPSYSDIBLib.CssWatchStgControl();
+                Condition_Profile.Add(CssWatchStgControl);
+
+                //초기종목받기
+                stock_initial(condition[0], condition[1]);
+
+                //일련번호
+                int condition_serial = condition_sub_code(condition[0]);
+
+                System.Threading.Thread.Sleep(2000);
 
                 //종목 검색 요청
                 CssWatchStgControl.SetInputValue(0, condition[0]); //전략ID
-                CssWatchStgControl.SetInputValue(1, prober++); //감시 일련번호
+                CssWatchStgControl.SetInputValue(1, condition_serial); //감시 일련번호
                 CssWatchStgControl.SetInputValue(2, '1'); //감시시작
 
                 int result = CssWatchStgControl.BlockRequest();
@@ -1587,19 +1616,20 @@ namespace WindowsFormsApp1
                     int result_type = Convert.ToInt32(CssWatchStgControl.GetHeaderValue(0));
                     if (result_type == 0)
                     {
-                        WriteLog_Stock($"[조건식/등록/{condition[1]}] : 초기상태 \n");
+                        WriteLog_System($"[조건식/등록/{condition[1]}] : 초기상태 \n");
                     }
                     else if (result_type == 1)
                     {
-                        WriteLog_Stock($"[조건식/등록/{condition[1]}] : 감시중 \n");
+                        WriteLog_System($"[조건식/등록/{condition[1]}] : 감시중 \n");
+                        WriteLog_System($"[조건식/등록/{condition[1]}] : 메시지({CssWatchStgControl.GetDibMsg1()})\n");
                     }
                     else if (result_type == 2)
                     {
-                        WriteLog_Stock($"[조건식/등록/{condition[1]}] : 감시중단 \n");
+                        WriteLog_System($"[조건식/등록/{condition[1]}] : 감시중단 \n");
                     }
                     else
                     {
-                        WriteLog_Stock($"[조건식/등록/{condition[1]}] : 등록취소 \n");
+                        WriteLog_System($"[조건식/등록/{condition[1]}] : 등록취소 \n");
                     }
                 }
                 else
@@ -1607,9 +1637,6 @@ namespace WindowsFormsApp1
                     WriteLog_System("[실시간조건식/등록실패/" + Fomula + "] : 고유번호 및 이름 확인\n");
                     telegram_message("[실시간조건식/등록실패/" + Fomula + "] : 고유번호 및 이름 확인\n");
                 }
-
-                //
-                stock_initial(condition[0], condition[1]);
             }
         }
 
