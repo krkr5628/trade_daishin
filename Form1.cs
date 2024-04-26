@@ -1519,18 +1519,22 @@ namespace WindowsFormsApp1
                     if (result_type == 0)
                     {
                         WriteLog_System($"[조건식/등록/{condition[1]}] : 초기상태 \n");
+                        telegram_message($"[조건식/등록/{condition[1]}] : 초기상태 \n"));
                     }
                     else if (result_type == 1)
                     {
                         WriteLog_System($"[조건식/등록/{condition[1]}] : 감시중 \n");
+                        telegram_message($"[조건식/등록/{condition[1]}] : 감시중 \n");
                     }
                     else if (result_type == 2)
                     {
                         WriteLog_System($"[조건식/등록/{condition[1]}] : 감시중단 \n");
+                        telegram_message($"[조건식/등록/{condition[1]}] : 감시중단 \n");
                     }
                     else
                     {
                         WriteLog_System($"[조건식/등록/{condition[1]}] : 등록취소 \n");
+                        telegram_message($"[조건식/등록/{condition[1]}] : 등록취소 \n");
                     }
                 }
                 else
@@ -1617,19 +1621,23 @@ namespace WindowsFormsApp1
                     if (result_type == 0)
                     {
                         WriteLog_System($"[조건식/등록/{condition[1]}] : 초기상태 \n");
+                        telegram_message($"[조건식/등록/{condition[1]}] : 초기상태 \n"));
                     }
                     else if (result_type == 1)
                     {
                         WriteLog_System($"[조건식/등록/{condition[1]}] : 감시중 \n");
+                        telegram_message($"[조건식/등록/{condition[1]}] : 감시중 \n");
                         WriteLog_System($"[조건식/등록/{condition[1]}] : 메시지({CssWatchStgControl.GetDibMsg1()})\n");
                     }
                     else if (result_type == 2)
                     {
                         WriteLog_System($"[조건식/등록/{condition[1]}] : 감시중단 \n");
+                        telegram_message($"[조건식/등록/{condition[1]}] : 감시중단 \n");
                     }
                     else
                     {
                         WriteLog_System($"[조건식/등록/{condition[1]}] : 등록취소 \n");
+                        telegram_message($"[조건식/등록/{condition[1]}] : 등록취소 \n");
                     }
                 }
                 else
