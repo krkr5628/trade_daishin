@@ -1519,7 +1519,7 @@ namespace WindowsFormsApp1
                     if (result_type == 0)
                     {
                         WriteLog_System($"[조건식/등록/{condition[1]}] : 초기상태 \n");
-                        telegram_message($"[조건식/등록/{condition[1]}] : 초기상태 \n"));
+                        telegram_message($"[조건식/등록/{condition[1]}] : 초기상태 \n");
                     }
                     else if (result_type == 1)
                     {
@@ -1621,7 +1621,7 @@ namespace WindowsFormsApp1
                     if (result_type == 0)
                     {
                         WriteLog_System($"[조건식/등록/{condition[1]}] : 초기상태 \n");
-                        telegram_message($"[조건식/등록/{condition[1]}] : 초기상태 \n"));
+                        telegram_message($"[조건식/등록/{condition[1]}] : 초기상태 \n");
                     }
                     else if (result_type == 1)
                     {
