@@ -504,6 +504,7 @@ namespace WindowsFormsApp1
             Fomula_list_buy_Checked_box.BringToFront();
 
             //430 203
+            //301 135
             Fomula_list_buy_Checked_box.BringToFront();
         }
 

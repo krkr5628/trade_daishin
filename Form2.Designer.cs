@@ -206,6 +206,7 @@ namespace WindowsFormsApp1
             this.label23 = new System.Windows.Forms.Label();
             this.label22 = new System.Windows.Forms.Label();
             this.real_id_text = new System.Windows.Forms.TextBox();
+            this.buy_mode_dual = new System.Windows.Forms.RadioButton();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
@@ -720,7 +721,7 @@ namespace WindowsFormsApp1
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.90253F));
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15.43321F));
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.53069F));
-            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 188F));
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 190F));
             this.tableLayoutPanel5.Controls.Add(this.setting_allowed, 4, 0);
             this.tableLayoutPanel5.Controls.Add(this.setting_open, 3, 0);
             this.tableLayoutPanel5.Controls.Add(this.save_button, 2, 0);
@@ -741,7 +742,7 @@ namespace WindowsFormsApp1
             this.setting_allowed.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.setting_allowed.Font = new System.Drawing.Font("굴림", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.setting_allowed.ForeColor = System.Drawing.Color.SpringGreen;
-            this.setting_allowed.Location = new System.Drawing.Point(695, 2);
+            this.setting_allowed.Location = new System.Drawing.Point(692, 2);
             this.setting_allowed.Margin = new System.Windows.Forms.Padding(2);
             this.setting_allowed.Name = "setting_allowed";
             this.setting_allowed.Size = new System.Drawing.Size(103, 29);
@@ -754,7 +755,7 @@ namespace WindowsFormsApp1
             this.setting_open.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.setting_open.Font = new System.Drawing.Font("굴림", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.setting_open.ForeColor = System.Drawing.Color.SpringGreen;
-            this.setting_open.Location = new System.Drawing.Point(595, 2);
+            this.setting_open.Location = new System.Drawing.Point(592, 2);
             this.setting_open.Margin = new System.Windows.Forms.Padding(2);
             this.setting_open.Name = "setting_open";
             this.setting_open.Size = new System.Drawing.Size(96, 29);
@@ -767,10 +768,10 @@ namespace WindowsFormsApp1
             this.save_button.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.save_button.Font = new System.Drawing.Font("굴림", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.save_button.ForeColor = System.Drawing.Color.SpringGreen;
-            this.save_button.Location = new System.Drawing.Point(488, 2);
+            this.save_button.Location = new System.Drawing.Point(486, 2);
             this.save_button.Margin = new System.Windows.Forms.Padding(2);
             this.save_button.Name = "save_button";
-            this.save_button.Size = new System.Drawing.Size(103, 29);
+            this.save_button.Size = new System.Drawing.Size(102, 29);
             this.save_button.TabIndex = 6;
             this.save_button.Text = "전량저장";
             this.save_button.UseVisualStyleBackColor = false;
@@ -780,11 +781,11 @@ namespace WindowsFormsApp1
             this.setting_name.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.setting_name.Location = new System.Drawing.Point(135, 2);
+            this.setting_name.Location = new System.Drawing.Point(134, 2);
             this.setting_name.Margin = new System.Windows.Forms.Padding(2);
             this.setting_name.Name = "setting_name";
             this.setting_name.ReadOnly = true;
-            this.setting_name.Size = new System.Drawing.Size(349, 21);
+            this.setting_name.Size = new System.Drawing.Size(348, 21);
             this.setting_name.TabIndex = 1;
             // 
             // label5
@@ -797,7 +798,7 @@ namespace WindowsFormsApp1
             this.label5.Location = new System.Drawing.Point(2, 0);
             this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(129, 33);
+            this.label5.Size = new System.Drawing.Size(128, 33);
             this.label5.TabIndex = 9;
             this.label5.Text = "전략명";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1628,7 +1629,7 @@ namespace WindowsFormsApp1
             this.Fomula_list_buy.Location = new System.Drawing.Point(2, 2);
             this.Fomula_list_buy.Margin = new System.Windows.Forms.Padding(2);
             this.Fomula_list_buy.Name = "Fomula_list_buy";
-            this.Fomula_list_buy.Size = new System.Drawing.Size(371, 21);
+            this.Fomula_list_buy.Size = new System.Drawing.Size(464, 21);
             this.Fomula_list_buy.TabIndex = 11;
             // 
             // Fomula_list_sell
@@ -1638,7 +1639,7 @@ namespace WindowsFormsApp1
             this.Fomula_list_sell.Location = new System.Drawing.Point(4, 136);
             this.Fomula_list_sell.Margin = new System.Windows.Forms.Padding(2);
             this.Fomula_list_sell.Name = "Fomula_list_sell";
-            this.Fomula_list_sell.Size = new System.Drawing.Size(374, 21);
+            this.Fomula_list_sell.Size = new System.Drawing.Size(468, 21);
             this.Fomula_list_sell.TabIndex = 12;
             // 
             // tableLayoutPanel11
@@ -1792,6 +1793,7 @@ namespace WindowsFormsApp1
             // groupBox4
             // 
             this.groupBox4.Controls.Add(this.tableLayoutPanel15);
+            this.groupBox4.Controls.Add(this.Fomula_list_buy_Checked_box);
             this.groupBox4.Controls.Add(this.tableLayoutPanel6);
             this.groupBox4.Controls.Add(this.tableLayoutPanel8);
             this.groupBox4.Controls.Add(this.Fomula_list_sell);
@@ -1817,24 +1819,26 @@ namespace WindowsFormsApp1
             this.tableLayoutPanel15.RowCount = 2;
             this.tableLayoutPanel15.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel15.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel15.Size = new System.Drawing.Size(375, 50);
+            this.tableLayoutPanel15.Size = new System.Drawing.Size(468, 50);
             this.tableLayoutPanel15.TabIndex = 14;
             // 
             // tableLayoutPanel16
             // 
-            this.tableLayoutPanel16.ColumnCount = 3;
-            this.tableLayoutPanel16.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPanel16.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPanel16.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel16.ColumnCount = 4;
+            this.tableLayoutPanel16.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel16.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel16.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel16.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanel16.Controls.Add(this.buy_mode_or, 0, 0);
             this.tableLayoutPanel16.Controls.Add(this.buy_mode_and, 1, 0);
             this.tableLayoutPanel16.Controls.Add(this.buy_mode_independent, 2, 0);
+            this.tableLayoutPanel16.Controls.Add(this.buy_mode_dual, 3, 0);
             this.tableLayoutPanel16.Location = new System.Drawing.Point(2, 27);
             this.tableLayoutPanel16.Margin = new System.Windows.Forms.Padding(2);
             this.tableLayoutPanel16.Name = "tableLayoutPanel16";
             this.tableLayoutPanel16.RowCount = 1;
             this.tableLayoutPanel16.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel16.Size = new System.Drawing.Size(371, 21);
+            this.tableLayoutPanel16.Size = new System.Drawing.Size(464, 21);
             this.tableLayoutPanel16.TabIndex = 12;
             // 
             // buy_mode_or
@@ -1847,7 +1851,7 @@ namespace WindowsFormsApp1
             this.buy_mode_or.Location = new System.Drawing.Point(2, 2);
             this.buy_mode_or.Margin = new System.Windows.Forms.Padding(2);
             this.buy_mode_or.Name = "buy_mode_or";
-            this.buy_mode_or.Size = new System.Drawing.Size(119, 17);
+            this.buy_mode_or.Size = new System.Drawing.Size(112, 17);
             this.buy_mode_or.TabIndex = 17;
             this.buy_mode_or.TabStop = true;
             this.buy_mode_or.Text = "OR MODE";
@@ -1861,10 +1865,10 @@ namespace WindowsFormsApp1
             | System.Windows.Forms.AnchorStyles.Right)));
             this.buy_mode_and.AutoSize = true;
             this.buy_mode_and.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.buy_mode_and.Location = new System.Drawing.Point(125, 2);
+            this.buy_mode_and.Location = new System.Drawing.Point(118, 2);
             this.buy_mode_and.Margin = new System.Windows.Forms.Padding(2);
             this.buy_mode_and.Name = "buy_mode_and";
-            this.buy_mode_and.Size = new System.Drawing.Size(119, 17);
+            this.buy_mode_and.Size = new System.Drawing.Size(112, 17);
             this.buy_mode_and.TabIndex = 16;
             this.buy_mode_and.TabStop = true;
             this.buy_mode_and.Text = "AND MODE";
@@ -1878,10 +1882,10 @@ namespace WindowsFormsApp1
             | System.Windows.Forms.AnchorStyles.Right)));
             this.buy_mode_independent.AutoSize = true;
             this.buy_mode_independent.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.buy_mode_independent.Location = new System.Drawing.Point(248, 2);
+            this.buy_mode_independent.Location = new System.Drawing.Point(234, 2);
             this.buy_mode_independent.Margin = new System.Windows.Forms.Padding(2);
             this.buy_mode_independent.Name = "buy_mode_independent";
-            this.buy_mode_independent.Size = new System.Drawing.Size(121, 17);
+            this.buy_mode_independent.Size = new System.Drawing.Size(112, 17);
             this.buy_mode_independent.TabIndex = 15;
             this.buy_mode_independent.TabStop = true;
             this.buy_mode_independent.Text = "Independent";
@@ -1965,7 +1969,7 @@ namespace WindowsFormsApp1
             this.tableLayoutPanel12.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 36.39456F));
             this.tableLayoutPanel12.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 36.8231F));
             this.tableLayoutPanel12.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10.83033F));
-            this.tableLayoutPanel12.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
+            this.tableLayoutPanel12.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 102F));
             this.tableLayoutPanel12.Controls.Add(this.type4_selection, 1, 3);
             this.tableLayoutPanel12.Controls.Add(this.type3_selection, 1, 2);
             this.tableLayoutPanel12.Controls.Add(this.type2_selection, 1, 1);
@@ -2006,7 +2010,7 @@ namespace WindowsFormsApp1
             this.type4_selection.Location = new System.Drawing.Point(26, 80);
             this.type4_selection.Margin = new System.Windows.Forms.Padding(2);
             this.type4_selection.Name = "type4_selection";
-            this.type4_selection.Size = new System.Drawing.Size(52, 21);
+            this.type4_selection.Size = new System.Drawing.Size(51, 21);
             this.type4_selection.TabIndex = 33;
             // 
             // type3_selection
@@ -2018,7 +2022,7 @@ namespace WindowsFormsApp1
             this.type3_selection.Location = new System.Drawing.Point(26, 54);
             this.type3_selection.Margin = new System.Windows.Forms.Padding(2);
             this.type3_selection.Name = "type3_selection";
-            this.type3_selection.Size = new System.Drawing.Size(52, 21);
+            this.type3_selection.Size = new System.Drawing.Size(51, 21);
             this.type3_selection.TabIndex = 32;
             // 
             // type2_selection
@@ -2030,7 +2034,7 @@ namespace WindowsFormsApp1
             this.type2_selection.Location = new System.Drawing.Point(26, 28);
             this.type2_selection.Margin = new System.Windows.Forms.Padding(2);
             this.type2_selection.Name = "type2_selection";
-            this.type2_selection.Size = new System.Drawing.Size(52, 21);
+            this.type2_selection.Size = new System.Drawing.Size(51, 21);
             this.type2_selection.TabIndex = 31;
             // 
             // label20
@@ -2065,7 +2069,7 @@ namespace WindowsFormsApp1
             // 
             // type1_end
             // 
-            this.type1_end.Location = new System.Drawing.Point(155, 2);
+            this.type1_end.Location = new System.Drawing.Point(153, 2);
             this.type1_end.Margin = new System.Windows.Forms.Padding(2);
             this.type1_end.Name = "type1_end";
             this.type1_end.Size = new System.Drawing.Size(62, 23);
@@ -2073,7 +2077,7 @@ namespace WindowsFormsApp1
             // 
             // type2_end
             // 
-            this.type2_end.Location = new System.Drawing.Point(155, 28);
+            this.type2_end.Location = new System.Drawing.Point(153, 28);
             this.type2_end.Margin = new System.Windows.Forms.Padding(2);
             this.type2_end.Name = "type2_end";
             this.type2_end.Size = new System.Drawing.Size(62, 23);
@@ -2081,7 +2085,7 @@ namespace WindowsFormsApp1
             // 
             // type3_end
             // 
-            this.type3_end.Location = new System.Drawing.Point(155, 54);
+            this.type3_end.Location = new System.Drawing.Point(153, 54);
             this.type3_end.Margin = new System.Windows.Forms.Padding(2);
             this.type3_end.Name = "type3_end";
             this.type3_end.Size = new System.Drawing.Size(62, 23);
@@ -2089,7 +2093,7 @@ namespace WindowsFormsApp1
             // 
             // type4_end
             // 
-            this.type4_end.Location = new System.Drawing.Point(155, 80);
+            this.type4_end.Location = new System.Drawing.Point(153, 80);
             this.type4_end.Margin = new System.Windows.Forms.Padding(2);
             this.type4_end.Name = "type4_end";
             this.type4_end.Size = new System.Drawing.Size(62, 23);
@@ -2102,7 +2106,7 @@ namespace WindowsFormsApp1
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label12.AutoSize = true;
             this.label12.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.label12.Location = new System.Drawing.Point(139, 0);
+            this.label12.Location = new System.Drawing.Point(137, 0);
             this.label12.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(12, 26);
@@ -2117,7 +2121,7 @@ namespace WindowsFormsApp1
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label14.AutoSize = true;
             this.label14.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.label14.Location = new System.Drawing.Point(139, 26);
+            this.label14.Location = new System.Drawing.Point(137, 26);
             this.label14.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(12, 26);
@@ -2132,7 +2136,7 @@ namespace WindowsFormsApp1
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label16.AutoSize = true;
             this.label16.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.label16.Location = new System.Drawing.Point(139, 52);
+            this.label16.Location = new System.Drawing.Point(137, 52);
             this.label16.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(12, 26);
@@ -2147,7 +2151,7 @@ namespace WindowsFormsApp1
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label18.AutoSize = true;
             this.label18.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.label18.Location = new System.Drawing.Point(139, 78);
+            this.label18.Location = new System.Drawing.Point(137, 78);
             this.label18.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(12, 29);
@@ -2157,34 +2161,34 @@ namespace WindowsFormsApp1
             // 
             // type1_start
             // 
-            this.type1_start.Location = new System.Drawing.Point(82, 2);
+            this.type1_start.Location = new System.Drawing.Point(81, 2);
             this.type1_start.Margin = new System.Windows.Forms.Padding(2);
             this.type1_start.Name = "type1_start";
-            this.type1_start.Size = new System.Drawing.Size(53, 23);
+            this.type1_start.Size = new System.Drawing.Size(52, 23);
             this.type1_start.TabIndex = 4;
             // 
             // type2_start
             // 
-            this.type2_start.Location = new System.Drawing.Point(82, 28);
+            this.type2_start.Location = new System.Drawing.Point(81, 28);
             this.type2_start.Margin = new System.Windows.Forms.Padding(2);
             this.type2_start.Name = "type2_start";
-            this.type2_start.Size = new System.Drawing.Size(53, 23);
+            this.type2_start.Size = new System.Drawing.Size(52, 23);
             this.type2_start.TabIndex = 7;
             // 
             // type3_start
             // 
-            this.type3_start.Location = new System.Drawing.Point(82, 54);
+            this.type3_start.Location = new System.Drawing.Point(81, 54);
             this.type3_start.Margin = new System.Windows.Forms.Padding(2);
             this.type3_start.Name = "type3_start";
-            this.type3_start.Size = new System.Drawing.Size(53, 23);
+            this.type3_start.Size = new System.Drawing.Size(52, 23);
             this.type3_start.TabIndex = 12;
             // 
             // type4_start
             // 
-            this.type4_start.Location = new System.Drawing.Point(82, 80);
+            this.type4_start.Location = new System.Drawing.Point(81, 80);
             this.type4_start.Margin = new System.Windows.Forms.Padding(2);
             this.type4_start.Name = "type4_start";
-            this.type4_start.Size = new System.Drawing.Size(53, 23);
+            this.type4_start.Size = new System.Drawing.Size(52, 23);
             this.type4_start.TabIndex = 16;
             // 
             // label19
@@ -2226,7 +2230,7 @@ namespace WindowsFormsApp1
             this.type1_selection.Location = new System.Drawing.Point(26, 2);
             this.type1_selection.Margin = new System.Windows.Forms.Padding(2);
             this.type1_selection.Name = "type1_selection";
-            this.type1_selection.Size = new System.Drawing.Size(52, 21);
+            this.type1_selection.Size = new System.Drawing.Size(51, 21);
             this.type1_selection.TabIndex = 30;
             // 
             // tableLayoutPanel18
@@ -2620,10 +2624,10 @@ namespace WindowsFormsApp1
             // Fomula_list_buy_Checked_box
             // 
             this.Fomula_list_buy_Checked_box.FormattingEnabled = true;
-            this.Fomula_list_buy_Checked_box.Location = new System.Drawing.Point(301, 135);
+            this.Fomula_list_buy_Checked_box.Location = new System.Drawing.Point(4, 78);
             this.Fomula_list_buy_Checked_box.Margin = new System.Windows.Forms.Padding(2);
             this.Fomula_list_buy_Checked_box.Name = "Fomula_list_buy_Checked_box";
-            this.Fomula_list_buy_Checked_box.Size = new System.Drawing.Size(372, 52);
+            this.Fomula_list_buy_Checked_box.Size = new System.Drawing.Size(372, 40);
             this.Fomula_list_buy_Checked_box.TabIndex = 25;
             this.Fomula_list_buy_Checked_box.Visible = false;
             // 
@@ -2736,6 +2740,23 @@ namespace WindowsFormsApp1
             this.real_id_text.Size = new System.Drawing.Size(153, 22);
             this.real_id_text.TabIndex = 3;
             // 
+            // buy_mode_dual
+            // 
+            this.buy_mode_dual.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.buy_mode_dual.AutoSize = true;
+            this.buy_mode_dual.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.buy_mode_dual.Location = new System.Drawing.Point(350, 2);
+            this.buy_mode_dual.Margin = new System.Windows.Forms.Padding(2);
+            this.buy_mode_dual.Name = "buy_mode_dual";
+            this.buy_mode_dual.Size = new System.Drawing.Size(112, 17);
+            this.buy_mode_dual.TabIndex = 18;
+            this.buy_mode_dual.TabStop = true;
+            this.buy_mode_dual.Text = "Dual";
+            this.buy_mode_dual.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.buy_mode_dual.UseVisualStyleBackColor = false;
+            // 
             // Setting
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
@@ -2743,7 +2764,6 @@ namespace WindowsFormsApp1
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(1069, 663);
             this.Controls.Add(this.groupBox12);
-            this.Controls.Add(this.Fomula_list_buy_Checked_box);
             this.Controls.Add(this.groupBox9);
             this.Controls.Add(this.groupBox11);
             this.Controls.Add(this.groupBox10);
@@ -2994,5 +3014,6 @@ namespace WindowsFormsApp1
         private System.Windows.Forms.TextBox real_id_text;
         private System.Windows.Forms.TextBox real_cert_password_text;
         private System.Windows.Forms.TextBox real_password_text;
+        private System.Windows.Forms.RadioButton buy_mode_dual;
     }
 }

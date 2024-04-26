@@ -57,20 +57,12 @@ namespace WindowsFormsApp1
             this.label7 = new System.Windows.Forms.Label();
             this.all_profit_percent = new System.Windows.Forms.Label();
             this.User_money = new System.Windows.Forms.Label();
-            this.label14 = new System.Windows.Forms.Label();
-            this.today_profit_percent = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
-            this.today_profit = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.today_tax = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.today_profit_tax = new System.Windows.Forms.Label();
             this.today_profit_percent_tax = new System.Windows.Forms.Label();
-            this.User_name = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
             this.User_id = new System.Windows.Forms.Label();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.Real_time_stop_btn = new System.Windows.Forms.Button();
@@ -90,10 +82,8 @@ namespace WindowsFormsApp1
             this.update_agree_btn = new System.Windows.Forms.Button();
             this.User_connection = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.Keyboard_wall = new System.Windows.Forms.Label();
-            this.Fire_wall = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
+            this.acc_isa_text = new System.Windows.Forms.Label();
+            this.Current_User_money_isa = new System.Windows.Forms.Label();
             this.acc_text = new System.Windows.Forms.Label();
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
             this.loss = new System.Windows.Forms.Label();
@@ -158,13 +148,19 @@ namespace WindowsFormsApp1
             this.dataGridView3 = new System.Windows.Forms.DataGridView();
             this.groupBox9 = new System.Windows.Forms.GroupBox();
             this.log_window3 = new System.Windows.Forms.RichTextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.User_money_isa = new System.Windows.Forms.Label();
+            this.total_money_isa = new System.Windows.Forms.Label();
+            this.all_profit_isa = new System.Windows.Forms.Label();
+            this.all_profit_percent_isa = new System.Windows.Forms.Label();
+            this.today_profit_percent_tax_isa = new System.Windows.Forms.Label();
+            this.today_profit_tax_isa = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.menu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.tableLayoutPanel3.SuspendLayout();
-            this.tableLayoutPanel4.SuspendLayout();
             this.tableLayoutPanel5.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -262,44 +258,49 @@ namespace WindowsFormsApp1
             // 
             // tableLayoutPanel1
             // 
-            this.tableLayoutPanel1.ColumnCount = 10;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanel1.Controls.Add(this.Current_User_money, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.total_balance, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.total_money, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.label6, 4, 0);
-            this.tableLayoutPanel1.Controls.Add(this.label12, 3, 0);
-            this.tableLayoutPanel1.Controls.Add(this.total_profit, 2, 0);
-            this.tableLayoutPanel1.Controls.Add(this.all_profit, 2, 1);
-            this.tableLayoutPanel1.Controls.Add(this.label7, 1, 0);
-            this.tableLayoutPanel1.Controls.Add(this.all_profit_percent, 3, 1);
-            this.tableLayoutPanel1.Controls.Add(this.User_money, 4, 1);
-            this.tableLayoutPanel1.Controls.Add(this.label14, 5, 0);
-            this.tableLayoutPanel1.Controls.Add(this.today_profit_percent, 5, 1);
-            this.tableLayoutPanel1.Controls.Add(this.label13, 6, 0);
-            this.tableLayoutPanel1.Controls.Add(this.today_profit, 6, 1);
-            this.tableLayoutPanel1.Controls.Add(this.label1, 7, 0);
-            this.tableLayoutPanel1.Controls.Add(this.today_tax, 7, 1);
-            this.tableLayoutPanel1.Controls.Add(this.label8, 9, 0);
-            this.tableLayoutPanel1.Controls.Add(this.label11, 8, 0);
-            this.tableLayoutPanel1.Controls.Add(this.today_profit_tax, 9, 1);
-            this.tableLayoutPanel1.Controls.Add(this.today_profit_percent_tax, 8, 1);
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(12, 132);
+            this.tableLayoutPanel1.ColumnCount = 9;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 11.11111F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 11.11111F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 11.11111F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 11.11111F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 11.11111F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 11.11111F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 11.11111F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 11.11111F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 11.11111F));
+            this.tableLayoutPanel1.Controls.Add(this.label8, 8, 0);
+            this.tableLayoutPanel1.Controls.Add(this.today_profit_tax, 8, 1);
+            this.tableLayoutPanel1.Controls.Add(this.label11, 7, 0);
+            this.tableLayoutPanel1.Controls.Add(this.today_profit_percent_tax, 7, 1);
+            this.tableLayoutPanel1.Controls.Add(this.label6, 6, 0);
+            this.tableLayoutPanel1.Controls.Add(this.User_money, 6, 1);
+            this.tableLayoutPanel1.Controls.Add(this.label12, 5, 0);
+            this.tableLayoutPanel1.Controls.Add(this.all_profit_percent, 5, 1);
+            this.tableLayoutPanel1.Controls.Add(this.total_profit, 4, 0);
+            this.tableLayoutPanel1.Controls.Add(this.all_profit, 4, 1);
+            this.tableLayoutPanel1.Controls.Add(this.label7, 3, 0);
+            this.tableLayoutPanel1.Controls.Add(this.Current_User_money, 3, 1);
+            this.tableLayoutPanel1.Controls.Add(this.total_balance, 2, 0);
+            this.tableLayoutPanel1.Controls.Add(this.total_money, 2, 1);
+            this.tableLayoutPanel1.Controls.Add(this.acc_text, 1, 1);
+            this.tableLayoutPanel1.Controls.Add(this.label1, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.label3, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.label4, 0, 2);
+            this.tableLayoutPanel1.Controls.Add(this.Current_User_money_isa, 3, 2);
+            this.tableLayoutPanel1.Controls.Add(this.User_money_isa, 6, 2);
+            this.tableLayoutPanel1.Controls.Add(this.acc_isa_text, 1, 2);
+            this.tableLayoutPanel1.Controls.Add(this.total_money_isa, 2, 2);
+            this.tableLayoutPanel1.Controls.Add(this.all_profit_isa, 4, 2);
+            this.tableLayoutPanel1.Controls.Add(this.all_profit_percent_isa, 5, 2);
+            this.tableLayoutPanel1.Controls.Add(this.today_profit_percent_tax_isa, 7, 2);
+            this.tableLayoutPanel1.Controls.Add(this.today_profit_tax_isa, 8, 2);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(12, 79);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 2;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 13F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(923, 58);
+            this.tableLayoutPanel1.RowCount = 3;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(923, 111);
             this.tableLayoutPanel1.TabIndex = 4;
             // 
             // Current_User_money
@@ -309,10 +310,10 @@ namespace WindowsFormsApp1
             | System.Windows.Forms.AnchorStyles.Right)));
             this.Current_User_money.AutoSize = true;
             this.Current_User_money.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.Current_User_money.Location = new System.Drawing.Point(94, 29);
+            this.Current_User_money.Location = new System.Drawing.Point(308, 36);
             this.Current_User_money.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.Current_User_money.Name = "Current_User_money";
-            this.Current_User_money.Size = new System.Drawing.Size(88, 29);
+            this.Current_User_money.Size = new System.Drawing.Size(98, 36);
             this.Current_User_money.TabIndex = 39;
             this.Current_User_money.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -325,9 +326,9 @@ namespace WindowsFormsApp1
             this.total_balance.BackColor = System.Drawing.Color.LightSlateGray;
             this.total_balance.Font = new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.total_balance.ForeColor = System.Drawing.Color.White;
-            this.total_balance.Location = new System.Drawing.Point(3, 0);
+            this.total_balance.Location = new System.Drawing.Point(207, 0);
             this.total_balance.Name = "total_balance";
-            this.total_balance.Size = new System.Drawing.Size(86, 29);
+            this.total_balance.Size = new System.Drawing.Size(96, 36);
             this.total_balance.TabIndex = 17;
             this.total_balance.Text = "총자산";
             this.total_balance.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -339,10 +340,10 @@ namespace WindowsFormsApp1
             | System.Windows.Forms.AnchorStyles.Right)));
             this.total_money.AutoSize = true;
             this.total_money.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.total_money.Location = new System.Drawing.Point(2, 29);
+            this.total_money.Location = new System.Drawing.Point(206, 36);
             this.total_money.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.total_money.Name = "total_money";
-            this.total_money.Size = new System.Drawing.Size(88, 29);
+            this.total_money.Size = new System.Drawing.Size(98, 36);
             this.total_money.TabIndex = 26;
             this.total_money.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -355,9 +356,9 @@ namespace WindowsFormsApp1
             this.label6.BackColor = System.Drawing.Color.LightSlateGray;
             this.label6.Font = new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.label6.ForeColor = System.Drawing.Color.White;
-            this.label6.Location = new System.Drawing.Point(371, 0);
+            this.label6.Location = new System.Drawing.Point(615, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(86, 29);
+            this.label6.Size = new System.Drawing.Size(96, 36);
             this.label6.TabIndex = 4;
             this.label6.Text = "예수금(장전)";
             this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -371,9 +372,9 @@ namespace WindowsFormsApp1
             this.label12.BackColor = System.Drawing.Color.LightSlateGray;
             this.label12.Font = new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.label12.ForeColor = System.Drawing.Color.White;
-            this.label12.Location = new System.Drawing.Point(279, 0);
+            this.label12.Location = new System.Drawing.Point(513, 0);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(86, 29);
+            this.label12.Size = new System.Drawing.Size(96, 36);
             this.label12.TabIndex = 36;
             this.label12.Text = "총수익률";
             this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -387,9 +388,9 @@ namespace WindowsFormsApp1
             this.total_profit.BackColor = System.Drawing.Color.LightSlateGray;
             this.total_profit.Font = new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.total_profit.ForeColor = System.Drawing.Color.White;
-            this.total_profit.Location = new System.Drawing.Point(187, 0);
+            this.total_profit.Location = new System.Drawing.Point(411, 0);
             this.total_profit.Name = "total_profit";
-            this.total_profit.Size = new System.Drawing.Size(86, 29);
+            this.total_profit.Size = new System.Drawing.Size(96, 36);
             this.total_profit.TabIndex = 19;
             this.total_profit.Text = "총수익";
             this.total_profit.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -401,10 +402,10 @@ namespace WindowsFormsApp1
             | System.Windows.Forms.AnchorStyles.Right)));
             this.all_profit.AutoSize = true;
             this.all_profit.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.all_profit.Location = new System.Drawing.Point(186, 29);
+            this.all_profit.Location = new System.Drawing.Point(410, 36);
             this.all_profit.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.all_profit.Name = "all_profit";
-            this.all_profit.Size = new System.Drawing.Size(88, 29);
+            this.all_profit.Size = new System.Drawing.Size(98, 36);
             this.all_profit.TabIndex = 28;
             this.all_profit.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -417,9 +418,9 @@ namespace WindowsFormsApp1
             this.label7.BackColor = System.Drawing.Color.LightSlateGray;
             this.label7.Font = new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.label7.ForeColor = System.Drawing.Color.White;
-            this.label7.Location = new System.Drawing.Point(95, 0);
+            this.label7.Location = new System.Drawing.Point(309, 0);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(86, 29);
+            this.label7.Size = new System.Drawing.Size(96, 36);
             this.label7.TabIndex = 38;
             this.label7.Text = "예수금";
             this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -431,10 +432,10 @@ namespace WindowsFormsApp1
             | System.Windows.Forms.AnchorStyles.Right)));
             this.all_profit_percent.AutoSize = true;
             this.all_profit_percent.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.all_profit_percent.Location = new System.Drawing.Point(278, 29);
+            this.all_profit_percent.Location = new System.Drawing.Point(512, 36);
             this.all_profit_percent.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.all_profit_percent.Name = "all_profit_percent";
-            this.all_profit_percent.Size = new System.Drawing.Size(88, 29);
+            this.all_profit_percent.Size = new System.Drawing.Size(98, 36);
             this.all_profit_percent.TabIndex = 37;
             this.all_profit_percent.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -445,102 +446,12 @@ namespace WindowsFormsApp1
             | System.Windows.Forms.AnchorStyles.Right)));
             this.User_money.AutoSize = true;
             this.User_money.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.User_money.Location = new System.Drawing.Point(370, 29);
+            this.User_money.Location = new System.Drawing.Point(614, 36);
             this.User_money.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.User_money.Name = "User_money";
-            this.User_money.Size = new System.Drawing.Size(88, 29);
+            this.User_money.Size = new System.Drawing.Size(98, 36);
             this.User_money.TabIndex = 29;
             this.User_money.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label14
-            // 
-            this.label14.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label14.AutoSize = true;
-            this.label14.BackColor = System.Drawing.Color.LightSlateGray;
-            this.label14.Font = new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.label14.ForeColor = System.Drawing.Color.White;
-            this.label14.Location = new System.Drawing.Point(463, 0);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(86, 29);
-            this.label14.TabIndex = 25;
-            this.label14.Text = "당일손익률";
-            this.label14.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // today_profit_percent
-            // 
-            this.today_profit_percent.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.today_profit_percent.AutoSize = true;
-            this.today_profit_percent.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.today_profit_percent.Location = new System.Drawing.Point(462, 29);
-            this.today_profit_percent.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.today_profit_percent.Name = "today_profit_percent";
-            this.today_profit_percent.Size = new System.Drawing.Size(88, 29);
-            this.today_profit_percent.TabIndex = 35;
-            this.today_profit_percent.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label13
-            // 
-            this.label13.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label13.AutoSize = true;
-            this.label13.BackColor = System.Drawing.Color.LightSlateGray;
-            this.label13.Font = new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.label13.ForeColor = System.Drawing.Color.White;
-            this.label13.Location = new System.Drawing.Point(555, 0);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(86, 29);
-            this.label13.TabIndex = 24;
-            this.label13.Text = "당일손익합";
-            this.label13.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // today_profit
-            // 
-            this.today_profit.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.today_profit.AutoSize = true;
-            this.today_profit.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.today_profit.Location = new System.Drawing.Point(554, 29);
-            this.today_profit.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.today_profit.Name = "today_profit";
-            this.today_profit.Size = new System.Drawing.Size(88, 29);
-            this.today_profit.TabIndex = 34;
-            this.today_profit.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label1
-            // 
-            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label1.AutoSize = true;
-            this.label1.BackColor = System.Drawing.Color.LightSlateGray;
-            this.label1.Font = new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(647, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(86, 29);
-            this.label1.TabIndex = 20;
-            this.label1.Text = "당일수수료";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // today_tax
-            // 
-            this.today_tax.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.today_tax.AutoSize = true;
-            this.today_tax.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.today_tax.Location = new System.Drawing.Point(646, 29);
-            this.today_tax.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.today_tax.Name = "today_tax";
-            this.today_tax.Size = new System.Drawing.Size(88, 29);
-            this.today_tax.TabIndex = 30;
-            this.today_tax.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label8
             // 
@@ -551,11 +462,11 @@ namespace WindowsFormsApp1
             this.label8.BackColor = System.Drawing.Color.LightSlateGray;
             this.label8.Font = new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.label8.ForeColor = System.Drawing.Color.White;
-            this.label8.Location = new System.Drawing.Point(831, 0);
+            this.label8.Location = new System.Drawing.Point(819, 0);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(89, 29);
+            this.label8.Size = new System.Drawing.Size(101, 36);
             this.label8.TabIndex = 22;
-            this.label8.Text = "당일손익합  (-수수료)";
+            this.label8.Text = "당일손익합    (-수수료)";
             this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label11
@@ -567,11 +478,11 @@ namespace WindowsFormsApp1
             this.label11.BackColor = System.Drawing.Color.LightSlateGray;
             this.label11.Font = new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.label11.ForeColor = System.Drawing.Color.White;
-            this.label11.Location = new System.Drawing.Point(739, 0);
+            this.label11.Location = new System.Drawing.Point(717, 0);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(86, 29);
+            this.label11.Size = new System.Drawing.Size(96, 36);
             this.label11.TabIndex = 23;
-            this.label11.Text = "당일손익률 (-수수료)";
+            this.label11.Text = "당일손익률   (-수수료)";
             this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // today_profit_tax
@@ -581,10 +492,10 @@ namespace WindowsFormsApp1
             | System.Windows.Forms.AnchorStyles.Right)));
             this.today_profit_tax.AutoSize = true;
             this.today_profit_tax.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.today_profit_tax.Location = new System.Drawing.Point(830, 29);
+            this.today_profit_tax.Location = new System.Drawing.Point(818, 36);
             this.today_profit_tax.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.today_profit_tax.Name = "today_profit_tax";
-            this.today_profit_tax.Size = new System.Drawing.Size(91, 29);
+            this.today_profit_tax.Size = new System.Drawing.Size(103, 36);
             this.today_profit_tax.TabIndex = 32;
             this.today_profit_tax.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -595,25 +506,12 @@ namespace WindowsFormsApp1
             | System.Windows.Forms.AnchorStyles.Right)));
             this.today_profit_percent_tax.AutoSize = true;
             this.today_profit_percent_tax.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.today_profit_percent_tax.Location = new System.Drawing.Point(738, 29);
+            this.today_profit_percent_tax.Location = new System.Drawing.Point(716, 36);
             this.today_profit_percent_tax.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.today_profit_percent_tax.Name = "today_profit_percent_tax";
-            this.today_profit_percent_tax.Size = new System.Drawing.Size(88, 29);
+            this.today_profit_percent_tax.Size = new System.Drawing.Size(98, 36);
             this.today_profit_percent_tax.TabIndex = 33;
             this.today_profit_percent_tax.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // User_name
-            // 
-            this.User_name.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.User_name.AutoSize = true;
-            this.User_name.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.User_name.Location = new System.Drawing.Point(279, 0);
-            this.User_name.Name = "User_name";
-            this.User_name.Size = new System.Drawing.Size(86, 37);
-            this.User_name.TabIndex = 6;
-            this.User_name.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label2
             // 
@@ -624,9 +522,9 @@ namespace WindowsFormsApp1
             this.label2.BackColor = System.Drawing.Color.LightSlateGray;
             this.label2.Font = new System.Drawing.Font("굴림", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(3, 0);
+            this.label2.Location = new System.Drawing.Point(299, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(86, 37);
+            this.label2.Size = new System.Drawing.Size(68, 41);
             this.label2.TabIndex = 0;
             this.label2.Text = "ID";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -640,28 +538,12 @@ namespace WindowsFormsApp1
             this.label3.BackColor = System.Drawing.Color.LightSlateGray;
             this.label3.Font = new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.label3.ForeColor = System.Drawing.Color.White;
-            this.label3.Location = new System.Drawing.Point(371, 0);
+            this.label3.Location = new System.Drawing.Point(3, 36);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(86, 37);
+            this.label3.Size = new System.Drawing.Size(96, 36);
             this.label3.TabIndex = 1;
-            this.label3.Text = "계좌번호";
+            this.label3.Text = "종합계좌";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label5
-            // 
-            this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label5.AutoSize = true;
-            this.label5.BackColor = System.Drawing.Color.LightSlateGray;
-            this.label5.Font = new System.Drawing.Font("굴림", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.label5.ForeColor = System.Drawing.Color.White;
-            this.label5.Location = new System.Drawing.Point(187, 0);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(86, 37);
-            this.label5.TabIndex = 3;
-            this.label5.Text = "NAME";
-            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // User_id
             // 
@@ -670,9 +552,9 @@ namespace WindowsFormsApp1
             | System.Windows.Forms.AnchorStyles.Right)));
             this.User_id.AutoSize = true;
             this.User_id.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.User_id.Location = new System.Drawing.Point(95, 0);
+            this.User_id.Location = new System.Drawing.Point(373, 0);
             this.User_id.Name = "User_id";
-            this.User_id.Size = new System.Drawing.Size(86, 37);
+            this.User_id.Size = new System.Drawing.Size(73, 41);
             this.User_id.TabIndex = 5;
             this.User_id.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -855,6 +737,8 @@ namespace WindowsFormsApp1
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+            this.tableLayoutPanel3.Controls.Add(this.User_id, 5, 0);
+            this.tableLayoutPanel3.Controls.Add(this.label2, 4, 0);
             this.tableLayoutPanel3.Controls.Add(this.Login_btn, 0, 0);
             this.tableLayoutPanel3.Controls.Add(this.porfoilo_btn, 2, 0);
             this.tableLayoutPanel3.Controls.Add(this.Trade_setting, 1, 0);
@@ -938,87 +822,38 @@ namespace WindowsFormsApp1
             this.label4.BackColor = System.Drawing.Color.LightSlateGray;
             this.label4.Font = new System.Drawing.Font("굴림", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.label4.ForeColor = System.Drawing.Color.White;
-            this.label4.Location = new System.Drawing.Point(555, 0);
+            this.label4.Location = new System.Drawing.Point(3, 72);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(86, 37);
+            this.label4.Size = new System.Drawing.Size(96, 39);
             this.label4.TabIndex = 2;
-            this.label4.Text = "KEYBOARD";
+            this.label4.Text = "ISA계좌";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // Keyboard_wall
+            // acc_isa_text
             // 
-            this.Keyboard_wall.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.acc_isa_text.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.Keyboard_wall.AutoSize = true;
-            this.Keyboard_wall.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.Keyboard_wall.Location = new System.Drawing.Point(647, 0);
-            this.Keyboard_wall.Name = "Keyboard_wall";
-            this.Keyboard_wall.Size = new System.Drawing.Size(86, 37);
-            this.Keyboard_wall.TabIndex = 15;
-            this.Keyboard_wall.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.acc_isa_text.AutoSize = true;
+            this.acc_isa_text.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.acc_isa_text.Location = new System.Drawing.Point(105, 72);
+            this.acc_isa_text.Name = "acc_isa_text";
+            this.acc_isa_text.Size = new System.Drawing.Size(96, 39);
+            this.acc_isa_text.TabIndex = 15;
+            this.acc_isa_text.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // Fire_wall
+            // Current_User_money_isa
             // 
-            this.Fire_wall.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.Current_User_money_isa.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.Fire_wall.AutoSize = true;
-            this.Fire_wall.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.Fire_wall.Location = new System.Drawing.Point(831, 0);
-            this.Fire_wall.Name = "Fire_wall";
-            this.Fire_wall.Size = new System.Drawing.Size(89, 37);
-            this.Fire_wall.TabIndex = 9;
-            this.Fire_wall.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label10
-            // 
-            this.label10.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label10.AutoSize = true;
-            this.label10.BackColor = System.Drawing.Color.LightSlateGray;
-            this.label10.Font = new System.Drawing.Font("굴림", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.label10.ForeColor = System.Drawing.Color.White;
-            this.label10.Location = new System.Drawing.Point(739, 0);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(86, 37);
-            this.label10.TabIndex = 14;
-            this.label10.Text = "FIREWALL";
-            this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // tableLayoutPanel4
-            // 
-            this.tableLayoutPanel4.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.tableLayoutPanel4.ColumnCount = 10;
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanel4.Controls.Add(this.label3, 4, 0);
-            this.tableLayoutPanel4.Controls.Add(this.User_name, 3, 0);
-            this.tableLayoutPanel4.Controls.Add(this.label2, 0, 0);
-            this.tableLayoutPanel4.Controls.Add(this.User_id, 1, 0);
-            this.tableLayoutPanel4.Controls.Add(this.label5, 2, 0);
-            this.tableLayoutPanel4.Controls.Add(this.Fire_wall, 9, 0);
-            this.tableLayoutPanel4.Controls.Add(this.label10, 8, 0);
-            this.tableLayoutPanel4.Controls.Add(this.Keyboard_wall, 7, 0);
-            this.tableLayoutPanel4.Controls.Add(this.label4, 6, 0);
-            this.tableLayoutPanel4.Controls.Add(this.acc_text, 5, 0);
-            this.tableLayoutPanel4.Location = new System.Drawing.Point(12, 84);
-            this.tableLayoutPanel4.Margin = new System.Windows.Forms.Padding(2);
-            this.tableLayoutPanel4.Name = "tableLayoutPanel4";
-            this.tableLayoutPanel4.RowCount = 1;
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 37F));
-            this.tableLayoutPanel4.Size = new System.Drawing.Size(923, 37);
-            this.tableLayoutPanel4.TabIndex = 12;
+            this.Current_User_money_isa.AutoSize = true;
+            this.Current_User_money_isa.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.Current_User_money_isa.Location = new System.Drawing.Point(309, 72);
+            this.Current_User_money_isa.Name = "Current_User_money_isa";
+            this.Current_User_money_isa.Size = new System.Drawing.Size(96, 39);
+            this.Current_User_money_isa.TabIndex = 9;
+            this.Current_User_money_isa.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // acc_text
             // 
@@ -1027,10 +862,10 @@ namespace WindowsFormsApp1
             | System.Windows.Forms.AnchorStyles.Right)));
             this.acc_text.AutoSize = true;
             this.acc_text.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.acc_text.Location = new System.Drawing.Point(462, 0);
+            this.acc_text.Location = new System.Drawing.Point(104, 36);
             this.acc_text.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.acc_text.Name = "acc_text";
-            this.acc_text.Size = new System.Drawing.Size(88, 37);
+            this.acc_text.Size = new System.Drawing.Size(98, 36);
             this.acc_text.TabIndex = 16;
             this.acc_text.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -2047,6 +1882,105 @@ namespace WindowsFormsApp1
             this.log_window3.TabIndex = 2;
             this.log_window3.Text = "";
             // 
+            // label1
+            // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.Color.LightSlateGray;
+            this.label1.Font = new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.label1.ForeColor = System.Drawing.Color.White;
+            this.label1.Location = new System.Drawing.Point(105, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(96, 36);
+            this.label1.TabIndex = 40;
+            this.label1.Text = "계좌번호";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // User_money_isa
+            // 
+            this.User_money_isa.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.User_money_isa.AutoSize = true;
+            this.User_money_isa.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.User_money_isa.Location = new System.Drawing.Point(615, 72);
+            this.User_money_isa.Name = "User_money_isa";
+            this.User_money_isa.Size = new System.Drawing.Size(96, 39);
+            this.User_money_isa.TabIndex = 41;
+            this.User_money_isa.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // total_money_isa
+            // 
+            this.total_money_isa.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.total_money_isa.AutoSize = true;
+            this.total_money_isa.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.total_money_isa.Location = new System.Drawing.Point(206, 72);
+            this.total_money_isa.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.total_money_isa.Name = "total_money_isa";
+            this.total_money_isa.Size = new System.Drawing.Size(98, 39);
+            this.total_money_isa.TabIndex = 42;
+            this.total_money_isa.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // all_profit_isa
+            // 
+            this.all_profit_isa.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.all_profit_isa.AutoSize = true;
+            this.all_profit_isa.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.all_profit_isa.Location = new System.Drawing.Point(410, 72);
+            this.all_profit_isa.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.all_profit_isa.Name = "all_profit_isa";
+            this.all_profit_isa.Size = new System.Drawing.Size(98, 39);
+            this.all_profit_isa.TabIndex = 43;
+            this.all_profit_isa.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // all_profit_percent_isa
+            // 
+            this.all_profit_percent_isa.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.all_profit_percent_isa.AutoSize = true;
+            this.all_profit_percent_isa.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.all_profit_percent_isa.Location = new System.Drawing.Point(512, 72);
+            this.all_profit_percent_isa.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.all_profit_percent_isa.Name = "all_profit_percent_isa";
+            this.all_profit_percent_isa.Size = new System.Drawing.Size(98, 39);
+            this.all_profit_percent_isa.TabIndex = 44;
+            this.all_profit_percent_isa.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // today_profit_percent_tax_isa
+            // 
+            this.today_profit_percent_tax_isa.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.today_profit_percent_tax_isa.AutoSize = true;
+            this.today_profit_percent_tax_isa.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.today_profit_percent_tax_isa.Location = new System.Drawing.Point(716, 72);
+            this.today_profit_percent_tax_isa.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.today_profit_percent_tax_isa.Name = "today_profit_percent_tax_isa";
+            this.today_profit_percent_tax_isa.Size = new System.Drawing.Size(98, 39);
+            this.today_profit_percent_tax_isa.TabIndex = 45;
+            this.today_profit_percent_tax_isa.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // today_profit_tax_isa
+            // 
+            this.today_profit_tax_isa.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.today_profit_tax_isa.AutoSize = true;
+            this.today_profit_tax_isa.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.today_profit_tax_isa.Location = new System.Drawing.Point(818, 72);
+            this.today_profit_tax_isa.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.today_profit_tax_isa.Name = "today_profit_tax_isa";
+            this.today_profit_tax_isa.Size = new System.Drawing.Size(103, 39);
+            this.today_profit_tax_isa.TabIndex = 46;
+            this.today_profit_tax_isa.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // Trade_Auto
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
@@ -2062,7 +1996,6 @@ namespace WindowsFormsApp1
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.tableLayoutPanel4);
             this.Controls.Add(this.tableLayoutPanel3);
             this.Controls.Add(this.menu);
             this.Controls.Add(this.tableLayoutPanel1);
@@ -2080,8 +2013,7 @@ namespace WindowsFormsApp1
             this.menu.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
             this.tableLayoutPanel3.ResumeLayout(false);
-            this.tableLayoutPanel4.ResumeLayout(false);
-            this.tableLayoutPanel4.PerformLayout();
+            this.tableLayoutPanel3.PerformLayout();
             this.tableLayoutPanel5.ResumeLayout(false);
             this.tableLayoutPanel5.PerformLayout();
             this.groupBox1.ResumeLayout(false);
@@ -2110,10 +2042,8 @@ namespace WindowsFormsApp1
         private System.Windows.Forms.RichTextBox log_window;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.Label User_name;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label User_id;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
@@ -2131,17 +2061,12 @@ namespace WindowsFormsApp1
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
         private System.Windows.Forms.Label User_connection;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label Keyboard_wall;
-        private System.Windows.Forms.Label Fire_wall;
-        private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
+        private System.Windows.Forms.Label acc_isa_text;
+        private System.Windows.Forms.Label Current_User_money_isa;
         private System.Windows.Forms.Label total_balance;
         private System.Windows.Forms.Label total_profit;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Button porfoilo_btn;
         private System.Windows.Forms.Button Trade_setting;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel5;
@@ -2161,11 +2086,8 @@ namespace WindowsFormsApp1
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Label acc_text;
         private System.Windows.Forms.Label total_money;
-        private System.Windows.Forms.Label today_profit_percent;
-        private System.Windows.Forms.Label today_profit;
         private System.Windows.Forms.Label today_profit_percent_tax;
         private System.Windows.Forms.Label today_profit_tax;
-        private System.Windows.Forms.Label today_tax;
         private System.Windows.Forms.Label User_money;
         private System.Windows.Forms.Label all_profit;
         private System.Windows.Forms.Label loss;
@@ -2221,6 +2143,13 @@ namespace WindowsFormsApp1
         private System.Windows.Forms.Label label25;
         private System.Windows.Forms.Label KIS_Independent;
         private System.Windows.Forms.Label KIS_Account_Number;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label User_money_isa;
+        private System.Windows.Forms.Label total_money_isa;
+        private System.Windows.Forms.Label all_profit_isa;
+        private System.Windows.Forms.Label all_profit_percent_isa;
+        private System.Windows.Forms.Label today_profit_percent_tax_isa;
+        private System.Windows.Forms.Label today_profit_tax_isa;
     }
 }
 

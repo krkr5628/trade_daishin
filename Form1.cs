@@ -281,6 +281,7 @@ namespace WindowsFormsApp1
             //초기 세팅
             acc_text.Text = utility.setting_account_number;
             total_money.Text = string.Format("{0:#,##0}", Convert.ToDecimal(utility.initial_balance));
+            total_money_isa.Text = string.Format("{0:#,##0}", Convert.ToDecimal(utility.initial_balance));
             if (utility.buy_INDEPENDENT)
             {
                 maxbuy_acc.Text = string.Concat(Enumerable.Repeat("0/", utility.Fomula_list_buy_text.Split(',').Length)) + utility.maxbuy_acc;
@@ -289,6 +290,7 @@ namespace WindowsFormsApp1
             {
                 maxbuy_acc.Text = "0/" + utility.maxbuy_acc;
             }
+            User_id.Text = utility.real_id;
             operation_start.Text = utility.market_start_time;
             operation_stop.Text = utility.market_end_time;
             search_start.Text = utility.buy_condition_start;
@@ -305,11 +307,11 @@ namespace WindowsFormsApp1
             //초기세팅2
             all_profit.Text = "0";
             all_profit_percent.Text = "00.00%";
-            today_tax.Text = "0";
+            //today_tax.Text = "0";
             today_profit_percent_tax.Text = "00.00%";
             today_profit_tax.Text = "0";
-            today_profit_percent.Text = "00.00%";
-            today_profit.Text = "0";
+            //today_profit_percent.Text = "00.00%";
+            //today_profit.Text = "0";
 
             //초기세팅3
             if (utility.buy_OR)
@@ -831,7 +833,9 @@ namespace WindowsFormsApp1
             Account(); //계좌 번호
             //Independent2
             GetCashInfo(Master_code); //주계좌 => D+2 예수금 + 계좌 보유 종목
-            //GetCashInfo(ISA_code); //ISA계좌 => D+2 예수금 + 계좌 보유 종목
+            GetCashInfo(ISA_code); //ISA계좌 => D+2 예수금 + 계좌 보유 종목
+            //
+            hold_update_initial = false;
             //
             today_profit_tax_load(""); //매도실현손익(제세금, 수수료 포함)
             Transaction_Detail(""); //매매내역
@@ -854,7 +858,8 @@ namespace WindowsFormsApp1
                     if (!account.Contains(utility.setting_account_number))
                     {
                         WriteLog_System("계좌번호 재설정 요청 및 8번 초기화\n");
-                        acc_text.Text = account[0];
+                        acc_text.Text = account[0] +"-01";
+                        acc_isa_text.Text = account[0] + "-11";
                     }
                     WriteLog_System("[계좌번호/설정] : " + account[0] + "\n");
                 }
@@ -883,8 +888,14 @@ namespace WindowsFormsApp1
                 {
                     //예수금 받기
                     string day2money = string.Format("{0:#,##0}", Convert.ToDecimal(CpTd6033.GetHeaderValue(9).ToString().Trim()));
-                    User_money.Text = day2money;
-                    Current_User_money.Text = day2money;
+                    if (acc_gubun.Equals("01"))
+                    {
+                        Current_User_money.Text = day2money;
+                    }
+                    else
+                    {
+                        Current_User_money.Text = day2money;
+                    }
 
                     //전체 수익 업데이트
                     all_profit.Text = string.Format("{0:#,##0}", Convert.ToDecimal(Convert.ToInt32(Current_User_money.Text.Replace(",", "")) - Convert.ToInt32(total_money.Text.Replace(",", "")))); //수익
@@ -910,7 +921,7 @@ namespace WindowsFormsApp1
                     for (int i = 0; i < Convert.ToInt32(CpTd6033.GetHeaderValue(7)); i++)
                     {
                         dataTable2.Rows.Add(
-                            "01",
+                            acc_gubun,
                             CpTd5341.GetDataValue(12, i).Trim(), //종목코드(A Type) => string
                             CpTd5341.GetDataValue(0, i).Trim(), //종목명 => string
                             "0", //현재가
@@ -927,10 +938,17 @@ namespace WindowsFormsApp1
                     dtCondStock_hold = dataTable2;
                     dataGridView2.DataSource = dtCondStock_hold;
 
-                    //초기 보유 계좌는 테이블 업데이트 진행
+                    //1회성 업데이트 : 초기 보유 계좌 + 고정 예수금
                     if (hold_update_initial)
                     {
-                        hold_update_initial = false;
+                        if (acc_gubun.Equals("01"))
+                        {
+                            User_money.Text = day2money;
+                        }
+                        else
+                        {
+                            User_money_isa.Text = day2money;
+                        }
                         Hold_Update();
                     }
                 }
