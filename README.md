@@ -1,6 +1,6 @@
 # trade_daishin
 # 현재 상황
-- 정규장 시간에 대하여 0R - AND - INDEPENDENT 모드로 종목을 거래할 수 있으며 Telegram을 통해 상황을 보고받을 수 있습니다.
+- 정규장 시간에 대하여 0R - AND - INDEPENDENT - Dual 모드로 종목을 거래할 수 있으며 Telegram을 통해 상황을 보고받을 수 있습니다.
 - AWS 클라우에서 Free Tier 통해 실제로 활용하고 있습니다.
 - 현재 시나리오 모드, KIS, 시간외거래 등을 기획중이며 퀀트 프로그램도 재시작할 생각입니다.
 
