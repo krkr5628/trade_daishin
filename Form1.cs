@@ -828,6 +828,7 @@ namespace WindowsFormsApp1
                 Timer_Connection = null;
                 Timer_Count = 0;
                 WriteLog_System("[연결/정상] 연결\n");
+                telegram_message("[연결/정상] 연결\n");
                 //
                 initial_process();
             }
