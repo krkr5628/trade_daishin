@@ -49,6 +49,7 @@ namespace WindowsFormsApp1
         public static bool buy_OR;
         public static bool buy_AND;
         public static bool buy_INDEPENDENT;
+        public static bool buy_DUAL;
 
         public static bool sell_condition; //매도조건
         public static string sell_condition_start;
@@ -234,6 +235,7 @@ namespace WindowsFormsApp1
             buy_OR = Convert.ToBoolean(buy_condition_tmp[5]);
             buy_AND = Convert.ToBoolean(buy_condition_tmp[6]);
             buy_INDEPENDENT = Convert.ToBoolean(buy_condition_tmp[7]);
+            buy_DUAL = Convert.ToBoolean(buy_condition_tmp[8]);
 
             //매도조건
             String[] sell_condition_tmp = reader.ReadLine().Split(';');
@@ -291,7 +293,6 @@ namespace WindowsFormsApp1
             //손절시간외단일가
             String[] loss_after2_tmp = reader.ReadLine().Split('/');
             loss_after2 = Convert.ToBoolean(loss_after2_tmp[1]);
-
 
             //손절인덱스연동1
             String[] loss_index_connection1_tmp = reader.ReadLine().Split('/');
