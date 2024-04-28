@@ -622,7 +622,7 @@ namespace WindowsFormsApp1
                 {
                     if (row["상태"].ToString() == "매수완료")
                     {
-                        sell_order(row.Field<string>("현재가"), "청산매도/일반", row.Field<string>("주문번호"), row.Field<string>("수익률"));
+                        sell_order(row.Field<string>("현재가"), "청산매도/일반", row.Field<string>("주문번호"), row.Field<string>("수익률"), row.Field<string>("구분코드"));
                     }
                 }
             }
@@ -648,7 +648,7 @@ namespace WindowsFormsApp1
                     double percent_edit = double.Parse(row.Field<string>("수익률").TrimEnd('%'));
                     if (row["상태"].ToString() == "매수완료" && percent_edit >= 0)
                     {
-                        sell_order(row.Field<string>("현재가"), "청산매도/수익", row.Field<string>("주문번호"), row.Field<string>("수익률"));
+                        sell_order(row.Field<string>("현재가"), "청산매도/수익", row.Field<string>("주문번호"), row.Field<string>("수익률"), row.Field<string>("구분코드"));
                     }
                 }
             }
@@ -674,7 +674,7 @@ namespace WindowsFormsApp1
                     double percent_edit = double.Parse(row.Field<string>("수익률").TrimEnd('%'));
                     if (row["상태"].ToString() == "매수완료" && percent_edit < 0)
                     {
-                        sell_order(row.Field<string>("현재가"), "청산매도/수익", row.Field<string>("주문번호"), row.Field<string>("수익률"));
+                        sell_order(row.Field<string>("현재가"), "청산매도/수익", row.Field<string>("주문번호"), row.Field<string>("수익률"), row.Field<string>("구분코드"));
                     }
                 }
             }
@@ -1318,7 +1318,7 @@ namespace WindowsFormsApp1
                         if (!sell_runningCodes.ContainsKey(order_num))
                         {
                             sell_runningCodes[order_num] = true;
-                            sell_check_price(price.Equals("") ? findRows[0]["현재가"].ToString() : string.Format("{0:#,##0}", Convert.ToInt32(price)), percent, Convert.ToInt32(findRows[i]["보유수량"].ToString().Split('/')[0]), Convert.ToInt32(findRows[i]["편입가"].ToString().Replace(",", "")), order_num);
+                            sell_check_price(price.Equals("") ? findRows[i]["현재가"].ToString() : string.Format("{0:#,##0}", Convert.ToInt32(price)), percent, Convert.ToInt32(findRows[i]["보유수량"].ToString().Split('/')[0]), Convert.ToInt32(findRows[i]["편입가"].ToString().Replace(",", "")), order_num, findRows[i]["구분코드"].ToString());
                             sell_runningCodes.Remove(order_num);
                         }
                     }
@@ -1350,6 +1350,7 @@ namespace WindowsFormsApp1
             }
             else
             {
+                //Dual 모드라면 구분코드로 인해 동일 종목에 대하여 2개 들어올 수 있음(수정 요망)
                 if (!price.Equals(""))
                 {
                     findRows2[0]["현재가"] = string.Format("{0:#,##0}", Convert.ToInt32(price)); //새로운 현재가
@@ -2010,7 +2011,7 @@ namespace WindowsFormsApp1
                             sell_runningCodes[order_num] = true;
                             if (utility.clear_sell)
                             {
-                                sell_order("Nan", "청산매도/시간", order_num, row.Field<string>("수익률"));
+                                sell_order("Nan", "청산매도/시간", order_num, row.Field<string>("수익률"), row.Field<string>("구분코드"));
                             }
                             //
                             if (utility.clear_sell_mode)
@@ -2020,11 +2021,11 @@ namespace WindowsFormsApp1
                                 double loss = double.Parse(utility.clear_sell_loss_text);
                                 if (utility.clear_sell_profit && percent_edit >= profit)
                                 {
-                                    sell_order("Nan", "청산매도/수익", order_num, row.Field<string>("수익률"));
+                                    sell_order("Nan", "청산매도/수익", order_num, row.Field<string>("수익률"), row.Field<string>("구분코드"));
                                 }
                                 if (utility.clear_sell_loss && percent_edit <= -loss)
                                 {
-                                    sell_order("Nan", "청산매도/손실", order_num, row.Field<string>("수익률"));
+                                    sell_order("Nan", "청산매도/손실", order_num, row.Field<string>("수익률"), row.Field<string>("구분코드"));
                                 }
                             }
                             sell_runningCodes.Remove(order_num);
@@ -2101,6 +2102,13 @@ namespace WindowsFormsApp1
             //주문 방식 구분
             string[] order_method = buy_condtion_method.Text.Split('/');
 
+            //
+            string gubun = Master_code;
+            if (utility.buy_DUAL && condition_name.Equals(ISA_Condition))
+            {
+                gubun = ISA_code;
+            }
+
             //시장가 주문
             if (order_method[0].Equals("시장가"))
             {
@@ -2109,17 +2117,10 @@ namespace WindowsFormsApp1
                 //User_money.Text;
                 int order_acc_market = buy_order_cal(Convert.ToInt32(high.Replace(",", "")));
 
-                WriteLog_Order("[매수주문/시장가/주문접수] : " + code_name  + "(" + code + ") " + order_acc_market + "개\n");
-                telegram_message("[매수주문/시장가/주문접수] : " + code_name + "(" + code + ") " + order_acc_market + "개\n");
+                WriteLog_Order($"[매수주문/시장가/주문접수/{gubun}] : {code_name}({code}) {order_acc_market}개\n");
+                telegram_message($"[매수주문/시장가/주문접수/{gubun}] : {code_name}({code}) {order_acc_market}개\n");
 
                 System.Threading.Thread.Sleep(200);
-
-                //
-                string gubun = Master_code;
-                if (utility.buy_DUAL && condition_name.Equals(ISA_Condition))
-                {
-                    gubun = ISA_code;
-                }
 
                 //
                 CpTd0311.SetInputValue(0, "2"); //매수
@@ -2136,8 +2137,8 @@ namespace WindowsFormsApp1
                 if (error == 0)
                 {
                     //
-                    WriteLog_Order("[매수주문/시장가/주문성공] : " + code_name + "(" + code + ") " + order_acc_market + "개\n");
-                    telegram_message("[매수주문/시장가/주문성공] : " + code_name + "(" + code + ") " + order_acc_market + "개\n");
+                    WriteLog_Order($"[매수주문/시장가/주문성공/{gubun}] : {code_name}({code}) {order_acc_market}개\n");
+                    telegram_message($"[매수주문/시장가/주문성공/{gubun}] : {code_name}({code}) {order_acc_market}개\n");
 
                     var findRows = dtCondStock.AsEnumerable()
                                             .Where(rows => rows.Field<string>("종목코드") == code &&
@@ -2220,8 +2221,8 @@ namespace WindowsFormsApp1
                 //지정가에 대하여 주문 가능 개수 계산
                 int order_acc = buy_order_cal(edited_price_hoga);
 
-                WriteLog_Order("[매수주문/지정가매수/접수] : " + code_name + "(" + code + ") " + order_acc + "개 " + price + "원\n");
-                telegram_message("[매수주문/지정가매수/접수] : " + code_name + "(" + code + ") " + order_acc + "개 " + price + "원\n");
+                WriteLog_Order($"[매수주문/지정가매수/접수/{gubun}] : {code_name}({code}) {order_acc}개 {price}원\n");
+                telegram_message($"[매수주문/지정가매수/접수/{gubun}] : {code_name}({code}) {order_acc}개 {price}원\n");
 
                 CpTd0311.SetInputValue(0, "2"); //매수
                 CpTd0311.SetInputValue(1, utility.setting_account_number); //계좌번호
@@ -2237,8 +2238,8 @@ namespace WindowsFormsApp1
                 if (error == 0)
                 {
                     //
-                    WriteLog_Order("[매수주문/지정가매수/접수성공] : " + code_name + "(" + code + ") " + order_acc + "개 " + price + "원\n");
-                    telegram_message("[매수주문/지정가매수/접수성공] : " + code_name + "(" + code + ") " + order_acc + "개 " + price + "원\n");
+                    WriteLog_Order($"[매수주문/지정가매수/접수성공/{gubun}] : {code_name}({code}) {order_acc}개 {price}원\n");
+                    telegram_message($"[매수주문/지정가매수/접수성공/{gubun}] : {code_name}({code}) {order_acc}개 {price}원\n");
 
                     var findRows = dtCondStock.AsEnumerable()
                                             .Where(rows => rows.Field<string>("종목코드") == code &&
@@ -2392,11 +2393,11 @@ namespace WindowsFormsApp1
                 return;
             }
 
-            sell_order(price, "조건식매도", order_num, percent);
+            sell_order(price, "조건식매도", order_num, percent, gubun);
         }
 
         //실시간 가격 매도
-        private void sell_check_price(string price, string percent, int hold, int buy_price, string order_num)
+        private void sell_check_price(string price, string percent, int hold, int buy_price, string order_num, string gubun)
         {
 
             //익절
@@ -2406,7 +2407,7 @@ namespace WindowsFormsApp1
                 double profit = double.Parse(utility.profit_percent_text);
                 if (percent_edit >= profit)
                 {
-                    sell_order(price, "익절매도", order_num, percent);
+                    sell_order(price, "익절매도", order_num, percent, gubun);
                     return;
                 }
             }
@@ -2417,7 +2418,7 @@ namespace WindowsFormsApp1
                 int profit_amount = Convert.ToInt32(utility.profit_won_text);
                 if ((hold * buy_price * double.Parse(percent.Replace("%", "")) / 100) >= profit_amount)
                 {
-                    sell_order(price, "익절원", order_num, percent);
+                    sell_order(price, "익절원", order_num, percent, gubun);
                     return;
                 }
             }
@@ -2425,7 +2426,7 @@ namespace WindowsFormsApp1
             //익절TS(대기)
             if (utility.profit_ts)
             {
-                sell_order(price, "익절TS", order_num, percent);
+                sell_order(price, "익절TS", order_num, percent, gubun);
                 return;
             }
 
@@ -2436,7 +2437,7 @@ namespace WindowsFormsApp1
                 double loss = double.Parse(utility.loss_percent_text);
                 if (percent_edit <= -loss)
                 {
-                    sell_order(price, "손절매도", order_num, percent);
+                    sell_order(price, "손절매도", order_num, percent, gubun);
                     return;
                 }
             }
@@ -2447,7 +2448,7 @@ namespace WindowsFormsApp1
                 int loss_amount = Convert.ToInt32(utility.loss_won_text);
                 if ((hold * buy_price * double.Parse(percent.Replace("%", "")) / 100) <= -loss_amount)
                 {
-                    sell_order(price, "익절원", order_num, percent);
+                    sell_order(price, "익절원", order_num, percent, gubun);
                     return;
                 }
             }
@@ -2479,15 +2480,15 @@ namespace WindowsFormsApp1
                 //주문 방식 구분
                 string[] order_method = buy_condtion_method.Text.Split('/');
 
-                WriteLog_Order($"[{sell_message}/주문접수] : {code_name}({code}) {order_acc}개 {percent}\n");
-                telegram_message($"[{sell_message}/주문접수] : {code_name}({code}) {order_acc}개 {percent}\n");
+                WriteLog_Order($"[{sell_message}/주문접수/{gubun}] : {code_name}({code}) {order_acc}개 {percent}\n");
+                telegram_message($"[{sell_message}/주문접수/{gubun}] : {code_name}({code}) {order_acc}개 {percent}\n");
 
                 //시장가 주문 + 청산주문
                 if (sell_message.Split('/')[0].Equals("청산매도") || order_method[0].Equals("시장가"))
                 {
                     CpTd0311.SetInputValue(0, "1"); //매도
                     CpTd0311.SetInputValue(1, utility.setting_account_number); //계좌번호
-                    CpTd0311.SetInputValue(2, Master_code); //상품관리구분코드
+                    CpTd0311.SetInputValue(2, gubun); //상품관리구분코드
                     CpTd0311.SetInputValue(3, code); //종목코드
                     CpTd0311.SetInputValue(4, order_acc); //주문수량
                     CpTd0311.SetInputValue(5, 0); //주문단가
@@ -2498,10 +2499,13 @@ namespace WindowsFormsApp1
 
                     if (error == 0)
                     {
-                        WriteLog_Order($"[{sell_message}/시장가/주문성공] : {code_name}({code}) {order_acc}개");
-                        WriteLog_Order($"[{sell_message}/시장가/주문상세] : 편입가 {start_price}원, 현재가 {price}원, 수익 {percent}\n");
-                        telegram_message($"[{sell_message}/시장가//주문성공] : {code_name}({code}) {order_acc}개 {percent}\n");
-                        telegram_message($"[{sell_message}/시장가/주문상세] : 편입가 {start_price}원, 현재가 {price}원, 수익 {percent}\n");
+
+                        row["주문번호"] = CpTd0311.GetHeaderValue(8);
+
+                        WriteLog_Order($"[{sell_message}/시장가/주문성공/{gubun}] : {code_name}({code}) {order_acc}개");
+                        WriteLog_Order($"[{sell_message}/시장가/주문상세/{gubun}] : 편입가 {start_price}원, 현재가 {price}원, 수익 {percent}\n");
+                        telegram_message($"[{sell_message}/시장가//주문성공/{gubun}] : {code_name}({code}) {order_acc}개 {percent}\n");
+                        telegram_message($"[{sell_message}/시장가/주문상세/{gubun}] : 편입가 {start_price}원, 현재가 {price}원, 수익 {percent}\n");
                     }
                     else
                     {
@@ -2530,10 +2534,13 @@ namespace WindowsFormsApp1
 
                     if (error == 0)
                     {
-                        WriteLog_Order($"[{sell_message}/지정가/주문성공] : {code_name}({code}) {order_acc}개 {edited_price_hoga}원");
-                        WriteLog_Order($"[{sell_message}/지정가/주문상세] : 편입가 {start_price}원, 현재가 {price}원, 수익 {percent}\n");
-                        telegram_message($"[{sell_message}/지정가/주문성공] : {code_name}({code}) {order_acc}개 {edited_price_hoga}원 {percent}\n");
-                        telegram_message($"[{sell_message}/지정가/주문상세] : 편입가 {start_price}원, 현재가 {price}원, 수익 {percent}\n");
+
+                        row["주문번호"] = CpTd0311.GetHeaderValue(8);
+
+                        WriteLog_Order($"[{sell_message}/지정가/주문성공/{gubun}] : {code_name}({code}) {order_acc}개 {edited_price_hoga}원");
+                        WriteLog_Order($"[{sell_message}/지정가/주문상세/{gubun}] : 편입가 {start_price}원, 현재가 {price}원, 수익 {percent}\n");
+                        telegram_message($"[{sell_message}/지정가/주문성공/{gubun}] : {code_name}({code}) {order_acc}개 {edited_price_hoga}원 {percent}\n");
+                        telegram_message($"[{sell_message}/지정가/주문상세/{gubun}] : 편입가 {start_price}원, 현재가 {price}원, 수익 {percent}\n");
                     }
                     else if (error == -308)
                     {
