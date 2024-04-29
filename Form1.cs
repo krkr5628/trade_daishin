@@ -1621,13 +1621,11 @@ namespace WindowsFormsApp1
             string Condition_Name = condInfo.Name;
             string Stock_Code = CssAlert.GetHeaderValue(2); // 종목코드
             string gubun = CssAlert.GetHeaderValue(3).ToString();
-            //////////////////&*&8**&*&*&*&*&*&&*
-            WriteLog_Stock(gubun + "\n");
             //
             switch (gubun)
             {
                 //편출입구분
-                case "1" :
+                case "49" :
                     //
                     DataRow[] findRows1 = dtCondStock.Select($"종목코드 = '{Stock_Code}'");
                     string time1 = DateTime.Now.ToString("HH:mm:ss");
@@ -1732,7 +1730,7 @@ namespace WindowsFormsApp1
                     break;
 
                 //종목 이탈
-                case "2":
+                case "50":
                     //검출된 종목이 이미 이탈했다면(기본적으로 I D가 번갈아가면서 발생하므로 그럴릴 없음? 있는듯?)
                     DataRow[] findRows = dtCondStock.Select($"종목코드 = '{Stock_Code}'");
                     if (findRows.Length == 0) return;
