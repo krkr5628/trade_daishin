@@ -999,7 +999,7 @@ namespace WindowsFormsApp1
                     if (Native_Price < Convert.ToInt32(utility.min_price) || Native_Price > Convert.ToInt32(utility.max_price)) return;
 
                     //Independent 모드에서 조건식에 해당하는 종목이 있을시 제거
-                    if (utility.buy_INDEPENDENT)
+                    if (utility.buy_INDEPENDENT || utility.buy_DUAL)
                     {
                         if (dtCondStock.Select($"종목코드 = '{Code}', 조건식 = '{condition_name}'").Length == 1) return;
                     }
@@ -1052,7 +1052,7 @@ namespace WindowsFormsApp1
                 );
 
                 //OR 및 AND 모드에서는 중복제거
-                if (!utility.buy_INDEPENDENT)
+                if (!utility.buy_INDEPENDENT || !utility.buy_DUAL)
                 {
                     RemoveDuplicateRows(dtCondStock, utility.buy_AND);
                 }
@@ -1750,7 +1750,7 @@ namespace WindowsFormsApp1
                             findRows[0]["상태"] = "호출";
                         }
                     }
-                    else if (utility.buy_INDEPENDENT)
+                    else if (utility.buy_INDEPENDENT || utility.buy_DUAL)
                     {
                         for (int i = 0; i < findRows.Length; i++)
                         {
@@ -1917,7 +1917,7 @@ namespace WindowsFormsApp1
             if (hold >= hold_max) return "대기";
 
             //매매 횟수 확인
-            if (utility.buy_INDEPENDENT)
+            if (utility.buy_INDEPENDENT || utility.buy_DUAL)
             {
                 string[] trade_status = maxbuy_acc.Text.Split('/');
                 string[] condition_num = utility.Fomula_list_buy_text.Split(',');
@@ -2022,7 +2022,7 @@ namespace WindowsFormsApp1
                     max_hoid.Text = (hold_update + 1) + "/" + hold_max_update;
 
                     //매매 횟수업데이트
-                    if (utility.buy_INDEPENDENT)
+                    if (utility.buy_INDEPENDENT || utility.buy_DUAL)
                     {
                         string[] trade_status = maxbuy_acc.Text.Split('/');
                         string[] condition_num = utility.Fomula_list_buy_text.Split(',');
@@ -2123,7 +2123,7 @@ namespace WindowsFormsApp1
                     max_hoid.Text = (hold_update + 1) + "/" + hold_max_update;
 
                     //매매 횟수업데이트(Independent Mode)
-                    if (utility.buy_INDEPENDENT)
+                    if (utility.buy_INDEPENDENT || utility.buy_DUAL)
                     {
                         string[] trade_status = maxbuy_acc.Text.Split('/');
                         string[] condition_num = utility.Fomula_list_buy_text.Split(',');
