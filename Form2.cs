@@ -646,7 +646,7 @@ namespace WindowsFormsApp1
             {
                 MessageBox.Show("계좌번호를설정해주세요"); 
             }
-            else if (Fomula_list_buy.Text.Split(',').Length < 1)
+            else if (buy_condition.Checked && String.IsNullOrEmpty(Fomula_list_buy.Text) || sell_condition.Checked && String.IsNullOrEmpty(Fomula_list_sell.Text))
             {
                 MessageBox.Show("저장하기 위해 조건식 1개 이상 설정해 주세요.");
             }

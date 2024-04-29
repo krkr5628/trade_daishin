@@ -282,8 +282,8 @@ namespace WindowsFormsApp1
             string[] hoo = { "5호가", "4호가", "3호가", "2호가", "1호가", "현재가", "시장가", "-1호가", "-2호가", "-3호가", "-4호가", "-5호가" };
 
             //초기 세팅
-            acc_text.Text = utility.setting_account_number + "-01";
-            acc_isa_text.Text = utility.setting_account_number + "-11";
+            acc_text.Text = utility.setting_account_number;
+            acc_isa_text.Text = utility.setting_account_number;
             total_money.Text = string.Format("{0:#,##0}", Convert.ToDecimal(utility.initial_balance));
             total_money_isa.Text = string.Format("{0:#,##0}", Convert.ToDecimal(utility.initial_balance));
             //
@@ -693,7 +693,7 @@ namespace WindowsFormsApp1
         private void initial_process()
         {
             Account(); //계좌 번호
-            //Independent2
+            //
             GetCashInfo(Master_code); //주계좌 => D+2 예수금 + 계좌 보유 종목
             GetCashInfo(ISA_code); //ISA계좌 => D+2 예수금 + 계좌 보유 종목
             //
@@ -705,10 +705,10 @@ namespace WindowsFormsApp1
             Transaction_Detail("", Master_code, ""); //매매내역
             Transaction_Detail("", ISA_code, ""); //매매내역
             //
-            Condition_load(); //조건식 로드
-            //
             CssAlert.Subscribe(); //실시간 편출입 받기
             CpConclusion.Subscribe(); //실시간 체결 등록
+            //
+            Condition_load(); //조건식 로드
         }
 
         //계좌번호목록(마스터계좌)
@@ -723,7 +723,8 @@ namespace WindowsFormsApp1
                 {
                     if (!account.Contains(utility.setting_account_number))
                     {
-                        WriteLog_System("계좌번호 재설정 요청 및 8번 초기화\n");
+                        acc_text.Text = account[0];
+                        WriteLog_System("계좌번호 재설정 요청 및 초기화\n");
                     }
                     WriteLog_System("[계좌번호/설정] : " + account[0] + "\n");
                 }
@@ -986,11 +987,11 @@ namespace WindowsFormsApp1
                 string Code_name = MarketEye.GetDataValue(4, 0); //종목명 => string
                 string Status = "매수완료";
                 string now_hold = hold_num;
-                string high = Convert.ToInt32(MarketEye.GetDataValue(5, 0));
+                string high = Convert.ToString(MarketEye.GetDataValue(5, 0));
                 //
-                DataRow[] findRows = dtCondStock_hold.Select($"종목코드 = {Code}");
+                DataRow[] findRows = dtCondStock_hold.Select($"종목코드 = '{Code}'");
                 //
-                if(condition_name != "HTS매매" && condition_name != "전일보유")
+                if (condition_name != "HTS매매" && condition_name != "전일보유")
                 {
                     //
                     Status = utility.buy_AND ? "호출" : "대기";
@@ -1001,14 +1002,16 @@ namespace WindowsFormsApp1
                     //Independent 모드에서 조건식에 해당하는 종목이 있을시 제거
                     if (utility.buy_INDEPENDENT || utility.buy_DUAL)
                     {
-                        if (dtCondStock.Select($"종목코드 = '{Code}', 조건식 = '{condition_name}'").Length == 1) return;
+                        var findRows2 = dtCondStock.AsEnumerable()
+                                                .Where(row => row.Field<string>("종목코드") == Code &&
+                                                              row.Field<string>("조건식") == condition_name);
+                        if (findRows2.Any()) return;
                     }
                     //OR AND 모드에서 기존 보유 종목 있을시 제거
                     else
                     {
-                        if (dtCondStock.Select($"종목코드 = {Code}").Length == 1) return;
+                        if (dtCondStock.Select($"종목코드 = '{Code}'").Length == 1) return;
                     }
-
                     //
                     lock (buy_lock)
                     {
@@ -1036,7 +1039,7 @@ namespace WindowsFormsApp1
                     Code_name,
                     Current_Price,
                     string.Format("{0:#,##0.00}%", "00.00"), //전일대비
-                    string.Format("{0:#,##0}", Convert.ToInt32(MarketEye.GetDataValue(3, 0))), //거래량 => ulong
+                    string.Format("{0:#,##0}", Convert.ToString(MarketEye.GetDataValue(3, 0))), //거래량 => ulong
                     condition_name == "HTS매매" || condition_name == "전일보유" ? "실매입" : "진입가",
                     condition_name == "HTS매매" || condition_name == "전일보유" ? findRows[0]["평균단가"].ToString() : Current_Price,
                     "-",
@@ -1143,8 +1146,8 @@ namespace WindowsFormsApp1
             string Stock_code = StockCur.GetHeaderValue(0);//종목코드 => string
 
             //종목 확인
-            DataRow[] findRows = dtCondStock.Select($"종목코드 = {Stock_code}");
-            DataRow[] findRows2 = dtCondStock_hold.Select($"종목코드 = {Stock_code}");
+            DataRow[] findRows = dtCondStock.Select($"종목코드 = '{Stock_code}'");
+            DataRow[] findRows2 = dtCondStock_hold.Select($"종목코드 = '{Stock_code}'");
 
             if (findRows.Length == 0) return;
 
@@ -1617,13 +1620,16 @@ namespace WindowsFormsApp1
             //
             string Condition_Name = condInfo.Name;
             string Stock_Code = CssAlert.GetHeaderValue(2); // 종목코드
+            string gubun = CssAlert.GetHeaderValue(3).ToString();
+            //////////////////&*&8**&*&*&*&*&*&&*
+            WriteLog_Stock(gubun + "\n");
             //
-            switch (CssAlert.GetHeaderValue(3))
+            switch (gubun)
             {
                 //편출입구분
-                case '1':
+                case "1" :
                     //
-                    DataRow[] findRows1 = dtCondStock.Select($"종목코드 = {Stock_Code}");
+                    DataRow[] findRows1 = dtCondStock.Select($"종목코드 = '{Stock_Code}'");
                     string time1 = DateTime.Now.ToString("HH:mm:ss");
 
                     //기존에 포함됬던 종목
@@ -1700,6 +1706,7 @@ namespace WindowsFormsApp1
                         //INDEPENDENT의 경우 조건식이 다르면 편입한다.
                         if (utility.buy_INDEPENDENT || utility.buy_DUAL)
                         {
+                            WriteLog_Stock("Check1\n");
                             for (int i = 0; i < findRows1.Length; i++)
                             {
                                 if (findRows1[i]["편입"].Equals("이탈") && findRows1[i]["상태"].Equals("대기") && Condition_Name.Equals(findRows1[i]["조건식"]))
@@ -1720,14 +1727,14 @@ namespace WindowsFormsApp1
                         dataGridView1.DataSource = dtCondStock;
                         return;
                     }
-
+                    WriteLog_Stock("Check\n");
                     Stock_info(Condition_Name, Stock_Code, "", Stock_Code, "");
                     break;
 
                 //종목 이탈
-                case '2':
+                case "2":
                     //검출된 종목이 이미 이탈했다면(기본적으로 I D가 번갈아가면서 발생하므로 그럴릴 없음? 있는듯?)
-                    DataRow[] findRows = dtCondStock.Select($"종목코드 = {Stock_Code}");
+                    DataRow[] findRows = dtCondStock.Select($"종목코드 = '{Stock_Code}'");
                     if (findRows.Length == 0) return;
 
                     bool isExitStock = false;
@@ -1947,7 +1954,7 @@ namespace WindowsFormsApp1
             if (check)
             {
                 //편입 차트 상태 '매수중' 변경
-                DataRow[] findRows = dtCondStock.Select($"종목코드 = {code}");
+                DataRow[] findRows = dtCondStock.Select($"종목코드 = '{code}'");
                 findRows[0]["상태"] = "매수중";
                 dtCondStock.AcceptChanges();
                 dataGridView1.DataSource = dtCondStock;
@@ -2059,7 +2066,7 @@ namespace WindowsFormsApp1
                     telegram_message("[매수주문/시장가/주문실패] : " + code_name + "(" + code + ") " + "에러코드(" + error + "\n");
 
                     //편입 차트 상태 '매수중' 변경
-                    DataRow[] findRows = dtCondStock.Select($"종목코드 = {code}");
+                    DataRow[] findRows = dtCondStock.Select($"종목코드 = '{code}'");
                     findRows[0]["상태"] = "대기";
                     dtCondStock.AcceptChanges();
                     dataGridView1.DataSource = dtCondStock;
@@ -2160,7 +2167,7 @@ namespace WindowsFormsApp1
                     telegram_message("[매수주문/지정가매수/주문실패] : " + code_name + "(" + code + ") " + "에러코드(" + error + "\n");
 
                     //편입 차트 상태 '매수중' 변경
-                    DataRow[] findRows = dtCondStock.Select($"종목코드 = {code}");
+                    DataRow[] findRows = dtCondStock.Select($"종목코드 = '{code}'");
                     findRows[0]["상태"] = "대기";
                     dtCondStock.AcceptChanges();
                     dataGridView1.DataSource = dtCondStock;
@@ -2469,7 +2476,7 @@ namespace WindowsFormsApp1
             string time = DateTime.Now.ToString("HH:mm:ss"); //시간
 
             //
-            DataRow[] findRows = dtCondStock.Select($"주문번호 = {order_number}");
+            DataRow[] findRows = dtCondStock.Select($"주문번호 = '{order_number}'");
             string order_sum = findRows[0]["보유수량"].ToString().Split('/')[1];
 
             WriteLog_Order("------------\n");
