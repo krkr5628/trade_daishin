@@ -461,152 +461,6 @@ namespace WindowsFormsApp1
             real_time_stop(true);
         }
 
-        private void real_time_stop(bool real_price_all_stop)
-        {
-            //실시간 중단이 선언되면 '실시간시작'이 가능해진다.
-            Real_time_stop_btn.Enabled = false;
-            Real_time_search_btn.Enabled = true;
-
-            //매수 조건식 중단
-            if (utility.buy_condition)
-            {
-                // 검색된 조건식이 없을시
-                if (string.IsNullOrEmpty(utility.Fomula_list_buy_text))
-                {
-                    WriteLog_System("[실시간매수조건/중단실패] : 조건식없음\n");
-                    telegram_message("[실시간매수조건/중단실패] : 조건식없음\n");
-                    Real_time_stop_btn.Enabled = true;
-                    Real_time_search_btn.Enabled = false;
-                }
-                else
-                {
-                    //검색된 매수 조건식이 있을시
-                    string[] condition = utility.Fomula_list_buy_text.Split(',');
-                    for (int i = 0; i < condition.Length; i++)
-                    {
-                        CPSYSDIBLib.CssWatchStgControl CssWatchStgControl = Condition_Profile[i];
-                        //
-                        string[] tmp = condition[i].Split('^');
-                        //
-                        int conditon_SubCode = condition_sub_code(tmp[0]);
-                        if (conditon_SubCode == -1)
-                        {
-                            WriteLog_System($"[Condition/{tmp[1]}] : 일련번호 없음 \n");
-                            return;
-                        }
-
-                        CssWatchStgControl.SetInputValue(0, tmp[0]); //전략ID
-                        CssWatchStgControl.SetInputValue(1, conditon_SubCode); //감시 일련번호
-                        CssWatchStgControl.SetInputValue(2, '3'); //감시 취소
-                                                                  //
-                        int result = CssWatchStgControl.BlockRequest();
-                        //
-                        if (result == 0)
-                        {
-                            int result_type = Convert.ToInt32(CssWatchStgControl.GetHeaderValue(0));
-                            if (result_type == 0)
-                            {
-                                WriteLog_System($"[실시간매수조건/{tmp[1]}] : 초기상태 \n");
-                                telegram_message($"[실시간매수조건/{tmp[1]}] : 초기상태 \n");
-                            }
-                            else if (result_type == 1)
-                            {
-                                WriteLog_System($"[실시간매수조건/{tmp[1]}] : 감시중 \n");
-                                telegram_message($"[실시간매수조건/{tmp[1]}] : 감시중 \n");
-                            }
-                            else if (result_type == 2)
-                            {
-                                WriteLog_System($"[실시간매수조건/{tmp[1]}] : 감시중단 \n");
-                                telegram_message($"[실시간매수조건/{tmp[1]}] : 감시중단 \n");
-                            }
-                            else
-                            {
-                                WriteLog_System($"[실시간매수조건/{tmp[1]}] : 등록취소 \n");
-                                telegram_message($"[실시간매수조건/{tmp[1]}] : 등록취소 \n");
-                            }
-                        }
-                    }
-                }
-            }
-
-            //매도 조건식 중단
-            if (utility.sell_condition)
-            {
-                // 검색된 조건식이 없을시
-                if (string.IsNullOrEmpty(utility.Fomula_list_buy_text))
-                {
-                    WriteLog_System("[실시간매도조건/중단실패] : 조건식없음\n");
-                    telegram_message("[실시간매도조건/중단실패] : 조건식없음\n");
-                    Real_time_stop_btn.Enabled = true;
-                    Real_time_search_btn.Enabled = false;
-                }
-                else
-                {
-                    //검색된 매수 조건식이 있을시
-                    string[] condition = utility.Fomula_list_sell_text.Split(',');
-                    for (int i = 0; i < condition.Length; i++)
-                    {
-                        CPSYSDIBLib.CssWatchStgControl CssWatchStgControl = Condition_Profile2[i];
-                        //
-                        string[] tmp = condition[i].Split('^');
-                        //
-                        int conditon_SubCode = condition_sub_code(tmp[0]);
-                        if (conditon_SubCode == -1)
-                        {
-                            WriteLog_System($"[Condition/{tmp[1]}] : 일련번호 없음 \n");
-                            return;
-                        }
-                        CssWatchStgControl.SetInputValue(0, tmp[0]); //전략ID
-                        CssWatchStgControl.SetInputValue(1, conditon_SubCode); //감시 일련번호
-                        CssWatchStgControl.SetInputValue(2, '3'); //감시 취소
-                                                                  //
-                        int result = CssWatchStgControl.BlockRequest();
-                        //
-                        if (result == 0)
-                        {
-                            int result_type = Convert.ToInt32(CssWatchStgControl.GetHeaderValue(0));
-                            if (result_type == 0)
-                            {
-                                WriteLog_System($"[실시간매수조건/{tmp[1]}] : 초기상태 \n");
-                                telegram_message($"[실시간매수조건/{tmp[1]}] : 초기상태 \n");
-                            }
-                            else if (result_type == 1)
-                            {
-                                WriteLog_System($"[실시간매수조건/{tmp[1]}] : 감시중 \n");
-                                telegram_message($"[실시간매수조건/{tmp[1]}] : 감시중 \n");
-                            }
-                            else if (result_type == 2)
-                            {
-                                WriteLog_System($"[실시간매수조건/{tmp[1]}] : 감시중단 \n");
-                                telegram_message($"[실시간매수조건/{tmp[1]}] : 감시중단 \n");
-                            }
-                            else
-                            {
-                                WriteLog_System($"[실시간매수조건/{tmp[1]}] : 등록취소 \n");
-                                telegram_message($"[실시간매수조건/{tmp[1]}] : 등록취소 \n");
-                            }
-                        }
-                    }
-                }
-            }
-
-            //완전 전체 중단
-            if (real_price_all_stop)
-            {
-                if (dtCondStock.Rows.Count > 0)
-                {
-                    foreach (DataRow row in dtCondStock.Rows)
-                    {
-                        StockCur.SetInputValue(0, row["종목코드"].ToString());
-                        StockCur.Unsubscribe();
-                    }
-                }
-                timer3.Stop();//계좌 탐색 중단
-                WriteLog_System("[실시간시세/중단]\n");
-                telegram_message("[실시간시세/중단]\n");
-            }
-        }
-
         //전체 청산 버튼
         private void All_clear_btn_Click(object sender, EventArgs e)
         {
@@ -2738,6 +2592,154 @@ namespace WindowsFormsApp1
             dtCondStock.AcceptChanges();
             dataGridView1.DataSource = dtCondStock;
 
-        }       
+        }
+
+        //--------------------------------------조건식중단-------------------------------------------------------------
+
+        private void real_time_stop(bool real_price_all_stop)
+        {
+            //실시간 중단이 선언되면 '실시간시작'이 가능해진다.
+            Real_time_stop_btn.Enabled = false;
+            Real_time_search_btn.Enabled = true;
+
+            //매수 조건식 중단
+            if (utility.buy_condition)
+            {
+                // 검색된 조건식이 없을시
+                if (string.IsNullOrEmpty(utility.Fomula_list_buy_text))
+                {
+                    WriteLog_System("[실시간매수조건/중단실패] : 조건식없음\n");
+                    telegram_message("[실시간매수조건/중단실패] : 조건식없음\n");
+                    Real_time_stop_btn.Enabled = true;
+                    Real_time_search_btn.Enabled = false;
+                }
+                else
+                {
+                    //검색된 매수 조건식이 있을시
+                    string[] condition = utility.Fomula_list_buy_text.Split(',');
+                    for (int i = 0; i < condition.Length; i++)
+                    {
+                        CPSYSDIBLib.CssWatchStgControl CssWatchStgControl = Condition_Profile[i];
+                        //
+                        string[] tmp = condition[i].Split('^');
+                        //
+                        int conditon_SubCode = condition_sub_code(tmp[0]);
+                        if (conditon_SubCode == -1)
+                        {
+                            WriteLog_System($"[Condition/{tmp[1]}] : 일련번호 없음 \n");
+                            return;
+                        }
+
+                        CssWatchStgControl.SetInputValue(0, tmp[0]); //전략ID
+                        CssWatchStgControl.SetInputValue(1, conditon_SubCode); //감시 일련번호
+                        CssWatchStgControl.SetInputValue(2, '3'); //감시 취소
+                                                                  //
+                        int result = CssWatchStgControl.BlockRequest();
+                        //
+                        if (result == 0)
+                        {
+                            int result_type = Convert.ToInt32(CssWatchStgControl.GetHeaderValue(0));
+                            if (result_type == 0)
+                            {
+                                WriteLog_System($"[실시간매수조건/{tmp[1]}] : 초기상태 \n");
+                                telegram_message($"[실시간매수조건/{tmp[1]}] : 초기상태 \n");
+                            }
+                            else if (result_type == 1)
+                            {
+                                WriteLog_System($"[실시간매수조건/{tmp[1]}] : 감시중 \n");
+                                telegram_message($"[실시간매수조건/{tmp[1]}] : 감시중 \n");
+                            }
+                            else if (result_type == 2)
+                            {
+                                WriteLog_System($"[실시간매수조건/{tmp[1]}] : 감시중단 \n");
+                                telegram_message($"[실시간매수조건/{tmp[1]}] : 감시중단 \n");
+                            }
+                            else
+                            {
+                                WriteLog_System($"[실시간매수조건/{tmp[1]}] : 등록취소 \n");
+                                telegram_message($"[실시간매수조건/{tmp[1]}] : 등록취소 \n");
+                            }
+                        }
+                    }
+                }
+            }
+
+            //매도 조건식 중단
+            if (utility.sell_condition)
+            {
+                // 검색된 조건식이 없을시
+                if (string.IsNullOrEmpty(utility.Fomula_list_buy_text))
+                {
+                    WriteLog_System("[실시간매도조건/중단실패] : 조건식없음\n");
+                    telegram_message("[실시간매도조건/중단실패] : 조건식없음\n");
+                    Real_time_stop_btn.Enabled = true;
+                    Real_time_search_btn.Enabled = false;
+                }
+                else
+                {
+                    //검색된 매수 조건식이 있을시
+                    string[] condition = utility.Fomula_list_sell_text.Split(',');
+                    for (int i = 0; i < condition.Length; i++)
+                    {
+                        CPSYSDIBLib.CssWatchStgControl CssWatchStgControl = Condition_Profile2[i];
+                        //
+                        string[] tmp = condition[i].Split('^');
+                        //
+                        int conditon_SubCode = condition_sub_code(tmp[0]);
+                        if (conditon_SubCode == -1)
+                        {
+                            WriteLog_System($"[Condition/{tmp[1]}] : 일련번호 없음 \n");
+                            return;
+                        }
+                        CssWatchStgControl.SetInputValue(0, tmp[0]); //전략ID
+                        CssWatchStgControl.SetInputValue(1, conditon_SubCode); //감시 일련번호
+                        CssWatchStgControl.SetInputValue(2, '3'); //감시 취소
+                                                                  //
+                        int result = CssWatchStgControl.BlockRequest();
+                        //
+                        if (result == 0)
+                        {
+                            int result_type = Convert.ToInt32(CssWatchStgControl.GetHeaderValue(0));
+                            if (result_type == 0)
+                            {
+                                WriteLog_System($"[실시간매수조건/{tmp[1]}] : 초기상태 \n");
+                                telegram_message($"[실시간매수조건/{tmp[1]}] : 초기상태 \n");
+                            }
+                            else if (result_type == 1)
+                            {
+                                WriteLog_System($"[실시간매수조건/{tmp[1]}] : 감시중 \n");
+                                telegram_message($"[실시간매수조건/{tmp[1]}] : 감시중 \n");
+                            }
+                            else if (result_type == 2)
+                            {
+                                WriteLog_System($"[실시간매수조건/{tmp[1]}] : 감시중단 \n");
+                                telegram_message($"[실시간매수조건/{tmp[1]}] : 감시중단 \n");
+                            }
+                            else
+                            {
+                                WriteLog_System($"[실시간매수조건/{tmp[1]}] : 등록취소 \n");
+                                telegram_message($"[실시간매수조건/{tmp[1]}] : 등록취소 \n");
+                            }
+                        }
+                    }
+                }
+            }
+
+            //완전 전체 중단
+            if (real_price_all_stop)
+            {
+                if (dtCondStock.Rows.Count > 0)
+                {
+                    foreach (DataRow row in dtCondStock.Rows)
+                    {
+                        StockCur.SetInputValue(0, row["종목코드"].ToString());
+                        StockCur.Unsubscribe();
+                    }
+                }
+                timer3.Stop();//계좌 탐색 중단
+                WriteLog_System("[실시간시세/중단]\n");
+                telegram_message("[실시간시세/중단]\n");
+            }
+        }
     }
 }
