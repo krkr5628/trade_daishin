@@ -42,7 +42,8 @@ namespace WindowsFormsApp1
         private CPUTILLib.CpStockCode CpStockCode; //?
         private CPUTILLib.CpCodeMgr CpCodeMgr; //?
         private CPTRADELib.CpTdUtil CpTdUtil; //?
-        private CPTRADELib.CpTd6033 CpTd6033;
+        private CPTRADELib.CpTd6033 CpTd6033; //계좌별 D+2 예수금
+        private CPTRADELib.CpTdNew5331B CpTdNew5331B;//계좌별 매도 가능 수량
         private CPTRADELib.CpTd6032 CpTd6032; //매도실현손익(제세금, 수수료 포함)
         private CPTRADELib.CpTd5341 CpTd5341; //매매내역
         private CPSYSDIBLib.CssStgList CssStgList; //조건식 받기
@@ -355,7 +356,8 @@ namespace WindowsFormsApp1
         {
             CpCybos = new CPUTILLib.CpCybos();
             CpTdUtil = new CPTRADELib.CpTdUtil();
-            CpTd6033 = new CPTRADELib.CpTd6033();
+            CpTd6033 = new CPTRADELib.CpTd6033(); //계좌별 D+2 예수금 현황
+            CpTdNew5331B = new  CPTRADELib.CpTdNew5331B();//계좌별 매도 가능 수량
             CpTd6032 = new CPTRADELib.CpTd6032();//매도실현손익(제세금, 수수료 포함)
             CpTd5341 = new CPTRADELib.CpTd5341(); //매매내역
             CssStgList = new CPSYSDIBLib.CssStgList(); //조건식 받기
@@ -692,10 +694,11 @@ namespace WindowsFormsApp1
 
         private void initial_process()
         {
-            Account(); //계좌 번호
-            //
-            GetCashInfo(Master_code); //주계좌 => D+2 예수금 + 계좌 보유 종목
-            GetCashInfo(ISA_code); //ISA계좌 => D+2 예수금 + 계좌 보유 종목
+            //계좌 번호
+            Account();
+            //D+2 예수금 + 계좌 보유 종목
+            GetCashInfo(Master_code);
+            GetCashInfo(ISA_code);
             //
             hold_update_initial = false;
             //
@@ -736,7 +739,7 @@ namespace WindowsFormsApp1
 
         private bool hold_update_initial = true;
 
-        //예수금 정보(D+2) + 계좌보유현황
+        //예수금 정보(D+2) + 계좌보유수량
         //https://money2.daishin.com/e5/mboard/ptype_basic/HTS_Plus_Helper/DW_Basic_Read.aspx?boardseq=291&seq=176&page=2&searchString=&p=&v=&m=
         private void GetCashInfo(string acc_gubun)
         {
@@ -744,7 +747,7 @@ namespace WindowsFormsApp1
             {
                 CpTd6033.SetInputValue(0, acc_text.Text);
                 CpTd6033.SetInputValue(1, acc_gubun);
-                CpTd6033.SetInputValue(2, 5);
+                CpTd6033.SetInputValue(2, 14);
                 CpTd6033.SetInputValue(3, "1");
                 //
                 int result = CpTd6033.BlockRequest();
@@ -777,15 +780,15 @@ namespace WindowsFormsApp1
                     {
                         dtCondStock_hold.Rows.Add(
                             acc_gubun,
-                            CpTd5341.GetDataValue(12, i).Trim(), //종목코드(A Type) => string
-                            CpTd5341.GetDataValue(0, i).Trim(), //종목명 => string
+                            CpTd6033.GetDataValue(12, i), //종목코드(A Type) => string
+                            CpTd6033.GetDataValue(0, i), //종목명 => string
                             "0", //현재가
-                            string.Format("{0:#,##0}", CpTd5341.GetDataValue(3, i)), //체결잔고수량 => long
-                            string.Format("{0:#,##0}", Convert.ToInt32(CpTd5341.GetDataValue(17, i))), //체결장부단가 => double
-                            string.Format("{0:#,##0}", Convert.ToInt32(CpTd5341.GetDataValue(9, i))), //평가금액(단위:원)(천원미만내림) => longlong
-                            string.Format("{0:#,##0.00}%", Convert.ToDecimal(CpTd5341.GetDataValue(11, i)) / 10000), //수익률 => double
-                            string.Format("{0:#,##0}", Convert.ToDecimal(CpTd5341.GetDataValue(10, i))), //평가손익(단위:원)(천원미만내림) => longlong
-                            string.Format("{0:#,##0}", Convert.ToDecimal(CpTd5341.GetDataValue(6, i))) //금일체결수량 => long
+                            string.Format("{0:#,##0}", Convert.ToString(CpTd6033.GetDataValue(15, i))), //매도가능수량 => long
+                            string.Format("{0:#,##0}", CpTd6033.GetDataValue(17, i)), //체결장부단가 => double
+                            string.Format("{0:#,##0}", CpTd6033.GetDataValue(9, i)), //평가금액(단위:원)(천원미만내림) => longlong
+                            string.Format("{0:#,##0.00}%", Convert.ToDecimal(CpTd6033.GetDataValue(11, i)) / 10000), //수익률 => double
+                            string.Format("{0:#,##0}", CpTd6033.GetDataValue(10, i)), //평가손익(단위:원)(천원미만내림) => longlong
+                            string.Format("{0:#,##0}", CpTd6033.GetDataValue(6, i)) //금일체결수량 => long
                         );
                     }
 
@@ -981,7 +984,7 @@ namespace WindowsFormsApp1
             if (result == 0)
             {
                 //
-                int Native_Price = Convert.ToInt32(MarketEye.GetDataValue(2, 0)); //현재가 => long or float
+                long Native_Price = Convert.ToInt64(MarketEye.GetDataValue(2, 0)); //현재가 => long or float
                 string Current_Price = string.Format("{0:#,##0}", Native_Price); //현재가 => long or float
                 string time = DateTime.Now.ToString("HH:mm:ss");
                 string Code_name = MarketEye.GetDataValue(4, 0); //종목명 => string
