@@ -139,10 +139,6 @@ namespace WindowsFormsApp1
         public static string Dual_Time_Start;
         public static string Dual_Time_Stop;
 
-        public static bool Dual_Telegram;
-        public static string Dual_Telegram_id;
-        public static string Dual_Telegram_token;
-
         //utility 목록
         public static async Task setting_load_auto()
         {
@@ -477,18 +473,6 @@ namespace WindowsFormsApp1
             //Dual_Time_Stop
             String[] Dual_Time_Stop_tmp = reader.ReadLine().Split('/');
             Dual_Time_Stop = Dual_Time_Stop_tmp[1];
-
-            //Dual텔레그램
-            String[] Dual_Telegram_Allow_tmp = reader.ReadLine().Split('/');
-            Dual_Telegram = Convert.ToBoolean(Dual_Telegram_Allow_tmp[1]);
-
-            //Dual텔레그램ID
-            String[] Dual_telegram_user_id_tmp = reader.ReadLine().Split('/');
-            Dual_Telegram_id = Dual_telegram_user_id_tmp[1];
-
-            //Dual텔레그램TOKEN
-            String[] Dual_telegram_token_tmp = reader.ReadLine().Split('/');
-            Dual_Telegram_token = Dual_telegram_token_tmp[1];
 
             reader.Close();
 

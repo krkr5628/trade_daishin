@@ -208,20 +208,11 @@ namespace WindowsFormsApp1
             this.label22 = new System.Windows.Forms.Label();
             this.real_id_text = new System.Windows.Forms.TextBox();
             this.groupBox13 = new System.Windows.Forms.GroupBox();
-            this.tableLayoutPanel22 = new System.Windows.Forms.TableLayoutPanel();
-            this.Dual_Telegram_token = new System.Windows.Forms.TextBox();
-            this.label25 = new System.Windows.Forms.Label();
-            this.label26 = new System.Windows.Forms.Label();
-            this.Dual_Telegram_id = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel21 = new System.Windows.Forms.TableLayoutPanel();
-            this.tableLayoutPanel23 = new System.Windows.Forms.TableLayoutPanel();
             this.Dual_Time_Stop = new System.Windows.Forms.TextBox();
             this.label24 = new System.Windows.Forms.Label();
             this.Dual_Time_Start = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel24 = new System.Windows.Forms.TableLayoutPanel();
-            this.Dual_Telegram = new System.Windows.Forms.CheckBox();
-            this.label27 = new System.Windows.Forms.Label();
-            this.label28 = new System.Windows.Forms.Label();
             this.Dual_Time = new System.Windows.Forms.CheckBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -256,9 +247,7 @@ namespace WindowsFormsApp1
             this.groupBox12.SuspendLayout();
             this.tableLayoutPanel20.SuspendLayout();
             this.groupBox13.SuspendLayout();
-            this.tableLayoutPanel22.SuspendLayout();
             this.tableLayoutPanel21.SuspendLayout();
-            this.tableLayoutPanel23.SuspendLayout();
             this.tableLayoutPanel24.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -659,7 +648,7 @@ namespace WindowsFormsApp1
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel4.Size = new System.Drawing.Size(259, 97);
+            this.tableLayoutPanel4.Size = new System.Drawing.Size(259, 92);
             this.tableLayoutPanel4.TabIndex = 5;
             // 
             // max_hold
@@ -672,7 +661,7 @@ namespace WindowsFormsApp1
             this.max_hold.Location = new System.Drawing.Point(2, 2);
             this.max_hold.Margin = new System.Windows.Forms.Padding(2);
             this.max_hold.Name = "max_hold";
-            this.max_hold.Size = new System.Drawing.Size(175, 20);
+            this.max_hold.Size = new System.Drawing.Size(175, 19);
             this.max_hold.TabIndex = 7;
             this.max_hold.Text = "최대 보유종목 수 (1~10)";
             this.max_hold.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -685,10 +674,10 @@ namespace WindowsFormsApp1
             | System.Windows.Forms.AnchorStyles.Right)));
             this.duplication_deny.AutoSize = true;
             this.duplication_deny.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.duplication_deny.Location = new System.Drawing.Point(2, 26);
+            this.duplication_deny.Location = new System.Drawing.Point(2, 25);
             this.duplication_deny.Margin = new System.Windows.Forms.Padding(2);
             this.duplication_deny.Name = "duplication_deny";
-            this.duplication_deny.Size = new System.Drawing.Size(175, 20);
+            this.duplication_deny.Size = new System.Drawing.Size(175, 19);
             this.duplication_deny.TabIndex = 8;
             this.duplication_deny.Text = "당일 중복 매수 금지";
             this.duplication_deny.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -709,10 +698,10 @@ namespace WindowsFormsApp1
             | System.Windows.Forms.AnchorStyles.Right)));
             this.before_time_deny.AutoSize = true;
             this.before_time_deny.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.before_time_deny.Location = new System.Drawing.Point(2, 50);
+            this.before_time_deny.Location = new System.Drawing.Point(2, 48);
             this.before_time_deny.Margin = new System.Windows.Forms.Padding(2);
             this.before_time_deny.Name = "before_time_deny";
-            this.before_time_deny.Size = new System.Drawing.Size(175, 20);
+            this.before_time_deny.Size = new System.Drawing.Size(175, 19);
             this.before_time_deny.TabIndex = 11;
             this.before_time_deny.Text = "시간전 검출 매수 금지";
             this.before_time_deny.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -726,10 +715,10 @@ namespace WindowsFormsApp1
             this.hold_deny.AutoSize = true;
             this.hold_deny.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.hold_deny.Font = new System.Drawing.Font("굴림", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.hold_deny.Location = new System.Drawing.Point(2, 74);
+            this.hold_deny.Location = new System.Drawing.Point(2, 71);
             this.hold_deny.Margin = new System.Windows.Forms.Padding(2);
             this.hold_deny.Name = "hold_deny";
-            this.hold_deny.Size = new System.Drawing.Size(175, 21);
+            this.hold_deny.Size = new System.Drawing.Size(175, 19);
             this.hold_deny.TabIndex = 10;
             this.hold_deny.Text = "보유 종목 매수 금지";
             this.hold_deny.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1775,11 +1764,11 @@ namespace WindowsFormsApp1
             // 
             this.groupBox1.Controls.Add(this.tableLayoutPanel4);
             this.groupBox1.Font = new System.Drawing.Font("굴림", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.groupBox1.Location = new System.Drawing.Point(8, 536);
+            this.groupBox1.Location = new System.Drawing.Point(8, 524);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox1.Size = new System.Drawing.Size(267, 120);
+            this.groupBox1.Size = new System.Drawing.Size(267, 118);
             this.groupBox1.TabIndex = 14;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "추가 옵션 설정(보유종목 불가)";
@@ -1792,7 +1781,7 @@ namespace WindowsFormsApp1
             this.groupBox2.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox2.Size = new System.Drawing.Size(267, 285);
+            this.groupBox2.Size = new System.Drawing.Size(267, 276);
             this.groupBox2.TabIndex = 15;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "기본 설정";
@@ -2780,116 +2769,35 @@ namespace WindowsFormsApp1
             // 
             // groupBox13
             // 
-            this.groupBox13.Controls.Add(this.tableLayoutPanel22);
             this.groupBox13.Controls.Add(this.tableLayoutPanel21);
             this.groupBox13.Font = new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.groupBox13.Location = new System.Drawing.Point(295, 583);
+            this.groupBox13.Location = new System.Drawing.Point(295, 587);
             this.groupBox13.Name = "groupBox13";
-            this.groupBox13.Size = new System.Drawing.Size(762, 73);
+            this.groupBox13.Size = new System.Drawing.Size(476, 55);
             this.groupBox13.TabIndex = 27;
             this.groupBox13.TabStop = false;
             this.groupBox13.Text = "DUAL(ISA)";
-            // 
-            // tableLayoutPanel22
-            // 
-            this.tableLayoutPanel22.ColumnCount = 2;
-            this.tableLayoutPanel22.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 28.01556F));
-            this.tableLayoutPanel22.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 71.98444F));
-            this.tableLayoutPanel22.Controls.Add(this.Dual_Telegram_token, 1, 1);
-            this.tableLayoutPanel22.Controls.Add(this.label25, 0, 0);
-            this.tableLayoutPanel22.Controls.Add(this.label26, 0, 1);
-            this.tableLayoutPanel22.Controls.Add(this.Dual_Telegram_id, 1, 0);
-            this.tableLayoutPanel22.Location = new System.Drawing.Point(501, 18);
-            this.tableLayoutPanel22.Name = "tableLayoutPanel22";
-            this.tableLayoutPanel22.RowCount = 2;
-            this.tableLayoutPanel22.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel22.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel22.Size = new System.Drawing.Size(257, 51);
-            this.tableLayoutPanel22.TabIndex = 1;
-            // 
-            // Dual_Telegram_token
-            // 
-            this.Dual_Telegram_token.Location = new System.Drawing.Point(74, 28);
-            this.Dual_Telegram_token.Name = "Dual_Telegram_token";
-            this.Dual_Telegram_token.Size = new System.Drawing.Size(180, 21);
-            this.Dual_Telegram_token.TabIndex = 3;
-            // 
-            // label25
-            // 
-            this.label25.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label25.AutoSize = true;
-            this.label25.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.label25.Location = new System.Drawing.Point(3, 0);
-            this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(65, 25);
-            this.label25.TabIndex = 0;
-            this.label25.Text = "USER_ID";
-            this.label25.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label26
-            // 
-            this.label26.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label26.AutoSize = true;
-            this.label26.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.label26.Location = new System.Drawing.Point(3, 25);
-            this.label26.Name = "label26";
-            this.label26.Size = new System.Drawing.Size(65, 26);
-            this.label26.TabIndex = 1;
-            this.label26.Text = "TOKEN";
-            this.label26.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // Dual_Telegram_id
-            // 
-            this.Dual_Telegram_id.Location = new System.Drawing.Point(74, 3);
-            this.Dual_Telegram_id.Name = "Dual_Telegram_id";
-            this.Dual_Telegram_id.Size = new System.Drawing.Size(180, 21);
-            this.Dual_Telegram_id.TabIndex = 2;
             // 
             // tableLayoutPanel21
             // 
             this.tableLayoutPanel21.ColumnCount = 1;
             this.tableLayoutPanel21.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel21.Controls.Add(this.tableLayoutPanel23, 0, 1);
             this.tableLayoutPanel21.Controls.Add(this.tableLayoutPanel24, 0, 0);
             this.tableLayoutPanel21.Location = new System.Drawing.Point(2, 18);
             this.tableLayoutPanel21.Name = "tableLayoutPanel21";
-            this.tableLayoutPanel21.RowCount = 2;
+            this.tableLayoutPanel21.RowCount = 1;
             this.tableLayoutPanel21.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel21.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel21.Size = new System.Drawing.Size(474, 55);
+            this.tableLayoutPanel21.Size = new System.Drawing.Size(474, 33);
             this.tableLayoutPanel21.TabIndex = 0;
-            // 
-            // tableLayoutPanel23
-            // 
-            this.tableLayoutPanel23.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tableLayoutPanel23.ColumnCount = 3;
-            this.tableLayoutPanel23.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 47.32334F));
-            this.tableLayoutPanel23.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 7.922912F));
-            this.tableLayoutPanel23.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 44.75375F));
-            this.tableLayoutPanel23.Controls.Add(this.Dual_Time_Stop, 2, 0);
-            this.tableLayoutPanel23.Controls.Add(this.label24, 1, 0);
-            this.tableLayoutPanel23.Controls.Add(this.Dual_Time_Start, 0, 0);
-            this.tableLayoutPanel23.Location = new System.Drawing.Point(3, 30);
-            this.tableLayoutPanel23.Name = "tableLayoutPanel23";
-            this.tableLayoutPanel23.RowCount = 1;
-            this.tableLayoutPanel23.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel23.Size = new System.Drawing.Size(468, 22);
-            this.tableLayoutPanel23.TabIndex = 0;
             // 
             // Dual_Time_Stop
             // 
             this.Dual_Time_Stop.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.Dual_Time_Stop.Location = new System.Drawing.Point(261, 3);
+            this.Dual_Time_Stop.Location = new System.Drawing.Point(309, 3);
             this.Dual_Time_Stop.Name = "Dual_Time_Stop";
-            this.Dual_Time_Stop.Size = new System.Drawing.Size(204, 21);
+            this.Dual_Time_Stop.Size = new System.Drawing.Size(156, 21);
             this.Dual_Time_Stop.TabIndex = 2;
             // 
             // label24
@@ -2899,9 +2807,9 @@ namespace WindowsFormsApp1
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label24.AutoSize = true;
             this.label24.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.label24.Location = new System.Drawing.Point(224, 0);
+            this.label24.Location = new System.Drawing.Point(270, 0);
             this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(31, 22);
+            this.label24.Size = new System.Drawing.Size(33, 27);
             this.label24.TabIndex = 0;
             this.label24.Text = "~";
             this.label24.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -2911,9 +2819,9 @@ namespace WindowsFormsApp1
             this.Dual_Time_Start.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.Dual_Time_Start.Location = new System.Drawing.Point(3, 3);
+            this.Dual_Time_Start.Location = new System.Drawing.Point(119, 3);
             this.Dual_Time_Start.Name = "Dual_Time_Start";
-            this.Dual_Time_Start.Size = new System.Drawing.Size(215, 21);
+            this.Dual_Time_Start.Size = new System.Drawing.Size(145, 21);
             this.Dual_Time_Start.TabIndex = 1;
             // 
             // tableLayoutPanel24
@@ -2923,65 +2831,19 @@ namespace WindowsFormsApp1
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tableLayoutPanel24.ColumnCount = 4;
             this.tableLayoutPanel24.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel24.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel24.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel24.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel24.Controls.Add(this.Dual_Telegram, 2, 0);
-            this.tableLayoutPanel24.Controls.Add(this.label27, 3, 0);
-            this.tableLayoutPanel24.Controls.Add(this.label28, 1, 0);
+            this.tableLayoutPanel24.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 32.47863F));
+            this.tableLayoutPanel24.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 8.547009F));
+            this.tableLayoutPanel24.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 34.40171F));
+            this.tableLayoutPanel24.Controls.Add(this.Dual_Time_Stop, 3, 0);
             this.tableLayoutPanel24.Controls.Add(this.Dual_Time, 0, 0);
+            this.tableLayoutPanel24.Controls.Add(this.label24, 2, 0);
+            this.tableLayoutPanel24.Controls.Add(this.Dual_Time_Start, 1, 0);
             this.tableLayoutPanel24.Location = new System.Drawing.Point(3, 3);
             this.tableLayoutPanel24.Name = "tableLayoutPanel24";
             this.tableLayoutPanel24.RowCount = 1;
             this.tableLayoutPanel24.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel24.Size = new System.Drawing.Size(468, 21);
+            this.tableLayoutPanel24.Size = new System.Drawing.Size(468, 27);
             this.tableLayoutPanel24.TabIndex = 1;
-            // 
-            // Dual_Telegram
-            // 
-            this.Dual_Telegram.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.Dual_Telegram.AutoSize = true;
-            this.Dual_Telegram.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.Dual_Telegram.Font = new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.Dual_Telegram.ForeColor = System.Drawing.Color.Crimson;
-            this.Dual_Telegram.Location = new System.Drawing.Point(237, 3);
-            this.Dual_Telegram.Name = "Dual_Telegram";
-            this.Dual_Telegram.Size = new System.Drawing.Size(111, 15);
-            this.Dual_Telegram.TabIndex = 5;
-            this.Dual_Telegram.Text = "ISA_Telegram";
-            this.Dual_Telegram.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.Dual_Telegram.UseVisualStyleBackColor = false;
-            // 
-            // label27
-            // 
-            this.label27.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label27.AutoSize = true;
-            this.label27.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.label27.Location = new System.Drawing.Point(354, 0);
-            this.label27.Name = "label27";
-            this.label27.Size = new System.Drawing.Size(111, 21);
-            this.label27.TabIndex = 2;
-            this.label27.Text = "=>";
-            this.label27.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label28
-            // 
-            this.label28.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label28.AutoSize = true;
-            this.label28.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.label28.Font = new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.label28.Location = new System.Drawing.Point(120, 0);
-            this.label28.Name = "label28";
-            this.label28.Size = new System.Drawing.Size(111, 21);
-            this.label28.TabIndex = 3;
-            this.label28.Text = "아래";
-            this.label28.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // Dual_Time
             // 
@@ -2994,7 +2856,7 @@ namespace WindowsFormsApp1
             this.Dual_Time.ForeColor = System.Drawing.Color.Crimson;
             this.Dual_Time.Location = new System.Drawing.Point(3, 3);
             this.Dual_Time.Name = "Dual_Time";
-            this.Dual_Time.Size = new System.Drawing.Size(111, 15);
+            this.Dual_Time.Size = new System.Drawing.Size(110, 21);
             this.Dual_Time.TabIndex = 4;
             this.Dual_Time.Text = "ISA매수시간";
             this.Dual_Time.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -3005,7 +2867,7 @@ namespace WindowsFormsApp1
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(1069, 663);
+            this.ClientSize = new System.Drawing.Size(1069, 646);
             this.Controls.Add(this.groupBox13);
             this.Controls.Add(this.groupBox12);
             this.Controls.Add(this.groupBox9);
@@ -3077,11 +2939,7 @@ namespace WindowsFormsApp1
             this.tableLayoutPanel20.ResumeLayout(false);
             this.tableLayoutPanel20.PerformLayout();
             this.groupBox13.ResumeLayout(false);
-            this.tableLayoutPanel22.ResumeLayout(false);
-            this.tableLayoutPanel22.PerformLayout();
             this.tableLayoutPanel21.ResumeLayout(false);
-            this.tableLayoutPanel23.ResumeLayout(false);
-            this.tableLayoutPanel23.PerformLayout();
             this.tableLayoutPanel24.ResumeLayout(false);
             this.tableLayoutPanel24.PerformLayout();
             this.ResumeLayout(false);
@@ -3268,20 +3126,11 @@ namespace WindowsFormsApp1
         private System.Windows.Forms.TextBox real_password_text;
         private System.Windows.Forms.RadioButton buy_mode_dual;
         private System.Windows.Forms.GroupBox groupBox13;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel22;
-        private System.Windows.Forms.TextBox Dual_Telegram_token;
-        private System.Windows.Forms.Label label25;
-        private System.Windows.Forms.Label label26;
-        private System.Windows.Forms.TextBox Dual_Telegram_id;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel21;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel23;
         private System.Windows.Forms.TextBox Dual_Time_Stop;
         private System.Windows.Forms.Label label24;
         private System.Windows.Forms.TextBox Dual_Time_Start;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel24;
-        private System.Windows.Forms.CheckBox Dual_Telegram;
-        private System.Windows.Forms.Label label27;
-        private System.Windows.Forms.Label label28;
         private System.Windows.Forms.CheckBox Dual_Time;
     }
 }

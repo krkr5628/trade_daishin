@@ -737,10 +737,6 @@ namespace WindowsFormsApp1
                     tmp.Add("Dual_Time/" + Convert.ToString(Dual_Time.Checked));
                     tmp.Add("Dual_Time_Start/" + Dual_Time_Start.Text);
                     tmp.Add("Dual_Time_Stop/" + Dual_Time_Stop.Text);
-                    //
-                    tmp.Add("Dual_Telegram/" + Convert.ToString(Dual_Telegram.Checked));
-                    tmp.Add("Dual_Telegram_ID/" + Dual_Telegram_id.Text);
-                    tmp.Add("Dual_Telegram_token/" + Dual_Telegram_token.Text);
 
                     //텍스트 합치기
                     string textToSave = string.Join("\r\n", tmp);
@@ -1105,18 +1101,6 @@ namespace WindowsFormsApp1
             //Dual_Time_Stop
             String[] Dual_Time_Stop_tmp = reader.ReadLine().Split('/');
             Dual_Time_Stop.Text = Dual_Time_Stop_tmp[1];
-
-            //Dual텔레그램
-            String[] Dual_Telegram_Allow_tmp = reader.ReadLine().Split('/');
-            Dual_Telegram.Checked = Convert.ToBoolean(Dual_Telegram_Allow_tmp[1]);
-
-            //Dual텔레그램ID
-            String[] Dual_telegram_user_id_tmp = reader.ReadLine().Split('/');
-            Dual_Telegram_id.Text = Dual_telegram_user_id_tmp[1];
-
-            //Dual텔레그램TOKEN
-            String[] Dual_telegram_token_tmp = reader.ReadLine().Split('/');
-            Dual_Telegram_token.Text = Dual_telegram_token_tmp[1];
 
             reader.Close();
         }
