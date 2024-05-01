@@ -16,6 +16,7 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using System.Linq;
 using System.Windows.Forms;
+using System.Net.WebSockets;
 
 namespace WindowsFormsApp1
 {
@@ -183,12 +184,10 @@ namespace WindowsFormsApp1
             {
                 { "CANO", cano },
                 { "ACNT_PRDT_CD", acntPrdtCd },
-                { "INQR_DVSN_1", "" },
-                { "BSPR_BF_DT_APLY_YN", "" }
             };
 
             string queryString = string.Join("&", queryParams.Select(x => $"{x.Key}={Uri.EscapeDataString(x.Value)}"));
-            string uri = $"{domain}{endpoint}?{queryString}";
+            string url = $"{domain}{endpoint}?{queryString}&INQR_DVSN_1&BSPR_BF_DT_APLY_YN";
 
             // Make a POST request to the token endpoint
             using (var client = new HttpClient())
@@ -197,7 +196,7 @@ namespace WindowsFormsApp1
                 client.BaseAddress = new Uri(domain);
 
                 // Set authorization header and other headers
-                client.DefaultRequestHeaders.Add("authorization", access_token);
+                client.DefaultRequestHeaders.Add("authorization", "Bearer " + access_token);
                 client.DefaultRequestHeaders.Add("appkey", appKey);
                 client.DefaultRequestHeaders.Add("appsecret", secretkey);
                 client.DefaultRequestHeaders.Add("tr_id", "CTRP6548R");
@@ -206,8 +205,8 @@ namespace WindowsFormsApp1
                 // Create the request content
                 var content = new StringContent(string.Empty, Encoding.UTF8, "application/json");
 
-                // Send the POST request
-                HttpResponseMessage response = await client.PostAsync(endpoint, content);
+                // Send the Get request
+                HttpResponseMessage response = await client.GetAsync("");
 
                 MessageBox.Show(response.ToString());
 
@@ -225,7 +224,7 @@ namespace WindowsFormsApp1
                     string Tot_dncl_amt = tokenResponse.output2.tot_dncl_amt; //총예수금액
                     string Dncl_amt = tokenResponse.output2.dncl_amt; //예수금액
                     //
-                    account_value = Tot_dncl_amt;
+                    account_value = Tot_asst_amt;
                     return "Account Value Success";
                 }
                 else
@@ -251,26 +250,22 @@ namespace WindowsFormsApp1
 
         public async Task KIS_Order(string buy_sell, string code, string order_type, string order_amt, string order_price)
         {
-            string domain = "https://openapivts.koreainvestment.com:29443"; //모의투자
-            //string domain = "https://openapi.koreainvestment.com:9443"; //실전투자
+            //string domain = "https://openapivts.koreainvestment.com:29443"; //모의투자
+            string domain = "https://openapi.koreainvestment.com:9443"; //실전투자
             string endpoint = "/uapi/domestic-stock/v1/trading/order-cash";
-            string buy_sell_code = "VTTC0802U"; //기본 모의투자 매수
-            //string buy_sell_code = "TTTC0802U"; //기본 실전투자 매수
+            //string buy_sell_code = "VTTC0802U"; //기본 모의투자 매수
+            string buy_sell_code = "TTTC0802U"; //기본 실전투자 매수
 
             //
             if (buy_sell.Equals("sell"))
             {
-                buy_sell_code = "VTTC0801U"; //기본 모의투자 매도
-                //buy_sell_code = "TTTC0801U"; //기본 실전투자 매도
+                //buy_sell_code = "VTTC0801U"; //기본 모의투자 매도
+                buy_sell_code = "TTTC0801U"; //기본 실전투자 매도
             }
 
             // Construct the request data
             var requestData = new
             {
-                authorization = access_token,
-                appkey = appKey,
-                appsecret = secretkey,
-                tr_id = buy_sell_code,//모의투자 주식 현금 매수 주문
                 CANO = cano,
                 ACNT_PRDT_CD = acntPrdtCd,
                 PDNO = code, //종목코드
@@ -287,6 +282,13 @@ namespace WindowsFormsApp1
             {
                 // Set the base address
                 client.BaseAddress = new Uri(domain);
+
+                // Set authorization header and other headers
+                client.DefaultRequestHeaders.Add("authorization", "Bearer " + access_token);
+                client.DefaultRequestHeaders.Add("appkey", appKey);
+                client.DefaultRequestHeaders.Add("appsecret", secretkey);
+                client.DefaultRequestHeaders.Add("tr_id", buy_sell_code);
+                client.DefaultRequestHeaders.Add("custtype", "P");
 
                 // Create the request content
                 var content = new StringContent(jsonData, Encoding.UTF8, "application/json");
@@ -348,6 +350,7 @@ namespace WindowsFormsApp1
             string jsonData = JsonConvert.SerializeObject(requestData);
 
             // Make a POST request to the token endpoint
+            //using (ClientWebSocket client = new ClientWebSocket())
             using (var client = new HttpClient())
             {
                 // Set the base address
