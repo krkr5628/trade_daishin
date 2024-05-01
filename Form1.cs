@@ -1948,17 +1948,35 @@ namespace WindowsFormsApp1
         private string buy_check(string code, string code_name, string price, string time, string high, bool check, string condition_name)
         {
 
-            //매수 시간 확인
-            TimeSpan t_code = TimeSpan.Parse(time);
-            TimeSpan t_start = TimeSpan.Parse(utility.buy_condition_start);
-            TimeSpan t_end = TimeSpan.Parse(utility.buy_condition_end);
-
-            if (t_code.CompareTo(t_start) < 0 || t_code.CompareTo(t_end) > 0)
+            if(utility.buy_DUAL && utility.Dual_Time)
             {
-                // result가 0보다 작으면 time1 < time2
-                // result가 0이면 time1 = time2
-                // result가 0보다 크면 time1 > time2
-                return "대기";
+                //매수 시간 확인
+                TimeSpan t_code = TimeSpan.Parse(time);
+                TimeSpan t_start = TimeSpan.Parse(utility.Dual_Time_Start);
+                TimeSpan t_end = TimeSpan.Parse(utility.Dual_Time_Stop);
+
+                if (t_code.CompareTo(t_start) < 0 || t_code.CompareTo(t_end) > 0)
+                {
+                    // result가 0보다 작으면 time1 < time2
+                    // result가 0이면 time1 = time2
+                    // result가 0보다 크면 time1 > time2
+                    return "대기";
+                }
+            }
+            else
+            {
+                //매수 시간 확인
+                TimeSpan t_code = TimeSpan.Parse(time);
+                TimeSpan t_start = TimeSpan.Parse(utility.buy_condition_start);
+                TimeSpan t_end = TimeSpan.Parse(utility.buy_condition_end);
+
+                if (t_code.CompareTo(t_start) < 0 || t_code.CompareTo(t_end) > 0)
+                {
+                    // result가 0보다 작으면 time1 < time2
+                    // result가 0이면 time1 = time2
+                    // result가 0보다 크면 time1 > time2
+                    return "대기";
+                }
             }
 
             //보유 종목 수 확인
