@@ -58,8 +58,8 @@ namespace WindowsFormsApp1
 
         //-----------------------------------전용 신호j----------------------------------------
 
-        //private string Master_code = "01";
-        private string Master_code = "10"; //TEST용
+        private string Master_code = "01";
+        //private string Master_code = "10"; //TEST용
         private string ISA_code = "11";
         private bool Checked_Trade_Init; //?
         private string Master_Condition = "";
@@ -534,8 +534,6 @@ namespace WindowsFormsApp1
             }
         }
 
-
-
         //------------------------------------Main_Start---------------------------------
 
         //timer1(1000ms) : 주기 고정
@@ -646,6 +644,9 @@ namespace WindowsFormsApp1
         {
             if (Timer_Count > 180)
             {
+                WriteLog_System("[연결/비정상] API 업데이트 확인 요망\n");
+                telegram_message("[연결/비정상] API 업데이트 확인 요망\n");
+                //
                 Timer_Connection.Stop();
                 Timer_Connection.Dispose();
                 Timer_Connection = null;
@@ -1898,31 +1899,38 @@ namespace WindowsFormsApp1
 
         private void account_check_sell()
         {
-            //특저 열 추출
-            DataColumn columnStateColumn = dtCondStock.Columns["상태"];
-            //AsEnumerable()은 DataTable의 행을 열거형으로 변환
-            var filteredRows = dtCondStock.AsEnumerable()
-                                        .Where(row => row.Field<string>(columnStateColumn) == "매수완료")
-                                        .ToList();
-
-            //검출 종목에 대한 확인
-            if (filteredRows.Count > 0)
+            if (utility.clear_sell)
             {
-                foreach (DataRow row in filteredRows)
+                All_clear_btn_Click(null, EventArgs.Empty);
+                return;
+            }
+            else if(utility.clear_sell_mode)
+            {
+                if (!utility.clear_sell_profit || !utility.clear_sell_loss)
                 {
-                    lock (sell_lock)
+                    WriteLog_System("청산 모드 선택 요청\n");
+                    telegram_message("청산 모드 선택 요청\n");
+                    return;
+                }
+
+                //특저 열 추출
+                DataColumn columnStateColumn = dtCondStock.Columns["상태"];
+                
+                //AsEnumerable()은 DataTable의 행을 열거형으로 변환
+                var filteredRows = dtCondStock.AsEnumerable().Where(row => row.Field<string>(columnStateColumn) == "매수완료").ToList();
+                
+                //검출 종목에 대한 확인
+                if (filteredRows.Count > 0)
+                {
+                    foreach (DataRow row in filteredRows)
                     {
-                        string order_num = row.Field<string>("주문번호"); ;
-                        if (!sell_runningCodes.ContainsKey(order_num))
+                        lock (sell_lock)
                         {
-                            sell_runningCodes[order_num] = true;
-                            if (utility.clear_sell)
+                            string order_num = row.Field<string>("주문번호"); ;
+                            if (!sell_runningCodes.ContainsKey(order_num))
                             {
-                                sell_order("Nan", "청산매도/시간", order_num, row.Field<string>("수익률"), row.Field<string>("구분코드"));
-                            }
-                            //
-                            if (utility.clear_sell_mode)
-                            {
+                                sell_runningCodes[order_num] = true;
+                                //
                                 double percent_edit = double.Parse(row.Field<string>("수익률").Replace("%", ""));
                                 double profit = double.Parse(utility.clear_sell_profit_text);
                                 double loss = double.Parse(utility.clear_sell_loss_text);
@@ -1930,12 +1938,14 @@ namespace WindowsFormsApp1
                                 {
                                     sell_order("Nan", "청산매도/수익", order_num, row.Field<string>("수익률"), row.Field<string>("구분코드"));
                                 }
+                                //
                                 if (utility.clear_sell_loss && percent_edit <= -loss)
                                 {
                                     sell_order("Nan", "청산매도/손실", order_num, row.Field<string>("수익률"), row.Field<string>("구분코드"));
                                 }
+                                //
+                                sell_runningCodes.Remove(order_num);
                             }
-                            sell_runningCodes.Remove(order_num);
                         }
                     }
                 }
