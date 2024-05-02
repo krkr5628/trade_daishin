@@ -40,7 +40,7 @@
 ![image](https://github.com/krkr5628/trade_daishin/assets/75410553/dfbaa626-50ad-4afb-ab80-78a52a5f3c9f)
 
 - FORM3 : 매매 설정
-![image](https://github.com/krkr5628/trade_daishin/assets/75410553/fdc0b41c-6e8e-4bc8-8bb1-928121e380c5)
+![image](https://github.com/krkr5628/trade_daishin/assets/75410553/ddc874aa-492e-4ac5-94c4-ba5d7066de34)
 
 # 특징
 - 증권사 실시간 조건 검색을 활용하여 매수 매도를 할 수 있다.
