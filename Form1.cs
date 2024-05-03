@@ -2052,6 +2052,13 @@ namespace WindowsFormsApp1
                 //User_money.Text;
                 int order_acc_market = buy_order_cal(Convert.ToInt32(high.Replace(",", "")));
 
+                if(order_acc_market == 0)
+                {
+                    WriteLog_Order("[매수주문/시장가/주문실패] : " + code_name + "(" + code + ") " + "예수금 부족 0개 주문\n");
+                    telegram_message("[매수주문/시장가/주문실패] : " + code_name + "(" + code + ") " + "예수금 부족 0개 주문\n");
+                    return "대기/0";
+                }
+
                 WriteLog_Order($"[매수주문/시장가/주문접수/{gubun}] : {code_name}({code}) {order_acc_market}개\n");
                 telegram_message($"[매수주문/시장가/주문접수/{gubun}] : {code_name}({code}) {order_acc_market}개\n");
 
@@ -2119,14 +2126,17 @@ namespace WindowsFormsApp1
                 }
                 else
                 {
-                    WriteLog_Order("[매수주문/시장가/주문실패] : " + code_name + "(" + code + ") " + "에러코드(" + error + "\n");
-                    telegram_message("[매수주문/시장가/주문실패] : " + code_name + "(" + code + ") " + "에러코드(" + error + "\n");
+                    WriteLog_Order("[매수주문/시장가/주문실패] : " + code_name + "(" + code + ") " + "에러코드(" + error + ")\n");
+                    telegram_message("[매수주문/시장가/주문실패] : " + code_name + "(" + code + ") " + "에러코드(" + error + ")\n");
 
-                    //편입 차트 상태 '매수중' 변경
-                    DataRow[] findRows = dtCondStock.Select($"종목코드 = '{code}'");
-                    findRows[0]["상태"] = "대기";
-                    dtCondStock.AcceptChanges();
-                    dataGridView1.DataSource = dtCondStock;
+                    if (check)
+                    {
+                        //편입 차트 상태 '매수중' 변경
+                        DataRow[] findRows = dtCondStock.Select($"종목코드 = '{code}'");
+                        findRows[0]["상태"] = "대기";
+                        dtCondStock.AcceptChanges();
+                        dataGridView1.DataSource = dtCondStock;
+                    }
 
                     return "대기/0";
                 }
@@ -2139,6 +2149,13 @@ namespace WindowsFormsApp1
 
                 //지정가에 대하여 주문 가능 개수 계산
                 int order_acc = buy_order_cal(edited_price_hoga);
+
+                if (order_acc == 0)
+                {
+                    WriteLog_Order("[매수주문/지정가/주문실패] : " + code_name + "(" + code + ") " + "예수금 부족 0개 주문\n");
+                    telegram_message("[매수주문/지정가/주문실패] : " + code_name + "(" + code + ") " + "예수금 부족 0개 주문\n");
+                    return "대기/0";
+                }
 
                 WriteLog_Order($"[매수주문/지정가매수/접수/{gubun}] : {code_name}({code}) {order_acc}개 {price}원\n");
                 telegram_message($"[매수주문/지정가매수/접수/{gubun}] : {code_name}({code}) {order_acc}개 {price}원\n");
@@ -2207,11 +2224,15 @@ namespace WindowsFormsApp1
                     WriteLog_Order("[매수주문/지정가매수/주문실패] : " + code_name + "(" + code + ") " + "에러코드(" + error + "\n");
                     telegram_message("[매수주문/지정가매수/주문실패] : " + code_name + "(" + code + ") " + "에러코드(" + error + "\n");
 
-                    //편입 차트 상태 '매수중' 변경
-                    DataRow[] findRows = dtCondStock.Select($"종목코드 = '{code}'");
-                    findRows[0]["상태"] = "대기";
-                    dtCondStock.AcceptChanges();
-                    dataGridView1.DataSource = dtCondStock;
+
+                    if (check)
+                    {
+                        //편입 차트 상태 '매수중' 변경
+                        DataRow[] findRows = dtCondStock.Select($"종목코드 = '{code}'");
+                        findRows[0]["상태"] = "대기";
+                        dtCondStock.AcceptChanges();
+                        dataGridView1.DataSource = dtCondStock;
+                    }
 
                     return "대기";
                 }

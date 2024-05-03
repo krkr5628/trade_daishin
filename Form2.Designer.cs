@@ -107,6 +107,7 @@ namespace WindowsFormsApp1
             this.loss_index_connection1 = new System.Windows.Forms.CheckBox();
             this.loss_index_connection2 = new System.Windows.Forms.CheckBox();
             this.tableLayoutPanel10 = new System.Windows.Forms.TableLayoutPanel();
+            this.clear_sell = new System.Windows.Forms.CheckBox();
             this.clear_sell_index_connection1 = new System.Windows.Forms.CheckBox();
             this.clear_sell_profit_text = new System.Windows.Forms.TextBox();
             this.clear_sell_end = new System.Windows.Forms.TextBox();
@@ -122,6 +123,7 @@ namespace WindowsFormsApp1
             this.clear_sell_loss_index_connection2 = new System.Windows.Forms.CheckBox();
             this.clear_sell_profit = new System.Windows.Forms.CheckBox();
             this.clear_sell_loss = new System.Windows.Forms.CheckBox();
+            this.clear_sell_mode = new System.Windows.Forms.CheckBox();
             this.Fomula_list_buy = new System.Windows.Forms.ComboBox();
             this.Fomula_list_sell = new System.Windows.Forms.ComboBox();
             this.tableLayoutPanel11 = new System.Windows.Forms.TableLayoutPanel();
@@ -212,8 +214,6 @@ namespace WindowsFormsApp1
             this.Dual_Time = new System.Windows.Forms.CheckBox();
             this.label24 = new System.Windows.Forms.Label();
             this.Dual_Time_Start = new System.Windows.Forms.TextBox();
-            this.clear_sell = new System.Windows.Forms.CheckBox();
-            this.clear_sell_mode = new System.Windows.Forms.CheckBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
@@ -731,7 +731,7 @@ namespace WindowsFormsApp1
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.90253F));
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15.43321F));
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.53069F));
-            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 208F));
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 209F));
             this.tableLayoutPanel5.Controls.Add(this.setting_allowed, 4, 0);
             this.tableLayoutPanel5.Controls.Add(this.setting_open, 3, 0);
             this.tableLayoutPanel5.Controls.Add(this.save_button, 2, 0);
@@ -752,7 +752,7 @@ namespace WindowsFormsApp1
             this.setting_allowed.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.setting_allowed.Font = new System.Drawing.Font("굴림", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.setting_allowed.ForeColor = System.Drawing.Color.SpringGreen;
-            this.setting_allowed.Location = new System.Drawing.Point(676, 2);
+            this.setting_allowed.Location = new System.Drawing.Point(674, 2);
             this.setting_allowed.Margin = new System.Windows.Forms.Padding(2);
             this.setting_allowed.Name = "setting_allowed";
             this.setting_allowed.Size = new System.Drawing.Size(103, 29);
@@ -765,10 +765,10 @@ namespace WindowsFormsApp1
             this.setting_open.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.setting_open.Font = new System.Drawing.Font("굴림", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.setting_open.ForeColor = System.Drawing.Color.SpringGreen;
-            this.setting_open.Location = new System.Drawing.Point(578, 2);
+            this.setting_open.Location = new System.Drawing.Point(577, 2);
             this.setting_open.Margin = new System.Windows.Forms.Padding(2);
             this.setting_open.Name = "setting_open";
-            this.setting_open.Size = new System.Drawing.Size(94, 29);
+            this.setting_open.Size = new System.Drawing.Size(93, 29);
             this.setting_open.TabIndex = 7;
             this.setting_open.Text = "전량열기";
             this.setting_open.UseVisualStyleBackColor = false;
@@ -781,7 +781,7 @@ namespace WindowsFormsApp1
             this.save_button.Location = new System.Drawing.Point(474, 2);
             this.save_button.Margin = new System.Windows.Forms.Padding(2);
             this.save_button.Name = "save_button";
-            this.save_button.Size = new System.Drawing.Size(100, 29);
+            this.save_button.Size = new System.Drawing.Size(99, 29);
             this.save_button.TabIndex = 6;
             this.save_button.Text = "전량저장";
             this.save_button.UseVisualStyleBackColor = false;
@@ -1377,6 +1377,21 @@ namespace WindowsFormsApp1
             this.tableLayoutPanel10.Size = new System.Drawing.Size(468, 97);
             this.tableLayoutPanel10.TabIndex = 10;
             // 
+            // clear_sell
+            // 
+            this.clear_sell.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.clear_sell.AutoSize = true;
+            this.clear_sell.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.clear_sell.Location = new System.Drawing.Point(3, 3);
+            this.clear_sell.Name = "clear_sell";
+            this.clear_sell.Size = new System.Drawing.Size(105, 18);
+            this.clear_sell.TabIndex = 28;
+            this.clear_sell.Text = "청산일반";
+            this.clear_sell.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.clear_sell.UseVisualStyleBackColor = false;
+            // 
             // clear_sell_index_connection1
             // 
             this.clear_sell_index_connection1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -1595,6 +1610,21 @@ namespace WindowsFormsApp1
             this.clear_sell_loss.Text = "청산손절(%)";
             this.clear_sell_loss.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.clear_sell_loss.UseVisualStyleBackColor = false;
+            // 
+            // clear_sell_mode
+            // 
+            this.clear_sell_mode.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.clear_sell_mode.AutoSize = true;
+            this.clear_sell_mode.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.clear_sell_mode.Location = new System.Drawing.Point(350, 3);
+            this.clear_sell_mode.Name = "clear_sell_mode";
+            this.clear_sell_mode.Size = new System.Drawing.Size(115, 18);
+            this.clear_sell_mode.TabIndex = 35;
+            this.clear_sell_mode.Text = "개별청산";
+            this.clear_sell_mode.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.clear_sell_mode.UseVisualStyleBackColor = false;
             // 
             // Fomula_list_buy
             // 
@@ -1970,7 +2000,7 @@ namespace WindowsFormsApp1
             this.tableLayoutPanel12.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 36.39456F));
             this.tableLayoutPanel12.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 36.8231F));
             this.tableLayoutPanel12.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10.83033F));
-            this.tableLayoutPanel12.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 119F));
+            this.tableLayoutPanel12.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 121F));
             this.tableLayoutPanel12.Controls.Add(this.type4_selection, 1, 3);
             this.tableLayoutPanel12.Controls.Add(this.type3_selection, 1, 2);
             this.tableLayoutPanel12.Controls.Add(this.type2_selection, 1, 1);
@@ -2011,7 +2041,7 @@ namespace WindowsFormsApp1
             this.type4_selection.Location = new System.Drawing.Point(23, 80);
             this.type4_selection.Margin = new System.Windows.Forms.Padding(2);
             this.type4_selection.Name = "type4_selection";
-            this.type4_selection.Size = new System.Drawing.Size(45, 21);
+            this.type4_selection.Size = new System.Drawing.Size(44, 21);
             this.type4_selection.TabIndex = 33;
             // 
             // type3_selection
@@ -2023,7 +2053,7 @@ namespace WindowsFormsApp1
             this.type3_selection.Location = new System.Drawing.Point(23, 54);
             this.type3_selection.Margin = new System.Windows.Forms.Padding(2);
             this.type3_selection.Name = "type3_selection";
-            this.type3_selection.Size = new System.Drawing.Size(45, 21);
+            this.type3_selection.Size = new System.Drawing.Size(44, 21);
             this.type3_selection.TabIndex = 32;
             // 
             // type2_selection
@@ -2035,7 +2065,7 @@ namespace WindowsFormsApp1
             this.type2_selection.Location = new System.Drawing.Point(23, 28);
             this.type2_selection.Margin = new System.Windows.Forms.Padding(2);
             this.type2_selection.Name = "type2_selection";
-            this.type2_selection.Size = new System.Drawing.Size(45, 21);
+            this.type2_selection.Size = new System.Drawing.Size(44, 21);
             this.type2_selection.TabIndex = 31;
             // 
             // label20
@@ -2070,7 +2100,7 @@ namespace WindowsFormsApp1
             // 
             // type1_end
             // 
-            this.type1_end.Location = new System.Drawing.Point(136, 2);
+            this.type1_end.Location = new System.Drawing.Point(134, 2);
             this.type1_end.Margin = new System.Windows.Forms.Padding(2);
             this.type1_end.Name = "type1_end";
             this.type1_end.Size = new System.Drawing.Size(62, 23);
@@ -2078,7 +2108,7 @@ namespace WindowsFormsApp1
             // 
             // type2_end
             // 
-            this.type2_end.Location = new System.Drawing.Point(136, 28);
+            this.type2_end.Location = new System.Drawing.Point(134, 28);
             this.type2_end.Margin = new System.Windows.Forms.Padding(2);
             this.type2_end.Name = "type2_end";
             this.type2_end.Size = new System.Drawing.Size(62, 23);
@@ -2086,7 +2116,7 @@ namespace WindowsFormsApp1
             // 
             // type3_end
             // 
-            this.type3_end.Location = new System.Drawing.Point(136, 54);
+            this.type3_end.Location = new System.Drawing.Point(134, 54);
             this.type3_end.Margin = new System.Windows.Forms.Padding(2);
             this.type3_end.Name = "type3_end";
             this.type3_end.Size = new System.Drawing.Size(62, 23);
@@ -2094,7 +2124,7 @@ namespace WindowsFormsApp1
             // 
             // type4_end
             // 
-            this.type4_end.Location = new System.Drawing.Point(136, 80);
+            this.type4_end.Location = new System.Drawing.Point(134, 80);
             this.type4_end.Margin = new System.Windows.Forms.Padding(2);
             this.type4_end.Name = "type4_end";
             this.type4_end.Size = new System.Drawing.Size(62, 23);
@@ -2107,7 +2137,7 @@ namespace WindowsFormsApp1
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label12.AutoSize = true;
             this.label12.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.label12.Location = new System.Drawing.Point(122, 0);
+            this.label12.Location = new System.Drawing.Point(120, 0);
             this.label12.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(10, 26);
@@ -2122,7 +2152,7 @@ namespace WindowsFormsApp1
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label14.AutoSize = true;
             this.label14.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.label14.Location = new System.Drawing.Point(122, 26);
+            this.label14.Location = new System.Drawing.Point(120, 26);
             this.label14.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(10, 26);
@@ -2137,7 +2167,7 @@ namespace WindowsFormsApp1
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label16.AutoSize = true;
             this.label16.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.label16.Location = new System.Drawing.Point(122, 52);
+            this.label16.Location = new System.Drawing.Point(120, 52);
             this.label16.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(10, 26);
@@ -2152,7 +2182,7 @@ namespace WindowsFormsApp1
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label18.AutoSize = true;
             this.label18.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.label18.Location = new System.Drawing.Point(122, 78);
+            this.label18.Location = new System.Drawing.Point(120, 78);
             this.label18.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(10, 29);
@@ -2162,34 +2192,34 @@ namespace WindowsFormsApp1
             // 
             // type1_start
             // 
-            this.type1_start.Location = new System.Drawing.Point(72, 2);
+            this.type1_start.Location = new System.Drawing.Point(71, 2);
             this.type1_start.Margin = new System.Windows.Forms.Padding(2);
             this.type1_start.Name = "type1_start";
-            this.type1_start.Size = new System.Drawing.Size(46, 23);
+            this.type1_start.Size = new System.Drawing.Size(45, 23);
             this.type1_start.TabIndex = 4;
             // 
             // type2_start
             // 
-            this.type2_start.Location = new System.Drawing.Point(72, 28);
+            this.type2_start.Location = new System.Drawing.Point(71, 28);
             this.type2_start.Margin = new System.Windows.Forms.Padding(2);
             this.type2_start.Name = "type2_start";
-            this.type2_start.Size = new System.Drawing.Size(46, 23);
+            this.type2_start.Size = new System.Drawing.Size(45, 23);
             this.type2_start.TabIndex = 7;
             // 
             // type3_start
             // 
-            this.type3_start.Location = new System.Drawing.Point(72, 54);
+            this.type3_start.Location = new System.Drawing.Point(71, 54);
             this.type3_start.Margin = new System.Windows.Forms.Padding(2);
             this.type3_start.Name = "type3_start";
-            this.type3_start.Size = new System.Drawing.Size(46, 23);
+            this.type3_start.Size = new System.Drawing.Size(45, 23);
             this.type3_start.TabIndex = 12;
             // 
             // type4_start
             // 
-            this.type4_start.Location = new System.Drawing.Point(72, 80);
+            this.type4_start.Location = new System.Drawing.Point(71, 80);
             this.type4_start.Margin = new System.Windows.Forms.Padding(2);
             this.type4_start.Name = "type4_start";
-            this.type4_start.Size = new System.Drawing.Size(46, 23);
+            this.type4_start.Size = new System.Drawing.Size(45, 23);
             this.type4_start.TabIndex = 16;
             // 
             // label19
@@ -2231,7 +2261,7 @@ namespace WindowsFormsApp1
             this.type1_selection.Location = new System.Drawing.Point(23, 2);
             this.type1_selection.Margin = new System.Windows.Forms.Padding(2);
             this.type1_selection.Name = "type1_selection";
-            this.type1_selection.Size = new System.Drawing.Size(45, 21);
+            this.type1_selection.Size = new System.Drawing.Size(44, 21);
             this.type1_selection.TabIndex = 30;
             // 
             // tableLayoutPanel18
@@ -2825,36 +2855,6 @@ namespace WindowsFormsApp1
             this.Dual_Time_Start.Name = "Dual_Time_Start";
             this.Dual_Time_Start.Size = new System.Drawing.Size(145, 21);
             this.Dual_Time_Start.TabIndex = 1;
-            // 
-            // clear_sell
-            // 
-            this.clear_sell.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.clear_sell.AutoSize = true;
-            this.clear_sell.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.clear_sell.Location = new System.Drawing.Point(3, 3);
-            this.clear_sell.Name = "clear_sell";
-            this.clear_sell.Size = new System.Drawing.Size(105, 18);
-            this.clear_sell.TabIndex = 28;
-            this.clear_sell.Text = "청산일반";
-            this.clear_sell.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.clear_sell.UseVisualStyleBackColor = false;
-            // 
-            // clear_sell_mode
-            // 
-            this.clear_sell_mode.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.clear_sell_mode.AutoSize = true;
-            this.clear_sell_mode.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.clear_sell_mode.Location = new System.Drawing.Point(350, 3);
-            this.clear_sell_mode.Name = "clear_sell_mode";
-            this.clear_sell_mode.Size = new System.Drawing.Size(115, 18);
-            this.clear_sell_mode.TabIndex = 35;
-            this.clear_sell_mode.Text = "개별청산";
-            this.clear_sell_mode.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.clear_sell_mode.UseVisualStyleBackColor = false;
             // 
             // Setting
             // 
