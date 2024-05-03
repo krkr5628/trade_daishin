@@ -2056,7 +2056,7 @@ namespace WindowsFormsApp1
                 {
                     WriteLog_Order("[매수주문/시장가/주문실패] : " + code_name + "(" + code + ") " + "예수금 부족 0개 주문\n");
                     telegram_message("[매수주문/시장가/주문실패] : " + code_name + "(" + code + ") " + "예수금 부족 0개 주문\n");
-                    return "대기/0";
+                    return "대기";
                 }
 
                 WriteLog_Order($"[매수주문/시장가/주문접수/{gubun}] : {code_name}({code}) {order_acc_market}개\n");
@@ -2138,7 +2138,7 @@ namespace WindowsFormsApp1
                         dataGridView1.DataSource = dtCondStock;
                     }
 
-                    return "대기/0";
+                    return "대기";
                 }
             }
             //지정가 주문
@@ -2154,7 +2154,7 @@ namespace WindowsFormsApp1
                 {
                     WriteLog_Order("[매수주문/지정가/주문실패] : " + code_name + "(" + code + ") " + "예수금 부족 0개 주문\n");
                     telegram_message("[매수주문/지정가/주문실패] : " + code_name + "(" + code + ") " + "예수금 부족 0개 주문\n");
-                    return "대기/0";
+                    return "대기";
                 }
 
                 WriteLog_Order($"[매수주문/지정가매수/접수/{gubun}] : {code_name}({code}) {order_acc}개 {price}원\n");
