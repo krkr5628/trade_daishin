@@ -218,6 +218,22 @@ namespace WindowsFormsApp1
             return -1;
         }
 
+        private string error_message(int error)
+        {
+            switch (error)
+            {
+                case 1:
+                    return "통신요청실패";
+                case 2:
+                    return "주문확인창에서취소";
+                case 3:
+                    return "그외의내부오류";
+                case 4:
+                    return "주문요청제한개수초과";
+            }
+            return "기타에러(" + error.ToString() + ")";
+        }
+
         //-----------------------------------------initial-------------------------------------
 
 
@@ -2126,8 +2142,8 @@ namespace WindowsFormsApp1
                 }
                 else
                 {
-                    WriteLog_Order("[매수주문/시장가/주문실패] : " + code_name + "(" + code + ") " + "에러코드(" + error + ")\n");
-                    telegram_message("[매수주문/시장가/주문실패] : " + code_name + "(" + code + ") " + "에러코드(" + error + ")\n");
+                    WriteLog_Order("[매수주문/시장가/주문실패] : " + code_name + "(" + code + ") " + "에러코드(" + error_message(error) + ")\n");
+                    telegram_message("[매수주문/시장가/주문실패] : " + code_name + "(" + code + ") " + "에러코드(" + error_message(error) + ")\n");
 
                     if (check)
                     {
@@ -2221,9 +2237,8 @@ namespace WindowsFormsApp1
                 }
                 else
                 {
-                    WriteLog_Order("[매수주문/지정가매수/주문실패] : " + code_name + "(" + code + ") " + "에러코드(" + error + "\n");
-                    telegram_message("[매수주문/지정가매수/주문실패] : " + code_name + "(" + code + ") " + "에러코드(" + error + "\n");
-
+                    WriteLog_Order("[매수주문/지정가매수/주문실패] : " + code_name + "(" + code + ") " + "에러코드(" + error_message(error) + "\n");
+                    telegram_message("[매수주문/지정가매수/주문실패] : " + code_name + "(" + code + ") " + "에러코드(" + error_message(error) + "\n");
 
                     if (check)
                     {
@@ -2449,8 +2464,8 @@ namespace WindowsFormsApp1
                         dtCondStock.AcceptChanges();
                         dataGridView1.DataSource = dtCondStock;
 
-                        WriteLog_Order($"[{sell_message}/시장가//주문실패] : {code_name}({code}) 에러코드({error})\n");
-                        telegram_message($"[{sell_message}/시장가//주문실패] : {code_name}({code}) 에러코드({error})\n");
+                        WriteLog_Order($"[{sell_message}/시장가//주문실패] : {code_name}({code}) {error_message(error)}\n");
+                        telegram_message($"[{sell_message}/시장가//주문실패] : {code_name}({code}) {error_message(error)}\n");
                     }
                 }
                 //지정가 주문
@@ -2498,8 +2513,8 @@ namespace WindowsFormsApp1
                         dtCondStock.AcceptChanges();
                         dataGridView1.DataSource = dtCondStock;
 
-                        WriteLog_Order($"[{sell_message}/지정가/주문실패] : {code_name}({code}) 에러코드({error})\n");
-                        telegram_message($"[{sell_message}/지정가/주문실패] : {code_name}({code}) 에러코드({error})\n");
+                        WriteLog_Order($"[{sell_message}/지정가/주문실패] : {code_name}({code}) {error_message(error)}\n");
+                        telegram_message($"[{sell_message}/지정가/주문실패] : {code_name}({code}) {error_message(error)}\n");
                     }
                 }             
             }
