@@ -2037,7 +2037,7 @@ namespace WindowsFormsApp1
             //주문 방식 구분
             string[] order_method = buy_condtion_method.Text.Split('/');
 
-            //
+            //계좌 구분 코드
             string gubun = Master_code;
             if (utility.buy_DUAL && condition_name.Equals(ISA_Condition))
             {
@@ -2050,7 +2050,7 @@ namespace WindowsFormsApp1
 
                 //시장가에 대하여 주문 가능 개수 계산 => 기억해야 함 / 종목당매수금액 / 종목당매수수량 / 종목당매수비율 / 종목당최대매수금액
                 //User_money.Text;
-                int order_acc_market = buy_order_cal(Convert.ToInt32(high.Replace(",", "")));
+                int order_acc_market = buy_order_cal(Convert.ToInt32(high.Replace(",", "")), gubun);
 
                 if(order_acc_market == 0)
                 {
@@ -2148,7 +2148,7 @@ namespace WindowsFormsApp1
                 int edited_price_hoga = hoga_cal(Convert.ToInt32(price), order_method[1].Equals("현재가") ? 0 : Convert.ToInt32(order_method[1].Replace("호가", "")));
 
                 //지정가에 대하여 주문 가능 개수 계산
-                int order_acc = buy_order_cal(edited_price_hoga);
+                int order_acc = buy_order_cal(edited_price_hoga, gubun);
 
                 if (order_acc == 0)
                 {
@@ -2240,9 +2240,18 @@ namespace WindowsFormsApp1
         }
 
         //매수 주문 수량 계산
-        private int buy_order_cal(int price)
+        private int buy_order_cal(int price, string gubun)
         {
-            int current_balance = Convert.ToInt32(User_money.Text.Replace(",", ""));
+            int current_balance = 0;
+            if (gubun == "01")
+            {
+                current_balance = Convert.ToInt32(User_money.Text.Replace(",", ""));
+            }
+            else
+            {
+                current_balance = Convert.ToInt32(User_money_isa.Text.Replace(",", ""));
+            }
+
             int max_buy = Convert.ToInt32(utility.maxbuy);
             //
             if (utility.buy_per_percent)
