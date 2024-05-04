@@ -330,11 +330,21 @@ namespace WindowsFormsApp1
             //초기세팅2
             all_profit.Text = "0";
             all_profit_percent.Text = "00.00%";
+            all_profit_isa.Text = "0";
+            all_profit_percent_isa.Text = "00.00%";
             //today_tax.Text = "0";
             today_profit_percent_tax.Text = "00.00%";
             today_profit_tax.Text = "0";
+            today_profit_percent_tax_isa.Text = "00.00%";
+            today_profit_tax_isa.Text = "0";
             //today_profit_percent.Text = "00.00%";
             //today_profit.Text = "0";
+
+            kospi_index.Text = "미수신";
+            kosdaq_index.Text = "미수신";
+            dow_index.Text = "미수신";
+            sp_index.Text = "미수신";
+            nasdaq_index.Text = "미수신";
 
             //초기세팅4
             if (utility.buy_OR)

@@ -313,14 +313,6 @@ namespace WindowsFormsApp1
             String[] profit_after2_tmp = reader.ReadLine().Split('/');
             profit_after2 = Convert.ToBoolean(profit_after2_tmp[1]);
 
-            //익절인덱스연동1 
-            String[] profit_index_connection1_tmp = reader.ReadLine().Split('/');
-            profit_index_connection1 = Convert.ToBoolean(profit_index_connection1_tmp[1]);
-
-            //익절인덱스연동2
-            String[] profit_index_connection2_tmp = reader.ReadLine().Split('/');
-            profit_index_connection2 = Convert.ToBoolean(profit_index_connection2_tmp[1]);
-
             //손절
             String[] loss_percent_tmp = reader.ReadLine().Split('/');
             loss_percent = Convert.ToBoolean(loss_percent_tmp[1]);
@@ -338,14 +330,6 @@ namespace WindowsFormsApp1
             //손절시간외단일가
             String[] loss_after2_tmp = reader.ReadLine().Split('/');
             loss_after2 = Convert.ToBoolean(loss_after2_tmp[1]);
-
-            //손절인덱스연동1
-            String[] loss_index_connection1_tmp = reader.ReadLine().Split('/');
-            loss_index_connection1 = Convert.ToBoolean(loss_index_connection1_tmp[1]);
-
-            //손절인덱스연동2
-            String[] loss_index_connection2_tmp = reader.ReadLine().Split('/');
-            loss_index_connection2 = Convert.ToBoolean(loss_index_connection2_tmp[1]);
 
             //전체청산
             String[] clear_sell_tmp = reader.ReadLine().Split('/');
@@ -370,14 +354,6 @@ namespace WindowsFormsApp1
             String[] clear_sell_profit_after2_tmp = reader.ReadLine().Split('/');
             clear_sell_profit_after2 = Convert.ToBoolean(clear_sell_profit_after2_tmp[1]);
 
-            //청산일반익절인덱스연동1
-            String[] clear_sell_index_connection1_tmp = reader.ReadLine().Split('/');
-            clear_sell_index_connection1 = Convert.ToBoolean(clear_sell_index_connection1_tmp[1]);
-
-            //청산일반익절인덱스연동2
-            String[] clear_sell_index_connection2_tmp = reader.ReadLine().Split('/');
-            clear_sell_index_connection2 = Convert.ToBoolean(clear_sell_index_connection2_tmp[1]);
-
             //청산손절
             String[] clear_sell_loss_tmp = reader.ReadLine().Split('/');
             clear_sell_loss= Convert.ToBoolean(clear_sell_loss_tmp[1]);
@@ -390,14 +366,6 @@ namespace WindowsFormsApp1
             //청산익절시간외단일가
             String[] clear_sell_loss_after2_tmp = reader.ReadLine().Split('/');
             clear_sell_loss_after2 = Convert.ToBoolean(clear_sell_loss_after2_tmp[1]);
-
-            //청산손절인덱스연동1
-            String[] clear_sell_loss_index_connection1_tmp = reader.ReadLine().Split('/');
-            clear_sell_loss_index_connection1 = Convert.ToBoolean(clear_sell_loss_index_connection1_tmp[1]);
-
-            //청산손절인덱스연동2
-            String[] clear_sell_loss_index_connection2_tmp = reader.ReadLine().Split('/');
-            clear_sell_loss_index_connection2 = Convert.ToBoolean(clear_sell_loss_index_connection2_tmp[1]);
 
             //종목매수텀(대기)
             String[] term_for_buy_tmp = reader.ReadLine().Split('/');

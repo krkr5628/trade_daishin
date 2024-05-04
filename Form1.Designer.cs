@@ -156,16 +156,16 @@ namespace WindowsFormsApp1
             this.groupBox9 = new System.Windows.Forms.GroupBox();
             this.log_window3 = new System.Windows.Forms.RichTextBox();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
-            this.label14 = new System.Windows.Forms.Label();
+            this.nasdaq_index = new System.Windows.Forms.Label();
+            this.sp_index = new System.Windows.Forms.Label();
+            this.dow_index = new System.Windows.Forms.Label();
+            this.kosdaq_index = new System.Windows.Forms.Label();
             this.label26 = new System.Windows.Forms.Label();
-            this.label27 = new System.Windows.Forms.Label();
-            this.label28 = new System.Windows.Forms.Label();
-            this.label29 = new System.Windows.Forms.Label();
-            this.label31 = new System.Windows.Forms.Label();
-            this.label33 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.kospi_index = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -2001,16 +2001,16 @@ namespace WindowsFormsApp1
             this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel4.Controls.Add(this.label33, 4, 1);
-            this.tableLayoutPanel4.Controls.Add(this.label31, 3, 1);
-            this.tableLayoutPanel4.Controls.Add(this.label29, 2, 1);
-            this.tableLayoutPanel4.Controls.Add(this.label28, 1, 1);
+            this.tableLayoutPanel4.Controls.Add(this.nasdaq_index, 4, 1);
+            this.tableLayoutPanel4.Controls.Add(this.sp_index, 3, 1);
+            this.tableLayoutPanel4.Controls.Add(this.dow_index, 2, 1);
+            this.tableLayoutPanel4.Controls.Add(this.kosdaq_index, 1, 1);
             this.tableLayoutPanel4.Controls.Add(this.label26, 4, 0);
             this.tableLayoutPanel4.Controls.Add(this.label14, 3, 0);
             this.tableLayoutPanel4.Controls.Add(this.label13, 2, 0);
             this.tableLayoutPanel4.Controls.Add(this.label10, 1, 0);
             this.tableLayoutPanel4.Controls.Add(this.label5, 0, 0);
-            this.tableLayoutPanel4.Controls.Add(this.label27, 0, 1);
+            this.tableLayoutPanel4.Controls.Add(this.kospi_index, 0, 1);
             this.tableLayoutPanel4.Location = new System.Drawing.Point(466, 34);
             this.tableLayoutPanel4.Name = "tableLayoutPanel4";
             this.tableLayoutPanel4.RowCount = 2;
@@ -2019,61 +2019,57 @@ namespace WindowsFormsApp1
             this.tableLayoutPanel4.Size = new System.Drawing.Size(469, 40);
             this.tableLayoutPanel4.TabIndex = 22;
             // 
-            // label5
+            // nasdaq_index
             // 
-            this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.nasdaq_index.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.label5.AutoSize = true;
-            this.label5.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.label5.Location = new System.Drawing.Point(3, 0);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(87, 20);
-            this.label5.TabIndex = 0;
-            this.label5.Text = "코스피선물";
-            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.nasdaq_index.AutoSize = true;
+            this.nasdaq_index.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.nasdaq_index.Location = new System.Drawing.Point(375, 20);
+            this.nasdaq_index.Name = "nasdaq_index";
+            this.nasdaq_index.Size = new System.Drawing.Size(91, 20);
+            this.nasdaq_index.TabIndex = 9;
+            this.nasdaq_index.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // label10
+            // sp_index
             // 
-            this.label10.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.sp_index.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.label10.AutoSize = true;
-            this.label10.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.label10.Location = new System.Drawing.Point(96, 0);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(87, 20);
-            this.label10.TabIndex = 1;
-            this.label10.Text = "코스닥선물";
-            this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.sp_index.AutoSize = true;
+            this.sp_index.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.sp_index.Location = new System.Drawing.Point(282, 20);
+            this.sp_index.Name = "sp_index";
+            this.sp_index.Size = new System.Drawing.Size(87, 20);
+            this.sp_index.TabIndex = 8;
+            this.sp_index.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // label13
+            // dow_index
             // 
-            this.label13.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.dow_index.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.label13.AutoSize = true;
-            this.label13.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.label13.Location = new System.Drawing.Point(189, 0);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(87, 20);
-            this.label13.TabIndex = 2;
-            this.label13.Text = "DOW30";
-            this.label13.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.dow_index.AutoSize = true;
+            this.dow_index.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.dow_index.Location = new System.Drawing.Point(189, 20);
+            this.dow_index.Name = "dow_index";
+            this.dow_index.Size = new System.Drawing.Size(87, 20);
+            this.dow_index.TabIndex = 7;
+            this.dow_index.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // label14
+            // kosdaq_index
             // 
-            this.label14.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.kosdaq_index.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.label14.AutoSize = true;
-            this.label14.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.label14.Location = new System.Drawing.Point(282, 0);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(87, 20);
-            this.label14.TabIndex = 3;
-            this.label14.Text = "S&P500";
-            this.label14.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.kosdaq_index.AutoSize = true;
+            this.kosdaq_index.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.kosdaq_index.Location = new System.Drawing.Point(96, 20);
+            this.kosdaq_index.Name = "kosdaq_index";
+            this.kosdaq_index.Size = new System.Drawing.Size(87, 20);
+            this.kosdaq_index.TabIndex = 6;
+            this.kosdaq_index.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label26
             // 
@@ -2089,70 +2085,74 @@ namespace WindowsFormsApp1
             this.label26.Text = "NASDAQ100";
             this.label26.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // label27
+            // label14
             // 
-            this.label27.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.label14.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.label27.AutoSize = true;
-            this.label27.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label27.Location = new System.Drawing.Point(3, 20);
-            this.label27.Name = "label27";
-            this.label27.Size = new System.Drawing.Size(87, 20);
-            this.label27.TabIndex = 5;
-            this.label27.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label14.AutoSize = true;
+            this.label14.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.label14.Location = new System.Drawing.Point(282, 0);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(87, 20);
+            this.label14.TabIndex = 3;
+            this.label14.Text = "S&P500";
+            this.label14.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // label28
+            // label13
             // 
-            this.label28.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.label13.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.label28.AutoSize = true;
-            this.label28.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label28.Location = new System.Drawing.Point(96, 20);
-            this.label28.Name = "label28";
-            this.label28.Size = new System.Drawing.Size(87, 20);
-            this.label28.TabIndex = 6;
-            this.label28.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label13.AutoSize = true;
+            this.label13.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.label13.Location = new System.Drawing.Point(189, 0);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(87, 20);
+            this.label13.TabIndex = 2;
+            this.label13.Text = "DOW30";
+            this.label13.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // label29
+            // label10
             // 
-            this.label29.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.label10.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.label29.AutoSize = true;
-            this.label29.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label29.Location = new System.Drawing.Point(189, 20);
-            this.label29.Name = "label29";
-            this.label29.Size = new System.Drawing.Size(87, 20);
-            this.label29.TabIndex = 7;
-            this.label29.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label10.AutoSize = true;
+            this.label10.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.label10.Location = new System.Drawing.Point(96, 0);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(87, 20);
+            this.label10.TabIndex = 1;
+            this.label10.Text = "코스닥선물";
+            this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // label31
+            // label5
             // 
-            this.label31.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.label31.AutoSize = true;
-            this.label31.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label31.Location = new System.Drawing.Point(282, 20);
-            this.label31.Name = "label31";
-            this.label31.Size = new System.Drawing.Size(87, 20);
-            this.label31.TabIndex = 8;
-            this.label31.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label5.AutoSize = true;
+            this.label5.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.label5.Location = new System.Drawing.Point(3, 0);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(87, 20);
+            this.label5.TabIndex = 0;
+            this.label5.Text = "코스피선물";
+            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // label33
+            // kospi_index
             // 
-            this.label33.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.kospi_index.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.label33.AutoSize = true;
-            this.label33.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label33.Location = new System.Drawing.Point(375, 20);
-            this.label33.Name = "label33";
-            this.label33.Size = new System.Drawing.Size(91, 20);
-            this.label33.TabIndex = 9;
-            this.label33.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.kospi_index.AutoSize = true;
+            this.kospi_index.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.kospi_index.Location = new System.Drawing.Point(3, 20);
+            this.kospi_index.Name = "kospi_index";
+            this.kospi_index.Size = new System.Drawing.Size(87, 20);
+            this.kospi_index.TabIndex = 5;
+            this.kospi_index.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // Trade_Auto_Daishin
             // 
@@ -2327,16 +2327,16 @@ namespace WindowsFormsApp1
         private System.Windows.Forms.Label today_profit_percent_tax_isa;
         private System.Windows.Forms.Label today_profit_tax_isa;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
-        private System.Windows.Forms.Label label33;
-        private System.Windows.Forms.Label label31;
-        private System.Windows.Forms.Label label29;
-        private System.Windows.Forms.Label label28;
+        private System.Windows.Forms.Label nasdaq_index;
+        private System.Windows.Forms.Label sp_index;
+        private System.Windows.Forms.Label dow_index;
+        private System.Windows.Forms.Label kosdaq_index;
         private System.Windows.Forms.Label label26;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label27;
+        private System.Windows.Forms.Label kospi_index;
     }
 }
 
