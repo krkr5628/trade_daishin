@@ -45,6 +45,7 @@ namespace WindowsFormsApp1
         public static bool buy_condition; //매수조건
         public static string buy_condition_start;
         public static string buy_condition_end;
+        public static bool buy_condition_index
         public static string Fomula_list_buy_text;
         public static bool buy_OR;
         public static bool buy_AND;
@@ -54,6 +55,7 @@ namespace WindowsFormsApp1
         public static bool sell_condition; //매도조건
         public static string sell_condition_start;
         public static string sell_condition_end;
+        public static bool sell_condition_index
         public static int Fomula_list_sell;
         public static string Fomula_list_sell_text;
 

@@ -112,8 +112,8 @@ namespace WindowsFormsApp1
             term_for_sell.CheckedChanged += HandleCheckedChanged;
             term_for_non_buy.CheckedChanged += HandleCheckedChanged;
             term_for_non_sell.CheckedChanged += HandleCheckedChanged;
-            kospi_index.CheckedChanged += HandleCheckedChanged;
-            kosdak_index.CheckedChanged += HandleCheckedChanged;
+            dow_index.CheckedChanged += HandleCheckedChanged;
+            nasdaq_index.CheckedChanged += HandleCheckedChanged;
             kospi_commodity.CheckedChanged += HandleCheckedChanged;
             kosdak_commodity.CheckedChanged += HandleCheckedChanged;
         }
@@ -713,8 +713,8 @@ namespace WindowsFormsApp1
                     tmp.Add("매수설정/" + Convert.ToString(buy_set1.SelectedIndex) + "/" + Convert.ToString(buy_set2.SelectedIndex));
                     tmp.Add("매도설정/" + Convert.ToString(sell_set1.SelectedIndex) + "/" + Convert.ToString(sell_set2.SelectedIndex));
                     //
-                    tmp.Add("코스피지수/" + Convert.ToString(kospi_index.Checked));
-                    tmp.Add("코스닥지수/" + Convert.ToString(kosdak_index.Checked));
+                    tmp.Add("코스피지수/" + Convert.ToString(dow_index.Checked));
+                    tmp.Add("코스닥지수/" + Convert.ToString(nasdaq_index.Checked));
                     tmp.Add("코스피선물/" + Convert.ToString(kospi_commodity.Checked));
                     tmp.Add("코스닥선물/" + Convert.ToString(kosdak_commodity.Checked));
                     //
@@ -1015,11 +1015,11 @@ namespace WindowsFormsApp1
 
             //코스피지수(대기)
             String[] kospi_index_tmp = reader.ReadLine().Split('/');
-            kospi_index.Checked = Convert.ToBoolean(kospi_index_tmp[1]);
+            dow_index.Checked = Convert.ToBoolean(kospi_index_tmp[1]);
 
             //코스닥지수(대기)
             String[] kosdak_index_tmp = reader.ReadLine().Split('/');
-            kosdak_index.Checked = Convert.ToBoolean(kosdak_index_tmp[1]);
+            nasdaq_index.Checked = Convert.ToBoolean(kosdak_index_tmp[1]);
 
             //코스피선물(대기)
             String[] kospi_commodity_tmp = reader.ReadLine().Split('/');
@@ -1152,7 +1152,7 @@ namespace WindowsFormsApp1
             }
         }
 
-        private void groupBox8_Enter(object sender, EventArgs e)
+        private void groupBox5_Enter(object sender, EventArgs e)
         {
 
         }
