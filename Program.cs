@@ -16,7 +16,7 @@ namespace WindowsFormsApp1
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Trade_Auto());
+            Application.Run(new Trade_Auto_Daishin());
         }
     }
 }

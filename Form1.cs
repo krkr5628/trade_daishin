@@ -27,7 +27,7 @@ using CPTRADELib; //Daishin
 
 namespace WindowsFormsApp1
 {
-    public partial class Trade_Auto : Form
+    public partial class Trade_Auto_Daishin : Form
     {
         //-----------------------------------공용 신호----------------------------------------
 
@@ -66,7 +66,7 @@ namespace WindowsFormsApp1
         private string ISA_Condition = "";
 
         //-----------------------------------------------Main------------------------------------------------
-        public Trade_Auto()
+        public Trade_Auto_Daishin()
         {
             InitializeComponent();
 

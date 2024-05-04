@@ -45,7 +45,7 @@ namespace WindowsFormsApp1
         public static bool buy_condition; //매수조건
         public static string buy_condition_start;
         public static string buy_condition_end;
-        public static bool buy_condition_index
+        public static bool buy_condition_index;
         public static string Fomula_list_buy_text;
         public static bool buy_OR;
         public static bool buy_AND;
@@ -55,7 +55,7 @@ namespace WindowsFormsApp1
         public static bool sell_condition; //매도조건
         public static string sell_condition_start;
         public static string sell_condition_end;
-        public static bool sell_condition_index
+        public static bool sell_condition_index;
         public static int Fomula_list_sell;
         public static string Fomula_list_sell_text;
 
@@ -108,23 +108,43 @@ namespace WindowsFormsApp1
         public static int sell_set1; //매도설정
         public static int sell_set2;
 
-        public static bool kospi_index;
-        public static bool kosdak_index;
         public static bool kospi_commodity;
         public static bool kosdak_commodity;
+        public static bool dow_index;
+        public static bool sp_index;
+        public static bool nasdaq_index;
 
-        public static string type1_selection;
+        public static bool type1_selection;
         public static string type1_start;
         public static string type1_end;
-        public static string type2_selection;
+        public static bool type2_selection;
         public static string type2_start;
         public static string type2_end;
-        public static string type3_selection;
+        public static bool type3_selection;
         public static string type3_start;
         public static string type3_end;
-        public static string type4_selection;
+        public static bool type4_selection;
         public static string type4_start;
         public static string type4_end;
+        public static bool type5_selection;
+        public static string type5_start;
+        public static string type5_end;
+
+        public static bool type1_selection_all;
+        public static string type1_start_all;
+        public static string type1_end_all;
+        public static bool type2_selection_all;
+        public static string type2_start_all;
+        public static string type2_end_all;
+        public static bool type3_selection_all;
+        public static string type3_start_all;
+        public static string type3_end_all;
+        public static bool type4_selection_all;
+        public static string type4_start_all;
+        public static string type4_end_all;
+        public static bool type5_selection_all;
+        public static string type5_start_all;
+        public static string type5_end_all;
 
         public static bool Telegram_Allow;
         public static string telegram_user_id;
@@ -140,6 +160,23 @@ namespace WindowsFormsApp1
         public static bool Dual_Time;
         public static string Dual_Time_Start;
         public static string Dual_Time_Stop;
+
+        public static bool Dual_Index;
+        public static bool type1_selection_isa;
+        public static string type1_start_isa;
+        public static string type1_end_isa;
+        public static bool type2_selection_isa;
+        public static string type2_start_isa;
+        public static string type2_end_isa;
+        public static bool type3_selection_isa;
+        public static string type3_start_isa;
+        public static string type3_end_isa;
+        public static bool type4_selection_isa;
+        public static string type4_start_isa;
+        public static string type4_end_isa;
+        public static bool type5_selection_isa;
+        public static string type5_start_isa;
+        public static string type5_end_isa;
 
         //utility 목록
         public static async Task setting_load_auto()
@@ -237,19 +274,21 @@ namespace WindowsFormsApp1
             buy_condition = Convert.ToBoolean(buy_condition_tmp[1]);
             buy_condition_start = buy_condition_tmp[2];
             buy_condition_end = buy_condition_tmp[3];
-            Fomula_list_buy_text = buy_condition_tmp[4];
-            buy_OR = Convert.ToBoolean(buy_condition_tmp[5]);
-            buy_AND = Convert.ToBoolean(buy_condition_tmp[6]);
-            buy_INDEPENDENT = Convert.ToBoolean(buy_condition_tmp[7]);
-            buy_DUAL = Convert.ToBoolean(buy_condition_tmp[8]);
+            buy_condition_index = Convert.ToBoolean(buy_condition_tmp[4]);
+            Fomula_list_buy_text = buy_condition_tmp[5];
+            buy_OR = Convert.ToBoolean(buy_condition_tmp[6]);
+            buy_AND = Convert.ToBoolean(buy_condition_tmp[7]);
+            buy_INDEPENDENT = Convert.ToBoolean(buy_condition_tmp[8]);
+            buy_DUAL = Convert.ToBoolean(buy_condition_tmp[9]);
 
             //매도조건
             String[] sell_condition_tmp = reader.ReadLine().Split(';');
             sell_condition = Convert.ToBoolean(sell_condition_tmp[1]);
             sell_condition_start = sell_condition_tmp[2];
             sell_condition_end = sell_condition_tmp[3];
-            Fomula_list_sell= Convert.ToInt32(sell_condition_tmp[4]);
-            Fomula_list_sell_text = sell_condition_tmp[5];
+            sell_condition_index = Convert.ToBoolean(sell_condition_tmp[4]);
+            Fomula_list_sell = Convert.ToInt32(sell_condition_tmp[5]);
+            Fomula_list_sell_text = sell_condition_tmp[6];
 
             //익절
             String[] profit_percent_tmp = reader.ReadLine().Split('/');
@@ -388,14 +427,6 @@ namespace WindowsFormsApp1
             sell_set1 = Convert.ToInt32(sell_set_tmp[1]);
             sell_set2 = Convert.ToInt32(sell_set_tmp[2]);
 
-            //코스피지수
-            String[] kospi_index_tmp = reader.ReadLine().Split('/');
-            kospi_index = Convert.ToBoolean(kospi_index_tmp[1]);
-
-            //코스닥지수
-            String[] kosdak_index_tmp = reader.ReadLine().Split('/');
-            kosdak_index = Convert.ToBoolean(kosdak_index_tmp[1]);
-
             //코스피선물
             String[] kospi_commodity_tmp = reader.ReadLine().Split('/');
             kospi_commodity = Convert.ToBoolean(kospi_commodity_tmp[1]);
@@ -404,29 +435,77 @@ namespace WindowsFormsApp1
             String[] kosdak_commodity_tmp = reader.ReadLine().Split('/');
             kosdak_commodity = Convert.ToBoolean(kosdak_commodity_tmp[1]);
 
+            //DOW30
+            String[] dow_index_tmp = reader.ReadLine().Split('/');
+            dow_index = Convert.ToBoolean(dow_index_tmp[1]);
+
+            //S&P500
+            String[] sp_index_tmp = reader.ReadLine().Split('/');
+            sp_index = Convert.ToBoolean(sp_index_tmp[1]);
+
+            //NASDAQ100
+            String[] nasdaq_index_tmp = reader.ReadLine().Split('/');
+            nasdaq_index = Convert.ToBoolean(nasdaq_index_tmp[1]);
+
             //#1
             String[] type1_selection_tmp = reader.ReadLine().Split('/');
-            type1_selection = Convert.ToString(type1_selection_tmp[1]);
+            type1_selection = Convert.ToBoolean(type1_selection_tmp[1]);
             type1_start = Convert.ToString(type1_selection_tmp[2]);
             type1_end = Convert.ToString(type1_selection_tmp[3]);
 
             //#2
             String[] type2_selection_tmp = reader.ReadLine().Split('/');
-            type2_selection = Convert.ToString(type2_selection_tmp[1]);
+            type2_selection = Convert.ToBoolean(type2_selection_tmp[1]);
             type2_start = Convert.ToString(type2_selection_tmp[2]);
             type2_end = Convert.ToString(type2_selection_tmp[3]);
 
             //#3
             String[] type3_selection_tmp = reader.ReadLine().Split('/');
-            type3_selection = Convert.ToString(type3_selection_tmp[1]);
+            type3_selection = Convert.ToBoolean(type3_selection_tmp[1]);
             type3_start = Convert.ToString(type3_selection_tmp[2]);
             type3_end = Convert.ToString(type3_selection_tmp[3]);
 
             //#4
             String[] type4_selection_tmp = reader.ReadLine().Split('/');
-            type4_selection = Convert.ToString(type4_selection_tmp[1]);
+            type4_selection = Convert.ToBoolean(type4_selection_tmp[1]);
             type4_start = Convert.ToString(type4_selection_tmp[2]);
             type4_end = Convert.ToString(type4_selection_tmp[3]);
+
+            //#5
+            String[] type5_selection_tmp = reader.ReadLine().Split('/');
+            type5_selection = Convert.ToBoolean(type5_selection_tmp[1]);
+            type5_start = Convert.ToString(type5_selection_tmp[2]);
+            type5_end = Convert.ToString(type5_selection_tmp[3]);
+
+            //#1
+            String[] type1_selection_all_tmp = reader.ReadLine().Split('/');
+            type1_selection_all = Convert.ToBoolean(type1_selection_all_tmp[1]);
+            type1_start_all = Convert.ToString(type1_selection_all_tmp[2]);
+            type1_end_all = Convert.ToString(type1_selection_all_tmp[3]);
+
+            //#2
+            String[] type2_selection_all_tmp = reader.ReadLine().Split('/');
+            type2_selection_all = Convert.ToBoolean(type2_selection_all_tmp[1]);
+            type2_start_all = Convert.ToString(type2_selection_all_tmp[2]);
+            type2_end_all = Convert.ToString(type2_selection_all_tmp[3]);
+
+            //#3
+            String[] type3_selection_all_tmp = reader.ReadLine().Split('/');
+            type3_selection_all = Convert.ToBoolean(type3_selection_all_tmp[1]);
+            type3_start_all = Convert.ToString(type3_selection_all_tmp[2]);
+            type3_end_all = Convert.ToString(type3_selection_all_tmp[3]);
+
+            //#4
+            String[] type4_selection_all_tmp = reader.ReadLine().Split('/');
+            type4_selection_all = Convert.ToBoolean(type4_selection_all_tmp[1]);
+            type4_start_all = Convert.ToString(type4_selection_all_tmp[2]);
+            type4_end_all = Convert.ToString(type4_selection_all_tmp[3]);
+
+            //#5
+            String[] type5_selection_all_tmp = reader.ReadLine().Split('/');
+            type5_selection_all = Convert.ToBoolean(type5_selection_all_tmp[1]);
+            type5_start_all = Convert.ToString(type5_selection_all_tmp[2]);
+            type5_end_all = Convert.ToString(type5_selection_all_tmp[3]);
 
             //텔레그램Telegram_Allow
             String[] Telegram_Allow_tmp = reader.ReadLine().Split('/');
@@ -475,6 +554,40 @@ namespace WindowsFormsApp1
             //Dual_Time_Stop
             String[] Dual_Time_Stop_tmp = reader.ReadLine().Split('/');
             Dual_Time_Stop = Dual_Time_Stop_tmp[1];
+
+            //Dual_Time_Stop
+            String[] Dual_Index_tmp = reader.ReadLine().Split('/');
+            Dual_Index = Convert.ToBoolean(Dual_Index_tmp[1]);
+
+            //#1
+            String[] type1_selection_isa_tmp = reader.ReadLine().Split('/');
+            type1_selection_isa = Convert.ToBoolean(type1_selection_isa_tmp[1]);
+            type1_start_isa = Convert.ToString(type1_selection_isa_tmp[2]);
+            type1_end_isa = Convert.ToString(type1_selection_isa_tmp[3]);
+
+            //#2
+            String[] type2_selection_isa_tmp = reader.ReadLine().Split('/');
+            type2_selection_isa = Convert.ToBoolean(type2_selection_isa_tmp[1]);
+            type2_start_isa = Convert.ToString(type2_selection_isa_tmp[2]);
+            type2_end_isa = Convert.ToString(type2_selection_isa_tmp[3]);
+
+            //#3
+            String[] type3_selection_isa_tmp = reader.ReadLine().Split('/');
+            type3_selection_isa = Convert.ToBoolean(type3_selection_isa_tmp[1]);
+            type3_start_isa = Convert.ToString(type3_selection_isa_tmp[2]);
+            type3_end_isa = Convert.ToString(type3_selection_isa_tmp[3]);
+
+            //#4
+            String[] type4_selection_isa_tmp = reader.ReadLine().Split('/');
+            type4_selection_isa = Convert.ToBoolean(type4_selection_isa_tmp[1]);
+            type4_start_isa = Convert.ToString(type4_selection_isa_tmp[2]);
+            type4_end_isa = Convert.ToString(type4_selection_isa_tmp[3]);
+
+            //#5
+            String[] type5_selection_isa_tmp = reader.ReadLine().Split('/');
+            type5_selection_isa = Convert.ToBoolean(type5_selection_isa_tmp[1]);
+            type5_start_isa = Convert.ToString(type5_selection_isa_tmp[2]);
+            type5_end_isa = Convert.ToString(type5_selection_isa_tmp[3]);
 
             reader.Close();
 
