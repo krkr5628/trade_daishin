@@ -237,7 +237,6 @@ namespace WindowsFormsApp1
             this.real_id_text = new System.Windows.Forms.TextBox();
             this.groupBox13 = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel21 = new System.Windows.Forms.TableLayoutPanel();
-            this.tableLayoutPanel26 = new System.Windows.Forms.TableLayoutPanel();
             this.type4_isa_end = new System.Windows.Forms.TextBox();
             this.type4_isa_start = new System.Windows.Forms.TextBox();
             this.type4_selection_isa = new System.Windows.Forms.CheckBox();
@@ -254,7 +253,6 @@ namespace WindowsFormsApp1
             this.dual_index = new System.Windows.Forms.CheckBox();
             this.type1_isa_start = new System.Windows.Forms.TextBox();
             this.type1_isa_end = new System.Windows.Forms.TextBox();
-            this.tableLayoutPanel25 = new System.Windows.Forms.TableLayoutPanel();
             this.type2_isa_end = new System.Windows.Forms.TextBox();
             this.type2_isa_start = new System.Windows.Forms.TextBox();
             this.type2_selection_isa = new System.Windows.Forms.CheckBox();
@@ -296,10 +294,8 @@ namespace WindowsFormsApp1
             this.tableLayoutPanel20.SuspendLayout();
             this.groupBox13.SuspendLayout();
             this.tableLayoutPanel21.SuspendLayout();
-            this.tableLayoutPanel26.SuspendLayout();
             this.tableLayoutPanel24.SuspendLayout();
             this.tableLayoutPanel23.SuspendLayout();
-            this.tableLayoutPanel25.SuspendLayout();
             this.SuspendLayout();
             // 
             // buy_per_price
@@ -782,7 +778,7 @@ namespace WindowsFormsApp1
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.90253F));
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15.43321F));
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.53069F));
-            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 217F));
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 220F));
             this.tableLayoutPanel5.Controls.Add(this.setting_allowed, 4, 0);
             this.tableLayoutPanel5.Controls.Add(this.setting_open, 3, 0);
             this.tableLayoutPanel5.Controls.Add(this.save_button, 2, 0);
@@ -803,7 +799,7 @@ namespace WindowsFormsApp1
             this.setting_allowed.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.setting_allowed.Font = new System.Drawing.Font("굴림", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.setting_allowed.ForeColor = System.Drawing.Color.SpringGreen;
-            this.setting_allowed.Location = new System.Drawing.Point(665, 2);
+            this.setting_allowed.Location = new System.Drawing.Point(663, 2);
             this.setting_allowed.Margin = new System.Windows.Forms.Padding(2);
             this.setting_allowed.Name = "setting_allowed";
             this.setting_allowed.Size = new System.Drawing.Size(103, 29);
@@ -816,7 +812,7 @@ namespace WindowsFormsApp1
             this.setting_open.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.setting_open.Font = new System.Drawing.Font("굴림", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.setting_open.ForeColor = System.Drawing.Color.SpringGreen;
-            this.setting_open.Location = new System.Drawing.Point(569, 2);
+            this.setting_open.Location = new System.Drawing.Point(567, 2);
             this.setting_open.Margin = new System.Windows.Forms.Padding(2);
             this.setting_open.Name = "setting_open";
             this.setting_open.Size = new System.Drawing.Size(92, 29);
@@ -829,7 +825,7 @@ namespace WindowsFormsApp1
             this.save_button.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.save_button.Font = new System.Drawing.Font("굴림", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.save_button.ForeColor = System.Drawing.Color.SpringGreen;
-            this.save_button.Location = new System.Drawing.Point(467, 2);
+            this.save_button.Location = new System.Drawing.Point(465, 2);
             this.save_button.Margin = new System.Windows.Forms.Padding(2);
             this.save_button.Name = "save_button";
             this.save_button.Size = new System.Drawing.Size(98, 29);
@@ -842,11 +838,11 @@ namespace WindowsFormsApp1
             this.setting_name.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.setting_name.Location = new System.Drawing.Point(129, 2);
+            this.setting_name.Location = new System.Drawing.Point(128, 2);
             this.setting_name.Margin = new System.Windows.Forms.Padding(2);
             this.setting_name.Name = "setting_name";
             this.setting_name.ReadOnly = true;
-            this.setting_name.Size = new System.Drawing.Size(334, 21);
+            this.setting_name.Size = new System.Drawing.Size(333, 21);
             this.setting_name.TabIndex = 1;
             // 
             // label5
@@ -859,7 +855,7 @@ namespace WindowsFormsApp1
             this.label5.Location = new System.Drawing.Point(2, 0);
             this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(123, 33);
+            this.label5.Size = new System.Drawing.Size(122, 33);
             this.label5.TabIndex = 9;
             this.label5.Text = "전략명";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -3189,53 +3185,24 @@ namespace WindowsFormsApp1
             // 
             this.tableLayoutPanel21.ColumnCount = 1;
             this.tableLayoutPanel21.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel21.Controls.Add(this.tableLayoutPanel26, 0, 3);
             this.tableLayoutPanel21.Controls.Add(this.tableLayoutPanel24, 0, 0);
             this.tableLayoutPanel21.Controls.Add(this.tableLayoutPanel23, 0, 1);
-            this.tableLayoutPanel21.Controls.Add(this.tableLayoutPanel25, 0, 2);
             this.tableLayoutPanel21.Location = new System.Drawing.Point(2, 18);
             this.tableLayoutPanel21.Name = "tableLayoutPanel21";
-            this.tableLayoutPanel21.RowCount = 4;
-            this.tableLayoutPanel21.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel21.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel21.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel21.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel21.RowCount = 2;
+            this.tableLayoutPanel21.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 28.45528F));
+            this.tableLayoutPanel21.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 71.54472F));
             this.tableLayoutPanel21.Size = new System.Drawing.Size(474, 123);
             this.tableLayoutPanel21.TabIndex = 0;
-            // 
-            // tableLayoutPanel26
-            // 
-            this.tableLayoutPanel26.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tableLayoutPanel26.ColumnCount = 6;
-            this.tableLayoutPanel26.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
-            this.tableLayoutPanel26.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
-            this.tableLayoutPanel26.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
-            this.tableLayoutPanel26.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
-            this.tableLayoutPanel26.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
-            this.tableLayoutPanel26.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
-            this.tableLayoutPanel26.Controls.Add(this.type4_isa_end, 0, 0);
-            this.tableLayoutPanel26.Controls.Add(this.type4_isa_start, 0, 0);
-            this.tableLayoutPanel26.Controls.Add(this.type4_selection_isa, 0, 0);
-            this.tableLayoutPanel26.Controls.Add(this.type5_selection_isa, 3, 0);
-            this.tableLayoutPanel26.Controls.Add(this.type5_isa_start, 4, 0);
-            this.tableLayoutPanel26.Controls.Add(this.type5_isa_end, 5, 0);
-            this.tableLayoutPanel26.Location = new System.Drawing.Point(3, 93);
-            this.tableLayoutPanel26.Name = "tableLayoutPanel26";
-            this.tableLayoutPanel26.RowCount = 1;
-            this.tableLayoutPanel26.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel26.Size = new System.Drawing.Size(468, 27);
-            this.tableLayoutPanel26.TabIndex = 7;
             // 
             // type4_isa_end
             // 
             this.type4_isa_end.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.type4_isa_end.Location = new System.Drawing.Point(157, 3);
+            this.type4_isa_end.Location = new System.Drawing.Point(89, 57);
             this.type4_isa_end.Name = "type4_isa_end";
-            this.type4_isa_end.Size = new System.Drawing.Size(71, 21);
+            this.type4_isa_end.Size = new System.Drawing.Size(70, 21);
             this.type4_isa_end.TabIndex = 6;
             // 
             // type4_isa_start
@@ -3243,9 +3210,9 @@ namespace WindowsFormsApp1
             this.type4_isa_start.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.type4_isa_start.Location = new System.Drawing.Point(80, 3);
+            this.type4_isa_start.Location = new System.Drawing.Point(165, 57);
             this.type4_isa_start.Name = "type4_isa_start";
-            this.type4_isa_start.Size = new System.Drawing.Size(71, 21);
+            this.type4_isa_start.Size = new System.Drawing.Size(67, 21);
             this.type4_isa_start.TabIndex = 5;
             // 
             // type4_selection_isa
@@ -3256,9 +3223,9 @@ namespace WindowsFormsApp1
             this.type4_selection_isa.AutoSize = true;
             this.type4_selection_isa.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.type4_selection_isa.Font = new System.Drawing.Font("굴림", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.type4_selection_isa.Location = new System.Drawing.Point(3, 3);
+            this.type4_selection_isa.Location = new System.Drawing.Point(3, 57);
             this.type4_selection_isa.Name = "type4_selection_isa";
-            this.type4_selection_isa.Size = new System.Drawing.Size(71, 21);
+            this.type4_selection_isa.Size = new System.Drawing.Size(80, 23);
             this.type4_selection_isa.TabIndex = 4;
             this.type4_selection_isa.Text = "#4";
             this.type4_selection_isa.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -3272,9 +3239,9 @@ namespace WindowsFormsApp1
             this.type5_selection_isa.AutoSize = true;
             this.type5_selection_isa.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.type5_selection_isa.Font = new System.Drawing.Font("굴림", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.type5_selection_isa.Location = new System.Drawing.Point(234, 3);
+            this.type5_selection_isa.Location = new System.Drawing.Point(238, 57);
             this.type5_selection_isa.Name = "type5_selection_isa";
-            this.type5_selection_isa.Size = new System.Drawing.Size(71, 21);
+            this.type5_selection_isa.Size = new System.Drawing.Size(72, 23);
             this.type5_selection_isa.TabIndex = 0;
             this.type5_selection_isa.Text = "#5";
             this.type5_selection_isa.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -3285,7 +3252,7 @@ namespace WindowsFormsApp1
             this.type5_isa_start.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.type5_isa_start.Location = new System.Drawing.Point(311, 3);
+            this.type5_isa_start.Location = new System.Drawing.Point(316, 57);
             this.type5_isa_start.Name = "type5_isa_start";
             this.type5_isa_start.Size = new System.Drawing.Size(71, 21);
             this.type5_isa_start.TabIndex = 2;
@@ -3295,9 +3262,9 @@ namespace WindowsFormsApp1
             this.type5_isa_end.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.type5_isa_end.Location = new System.Drawing.Point(388, 3);
+            this.type5_isa_end.Location = new System.Drawing.Point(393, 57);
             this.type5_isa_end.Name = "type5_isa_end";
-            this.type5_isa_end.Size = new System.Drawing.Size(77, 21);
+            this.type5_isa_end.Size = new System.Drawing.Size(72, 21);
             this.type5_isa_end.TabIndex = 3;
             // 
             // tableLayoutPanel24
@@ -3318,7 +3285,7 @@ namespace WindowsFormsApp1
             this.tableLayoutPanel24.Name = "tableLayoutPanel24";
             this.tableLayoutPanel24.RowCount = 1;
             this.tableLayoutPanel24.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel24.Size = new System.Drawing.Size(468, 24);
+            this.tableLayoutPanel24.Size = new System.Drawing.Size(468, 28);
             this.tableLayoutPanel24.TabIndex = 1;
             // 
             // Dual_Time_Stop
@@ -3339,10 +3306,10 @@ namespace WindowsFormsApp1
             this.Dual_Time.AutoSize = true;
             this.Dual_Time.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.Dual_Time.Font = new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.Dual_Time.ForeColor = System.Drawing.Color.Crimson;
+            this.Dual_Time.ForeColor = System.Drawing.Color.DarkOliveGreen;
             this.Dual_Time.Location = new System.Drawing.Point(3, 3);
             this.Dual_Time.Name = "Dual_Time";
-            this.Dual_Time.Size = new System.Drawing.Size(110, 18);
+            this.Dual_Time.Size = new System.Drawing.Size(110, 22);
             this.Dual_Time.TabIndex = 4;
             this.Dual_Time.Text = "ISA매수시간";
             this.Dual_Time.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -3357,7 +3324,7 @@ namespace WindowsFormsApp1
             this.label24.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.label24.Location = new System.Drawing.Point(270, 0);
             this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(33, 24);
+            this.label24.Size = new System.Drawing.Size(33, 28);
             this.label24.TabIndex = 0;
             this.label24.Text = "~";
             this.label24.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -3378,21 +3345,35 @@ namespace WindowsFormsApp1
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tableLayoutPanel23.ColumnCount = 6;
-            this.tableLayoutPanel23.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 24.57265F));
-            this.tableLayoutPanel23.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 8.760684F));
+            this.tableLayoutPanel23.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 18.37607F));
+            this.tableLayoutPanel23.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.23932F));
+            this.tableLayoutPanel23.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15.59829F));
             this.tableLayoutPanel23.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
-            this.tableLayoutPanel23.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
-            this.tableLayoutPanel23.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
-            this.tableLayoutPanel23.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+            this.tableLayoutPanel23.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.45299F));
+            this.tableLayoutPanel23.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.23932F));
+            this.tableLayoutPanel23.Controls.Add(this.type3_isa_end, 5, 1);
+            this.tableLayoutPanel23.Controls.Add(this.type3_isa_start, 4, 1);
+            this.tableLayoutPanel23.Controls.Add(this.type3_selection_isa, 3, 1);
+            this.tableLayoutPanel23.Controls.Add(this.type2_isa_end, 2, 1);
+            this.tableLayoutPanel23.Controls.Add(this.type5_isa_end, 5, 2);
+            this.tableLayoutPanel23.Controls.Add(this.type2_isa_start, 1, 1);
+            this.tableLayoutPanel23.Controls.Add(this.type5_isa_start, 4, 2);
+            this.tableLayoutPanel23.Controls.Add(this.type2_selection_isa, 0, 1);
+            this.tableLayoutPanel23.Controls.Add(this.type4_selection_isa, 0, 2);
             this.tableLayoutPanel23.Controls.Add(this.type1_selection_isa, 3, 0);
+            this.tableLayoutPanel23.Controls.Add(this.type4_isa_start, 2, 2);
             this.tableLayoutPanel23.Controls.Add(this.dual_index, 0, 0);
+            this.tableLayoutPanel23.Controls.Add(this.type4_isa_end, 1, 2);
             this.tableLayoutPanel23.Controls.Add(this.type1_isa_start, 4, 0);
             this.tableLayoutPanel23.Controls.Add(this.type1_isa_end, 5, 0);
-            this.tableLayoutPanel23.Location = new System.Drawing.Point(3, 33);
+            this.tableLayoutPanel23.Controls.Add(this.type5_selection_isa, 3, 2);
+            this.tableLayoutPanel23.Location = new System.Drawing.Point(3, 37);
             this.tableLayoutPanel23.Name = "tableLayoutPanel23";
-            this.tableLayoutPanel23.RowCount = 1;
-            this.tableLayoutPanel23.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel23.Size = new System.Drawing.Size(468, 24);
+            this.tableLayoutPanel23.RowCount = 3;
+            this.tableLayoutPanel23.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel23.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel23.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel23.Size = new System.Drawing.Size(468, 83);
             this.tableLayoutPanel23.TabIndex = 2;
             // 
             // type1_selection_isa
@@ -3403,9 +3384,9 @@ namespace WindowsFormsApp1
             this.type1_selection_isa.AutoSize = true;
             this.type1_selection_isa.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.type1_selection_isa.Font = new System.Drawing.Font("굴림", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.type1_selection_isa.Location = new System.Drawing.Point(234, 3);
+            this.type1_selection_isa.Location = new System.Drawing.Point(238, 3);
             this.type1_selection_isa.Name = "type1_selection_isa";
-            this.type1_selection_isa.Size = new System.Drawing.Size(71, 18);
+            this.type1_selection_isa.Size = new System.Drawing.Size(72, 21);
             this.type1_selection_isa.TabIndex = 0;
             this.type1_selection_isa.Text = "#1";
             this.type1_selection_isa.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -3418,9 +3399,11 @@ namespace WindowsFormsApp1
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dual_index.AutoSize = true;
             this.dual_index.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.dual_index.Font = new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.dual_index.ForeColor = System.Drawing.Color.DarkOliveGreen;
             this.dual_index.Location = new System.Drawing.Point(3, 3);
             this.dual_index.Name = "dual_index";
-            this.dual_index.Size = new System.Drawing.Size(108, 18);
+            this.dual_index.Size = new System.Drawing.Size(80, 21);
             this.dual_index.TabIndex = 1;
             this.dual_index.Text = "지수연동";
             this.dual_index.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -3431,7 +3414,7 @@ namespace WindowsFormsApp1
             this.type1_isa_start.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.type1_isa_start.Location = new System.Drawing.Point(311, 3);
+            this.type1_isa_start.Location = new System.Drawing.Point(316, 3);
             this.type1_isa_start.Name = "type1_isa_start";
             this.type1_isa_start.Size = new System.Drawing.Size(71, 21);
             this.type1_isa_start.TabIndex = 2;
@@ -3441,44 +3424,19 @@ namespace WindowsFormsApp1
             this.type1_isa_end.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.type1_isa_end.Location = new System.Drawing.Point(388, 3);
+            this.type1_isa_end.Location = new System.Drawing.Point(393, 3);
             this.type1_isa_end.Name = "type1_isa_end";
-            this.type1_isa_end.Size = new System.Drawing.Size(77, 21);
+            this.type1_isa_end.Size = new System.Drawing.Size(72, 21);
             this.type1_isa_end.TabIndex = 3;
-            // 
-            // tableLayoutPanel25
-            // 
-            this.tableLayoutPanel25.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tableLayoutPanel25.ColumnCount = 6;
-            this.tableLayoutPanel25.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
-            this.tableLayoutPanel25.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
-            this.tableLayoutPanel25.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
-            this.tableLayoutPanel25.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
-            this.tableLayoutPanel25.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
-            this.tableLayoutPanel25.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
-            this.tableLayoutPanel25.Controls.Add(this.type2_isa_end, 0, 0);
-            this.tableLayoutPanel25.Controls.Add(this.type2_isa_start, 0, 0);
-            this.tableLayoutPanel25.Controls.Add(this.type2_selection_isa, 0, 0);
-            this.tableLayoutPanel25.Controls.Add(this.type3_selection_isa, 3, 0);
-            this.tableLayoutPanel25.Controls.Add(this.type3_isa_start, 4, 0);
-            this.tableLayoutPanel25.Controls.Add(this.type3_isa_end, 5, 0);
-            this.tableLayoutPanel25.Location = new System.Drawing.Point(3, 63);
-            this.tableLayoutPanel25.Name = "tableLayoutPanel25";
-            this.tableLayoutPanel25.RowCount = 1;
-            this.tableLayoutPanel25.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel25.Size = new System.Drawing.Size(468, 24);
-            this.tableLayoutPanel25.TabIndex = 3;
             // 
             // type2_isa_end
             // 
             this.type2_isa_end.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.type2_isa_end.Location = new System.Drawing.Point(157, 3);
+            this.type2_isa_end.Location = new System.Drawing.Point(165, 30);
             this.type2_isa_end.Name = "type2_isa_end";
-            this.type2_isa_end.Size = new System.Drawing.Size(71, 21);
+            this.type2_isa_end.Size = new System.Drawing.Size(67, 21);
             this.type2_isa_end.TabIndex = 6;
             // 
             // type2_isa_start
@@ -3486,9 +3444,9 @@ namespace WindowsFormsApp1
             this.type2_isa_start.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.type2_isa_start.Location = new System.Drawing.Point(80, 3);
+            this.type2_isa_start.Location = new System.Drawing.Point(89, 30);
             this.type2_isa_start.Name = "type2_isa_start";
-            this.type2_isa_start.Size = new System.Drawing.Size(71, 21);
+            this.type2_isa_start.Size = new System.Drawing.Size(70, 21);
             this.type2_isa_start.TabIndex = 5;
             // 
             // type2_selection_isa
@@ -3499,9 +3457,9 @@ namespace WindowsFormsApp1
             this.type2_selection_isa.AutoSize = true;
             this.type2_selection_isa.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.type2_selection_isa.Font = new System.Drawing.Font("굴림", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.type2_selection_isa.Location = new System.Drawing.Point(3, 3);
+            this.type2_selection_isa.Location = new System.Drawing.Point(3, 30);
             this.type2_selection_isa.Name = "type2_selection_isa";
-            this.type2_selection_isa.Size = new System.Drawing.Size(71, 18);
+            this.type2_selection_isa.Size = new System.Drawing.Size(80, 21);
             this.type2_selection_isa.TabIndex = 4;
             this.type2_selection_isa.Text = "#2";
             this.type2_selection_isa.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -3515,9 +3473,9 @@ namespace WindowsFormsApp1
             this.type3_selection_isa.AutoSize = true;
             this.type3_selection_isa.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.type3_selection_isa.Font = new System.Drawing.Font("굴림", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.type3_selection_isa.Location = new System.Drawing.Point(234, 3);
+            this.type3_selection_isa.Location = new System.Drawing.Point(238, 30);
             this.type3_selection_isa.Name = "type3_selection_isa";
-            this.type3_selection_isa.Size = new System.Drawing.Size(71, 18);
+            this.type3_selection_isa.Size = new System.Drawing.Size(72, 21);
             this.type3_selection_isa.TabIndex = 0;
             this.type3_selection_isa.Text = "#3";
             this.type3_selection_isa.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -3528,7 +3486,7 @@ namespace WindowsFormsApp1
             this.type3_isa_start.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.type3_isa_start.Location = new System.Drawing.Point(311, 3);
+            this.type3_isa_start.Location = new System.Drawing.Point(316, 30);
             this.type3_isa_start.Name = "type3_isa_start";
             this.type3_isa_start.Size = new System.Drawing.Size(71, 21);
             this.type3_isa_start.TabIndex = 2;
@@ -3538,9 +3496,9 @@ namespace WindowsFormsApp1
             this.type3_isa_end.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.type3_isa_end.Location = new System.Drawing.Point(388, 3);
+            this.type3_isa_end.Location = new System.Drawing.Point(393, 30);
             this.type3_isa_end.Name = "type3_isa_end";
-            this.type3_isa_end.Size = new System.Drawing.Size(77, 21);
+            this.type3_isa_end.Size = new System.Drawing.Size(72, 21);
             this.type3_isa_end.TabIndex = 3;
             // 
             // Setting
@@ -3623,14 +3581,10 @@ namespace WindowsFormsApp1
             this.tableLayoutPanel20.PerformLayout();
             this.groupBox13.ResumeLayout(false);
             this.tableLayoutPanel21.ResumeLayout(false);
-            this.tableLayoutPanel26.ResumeLayout(false);
-            this.tableLayoutPanel26.PerformLayout();
             this.tableLayoutPanel24.ResumeLayout(false);
             this.tableLayoutPanel24.PerformLayout();
             this.tableLayoutPanel23.ResumeLayout(false);
             this.tableLayoutPanel23.PerformLayout();
-            this.tableLayoutPanel25.ResumeLayout(false);
-            this.tableLayoutPanel25.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -3844,7 +3798,6 @@ namespace WindowsFormsApp1
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel21;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel26;
         private System.Windows.Forms.TextBox type4_isa_end;
         private System.Windows.Forms.TextBox type4_isa_start;
         private System.Windows.Forms.CheckBox type4_selection_isa;
@@ -3861,7 +3814,6 @@ namespace WindowsFormsApp1
         private System.Windows.Forms.CheckBox dual_index;
         private System.Windows.Forms.TextBox type1_isa_start;
         private System.Windows.Forms.TextBox type1_isa_end;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel25;
         private System.Windows.Forms.TextBox type2_isa_end;
         private System.Windows.Forms.TextBox type2_isa_start;
         private System.Windows.Forms.CheckBox type2_selection_isa;
