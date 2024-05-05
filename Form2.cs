@@ -838,7 +838,7 @@ namespace WindowsFormsApp1
             buy_condition_end.Text = buy_condition_tmp[3];
             buy_condition_index.Checked = Convert.ToBoolean(buy_condition_tmp[4]);
             //
-            if (!buy_condition_tmp[4].Equals("9999"))
+            if (!buy_condition_tmp[5].Equals("9999"))
             {
                 string[] Selectedtext_temp = buy_condition_tmp[5].Split(',');
                 string SelectedIndexTextJoin_temp = "";
