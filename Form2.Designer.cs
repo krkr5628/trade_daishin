@@ -237,28 +237,28 @@ namespace WindowsFormsApp1
             this.real_id_text = new System.Windows.Forms.TextBox();
             this.groupBox13 = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel21 = new System.Windows.Forms.TableLayoutPanel();
-            this.type4_isa_end = new System.Windows.Forms.TextBox();
-            this.type4_isa_start = new System.Windows.Forms.TextBox();
-            this.type4_selection_isa = new System.Windows.Forms.CheckBox();
-            this.type5_selection_isa = new System.Windows.Forms.CheckBox();
-            this.type5_isa_start = new System.Windows.Forms.TextBox();
-            this.type5_isa_end = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel24 = new System.Windows.Forms.TableLayoutPanel();
             this.Dual_Time_Stop = new System.Windows.Forms.TextBox();
             this.Dual_Time = new System.Windows.Forms.CheckBox();
             this.label24 = new System.Windows.Forms.Label();
             this.Dual_Time_Start = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel23 = new System.Windows.Forms.TableLayoutPanel();
+            this.type3_isa_end = new System.Windows.Forms.TextBox();
+            this.type3_isa_start = new System.Windows.Forms.TextBox();
+            this.type3_selection_isa = new System.Windows.Forms.CheckBox();
+            this.type2_isa_end = new System.Windows.Forms.TextBox();
+            this.type5_isa_end = new System.Windows.Forms.TextBox();
+            this.type2_isa_start = new System.Windows.Forms.TextBox();
+            this.type5_isa_start = new System.Windows.Forms.TextBox();
+            this.type2_selection_isa = new System.Windows.Forms.CheckBox();
+            this.type4_selection_isa = new System.Windows.Forms.CheckBox();
             this.type1_selection_isa = new System.Windows.Forms.CheckBox();
+            this.type4_isa_start = new System.Windows.Forms.TextBox();
             this.dual_index = new System.Windows.Forms.CheckBox();
+            this.type4_isa_end = new System.Windows.Forms.TextBox();
             this.type1_isa_start = new System.Windows.Forms.TextBox();
             this.type1_isa_end = new System.Windows.Forms.TextBox();
-            this.type2_isa_end = new System.Windows.Forms.TextBox();
-            this.type2_isa_start = new System.Windows.Forms.TextBox();
-            this.type2_selection_isa = new System.Windows.Forms.CheckBox();
-            this.type3_selection_isa = new System.Windows.Forms.CheckBox();
-            this.type3_isa_start = new System.Windows.Forms.TextBox();
-            this.type3_isa_end = new System.Windows.Forms.TextBox();
+            this.type5_selection_isa = new System.Windows.Forms.CheckBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
@@ -778,7 +778,7 @@ namespace WindowsFormsApp1
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.90253F));
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15.43321F));
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.53069F));
-            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 220F));
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 224F));
             this.tableLayoutPanel5.Controls.Add(this.setting_allowed, 4, 0);
             this.tableLayoutPanel5.Controls.Add(this.setting_open, 3, 0);
             this.tableLayoutPanel5.Controls.Add(this.save_button, 2, 0);
@@ -799,7 +799,7 @@ namespace WindowsFormsApp1
             this.setting_allowed.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.setting_allowed.Font = new System.Drawing.Font("굴림", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.setting_allowed.ForeColor = System.Drawing.Color.SpringGreen;
-            this.setting_allowed.Location = new System.Drawing.Point(663, 2);
+            this.setting_allowed.Location = new System.Drawing.Point(659, 2);
             this.setting_allowed.Margin = new System.Windows.Forms.Padding(2);
             this.setting_allowed.Name = "setting_allowed";
             this.setting_allowed.Size = new System.Drawing.Size(103, 29);
@@ -812,10 +812,10 @@ namespace WindowsFormsApp1
             this.setting_open.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.setting_open.Font = new System.Drawing.Font("굴림", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.setting_open.ForeColor = System.Drawing.Color.SpringGreen;
-            this.setting_open.Location = new System.Drawing.Point(567, 2);
+            this.setting_open.Location = new System.Drawing.Point(564, 2);
             this.setting_open.Margin = new System.Windows.Forms.Padding(2);
             this.setting_open.Name = "setting_open";
-            this.setting_open.Size = new System.Drawing.Size(92, 29);
+            this.setting_open.Size = new System.Drawing.Size(91, 29);
             this.setting_open.TabIndex = 7;
             this.setting_open.Text = "전량열기";
             this.setting_open.UseVisualStyleBackColor = false;
@@ -825,10 +825,10 @@ namespace WindowsFormsApp1
             this.save_button.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.save_button.Font = new System.Drawing.Font("굴림", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.save_button.ForeColor = System.Drawing.Color.SpringGreen;
-            this.save_button.Location = new System.Drawing.Point(465, 2);
+            this.save_button.Location = new System.Drawing.Point(463, 2);
             this.save_button.Margin = new System.Windows.Forms.Padding(2);
             this.save_button.Name = "save_button";
-            this.save_button.Size = new System.Drawing.Size(98, 29);
+            this.save_button.Size = new System.Drawing.Size(97, 29);
             this.save_button.TabIndex = 6;
             this.save_button.Text = "전량저장";
             this.save_button.UseVisualStyleBackColor = false;
@@ -842,7 +842,7 @@ namespace WindowsFormsApp1
             this.setting_name.Margin = new System.Windows.Forms.Padding(2);
             this.setting_name.Name = "setting_name";
             this.setting_name.ReadOnly = true;
-            this.setting_name.Size = new System.Drawing.Size(333, 21);
+            this.setting_name.Size = new System.Drawing.Size(331, 21);
             this.setting_name.TabIndex = 1;
             // 
             // label5
@@ -3195,78 +3195,6 @@ namespace WindowsFormsApp1
             this.tableLayoutPanel21.Size = new System.Drawing.Size(474, 123);
             this.tableLayoutPanel21.TabIndex = 0;
             // 
-            // type4_isa_end
-            // 
-            this.type4_isa_end.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.type4_isa_end.Location = new System.Drawing.Point(89, 57);
-            this.type4_isa_end.Name = "type4_isa_end";
-            this.type4_isa_end.Size = new System.Drawing.Size(70, 21);
-            this.type4_isa_end.TabIndex = 6;
-            // 
-            // type4_isa_start
-            // 
-            this.type4_isa_start.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.type4_isa_start.Location = new System.Drawing.Point(165, 57);
-            this.type4_isa_start.Name = "type4_isa_start";
-            this.type4_isa_start.Size = new System.Drawing.Size(67, 21);
-            this.type4_isa_start.TabIndex = 5;
-            // 
-            // type4_selection_isa
-            // 
-            this.type4_selection_isa.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.type4_selection_isa.AutoSize = true;
-            this.type4_selection_isa.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.type4_selection_isa.Font = new System.Drawing.Font("굴림", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.type4_selection_isa.Location = new System.Drawing.Point(3, 57);
-            this.type4_selection_isa.Name = "type4_selection_isa";
-            this.type4_selection_isa.Size = new System.Drawing.Size(80, 23);
-            this.type4_selection_isa.TabIndex = 4;
-            this.type4_selection_isa.Text = "#4";
-            this.type4_selection_isa.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.type4_selection_isa.UseVisualStyleBackColor = false;
-            // 
-            // type5_selection_isa
-            // 
-            this.type5_selection_isa.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.type5_selection_isa.AutoSize = true;
-            this.type5_selection_isa.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.type5_selection_isa.Font = new System.Drawing.Font("굴림", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.type5_selection_isa.Location = new System.Drawing.Point(238, 57);
-            this.type5_selection_isa.Name = "type5_selection_isa";
-            this.type5_selection_isa.Size = new System.Drawing.Size(72, 23);
-            this.type5_selection_isa.TabIndex = 0;
-            this.type5_selection_isa.Text = "#5";
-            this.type5_selection_isa.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.type5_selection_isa.UseVisualStyleBackColor = false;
-            // 
-            // type5_isa_start
-            // 
-            this.type5_isa_start.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.type5_isa_start.Location = new System.Drawing.Point(316, 57);
-            this.type5_isa_start.Name = "type5_isa_start";
-            this.type5_isa_start.Size = new System.Drawing.Size(71, 21);
-            this.type5_isa_start.TabIndex = 2;
-            // 
-            // type5_isa_end
-            // 
-            this.type5_isa_end.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.type5_isa_end.Location = new System.Drawing.Point(393, 57);
-            this.type5_isa_end.Name = "type5_isa_end";
-            this.type5_isa_end.Size = new System.Drawing.Size(72, 21);
-            this.type5_isa_end.TabIndex = 3;
-            // 
             // tableLayoutPanel24
             // 
             this.tableLayoutPanel24.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -3376,6 +3304,114 @@ namespace WindowsFormsApp1
             this.tableLayoutPanel23.Size = new System.Drawing.Size(468, 83);
             this.tableLayoutPanel23.TabIndex = 2;
             // 
+            // type3_isa_end
+            // 
+            this.type3_isa_end.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.type3_isa_end.Location = new System.Drawing.Point(393, 30);
+            this.type3_isa_end.Name = "type3_isa_end";
+            this.type3_isa_end.Size = new System.Drawing.Size(72, 21);
+            this.type3_isa_end.TabIndex = 3;
+            // 
+            // type3_isa_start
+            // 
+            this.type3_isa_start.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.type3_isa_start.Location = new System.Drawing.Point(316, 30);
+            this.type3_isa_start.Name = "type3_isa_start";
+            this.type3_isa_start.Size = new System.Drawing.Size(71, 21);
+            this.type3_isa_start.TabIndex = 2;
+            // 
+            // type3_selection_isa
+            // 
+            this.type3_selection_isa.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.type3_selection_isa.AutoSize = true;
+            this.type3_selection_isa.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.type3_selection_isa.Font = new System.Drawing.Font("굴림", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.type3_selection_isa.Location = new System.Drawing.Point(238, 30);
+            this.type3_selection_isa.Name = "type3_selection_isa";
+            this.type3_selection_isa.Size = new System.Drawing.Size(72, 21);
+            this.type3_selection_isa.TabIndex = 0;
+            this.type3_selection_isa.Text = "#3";
+            this.type3_selection_isa.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.type3_selection_isa.UseVisualStyleBackColor = false;
+            // 
+            // type2_isa_end
+            // 
+            this.type2_isa_end.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.type2_isa_end.Location = new System.Drawing.Point(165, 30);
+            this.type2_isa_end.Name = "type2_isa_end";
+            this.type2_isa_end.Size = new System.Drawing.Size(67, 21);
+            this.type2_isa_end.TabIndex = 6;
+            // 
+            // type5_isa_end
+            // 
+            this.type5_isa_end.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.type5_isa_end.Location = new System.Drawing.Point(393, 57);
+            this.type5_isa_end.Name = "type5_isa_end";
+            this.type5_isa_end.Size = new System.Drawing.Size(72, 21);
+            this.type5_isa_end.TabIndex = 3;
+            // 
+            // type2_isa_start
+            // 
+            this.type2_isa_start.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.type2_isa_start.Location = new System.Drawing.Point(89, 30);
+            this.type2_isa_start.Name = "type2_isa_start";
+            this.type2_isa_start.Size = new System.Drawing.Size(70, 21);
+            this.type2_isa_start.TabIndex = 5;
+            // 
+            // type5_isa_start
+            // 
+            this.type5_isa_start.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.type5_isa_start.Location = new System.Drawing.Point(316, 57);
+            this.type5_isa_start.Name = "type5_isa_start";
+            this.type5_isa_start.Size = new System.Drawing.Size(71, 21);
+            this.type5_isa_start.TabIndex = 2;
+            // 
+            // type2_selection_isa
+            // 
+            this.type2_selection_isa.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.type2_selection_isa.AutoSize = true;
+            this.type2_selection_isa.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.type2_selection_isa.Font = new System.Drawing.Font("굴림", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.type2_selection_isa.Location = new System.Drawing.Point(3, 30);
+            this.type2_selection_isa.Name = "type2_selection_isa";
+            this.type2_selection_isa.Size = new System.Drawing.Size(80, 21);
+            this.type2_selection_isa.TabIndex = 4;
+            this.type2_selection_isa.Text = "#2";
+            this.type2_selection_isa.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.type2_selection_isa.UseVisualStyleBackColor = false;
+            // 
+            // type4_selection_isa
+            // 
+            this.type4_selection_isa.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.type4_selection_isa.AutoSize = true;
+            this.type4_selection_isa.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.type4_selection_isa.Font = new System.Drawing.Font("굴림", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.type4_selection_isa.Location = new System.Drawing.Point(3, 57);
+            this.type4_selection_isa.Name = "type4_selection_isa";
+            this.type4_selection_isa.Size = new System.Drawing.Size(80, 23);
+            this.type4_selection_isa.TabIndex = 4;
+            this.type4_selection_isa.Text = "#4";
+            this.type4_selection_isa.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.type4_selection_isa.UseVisualStyleBackColor = false;
+            // 
             // type1_selection_isa
             // 
             this.type1_selection_isa.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -3391,6 +3427,16 @@ namespace WindowsFormsApp1
             this.type1_selection_isa.Text = "#1";
             this.type1_selection_isa.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.type1_selection_isa.UseVisualStyleBackColor = false;
+            // 
+            // type4_isa_start
+            // 
+            this.type4_isa_start.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.type4_isa_start.Location = new System.Drawing.Point(165, 57);
+            this.type4_isa_start.Name = "type4_isa_start";
+            this.type4_isa_start.Size = new System.Drawing.Size(67, 21);
+            this.type4_isa_start.TabIndex = 5;
             // 
             // dual_index
             // 
@@ -3408,6 +3454,16 @@ namespace WindowsFormsApp1
             this.dual_index.Text = "지수연동";
             this.dual_index.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.dual_index.UseVisualStyleBackColor = false;
+            // 
+            // type4_isa_end
+            // 
+            this.type4_isa_end.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.type4_isa_end.Location = new System.Drawing.Point(89, 57);
+            this.type4_isa_end.Name = "type4_isa_end";
+            this.type4_isa_end.Size = new System.Drawing.Size(70, 21);
+            this.type4_isa_end.TabIndex = 6;
             // 
             // type1_isa_start
             // 
@@ -3429,77 +3485,21 @@ namespace WindowsFormsApp1
             this.type1_isa_end.Size = new System.Drawing.Size(72, 21);
             this.type1_isa_end.TabIndex = 3;
             // 
-            // type2_isa_end
+            // type5_selection_isa
             // 
-            this.type2_isa_end.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.type5_selection_isa.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.type2_isa_end.Location = new System.Drawing.Point(165, 30);
-            this.type2_isa_end.Name = "type2_isa_end";
-            this.type2_isa_end.Size = new System.Drawing.Size(67, 21);
-            this.type2_isa_end.TabIndex = 6;
-            // 
-            // type2_isa_start
-            // 
-            this.type2_isa_start.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.type2_isa_start.Location = new System.Drawing.Point(89, 30);
-            this.type2_isa_start.Name = "type2_isa_start";
-            this.type2_isa_start.Size = new System.Drawing.Size(70, 21);
-            this.type2_isa_start.TabIndex = 5;
-            // 
-            // type2_selection_isa
-            // 
-            this.type2_selection_isa.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.type2_selection_isa.AutoSize = true;
-            this.type2_selection_isa.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.type2_selection_isa.Font = new System.Drawing.Font("굴림", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.type2_selection_isa.Location = new System.Drawing.Point(3, 30);
-            this.type2_selection_isa.Name = "type2_selection_isa";
-            this.type2_selection_isa.Size = new System.Drawing.Size(80, 21);
-            this.type2_selection_isa.TabIndex = 4;
-            this.type2_selection_isa.Text = "#2";
-            this.type2_selection_isa.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.type2_selection_isa.UseVisualStyleBackColor = false;
-            // 
-            // type3_selection_isa
-            // 
-            this.type3_selection_isa.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.type3_selection_isa.AutoSize = true;
-            this.type3_selection_isa.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.type3_selection_isa.Font = new System.Drawing.Font("굴림", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.type3_selection_isa.Location = new System.Drawing.Point(238, 30);
-            this.type3_selection_isa.Name = "type3_selection_isa";
-            this.type3_selection_isa.Size = new System.Drawing.Size(72, 21);
-            this.type3_selection_isa.TabIndex = 0;
-            this.type3_selection_isa.Text = "#3";
-            this.type3_selection_isa.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.type3_selection_isa.UseVisualStyleBackColor = false;
-            // 
-            // type3_isa_start
-            // 
-            this.type3_isa_start.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.type3_isa_start.Location = new System.Drawing.Point(316, 30);
-            this.type3_isa_start.Name = "type3_isa_start";
-            this.type3_isa_start.Size = new System.Drawing.Size(71, 21);
-            this.type3_isa_start.TabIndex = 2;
-            // 
-            // type3_isa_end
-            // 
-            this.type3_isa_end.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.type3_isa_end.Location = new System.Drawing.Point(393, 30);
-            this.type3_isa_end.Name = "type3_isa_end";
-            this.type3_isa_end.Size = new System.Drawing.Size(72, 21);
-            this.type3_isa_end.TabIndex = 3;
+            this.type5_selection_isa.AutoSize = true;
+            this.type5_selection_isa.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.type5_selection_isa.Font = new System.Drawing.Font("굴림", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.type5_selection_isa.Location = new System.Drawing.Point(238, 57);
+            this.type5_selection_isa.Name = "type5_selection_isa";
+            this.type5_selection_isa.Size = new System.Drawing.Size(72, 23);
+            this.type5_selection_isa.TabIndex = 0;
+            this.type5_selection_isa.Text = "#5";
+            this.type5_selection_isa.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.type5_selection_isa.UseVisualStyleBackColor = false;
             // 
             // Setting
             // 

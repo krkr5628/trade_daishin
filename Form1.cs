@@ -297,7 +297,7 @@ namespace WindowsFormsApp1
         {
             string[] mode = { "지정가", "시장가" };
             string[] hoo = { "5호가", "4호가", "3호가", "2호가", "1호가", "현재가", "시장가", "-1호가", "-2호가", "-3호가", "-4호가", "-5호가" };
-
+            
             //초기 세팅
             acc_text.Text = utility.setting_account_number;
             acc_isa_text.Text = utility.setting_account_number;
@@ -1094,7 +1094,7 @@ namespace WindowsFormsApp1
                 }
                 //
                 WriteLog_Stock($"[{condition_name}/편입] : {Code_name}({Code})\n");
-                telegram_message($"[{condition_name}/편입] : {Code_name}({Code})\n");
+                //telegram_message($"[{condition_name}/편입] : {Code_name}({Code})\n");
                 //
                 dtCondStock.Rows.Add(
                     gubun,
@@ -1906,6 +1906,9 @@ namespace WindowsFormsApp1
                     if (utility.before_time_deny)
                     {
                         if (t_code.CompareTo(t_start) < 0) continue;
+                        // result가 0보다 작으면 time1 < time2
+                        // result가 0이면 time1 = time2
+                        // result가 0보다 크면 time1 > time2
                     }
 
                     //중복 
@@ -1985,9 +1988,15 @@ namespace WindowsFormsApp1
         private string buy_check(string code, string code_name, string price, string time, string high, bool check, string condition_name)
         {
 
-            if(utility.buy_DUAL && utility.Dual_Time)
+            //계좌 구분 코드
+            string gubun = Master_code;
+            if (utility.buy_DUAL && condition_name.Equals(ISA_Condition))
             {
-                //매수 시간 확인
+                gubun = ISA_code;
+            }
+            //매수 시간 확인
+            if (utility.buy_DUAL && utility.Dual_Time && gubun == ISA_code)
+            {
                 TimeSpan t_code = TimeSpan.Parse(time);
                 TimeSpan t_start = TimeSpan.Parse(utility.Dual_Time_Start);
                 TimeSpan t_end = TimeSpan.Parse(utility.Dual_Time_Stop);
@@ -2002,7 +2011,6 @@ namespace WindowsFormsApp1
             }
             else
             {
-                //매수 시간 확인
                 TimeSpan t_code = TimeSpan.Parse(time);
                 TimeSpan t_start = TimeSpan.Parse(utility.buy_condition_start);
                 TimeSpan t_end = TimeSpan.Parse(utility.buy_condition_end);
@@ -2062,13 +2070,6 @@ namespace WindowsFormsApp1
             //매수 주문(1초에 5회)
             //주문 방식 구분
             string[] order_method = buy_condtion_method.Text.Split('/');
-
-            //계좌 구분 코드
-            string gubun = Master_code;
-            if (utility.buy_DUAL && condition_name.Equals(ISA_Condition))
-            {
-                gubun = ISA_code;
-            }
 
             //시장가 주문
             if (order_method[0].Equals("시장가"))
