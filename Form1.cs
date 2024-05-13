@@ -41,6 +41,7 @@ namespace WindowsFormsApp1
         private CPUTILLib.CpCybos CpCybos; //?
         private CPUTILLib.CpStockCode CpStockCode; //?
         private CPUTILLib.CpCodeMgr CpCodeMgr; //?
+        private CPUTILLib.CpUsCode CpUsCode; //해외지수
         private CPTRADELib.CpTdUtil CpTdUtil; //?
         private CPTRADELib.CpTd6033 CpTd6033; //계좌별 D+2 예수금
         private CPTRADELib.CpTdNew5331B CpTdNew5331B;//계좌별 매도 가능 수량
@@ -236,7 +237,6 @@ namespace WindowsFormsApp1
 
         //-----------------------------------------initial-------------------------------------
 
-
         //초기 Table 값 입력
         private void initial_Table()
         {
@@ -382,6 +382,7 @@ namespace WindowsFormsApp1
         {
             CpCybos = new CPUTILLib.CpCybos();
             CpTdUtil = new CPTRADELib.CpTdUtil();
+            CpUsCode = new CPUTILLib.CpUsCode(); //해외지수
             CpTd6033 = new CPTRADELib.CpTd6033(); //계좌별 D+2 예수금 현황
             CpTdNew5331B = new  CPTRADELib.CpTdNew5331B();//계좌별 매도 가능 수량
             CpTd6032 = new CPTRADELib.CpTd6032();//매도실현손익(제세금, 수수료 포함)
@@ -726,6 +727,8 @@ namespace WindowsFormsApp1
             today_profit_tax_load_seperate();
             //매매내역
             Transaction_Detail_seperate("", "");
+            //지수
+            Index_load();
             //
             Condition_load(); //조건식 로드
             //
@@ -1022,6 +1025,16 @@ namespace WindowsFormsApp1
                 }
                 dtCondStock_Transaction.AcceptChanges();
                 dataGridView3.DataSource = dtCondStock_Transaction;
+            }
+        }
+
+        //------------------------------------인덱스 목록 받기---------------------------------
+        private void Index_load()
+        {
+            var codes = CpUsCode.GetUsCodeList(USTYPE.USTYPE_UPJONG);
+            foreach(string tmp in codes)
+            {
+                WriteLog_Order(tmp+"\n");
             }
         }
 
