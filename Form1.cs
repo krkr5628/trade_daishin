@@ -1032,6 +1032,8 @@ namespace WindowsFormsApp1
         }
 
         //------------------------------------인덱스 목록 받기---------------------------------
+        //https://money2.creontrade.com/e5/mboard/ptype_basic/HTS_Plus_Helper/DW_Basic_Read_Page.aspx?boardseq=284&seq=12&page=1&searchString=CpUtil&p=8841&v=8643&m=9505
+        //https://money2.creontrade.com/e5/mboard/ptype_basic/HTS_Plus_Helper/DW_Basic_Read_Page.aspx?boardseq=284&seq=91&page=2&searchString=%ec%a7%80%ec%88%98&p=8841&v=8643&m=9505
         private void Index_load()
         {
             //.DJI SPX COMP
@@ -1045,20 +1047,53 @@ namespace WindowsFormsApp1
             //
             CpFore8312.SetInputValue(0, ".DJI");
             CpFore8312.SetInputValue(1, '2');
-            CpFore8312.SetInputValue(2, 3);
+            CpFore8312.SetInputValue(2, 2);
             //
             int result = CpFore8312.BlockRequest();
             //
             if (result == 0)
             {
-
                 string tmp = CpFore8312.GetHeaderValue(0);//해외지수코드 => string
-                int tmp2 = (int)CpFore8312.GetHeaderValue(2);//데이터수 => short
                 string tmp3 = CpFore8312.GetHeaderValue(3);//심볼명 => string
                 float tmp4 = CpFore8312.GetHeaderValue(4);//현재가 => long
                 float tmp5 = CpFore8312.GetHeaderValue(6);//등락률 => float
                 int tmp6 = CpFore8312.GetHeaderValue(13);//거래일자 => long
-                WriteLog_Order($"{tmp}/{tmp2.ToString()}/{tmp3}/{tmp4.ToString()}/{tmp5.ToString()}/{tmp6.ToString()}\n");
+                WriteLog_System($"{tmp}/{tmp3}/{tmp4.ToString()}/{tmp5.ToString()}/{tmp6.ToString()}\n");
+                dow_index.Text = tmp5.ToString();
+            }
+            //
+            CpFore8312.SetInputValue(0, "SPX");
+            CpFore8312.SetInputValue(1, '2');
+            CpFore8312.SetInputValue(2, 2);
+            //
+            int result2 = CpFore8312.BlockRequest();
+            //
+            if (result2 == 0)
+            {
+                string tmp = CpFore8312.GetHeaderValue(0);//해외지수코드 => string
+                string tmp3 = CpFore8312.GetHeaderValue(3);//심볼명 => string
+                float tmp4 = CpFore8312.GetHeaderValue(4);//현재가 => long
+                float tmp5 = CpFore8312.GetHeaderValue(6);//등락률 => float
+                int tmp6 = CpFore8312.GetHeaderValue(13);//거래일자 => long
+                WriteLog_System($"{tmp}/{tmp3}/{tmp4.ToString()}/{tmp5.ToString()}/{tmp6.ToString()}\n");
+                sp_index.Text = tmp5.ToString();
+            }
+            //
+            CpFore8312.SetInputValue(0, "COMP");
+            CpFore8312.SetInputValue(1, '2');
+            CpFore8312.SetInputValue(2, 2);
+            //
+            int result3 = CpFore8312.BlockRequest();
+            //
+            if (result3 == 0)
+            {
+                string tmp = CpFore8312.GetHeaderValue(0);//해외지수코드 => string
+                string tmp3 = CpFore8312.GetHeaderValue(3);//심볼명 => string
+                float tmp4 = CpFore8312.GetHeaderValue(4);//현재가 => long
+                float tmp5 = CpFore8312.GetHeaderValue(6);//등락률 => float
+                int tmp6 = CpFore8312.GetHeaderValue(13);//거래일자 => long
+                WriteLog_System($"{tmp}/{tmp3}/{tmp4.ToString()}/{tmp5.ToString()}/{tmp6.ToString()}\n");
+                nasdaq_index.Text = tmp5.ToString();
             }
         }
 
