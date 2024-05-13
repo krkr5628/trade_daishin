@@ -41,7 +41,8 @@ namespace WindowsFormsApp1
         private CPUTILLib.CpCybos CpCybos; //?
         private CPUTILLib.CpStockCode CpStockCode; //?
         private CPUTILLib.CpCodeMgr CpCodeMgr; //?
-        private CPUTILLib.CpUsCode CpUsCode; //해외지수
+        private CPUTILLib.CpUsCode CpUsCode; //해외지수 목록
+        private DSCBO1Lib.CpFore8312 CpFore8312; //해외지수 수신
         private CPTRADELib.CpTdUtil CpTdUtil; //?
         private CPTRADELib.CpTd6033 CpTd6033; //계좌별 D+2 예수금
         private CPTRADELib.CpTdNew5331B CpTdNew5331B;//계좌별 매도 가능 수량
@@ -387,6 +388,8 @@ namespace WindowsFormsApp1
             CpTdNew5331B = new  CPTRADELib.CpTdNew5331B();//계좌별 매도 가능 수량
             CpTd6032 = new CPTRADELib.CpTd6032();//매도실현손익(제세금, 수수료 포함)
             CpTd5341 = new CPTRADELib.CpTd5341(); //매매내역
+            CpUsCode = new CPUTILLib.CpUsCode(); //해외지수
+            CpFore8312 = new DSCBO1Lib.CpFore8312(); //해외지수 수신
             CssStgList = new CPSYSDIBLib.CssStgList(); //조건식 받기
             //CssWatchStgControl = new CPSYSDIBLib.CssWatchStgControl(); // 실시간 조건식 등록 및 해제
             CssStgFind = new CPSYSDIBLib.CssStgFind(); //초기 종목 검색 리스트
@@ -1031,10 +1034,31 @@ namespace WindowsFormsApp1
         //------------------------------------인덱스 목록 받기---------------------------------
         private void Index_load()
         {
-            var codes = CpUsCode.GetUsCodeList(USTYPE.USTYPE_UPJONG);
+            //.DJI SPX COMP
+            /*
+            var codes = CpUsCode.GetUsCodeList(USTYPE.USTYPE_COUNTRY);
             foreach(string tmp in codes)
             {
                 WriteLog_Order(tmp+"\n");
+            }
+            */
+            //
+            CpFore8312.SetInputValue(0, ".DJI");
+            CpFore8312.SetInputValue(1, '2');
+            CpFore8312.SetInputValue(2, 3);
+            //
+            int result = CpFore8312.BlockRequest();
+            //
+            if (result == 0)
+            {
+
+                string tmp = CpFore8312.GetHeaderValue(0);//해외지수코드 => string
+                int tmp2 = (int)CpFore8312.GetHeaderValue(2);//데이터수 => short
+                string tmp3 = CpFore8312.GetHeaderValue(3);//심볼명 => string
+                float tmp4 = CpFore8312.GetHeaderValue(4);//현재가 => long
+                float tmp5 = CpFore8312.GetHeaderValue(6);//등락률 => float
+                int tmp6 = CpFore8312.GetHeaderValue(13);//거래일자 => long
+                WriteLog_Order($"{tmp}/{tmp2.ToString()}/{tmp3}/{tmp4.ToString()}/{tmp5.ToString()}/{tmp6.ToString()}\n");
             }
         }
 
