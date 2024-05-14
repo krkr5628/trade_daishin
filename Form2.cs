@@ -104,10 +104,6 @@ namespace WindowsFormsApp1
             term_for_sell.CheckedChanged += HandleCheckedChanged;
             term_for_non_buy.CheckedChanged += HandleCheckedChanged;
             term_for_non_sell.CheckedChanged += HandleCheckedChanged;
-            dow_index.CheckedChanged += HandleCheckedChanged;
-            nasdaq_index.CheckedChanged += HandleCheckedChanged;
-            kospi_commodity.CheckedChanged += HandleCheckedChanged;
-            kosdak_commodity.CheckedChanged += HandleCheckedChanged;
         }
 
         //----------------------------미사용 항목 경고창----------------------------------------

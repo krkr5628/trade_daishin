@@ -1040,89 +1040,10 @@ namespace WindowsFormsApp1
         //------------------------------------인덱스 목록 받기---------------------------------        
         private void Index_load()
         {
-            KOR_INDEX();
             US_INDEX();
-        }
-
-        //https://money2.creontrade.com/e5/mboard/ptype_basic/HTS_Plus_Helper/DW_Basic_Read_Page.aspx?boardseq=284&seq=6&page=5&searchString=%ec%84%a0%eb%ac%bc&p=8841&v=8643&m=9505
-        //https://money2.creontrade.com/e5/mboard/ptype_basic/HTS_Plus_Helper/DW_Basic_Read_Page.aspx?boardseq=287&seq=9&page=1&searchString=&p=&v=&m=
-        //https://money2.creontrade.com/e5/mboard/ptype_basic/HTS_Plus_Helper/DW_Basic_Read_Page.aspx?boardseq=284&seq=105&page=3&searchString=%ec%84%a0%eb%ac%bc&p=8841&v=8643&m=9505
-        private void KOR_INDEX()
-        {
-            //KOSPI 200 OPTIONS
-
-            //시간확인
-            string time = DateTime.Now.ToString("yyyyMMdd");
-            WriteLog_Order($"{time}\n");
-
-            //받아올 값 목록
-            int[] items = { 0, 1, 4, 5 }; //날짜,시간,저가,종가
-
-            //월물확인
-            string sCode1 = cpFuture.GetData(0, (short)0);
-            string sName1 = cpFuture.GetData(1, (short)0);
-            WriteLog_Order($"코스피최근월물 : {sCode1}/{sName1}\n");
-
-            string sCode2 = cpFuture.GetData(0, (short)2);
-            string sName2 = cpFuture.GetData(1, (short)2);
-            WriteLog_Order($"코스피다음월물 : {sCode2}/{sName2}\n");
-
-            //KOSPI 200 FUTURES
-            FutOptChart.SetInputValue(0, sCode1); //종목코드
-            FutOptChart.SetInputValue(1, '2'); //요청구분 1 기간데이터 2 개수 데이터
-            //FutOptChart.SetInputValue(2,); //요청종료일 시간 요청인 경우 입력
-            FutOptChart.SetInputValue(3, Convert.ToInt32(time)); //요청시작일
-            FutOptChart.SetInputValue(4, 1); //요청개수
-            FutOptChart.SetInputValue(5, items); //필드배열
-            FutOptChart.SetInputValue(6, 'D'); //차트구분
-            FutOptChart.SetInputValue(7, (short)1); //주기?
-            FutOptChart.SetInputValue(8, '0'); //갭보정여부
-            FutOptChart.SetInputValue(9, '0'); //수정주가
-            //
-            int reuslt_kospi = FutOptChart.BlockRequest();
-            //
-            if (reuslt_kospi == 0)
+            if(utility.kospi_commodity || utility.kosdak_commodity)
             {
-                string tmp = FutOptChart.GetHeaderValue(0);//종목코드
-                int tmp1 = FutOptChart.GetHeaderValue(1);//필드개수
-                string[] tmp2 = FutOptChart.GetHeaderValue(2);//필드명
-                int tmp3 = FutOptChart.GetHeaderValue(3);//수신개수
-                float tmp4 = FutOptChart.GetHeaderValue(6);//전일종가
-                float tmp5 = FutOptChart.GetHeaderValue(14);//금일저가
-                WriteLog_Order($"{tmp}/{tmp1}/{tmp3}/{tmp4.ToString()}/{tmp5.ToString()}\n");
-            }
-
-            string sKCode1 = cpKFuture.GetData(0, (short)0);
-            string sKName1 = cpKFuture.GetData(1, (short)0);
-            WriteLog_Order($"코스닥최근월물 : {sKCode1}/{sKName1}\n");
-
-            string sKCode2 = cpKFuture.GetData(0, (short)2);
-            string sKName2 = cpKFuture.GetData(1, (short)2);
-            WriteLog_Order($"코스닥다음월물 : {sKCode2}/{sKName2}\n");
-
-            //KOSDAK 150 FUTURES
-            FutOptChart.SetInputValue(0, sKCode1); //종목코드
-            FutOptChart.SetInputValue(1, '2'); //요청구분 1 기간데이터 2 개수 데이터
-            //FutOptChart.SetInputValue(2,); //요청종료일 시간 요청인 경우 입력
-            FutOptChart.SetInputValue(3, Convert.ToInt32(time)); //요청시작일
-            FutOptChart.SetInputValue(4, 1); //요청개수
-            FutOptChart.SetInputValue(5, items); //필드배열
-            FutOptChart.SetInputValue(6, 'D'); //차트구분
-            FutOptChart.SetInputValue(7, (short)1); //주기?
-            FutOptChart.SetInputValue(8, '0'); //갭보정여부
-            FutOptChart.SetInputValue(9, '0'); //수정주가
-            //
-            int reuslt_kosdask = FutOptChart.BlockRequest();
-            //
-            if (reuslt_kosdask == 0)
-            {
-                string tmp = FutOptChart.GetHeaderValue(0);//종목코드
-                int tmp1 = FutOptChart.GetHeaderValue(1);//필드개수
-                string[] tmp2 = FutOptChart.GetHeaderValue(2);//필드명
-                int tmp3 = FutOptChart.GetHeaderValue(3);//수신개수
-                float tmp4 = FutOptChart.GetHeaderValue(6);//전일종가
-                float tmp5 = FutOptChart.GetHeaderValue(14);//금일저가
-                WriteLog_Order($"{tmp}/{tmp1}/{tmp3}/{tmp4.ToString()}/{tmp5.ToString()}\n");
+                Initial_kor_index();
             }
         }
 
@@ -1171,12 +1092,12 @@ namespace WindowsFormsApp1
                 //
                 if (result2 == 0)
                 {
-                    string tmp = CpFore8312.GetHeaderValue(0);//해외지수코드 => string
-                    string tmp3 = CpFore8312.GetHeaderValue(3);//심볼명 => string
-                    float tmp4 = CpFore8312.GetHeaderValue(4);//현재가 => long
+                    //string tmp = CpFore8312.GetHeaderValue(0);//해외지수코드 => string
+                    //string tmp3 = CpFore8312.GetHeaderValue(3);//심볼명 => string
+                    //float tmp4 = CpFore8312.GetHeaderValue(4);//현재가 => long
                     float tmp5 = CpFore8312.GetHeaderValue(6);//등락률 => float
-                    int tmp6 = CpFore8312.GetHeaderValue(13);//거래일자 => long
-                    WriteLog_System($"{tmp}/{tmp3}/{tmp4.ToString()}/{tmp5.ToString()}/{tmp6.ToString()}\n");
+                    //int tmp6 = CpFore8312.GetHeaderValue(13);//거래일자 => long
+                    //WriteLog_System($"{tmp}/{tmp3}/{tmp4.ToString()}/{tmp5.ToString()}/{tmp6.ToString()}\n");
                     sp_index.Text = tmp5.ToString();
                 }
             }
@@ -1192,13 +1113,175 @@ namespace WindowsFormsApp1
                 //
                 if (result3 == 0)
                 {
-                    string tmp = CpFore8312.GetHeaderValue(0);//해외지수코드 => string
-                    string tmp3 = CpFore8312.GetHeaderValue(3);//심볼명 => string
-                    float tmp4 = CpFore8312.GetHeaderValue(4);//현재가 => long
+                    //string tmp = CpFore8312.GetHeaderValue(0);//해외지수코드 => string
+                    //string tmp3 = CpFore8312.GetHeaderValue(3);//심볼명 => string
+                    //float tmp4 = CpFore8312.GetHeaderValue(4);//현재가 => long
                     float tmp5 = CpFore8312.GetHeaderValue(6);//등락률 => float
-                    int tmp6 = CpFore8312.GetHeaderValue(13);//거래일자 => long
-                    WriteLog_System($"{tmp}/{tmp3}/{tmp4.ToString()}/{tmp5.ToString()}/{tmp6.ToString()}\n");
+                    //int tmp6 = CpFore8312.GetHeaderValue(13);//거래일자 => long
+                    //WriteLog_System($"{tmp}/{tmp3}/{tmp4.ToString()}/{tmp5.ToString()}/{tmp6.ToString()}\n");
                     nasdaq_index.Text = tmp5.ToString();
+                }
+            }
+        }
+
+        private string index_time = DateTime.Now.ToString("yyyyMMdd");
+        private int[] items = { 0, 1, 4, 5 }; //날짜,시간,저가,종가
+        private string sCode1 = "";
+        private string sCode2 = "";
+        private string sKCode1 = "";
+        private string sKCode2 = "";
+
+        private void Initial_kor_index()
+        {
+            //월물확인
+            sCode1 = cpFuture.GetData(0, (short)0);
+            string sName1 = cpFuture.GetData(1, (short)0);
+            WriteLog_System($"코스피최근월물 : {sCode1}/{sName1}\n");
+
+            sCode2 = cpFuture.GetData(0, (short)2);
+            string sName2 = cpFuture.GetData(1, (short)2);
+            WriteLog_System($"코스피다음월물 : {sCode2}/{sName2}\n");
+
+            sKCode1 = cpKFuture.GetData(0, (short)0);
+            string sKName1 = cpKFuture.GetData(1, (short)0);
+            WriteLog_System($"코스닥최근월물 : {sKCode1}/{sKName1}\n");
+
+            sKCode2 = cpKFuture.GetData(0, (short)2);
+            string sKName2 = cpKFuture.GetData(1, (short)2);
+            WriteLog_System($"코스닥다음월물 : {sKCode2}/{sKName2}\n");
+
+            Index_timer();
+        }
+
+        private System.Timers.Timer minuteTimer;
+
+        private void Index_timer()
+        {
+            // 현재 시간을 기준으로 다음 분의 첫 번째 초까지의 시간을 계산
+            DateTime now = DateTime.Now;
+
+            // 다음 분의 00초를 계산
+            DateTime nextMinute = new DateTime(now.Year, now.Month, now.Day, now.Hour, now.Minute, 0).AddMinutes(1);
+            double intervalToNextMinute = (nextMinute - now).TotalMilliseconds;
+
+            // 첫 번째 타이머를 설정하여 다음 분 00초에 실행
+            minuteTimer = new System.Timers.Timer(intervalToNextMinute);
+            minuteTimer.Elapsed += (sender, e) =>
+            {
+                // 타이머를 중지하고 해제
+                minuteTimer.Stop();
+                minuteTimer.Dispose();
+
+                // 매 1분마다 실행되는 타이머 설정
+                StartMinuteTimer();
+
+                // 특정 함수 호출
+                KOR_INDEX();
+            };
+            minuteTimer.AutoReset = false;
+            minuteTimer.Start(); 
+        }
+
+        private void StartMinuteTimer()
+        {
+            minuteTimer = new System.Timers.Timer(60000); // 1분 = 60,000 밀리초
+            minuteTimer.Elapsed += OnTimedEvent;
+            minuteTimer.AutoReset = true;
+            minuteTimer.Enabled = true;
+        }
+
+        private void OnTimedEvent(Object source, ElapsedEventArgs e)
+        {
+            KOR_INDEX();
+        }
+
+        private double[] kospi_index_series = new double[3];
+        private double[] kosdaq_index_series = new double[3];
+
+        //https://money2.creontrade.com/e5/mboard/ptype_basic/HTS_Plus_Helper/DW_Basic_Read_Page.aspx?boardseq=284&seq=6&page=5&searchString=%ec%84%a0%eb%ac%bc&p=8841&v=8643&m=9505
+        //https://money2.creontrade.com/e5/mboard/ptype_basic/HTS_Plus_Helper/DW_Basic_Read_Page.aspx?boardseq=287&seq=9&page=1&searchString=&p=&v=&m=
+        //https://money2.creontrade.com/e5/mboard/ptype_basic/HTS_Plus_Helper/DW_Basic_Read_Page.aspx?boardseq=284&seq=105&page=3&searchString=%ec%84%a0%eb%ac%bc&p=8841&v=8643&m=9505
+        private void KOR_INDEX()
+        {
+            //KOSPI 200 OPTIONS
+
+            //KOSPI 200 FUTURES
+            if (utility.kospi_commodity)
+            {
+                FutOptChart.SetInputValue(0, sCode1); //종목코드
+                FutOptChart.SetInputValue(1, '2'); //요청구분 1 기간데이터 2 개수 데이터
+                                                   //FutOptChart.SetInputValue(2,); //요청종료일 시간 요청인 경우 입력
+                FutOptChart.SetInputValue(3, Convert.ToInt32(index_time)); //요청시작일
+                FutOptChart.SetInputValue(4, 1); //요청개수
+                FutOptChart.SetInputValue(5, items); //필드배열
+                FutOptChart.SetInputValue(6, 'D'); //차트구분
+                FutOptChart.SetInputValue(7, (short)1); //주기?
+                FutOptChart.SetInputValue(8, '0'); //갭보정여부
+                FutOptChart.SetInputValue(9, '0'); //수정주가
+                                                   //
+                int reuslt_kospi = FutOptChart.BlockRequest();
+                //
+                if (reuslt_kospi == 0)
+                {
+                    //string tmp = FutOptChart.GetHeaderValue(0);//종목코드
+                    //int tmp1 = FutOptChart.GetHeaderValue(1);//필드개수
+                    //string[] tmp2 = FutOptChart.GetHeaderValue(2);//필드명
+                    //int tmp3 = FutOptChart.GetHeaderValue(3);//수신개수
+                    float tmp4 = FutOptChart.GetHeaderValue(6);//전일종가
+                    float tmp5 = FutOptChart.GetHeaderValue(7);//현재가
+                    float tmp6 = FutOptChart.GetHeaderValue(14);//금일저가
+                    float tmp7 = FutOptChart.GetHeaderValue(13);//금일고가
+                    
+                    //저가,종가,고가
+                    kospi_index_series[0] = Math.Round((tmp6 - tmp4) / tmp4 * 100, 2); //저가
+                    kospi_index_series[1] = Math.Round((tmp5 - tmp4) / tmp4 * 100, 2); //종가
+                    kospi_index_series[2] = Math.Round((tmp7 - tmp4) / tmp4 * 100, 2); //고가
+
+                    this.Invoke((MethodInvoker)delegate
+                    {
+                        kospi_index.Text = kospi_index_series[0] + "/" + kospi_index_series[2];
+                        //WriteLog_System($"{tmp}/{tmp1}/{tmp3}/{tmp4.ToString()}/{tmp5.ToString()}/{tmp6.ToString()}/{tmp7.ToString()}\n");
+                    });
+                }
+            }
+
+            //KOSDAK 150 FUTURES
+            if (utility.kosdak_commodity)
+            {
+                FutOptChart.SetInputValue(0, sKCode1); //종목코드
+                FutOptChart.SetInputValue(1, '2'); //요청구분 1 기간데이터 2 개수 데이터
+                                                   //FutOptChart.SetInputValue(2,); //요청종료일 시간 요청인 경우 입력
+                FutOptChart.SetInputValue(3, Convert.ToInt32(index_time)); //요청시작일
+                FutOptChart.SetInputValue(4, 1); //요청개수
+                FutOptChart.SetInputValue(5, items); //필드배열
+                FutOptChart.SetInputValue(6, 'D'); //차트구분
+                FutOptChart.SetInputValue(7, (short)1); //주기?
+                FutOptChart.SetInputValue(8, '0'); //갭보정여부
+                FutOptChart.SetInputValue(9, '0'); //수정주가
+                                                   //
+                int reuslt_kosdask = FutOptChart.BlockRequest();
+                //
+                if (reuslt_kosdask == 0)
+                {
+                    //string tmp = FutOptChart.GetHeaderValue(0);//종목코드
+                    //int tmp1 = FutOptChart.GetHeaderValue(1);//필드개수
+                    //string[] tmp2 = FutOptChart.GetHeaderValue(2);//필드명
+                    //int tmp3 = FutOptChart.GetHeaderValue(3);//수신개수
+                    float tmp4 = FutOptChart.GetHeaderValue(6);//전일종가
+                    float tmp5 = FutOptChart.GetHeaderValue(7);//현재가
+                    float tmp6 = FutOptChart.GetHeaderValue(14);//금일저가
+                    float tmp7 = FutOptChart.GetHeaderValue(13);//금일고가
+
+                    //저가,종가,고가
+                    kosdaq_index_series[0] = Math.Round((tmp6 - tmp4) / tmp4 * 100, 2); //저가
+                    kosdaq_index_series[1] = Math.Round((tmp5 - tmp4) / tmp4 * 100, 2); //종가
+                    kosdaq_index_series[2] = Math.Round((tmp7 - tmp4) / tmp4 * 100, 2); //고가
+
+                    this.Invoke((MethodInvoker)delegate
+                    {
+                        kosdaq_index.Text = kosdaq_index_series[0] + "/" + kosdaq_index_series[2];
+                        //WriteLog_System($"{tmp}/{tmp1}/{tmp3}/{tmp4.ToString()}/{tmp5.ToString()}/{tmp6.ToString()}/{tmp7.ToString()}\n");
+                    });
                 }
             }
         }
