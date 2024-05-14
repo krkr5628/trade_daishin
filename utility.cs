@@ -68,8 +68,6 @@ namespace WindowsFormsApp1
         public static string profit_ts_text; //익절TS
         public static bool profit_after1; //익정동시호가
         public static bool profit_after2; //익절시간외단일가
-        public static bool profit_index_connection1; //익절 인덱스 연동1
-        public static bool profit_index_connection2; //익절 인덱스 연동2
 
         public static bool loss_percent;
         public static string loss_percent_text; //손절
@@ -77,8 +75,6 @@ namespace WindowsFormsApp1
         public static string loss_won_text; //손절원
         public static bool loss_after1; //손절동시호가
         public static bool loss_after2; //손절시간외단일가
-        public static bool loss_index_connection1; //손절 인덱스 연동1
-        public static bool loss_index_connection2; //손절 인덱스 연동2
 
         public static bool clear_sell; //전체청산
         public static bool clear_sell_mode; //개별청산
@@ -88,14 +84,11 @@ namespace WindowsFormsApp1
         public static string clear_sell_profit_text; //청산익절
         public static bool clear_sell_profit_after1; //동시호가익절
         public static bool clear_sell_profit_after2;//청산익절시간외단일가
-        public static bool clear_sell_index_connection1; //일반 & 익절 인덱스 연동1
-        public static bool clear_sell_index_connection2; //일반 & 익절 인덱스 연동2
         public static bool clear_sell_loss;
         public static string clear_sell_loss_text;//청산손절
         public static bool clear_sell_loss_after1;//동시호가손절
         public static bool clear_sell_loss_after2;//청산익절시간외단일가
-        public static bool clear_sell_loss_index_connection1; //청산 인덱스 연동1
-        public static bool clear_sell_loss_index_connection2; //청산 인덱스 연동2
+        public static bool clear_index;
 
         public static bool term_for_buy;
         public static string term_for_buy_text;//종목매수텀
@@ -367,6 +360,10 @@ namespace WindowsFormsApp1
             //청산익절시간외단일가
             String[] clear_sell_loss_after2_tmp = reader.ReadLine().Split('/');
             clear_sell_loss_after2 = Convert.ToBoolean(clear_sell_loss_after2_tmp[1]);
+
+            //청산인덱스
+            String[] clear_index_tmp = reader.ReadLine().Split('/');
+            clear_index = Convert.ToBoolean(clear_index_tmp[1]);
 
             //종목매수텀(대기)
             String[] term_for_buy_tmp = reader.ReadLine().Split('/');

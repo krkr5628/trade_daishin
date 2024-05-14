@@ -684,6 +684,7 @@ namespace WindowsFormsApp1
                     tmp.Add("청산손절/" + Convert.ToString(clear_sell_loss.Checked) + "/" + clear_sell_loss_text.Text);
                     tmp.Add("청산손절동시호가/" + Convert.ToString(clear_sell_loss_after1.Checked));
                     tmp.Add("청산손절시간외단일가/" + Convert.ToString(clear_sell_loss_after2.Checked));
+                    tmp.Add("청산인덱스/" + Convert.ToString(clear_index.Checked));
                     //
                     tmp.Add("종목매수텀/" + Convert.ToString(term_for_buy.Checked) + "/" + term_for_buy_text.Text);
                     tmp.Add("종목매도텀/" + Convert.ToString(term_for_sell.Checked) + "/" + term_for_sell_text.Text);
@@ -948,6 +949,10 @@ namespace WindowsFormsApp1
             //청산익절시간외단일가
             String[] clear_sell_loss_after2_tmp = reader.ReadLine().Split('/');
             clear_sell_loss_after2.Checked = Convert.ToBoolean(clear_sell_loss_after2_tmp[1]);
+
+            //청산익절시간외단일가
+            String[] clear_index_tmp = reader.ReadLine().Split('/');
+            clear_index.Checked = Convert.ToBoolean(clear_index_tmp[1]);
 
             //종목매수텀(대기)
             String[] term_for_buy_tmp = reader.ReadLine().Split('/');
