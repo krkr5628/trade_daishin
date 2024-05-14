@@ -89,7 +89,6 @@ namespace WindowsFormsApp1
             Fomula_list_buy.TextChanged += Fomula_list_buy_TextChanged;
 
             //미사용 항목 경고창(19개)
-            hold_deny.CheckedChanged += HandleCheckedChanged;
             sell_condition.CheckedChanged += HandleCheckedChanged;
             profit_ts.CheckedChanged += HandleCheckedChanged;
             profit_after1.CheckedChanged += HandleCheckedChanged;
@@ -99,7 +98,9 @@ namespace WindowsFormsApp1
             clear_sell_profit_after1.CheckedChanged += HandleCheckedChanged;
             clear_sell_profit_after2.CheckedChanged += HandleCheckedChanged;
             clear_sell_loss_after1.CheckedChanged += HandleCheckedChanged;
-            clear_sell_loss_after2.CheckedChanged += HandleCheckedChanged; ;
+            clear_sell_loss_after2.CheckedChanged += HandleCheckedChanged;
+            //
+            hold_deny.CheckedChanged += HandleCheckedChanged;
             term_for_buy.CheckedChanged += HandleCheckedChanged;
             term_for_sell.CheckedChanged += HandleCheckedChanged;
             term_for_non_buy.CheckedChanged += HandleCheckedChanged;

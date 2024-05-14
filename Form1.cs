@@ -1047,6 +1047,11 @@ namespace WindowsFormsApp1
             }
         }
 
+        private bool index_buy = false;
+        private bool index_sell = false;
+        private bool index_clear = false;
+        private bool index_dual = false;
+
         //https://money2.creontrade.com/e5/mboard/ptype_basic/HTS_Plus_Helper/DW_Basic_Read_Page.aspx?boardseq=284&seq=12&page=1&searchString=CpUtil&p=8841&v=8643&m=9505
         //https://money2.creontrade.com/e5/mboard/ptype_basic/HTS_Plus_Helper/DW_Basic_Read_Page.aspx?boardseq=284&seq=91&page=2&searchString=%ec%a7%80%ec%88%98&p=8841&v=8643&m=9505
         private void US_INDEX()
@@ -1071,13 +1076,66 @@ namespace WindowsFormsApp1
                 //
                 if (result == 0)
                 {
-                    string tmp = CpFore8312.GetHeaderValue(0);//해외지수코드 => string
-                    string tmp3 = CpFore8312.GetHeaderValue(3);//심볼명 => string
-                    float tmp4 = CpFore8312.GetHeaderValue(4);//현재가 => long
+                    //string tmp = CpFore8312.GetHeaderValue(0);//해외지수코드 => string
+                    //string tmp3 = CpFore8312.GetHeaderValue(3);//심볼명 => string
+                    //float tmp4 = CpFore8312.GetHeaderValue(4);//현재가 => long
                     float tmp5 = CpFore8312.GetHeaderValue(6);//등락률 => float
-                    int tmp6 = CpFore8312.GetHeaderValue(13);//거래일자 => long
-                    WriteLog_System($"{tmp}/{tmp3}/{tmp4.ToString()}/{tmp5.ToString()}/{tmp6.ToString()}\n");
+                    //int tmp6 = CpFore8312.GetHeaderValue(13);//거래일자 => long
+                    //WriteLog_System($"{tmp}/{tmp3}/{tmp4.ToString()}/{tmp5.ToString()}/{tmp6.ToString()}\n");
+
                     dow_index.Text = tmp5.ToString();
+
+                    if (utility.buy_condition_index)
+                    {
+                        if (utility.type3_selection)
+                        {
+                            double start = Convert.ToDouble(utility.type3_start);
+                            double end = Convert.ToDouble(utility.type3_end);
+                            if(tmp5 < start || end < tmp5)
+                            {
+                                index_buy = true;
+                            }
+                        }
+                    }
+
+                    if (utility.sell_condition_index)
+                    {
+                        if (utility.type3_selection)
+                        {
+                            double start = Convert.ToDouble(utility.type3_start);
+                            double end = Convert.ToDouble(utility.type3_end);
+                            if (tmp5 < start || end < tmp5)
+                            {
+                                index_sell = true;
+                            }
+                        }
+                    }
+
+                    if (utility.clear_index)
+                    {
+                        if (utility.type3_selection_all)
+                        {
+                            double start = Convert.ToDouble(utility.type3_start_all);
+                            double end = Convert.ToDouble(utility.type3_end_all);
+                            if (tmp5 < start || end < tmp5)
+                            {
+                                index_clear = true;
+                            }
+                        }
+                    }
+
+                    if (utility.Dual_Index)
+                    {
+                        if (utility.type3_selection_isa)
+                        {
+                            double start = Convert.ToDouble(utility.type3_start_isa);
+                            double end = Convert.ToDouble(utility.type3_end_isa);
+                            if (tmp5 < start || end < tmp5)
+                            {
+                                index_dual = true;
+                            }
+                        }
+                    }
                 }
             }
 
@@ -1098,7 +1156,60 @@ namespace WindowsFormsApp1
                     float tmp5 = CpFore8312.GetHeaderValue(6);//등락률 => float
                     //int tmp6 = CpFore8312.GetHeaderValue(13);//거래일자 => long
                     //WriteLog_System($"{tmp}/{tmp3}/{tmp4.ToString()}/{tmp5.ToString()}/{tmp6.ToString()}\n");
+
                     sp_index.Text = tmp5.ToString();
+
+                    if (utility.buy_condition_index)
+                    {
+                        if (utility.type4_selection)
+                        {
+                            double start = Convert.ToDouble(utility.type4_start);
+                            double end = Convert.ToDouble(utility.type4_end);
+                            if (tmp5 < start || end < tmp5)
+                            {
+                                index_buy = true;
+                            }
+                        }
+                    }
+
+                    if (utility.sell_condition_index)
+                    {
+                        if (utility.type4_selection)
+                        {
+                            double start = Convert.ToDouble(utility.type4_start);
+                            double end = Convert.ToDouble(utility.type4_end);
+                            if (tmp5 < start || end < tmp5)
+                            {
+                                index_sell = true;
+                            }
+                        }
+                    }
+
+                    if (utility.clear_index)
+                    {
+                        if (utility.type4_selection_all)
+                        {
+                            double start = Convert.ToDouble(utility.type4_start_all);
+                            double end = Convert.ToDouble(utility.type4_end_all);
+                            if (tmp5 < start || end < tmp5)
+                            {
+                                index_clear = true;
+                            }
+                        }
+                    }
+
+                    if (utility.Dual_Index)
+                    {
+                        if (utility.type4_selection_isa)
+                        {
+                            double start = Convert.ToDouble(utility.type4_start_isa);
+                            double end = Convert.ToDouble(utility.type4_end_isa);
+                            if (tmp5 < start || end < tmp5)
+                            {
+                                index_dual = true;
+                            }
+                        }
+                    }
                 }
             }
 
@@ -1119,7 +1230,60 @@ namespace WindowsFormsApp1
                     float tmp5 = CpFore8312.GetHeaderValue(6);//등락률 => float
                     //int tmp6 = CpFore8312.GetHeaderValue(13);//거래일자 => long
                     //WriteLog_System($"{tmp}/{tmp3}/{tmp4.ToString()}/{tmp5.ToString()}/{tmp6.ToString()}\n");
+
                     nasdaq_index.Text = tmp5.ToString();
+
+                    if (utility.buy_condition_index)
+                    {
+                        if (utility.type5_selection)
+                        {
+                            double start = Convert.ToDouble(utility.type5_start);
+                            double end = Convert.ToDouble(utility.type5_end);
+                            if (tmp5 < start || end < tmp5)
+                            {
+                                index_buy = true;
+                            }
+                        }
+                    }
+
+                    if (utility.sell_condition_index)
+                    {
+                        if (utility.type5_selection)
+                        {
+                            double start = Convert.ToDouble(utility.type5_start);
+                            double end = Convert.ToDouble(utility.type5_end);
+                            if (tmp5 < start || end < tmp5)
+                            {
+                                index_sell = true;
+                            }
+                        }
+                    }
+
+                    if (utility.clear_index)
+                    {
+                        if (utility.type5_selection_all)
+                        {
+                            double start = Convert.ToDouble(utility.type5_start_all);
+                            double end = Convert.ToDouble(utility.type5_end_all);
+                            if (tmp5 < start || end < tmp5)
+                            {
+                                index_clear = true;
+                            }
+                        }
+                    }
+
+                    if (utility.Dual_Index)
+                    {
+                        if (utility.type5_selection_isa)
+                        {
+                            double start = Convert.ToDouble(utility.type5_start_isa);
+                            double end = Convert.ToDouble(utility.type5_end_isa);
+                            if (tmp5 < start || end < tmp5)
+                            {
+                                index_dual = true;
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -1241,6 +1405,58 @@ namespace WindowsFormsApp1
                     {
                         kospi_index.Text = kospi_index_series[0] + "/" + kospi_index_series[2];
                         //WriteLog_System($"{tmp}/{tmp1}/{tmp3}/{tmp4.ToString()}/{tmp5.ToString()}/{tmp6.ToString()}/{tmp7.ToString()}\n");
+
+                        if (utility.buy_condition_index)
+                        {
+                            if (utility.type1_selection)
+                            {
+                                double start = Convert.ToDouble(utility.type1_start);
+                                double end = Convert.ToDouble(utility.type1_end);
+                                if (kospi_index_series[0] < start || end < kospi_index_series[2])
+                                {
+                                    index_buy = true;
+                                }
+                            }
+                        }
+
+                        if (utility.sell_condition_index)
+                        {
+                            if (utility.type1_selection)
+                            {
+                                double start = Convert.ToDouble(utility.type1_start);
+                                double end = Convert.ToDouble(utility.type1_end);
+                                if (kospi_index_series[0] < start || end < kospi_index_series[2])
+                                {
+                                    index_sell = true;
+                                }
+                            }
+                        }
+
+                        if (utility.clear_index)
+                        {
+                            if (utility.type1_selection_all)
+                            {
+                                double start = Convert.ToDouble(utility.type1_start_all);
+                                double end = Convert.ToDouble(utility.type1_end_all);
+                                if (kospi_index_series[0] < start || end < kospi_index_series[2])
+                                {
+                                    index_clear = true;
+                                }
+                            }
+                        }
+
+                        if (utility.Dual_Index)
+                        {
+                            if (utility.type1_selection_isa)
+                            {
+                                double start = Convert.ToDouble(utility.type1_start_isa);
+                                double end = Convert.ToDouble(utility.type1_end_isa);
+                                if (kospi_index_series[0] < start || end < kospi_index_series[2])
+                                {
+                                    index_dual = true;
+                                }
+                            }
+                        }
                     });
                 }
             }
@@ -1281,6 +1497,58 @@ namespace WindowsFormsApp1
                     {
                         kosdaq_index.Text = kosdaq_index_series[0] + "/" + kosdaq_index_series[2];
                         //WriteLog_System($"{tmp}/{tmp1}/{tmp3}/{tmp4.ToString()}/{tmp5.ToString()}/{tmp6.ToString()}/{tmp7.ToString()}\n");
+
+                        if (utility.buy_condition_index)
+                        {
+                            if (utility.type2_selection)
+                            {
+                                double start = Convert.ToDouble(utility.type2_start);
+                                double end = Convert.ToDouble(utility.type2_end);
+                                if (kosdaq_index_series[0] < start || end < kosdaq_index_series[2])
+                                {
+                                    index_buy = true;
+                                }
+                            }
+                        }
+
+                        if (utility.sell_condition_index)
+                        {
+                            if (utility.type2_selection)
+                            {
+                                double start = Convert.ToDouble(utility.type2_start);
+                                double end = Convert.ToDouble(utility.type2_end);
+                                if (kosdaq_index_series[0] < start || end < kosdaq_index_series[2])
+                                {
+                                    index_sell = true;
+                                }
+                            }
+                        }
+
+                        if (utility.clear_index)
+                        {
+                            if (utility.type2_selection_all)
+                            {
+                                double start = Convert.ToDouble(utility.type2_start_all);
+                                double end = Convert.ToDouble(utility.type2_end_all);
+                                if (kosdaq_index_series[0] < start || end < kosdaq_index_series[2])
+                                {
+                                    index_clear = true;
+                                }
+                            }
+                        }
+
+                        if (utility.Dual_Index)
+                        {
+                            if (utility.type2_selection_isa)
+                            {
+                                double start = Convert.ToDouble(utility.type2_start_isa);
+                                double end = Convert.ToDouble(utility.type2_end_isa);
+                                if (kosdaq_index_series[0] < start || end < kosdaq_index_series[2])
+                                {
+                                    index_dual = true;
+                                }
+                            }
+                        }
                     });
                 }
             }
@@ -2141,6 +2409,13 @@ namespace WindowsFormsApp1
 
                 account_check_sell();
             }
+
+            //지수연동
+            if (index_clear)
+            {
+                account_check_sell();
+            }
+
         }
 
         private void account_check_buy()
@@ -2248,13 +2523,25 @@ namespace WindowsFormsApp1
         //https://money2.daishin.com/e5/mboard/ptype_basic/HTS_Plus_Helper/DW_Basic_Read.aspx?boardseq=291&seq=159&page=3&searchString=&p=&v=&m=
         private string buy_check(string code, string code_name, string price, string time, string high, bool check, string condition_name)
         {
-
             //계좌 구분 코드
             string gubun = Master_code;
             if (utility.buy_DUAL && condition_name.Equals(ISA_Condition))
             {
                 gubun = ISA_code;
             }
+
+            //지수 확인
+            if(gubun == Master_code && index_buy)
+            {
+                return "대기";
+            }
+
+            //지수 확인
+            if (gubun == ISA_code && index_dual)
+            {
+                return "대기";
+            }
+
             //매수 시간 확인
             if (utility.buy_DUAL && utility.Dual_Time && gubun == ISA_code)
             {
@@ -2603,6 +2890,11 @@ namespace WindowsFormsApp1
         //조건식 매도(대기)
         private void sell_check_condition(string code, string price, string percent, string time, string order_num, string gubun)
         {
+            if (index_sell)
+            {
+                return;
+            }
+
             TimeSpan t_code = TimeSpan.Parse(time);
             TimeSpan t_start = TimeSpan.Parse(utility.sell_condition_start);
             TimeSpan t_end = TimeSpan.Parse(utility.sell_condition_end);
@@ -2619,7 +2911,6 @@ namespace WindowsFormsApp1
         //실시간 가격 매도
         private void sell_check_price(string price, string percent, int hold, int buy_price, string order_num, string gubun)
         {
-
             //익절
             if (utility.profit_percent)
             {
@@ -2945,6 +3236,11 @@ namespace WindowsFormsApp1
             //실시간 중단이 선언되면 '실시간시작'이 가능해진다.
             Real_time_stop_btn.Enabled = false;
             Real_time_search_btn.Enabled = true;
+
+            //지수 업데이트 중단
+            minuteTimer.Stop();
+            minuteTimer.Dispose();
+            minuteTimer = null;
 
             //매수 조건식 중단
             if (utility.buy_condition && Condition_Profile.Count != 0)

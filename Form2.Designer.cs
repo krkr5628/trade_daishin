@@ -3693,7 +3693,6 @@ namespace WindowsFormsApp1
         private System.Windows.Forms.CheckBox dow_index;
         private System.Windows.Forms.CheckBox nasdaq_index;
         private System.Windows.Forms.CheckBox kosdak_commodity;
-        private System.Windows.Forms.CheckBox kospi_commodity;
         private System.Windows.Forms.TextBox type1_start;
         private System.Windows.Forms.TextBox type2_start;
         private System.Windows.Forms.GroupBox groupBox9;
@@ -3839,5 +3838,6 @@ namespace WindowsFormsApp1
         private System.Windows.Forms.TextBox type3_isa_start;
         private System.Windows.Forms.TextBox type3_isa_end;
         private System.Windows.Forms.CheckBox clear_index;
+        private System.Windows.Forms.CheckBox kospi_commodity;
     }
 }
