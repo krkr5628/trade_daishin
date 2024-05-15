@@ -2168,25 +2168,23 @@ namespace WindowsFormsApp1
             string Stock_Code = CssAlert.GetHeaderValue(2); // 종목코드
             string gubun = CssAlert.GetHeaderValue(3).ToString();
 
-            //매도 조건식일 경우
-            if (utility.sell_condition && utility.Fomula_list_sell_text.Split('^')[1] == Condition_ID)
-            {
-                DataRow[] findRows1 = dtCondStock.Select($"종목코드 = '{Stock_Code}'");
-                if (findRows1.Length != 0 && findRows1[0]["상태"].Equals("매수완료"))
-                {
-                    sell_check_condition(Stock_Code, findRows1[0]["현재가"].ToString(), findRows1[0]["수익률"].ToString(), DateTime.Now.ToString("HH:mm:ss"), findRows1[0]["주문번호"].ToString(), findRows1[0]["구분코드"].ToString());
-                }
-                return;
-            }
-
             //
             switch (gubun)
             {
                 //편출입구분
                 case "49" :
-                    //
                     DataRow[] findRows1 = dtCondStock.Select($"종목코드 = '{Stock_Code}'");
                     string time1 = DateTime.Now.ToString("HH:mm:ss");
+
+                    //매도 조건식일 경우
+                    if (utility.sell_condition && utility.Fomula_list_sell_text.Split('^')[1] == Condition_ID)
+                    {
+                        if (findRows1.Length != 0 && findRows1[0]["상태"].Equals("매수완료"))
+                        {
+                            sell_check_condition(Stock_Code, findRows1[0]["현재가"].ToString(), findRows1[0]["수익률"].ToString(), time1, findRows1[0]["주문번호"].ToString(), findRows1[0]["구분코드"].ToString());
+                        }
+                        return;
+                    }
 
                     //기존에 포함됬던 종목
                     if (findRows1.Length != 0)
