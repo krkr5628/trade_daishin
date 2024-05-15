@@ -1107,19 +1107,6 @@ namespace WindowsFormsApp1
                         }
                     }
 
-                    if (utility.sell_condition_index)
-                    {
-                        if (utility.type3_selection)
-                        {
-                            double start = Convert.ToDouble(utility.type3_start);
-                            double end = Convert.ToDouble(utility.type3_end);
-                            if (tmp5 < start || end < tmp5)
-                            {
-                                index_sell = true;
-                            }
-                        }
-                    }
-
                     if (utility.clear_index)
                     {
                         if (utility.type3_selection_all)
@@ -1181,19 +1168,6 @@ namespace WindowsFormsApp1
                         }
                     }
 
-                    if (utility.sell_condition_index)
-                    {
-                        if (utility.type4_selection)
-                        {
-                            double start = Convert.ToDouble(utility.type4_start);
-                            double end = Convert.ToDouble(utility.type4_end);
-                            if (tmp5 < start || end < tmp5)
-                            {
-                                index_sell = true;
-                            }
-                        }
-                    }
-
                     if (utility.clear_index)
                     {
                         if (utility.type4_selection_all)
@@ -1251,19 +1225,6 @@ namespace WindowsFormsApp1
                             if (tmp5 < start || end < tmp5)
                             {
                                 index_buy = true;
-                            }
-                        }
-                    }
-
-                    if (utility.sell_condition_index)
-                    {
-                        if (utility.type5_selection)
-                        {
-                            double start = Convert.ToDouble(utility.type5_start);
-                            double end = Convert.ToDouble(utility.type5_end);
-                            if (tmp5 < start || end < tmp5)
-                            {
-                                index_sell = true;
                             }
                         }
                     }
@@ -1428,19 +1389,6 @@ namespace WindowsFormsApp1
                             }
                         }
 
-                        if (utility.sell_condition_index)
-                        {
-                            if (utility.type1_selection)
-                            {
-                                double start = Convert.ToDouble(utility.type1_start);
-                                double end = Convert.ToDouble(utility.type1_end);
-                                if (kospi_index_series[0] < start || end < kospi_index_series[2])
-                                {
-                                    index_sell = true;
-                                }
-                            }
-                        }
-
                         if (utility.clear_index)
                         {
                             if (utility.type1_selection_all)
@@ -1516,19 +1464,6 @@ namespace WindowsFormsApp1
                                 if (kosdaq_index_series[0] < start || end < kosdaq_index_series[2])
                                 {
                                     index_buy = true;
-                                }
-                            }
-                        }
-
-                        if (utility.sell_condition_index)
-                        {
-                            if (utility.type2_selection)
-                            {
-                                double start = Convert.ToDouble(utility.type2_start);
-                                double end = Convert.ToDouble(utility.type2_end);
-                                if (kosdaq_index_series[0] < start || end < kosdaq_index_series[2])
-                                {
-                                    index_sell = true;
                                 }
                             }
                         }

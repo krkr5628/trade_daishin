@@ -56,7 +56,6 @@ namespace WindowsFormsApp1
         public static bool sell_condition; //매도조건
         public static string sell_condition_start;
         public static string sell_condition_end;
-        public static bool sell_condition_index;
         public static int Fomula_list_sell;
         public static string Fomula_list_sell_text;
 
@@ -282,9 +281,8 @@ namespace WindowsFormsApp1
             sell_condition = Convert.ToBoolean(sell_condition_tmp[1]);
             sell_condition_start = sell_condition_tmp[2];
             sell_condition_end = sell_condition_tmp[3];
-            sell_condition_index = Convert.ToBoolean(sell_condition_tmp[4]);
-            Fomula_list_sell = Convert.ToInt32(sell_condition_tmp[5]);
-            Fomula_list_sell_text = sell_condition_tmp[6];
+            Fomula_list_sell = Convert.ToInt32(sell_condition_tmp[4]);
+            Fomula_list_sell_text = sell_condition_tmp[5];
 
             //익절
             String[] profit_percent_tmp = reader.ReadLine().Split('/');

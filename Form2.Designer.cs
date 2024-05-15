@@ -88,7 +88,6 @@ namespace WindowsFormsApp1
             this.sell_condition_start = new System.Windows.Forms.TextBox();
             this.textBox39 = new System.Windows.Forms.TextBox();
             this.sell_condition = new System.Windows.Forms.CheckBox();
-            this.sell_condition_index = new System.Windows.Forms.CheckBox();
             this.tableLayoutPanel9 = new System.Windows.Forms.TableLayoutPanel();
             this.profit_percent = new System.Windows.Forms.CheckBox();
             this.profit_percent_text = new System.Windows.Forms.TextBox();
@@ -1054,7 +1053,6 @@ namespace WindowsFormsApp1
             this.tableLayoutPanel8.Controls.Add(this.sell_condition_start, 1, 0);
             this.tableLayoutPanel8.Controls.Add(this.textBox39, 2, 0);
             this.tableLayoutPanel8.Controls.Add(this.sell_condition, 0, 0);
-            this.tableLayoutPanel8.Controls.Add(this.sell_condition_index, 4, 0);
             this.tableLayoutPanel8.Font = new System.Drawing.Font("굴림", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.tableLayoutPanel8.Location = new System.Drawing.Point(4, 105);
             this.tableLayoutPanel8.Margin = new System.Windows.Forms.Padding(2);
@@ -1107,22 +1105,6 @@ namespace WindowsFormsApp1
             this.sell_condition.TabIndex = 6;
             this.sell_condition.Text = "매도조건";
             this.sell_condition.UseVisualStyleBackColor = false;
-            // 
-            // sell_condition_index
-            // 
-            this.sell_condition_index.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.sell_condition_index.AutoSize = true;
-            this.sell_condition_index.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.sell_condition_index.ForeColor = System.Drawing.Color.RoyalBlue;
-            this.sell_condition_index.Location = new System.Drawing.Point(376, 3);
-            this.sell_condition_index.Name = "sell_condition_index";
-            this.sell_condition_index.Size = new System.Drawing.Size(89, 21);
-            this.sell_condition_index.TabIndex = 23;
-            this.sell_condition_index.Text = "지수연동";
-            this.sell_condition_index.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.sell_condition_index.UseVisualStyleBackColor = false;
             // 
             // tableLayoutPanel9
             // 
@@ -3878,7 +3860,6 @@ namespace WindowsFormsApp1
         private System.Windows.Forms.Label label26;
         private System.Windows.Forms.TextBox type5_end;
         private System.Windows.Forms.CheckBox buy_condition_index;
-        private System.Windows.Forms.CheckBox sell_condition_index;
         private System.Windows.Forms.CheckBox type1_selection;
         private System.Windows.Forms.CheckBox type5_selection_all;
         private System.Windows.Forms.CheckBox type4_selection_all;

@@ -628,7 +628,11 @@ namespace WindowsFormsApp1
             }
             else if (buy_condition.Checked && String.IsNullOrEmpty(Fomula_list_buy.Text) || sell_condition.Checked && String.IsNullOrEmpty(Fomula_list_sell.Text))
             {
-                MessageBox.Show("저장하기 위해 조건식 1개 이상 설정해 주세요.");
+                MessageBox.Show("저장하기 위해 조건식 1개 혹은 2개 필요");
+            }
+            else if (profit_after1.Checked || profit_after2.Checked || loss_after1.Checked || loss_after2.Checked || clear_sell_profit_after1.Checked || clear_sell_profit_after2.Checked || clear_sell_loss_after1.Checked || clear_sell_loss_after2.Checked)
+            {
+                MessageBox.Show("사간외 설정을 위해 매매방식(시간외) 설정 필요");
             }
             else
             {
@@ -657,7 +661,7 @@ namespace WindowsFormsApp1
                     tmp.Add("보유종목매수금지/" + Convert.ToString(hold_deny.Checked));
                     //
                     tmp.Add("매수조건;" + Convert.ToString(buy_condition.Checked) + ";" + buy_condition_start.Text + ";" + buy_condition_end.Text + ";" + Convert.ToString(buy_condition_index.Checked) + ";" + (Fomula_list_buy.Text.Equals("") ? "9999" : Fomula_list_buy.Text) + ";" + Convert.ToString(buy_mode_or.Checked) + ";" + Convert.ToString(buy_mode_and.Checked) + ";" + Convert.ToString(buy_mode_independent.Checked) + ";" + Convert.ToString(buy_mode_dual.Checked));
-                    tmp.Add("매도조건;" + Convert.ToString(sell_condition.Checked) + ";" + sell_condition_start.Text + ";" + sell_condition_end.Text + ";" + Convert.ToString(sell_condition_index.Checked) + ";" + Convert.ToString(Fomula_list_sell.SelectedIndex) + ";" + Fomula_list_sell.Text);
+                    tmp.Add("매도조건;" + Convert.ToString(sell_condition.Checked) + ";" + sell_condition_start.Text + ";" + sell_condition_end.Text + ";" + Convert.ToString(Fomula_list_sell.SelectedIndex) + ";" + Fomula_list_sell.Text);
                     tmp.Add("익절/" + Convert.ToString(profit_percent.Checked) + "/" + profit_percent_text.Text);
                     tmp.Add("익절원/" + Convert.ToString(profit_won.Checked) + "/" + profit_won_text.Text);
                     tmp.Add("익절TS/" + Convert.ToString(profit_ts.Checked) + "/" + profit_ts_text.Text);
@@ -862,9 +866,8 @@ namespace WindowsFormsApp1
             sell_condition.Checked = Convert.ToBoolean(sell_condition_tmp[1]);
             sell_condition_start.Text = sell_condition_tmp[2];
             sell_condition_end.Text = sell_condition_tmp[3];
-            sell_condition_index.Checked = Convert.ToBoolean(sell_condition_tmp[4]);
-            Fomula_list_sell.SelectedIndex = Convert.ToInt32(sell_condition_tmp[5]);
-            Fomula_list_sell.Text = sell_condition_tmp[6];
+            Fomula_list_sell.SelectedIndex = Convert.ToInt32(sell_condition_tmp[4]);
+            Fomula_list_sell.Text = sell_condition_tmp[5];
 
             //익절
             String[] profit_percent_tmp = reader.ReadLine().Split('/');
