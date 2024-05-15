@@ -2174,8 +2174,9 @@ namespace WindowsFormsApp1
                 DataRow[] findRows1 = dtCondStock.Select($"종목코드 = '{Stock_Code}'");
                 if (findRows1.Length != 0 && findRows1[0]["상태"].Equals("매수완료"))
                 {
-                    sell_check_condition(Stock_Code, findRows1[0]["현재가"].ToString(), findRows1[0]["수익률"].ToString(), DateTime.Now.ToString("HH:mm:ss"), findRows1[0]["주문번호"].ToString(), gubun);
+                    sell_check_condition(Stock_Code, findRows1[0]["현재가"].ToString(), findRows1[0]["수익률"].ToString(), DateTime.Now.ToString("HH:mm:ss"), findRows1[0]["주문번호"].ToString(), findRows1[0]["구분코드"].ToString());
                 }
+                return;
             }
 
             //
