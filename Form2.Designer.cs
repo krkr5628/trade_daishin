@@ -63,6 +63,7 @@ namespace WindowsFormsApp1
             this.duplication_deny = new System.Windows.Forms.CheckBox();
             this.max_hold_text = new System.Windows.Forms.TextBox();
             this.before_time_deny = new System.Windows.Forms.CheckBox();
+            this.hold_deny = new System.Windows.Forms.CheckBox();
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
             this.setting_allowed = new System.Windows.Forms.Button();
             this.setting_open = new System.Windows.Forms.Button();
@@ -260,10 +261,9 @@ namespace WindowsFormsApp1
             this.type5_selection_isa = new System.Windows.Forms.CheckBox();
             this.groupBox14 = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel25 = new System.Windows.Forms.TableLayoutPanel();
+            this.label38 = new System.Windows.Forms.Label();
             this.sell_set1_after = new System.Windows.Forms.ComboBox();
             this.sell_set2_after = new System.Windows.Forms.ComboBox();
-            this.label38 = new System.Windows.Forms.Label();
-            this.hold_deny = new System.Windows.Forms.CheckBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
@@ -761,6 +761,23 @@ namespace WindowsFormsApp1
             this.before_time_deny.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.before_time_deny.UseVisualStyleBackColor = false;
             // 
+            // hold_deny
+            // 
+            this.hold_deny.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.hold_deny.AutoSize = true;
+            this.hold_deny.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.hold_deny.Font = new System.Drawing.Font("굴림", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.hold_deny.Location = new System.Drawing.Point(2, 71);
+            this.hold_deny.Margin = new System.Windows.Forms.Padding(2);
+            this.hold_deny.Name = "hold_deny";
+            this.hold_deny.Size = new System.Drawing.Size(175, 19);
+            this.hold_deny.TabIndex = 10;
+            this.hold_deny.Text = "보유 종목 매수 금지";
+            this.hold_deny.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.hold_deny.UseVisualStyleBackColor = false;
+            // 
             // tableLayoutPanel5
             // 
             this.tableLayoutPanel5.ColumnCount = 5;
@@ -768,7 +785,7 @@ namespace WindowsFormsApp1
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.90253F));
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15.43321F));
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.53069F));
-            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 235F));
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 237F));
             this.tableLayoutPanel5.Controls.Add(this.setting_allowed, 4, 0);
             this.tableLayoutPanel5.Controls.Add(this.setting_open, 3, 0);
             this.tableLayoutPanel5.Controls.Add(this.save_button, 2, 0);
@@ -789,7 +806,7 @@ namespace WindowsFormsApp1
             this.setting_allowed.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.setting_allowed.Font = new System.Drawing.Font("굴림", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.setting_allowed.ForeColor = System.Drawing.Color.SpringGreen;
-            this.setting_allowed.Location = new System.Drawing.Point(648, 2);
+            this.setting_allowed.Location = new System.Drawing.Point(645, 2);
             this.setting_allowed.Margin = new System.Windows.Forms.Padding(2);
             this.setting_allowed.Name = "setting_allowed";
             this.setting_allowed.Size = new System.Drawing.Size(103, 29);
@@ -802,10 +819,10 @@ namespace WindowsFormsApp1
             this.setting_open.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.setting_open.Font = new System.Drawing.Font("굴림", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.setting_open.ForeColor = System.Drawing.Color.SpringGreen;
-            this.setting_open.Location = new System.Drawing.Point(554, 2);
+            this.setting_open.Location = new System.Drawing.Point(552, 2);
             this.setting_open.Margin = new System.Windows.Forms.Padding(2);
             this.setting_open.Name = "setting_open";
-            this.setting_open.Size = new System.Drawing.Size(90, 29);
+            this.setting_open.Size = new System.Drawing.Size(89, 29);
             this.setting_open.TabIndex = 7;
             this.setting_open.Text = "전량열기";
             this.setting_open.UseVisualStyleBackColor = false;
@@ -815,7 +832,7 @@ namespace WindowsFormsApp1
             this.save_button.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.save_button.Font = new System.Drawing.Font("굴림", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.save_button.ForeColor = System.Drawing.Color.SpringGreen;
-            this.save_button.Location = new System.Drawing.Point(455, 2);
+            this.save_button.Location = new System.Drawing.Point(453, 2);
             this.save_button.Margin = new System.Windows.Forms.Padding(2);
             this.save_button.Name = "save_button";
             this.save_button.Size = new System.Drawing.Size(95, 29);
@@ -828,11 +845,11 @@ namespace WindowsFormsApp1
             this.setting_name.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.setting_name.Location = new System.Drawing.Point(126, 2);
+            this.setting_name.Location = new System.Drawing.Point(125, 2);
             this.setting_name.Margin = new System.Windows.Forms.Padding(2);
             this.setting_name.Name = "setting_name";
             this.setting_name.ReadOnly = true;
-            this.setting_name.Size = new System.Drawing.Size(325, 21);
+            this.setting_name.Size = new System.Drawing.Size(324, 21);
             this.setting_name.TabIndex = 1;
             // 
             // label5
@@ -845,7 +862,7 @@ namespace WindowsFormsApp1
             this.label5.Location = new System.Drawing.Point(2, 0);
             this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(120, 33);
+            this.label5.Size = new System.Drawing.Size(119, 33);
             this.label5.TabIndex = 9;
             this.label5.Text = "전략명";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -3522,24 +3539,6 @@ namespace WindowsFormsApp1
             this.tableLayoutPanel25.Size = new System.Drawing.Size(259, 26);
             this.tableLayoutPanel25.TabIndex = 8;
             // 
-            // sell_set1_after
-            // 
-            this.sell_set1_after.FormattingEnabled = true;
-            this.sell_set1_after.Location = new System.Drawing.Point(88, 2);
-            this.sell_set1_after.Margin = new System.Windows.Forms.Padding(2);
-            this.sell_set1_after.Name = "sell_set1_after";
-            this.sell_set1_after.Size = new System.Drawing.Size(82, 21);
-            this.sell_set1_after.TabIndex = 22;
-            // 
-            // sell_set2_after
-            // 
-            this.sell_set2_after.FormattingEnabled = true;
-            this.sell_set2_after.Location = new System.Drawing.Point(174, 2);
-            this.sell_set2_after.Margin = new System.Windows.Forms.Padding(2);
-            this.sell_set2_after.Name = "sell_set2_after";
-            this.sell_set2_after.Size = new System.Drawing.Size(83, 21);
-            this.sell_set2_after.TabIndex = 24;
-            // 
             // label38
             // 
             this.label38.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -3557,22 +3556,23 @@ namespace WindowsFormsApp1
             this.label38.Text = "매도설정";
             this.label38.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // hold_deny
+            // sell_set1_after
             // 
-            this.hold_deny.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.hold_deny.AutoSize = true;
-            this.hold_deny.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.hold_deny.Font = new System.Drawing.Font("굴림", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.hold_deny.Location = new System.Drawing.Point(2, 71);
-            this.hold_deny.Margin = new System.Windows.Forms.Padding(2);
-            this.hold_deny.Name = "hold_deny";
-            this.hold_deny.Size = new System.Drawing.Size(175, 19);
-            this.hold_deny.TabIndex = 10;
-            this.hold_deny.Text = "보유 종목 매수 금지";
-            this.hold_deny.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.hold_deny.UseVisualStyleBackColor = false;
+            this.sell_set1_after.FormattingEnabled = true;
+            this.sell_set1_after.Location = new System.Drawing.Point(88, 2);
+            this.sell_set1_after.Margin = new System.Windows.Forms.Padding(2);
+            this.sell_set1_after.Name = "sell_set1_after";
+            this.sell_set1_after.Size = new System.Drawing.Size(82, 21);
+            this.sell_set1_after.TabIndex = 22;
+            // 
+            // sell_set2_after
+            // 
+            this.sell_set2_after.FormattingEnabled = true;
+            this.sell_set2_after.Location = new System.Drawing.Point(174, 2);
+            this.sell_set2_after.Margin = new System.Windows.Forms.Padding(2);
+            this.sell_set2_after.Name = "sell_set2_after";
+            this.sell_set2_after.Size = new System.Drawing.Size(83, 21);
+            this.sell_set2_after.TabIndex = 24;
             // 
             // Setting
             // 

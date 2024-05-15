@@ -944,7 +944,7 @@ namespace WindowsFormsApp1
             String[] clear_sell_loss_after2_tmp = reader.ReadLine().Split('/');
             clear_sell_loss_after2.Checked = Convert.ToBoolean(clear_sell_loss_after2_tmp[1]);
 
-            //청산익절시간외단일가
+            //청산인덱스
             String[] clear_index_tmp = reader.ReadLine().Split('/');
             clear_index.Checked = Convert.ToBoolean(clear_index_tmp[1]);
 
