@@ -1057,7 +1057,6 @@ namespace WindowsFormsApp1
         }
 
         private bool index_buy = false;
-        private bool index_sell = false;
         private bool index_clear = false;
         private bool index_dual = false;
 
@@ -2177,7 +2176,7 @@ namespace WindowsFormsApp1
                     string time1 = DateTime.Now.ToString("HH:mm:ss");
 
                     //매도 조건식일 경우
-                    if (utility.sell_condition && utility.Fomula_list_sell_text.Split('^')[1] == Condition_ID)
+                    if (utility.Fomula_list_sell_text.Split('^')[1] == Condition_ID)
                     {
                         if (findRows1.Length != 0 && findRows1[0]["상태"].Equals("매수완료"))
                         {
@@ -2297,6 +2296,9 @@ namespace WindowsFormsApp1
                     DataRow[] findRows = dtCondStock.Select($"종목코드 = '{Stock_Code}'");
                     if (findRows.Length == 0) return;
 
+                    //매도 조건식일 경우
+                    if (utility.Fomula_list_sell_text.Split('^')[1] == Condition_ID) return;
+
                     bool isExitStock = false;
                     string logMessage = "";
 
@@ -2369,7 +2371,7 @@ namespace WindowsFormsApp1
                 account_check_sell();
             }
 
-            //지수연동
+            //지수연동청산
             if (index_clear)
             {
                 account_check_sell();
@@ -2849,11 +2851,6 @@ namespace WindowsFormsApp1
         //조건식 매도(대기)
         private void sell_check_condition(string code, string price, string percent, string time, string order_num, string gubun)
         {
-            if (index_sell)
-            {
-                return;
-            }
-
             TimeSpan t_code = TimeSpan.Parse(time);
             TimeSpan t_start = TimeSpan.Parse(utility.sell_condition_start);
             TimeSpan t_end = TimeSpan.Parse(utility.sell_condition_end);
@@ -2965,6 +2962,7 @@ namespace WindowsFormsApp1
                 if (t_time0.CompareTo(t_now) <= 0 && t_now.CompareTo(t_time1) < 0)
                 {
                     WriteLog_Order($"[{sell_message}/주문접수/{gubun}] : {code_name}({code}) {order_acc}개 {percent} 정규장 종료\n");
+                    return;
                 }
                 else if (t_time1.CompareTo(t_now) <= 0 && t_now.CompareTo(t_time2) < 0)
                 {
@@ -2977,6 +2975,7 @@ namespace WindowsFormsApp1
                 else
                 {
                     WriteLog_Order($"[{sell_message}/주문접수/{gubun}] : {code_name}({code}) {order_acc}개 {percent} 시간외단일가 종료\n");
+                    return;
                 }
 
                 WriteLog_Order($"[{sell_message}/주문접수/{gubun}] : {code_name}({code}) {order_acc}개 {percent}\n");
