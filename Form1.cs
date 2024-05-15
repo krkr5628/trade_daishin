@@ -2981,9 +2981,6 @@ namespace WindowsFormsApp1
                 WriteLog_Order($"[{sell_message}/주문접수/{gubun}] : {code_name}({code}) {order_acc}개 {percent}\n");
                 telegram_message($"[{sell_message}/주문접수/{gubun}] : {code_name}({code}) {order_acc}개 {percent}\n");
 
-                string tmp_sell_message1 = sell_message.Split('/')[0]; //청산매도 등
-                string tmp_sell_message2 = sell_message.Split('/')[1]; //일반,수익,손실
-
                 //시간외종가
                 if (market_time == 1)
                 {
@@ -3095,7 +3092,7 @@ namespace WindowsFormsApp1
                     }
                 }
                 //시장가 주문 + 청산주문
-                else if (tmp_sell_message1.Equals("청산매도") || order_method[0].Equals("시장가"))
+                else if (sell_message.Split('/')[0].Equals("청산매도") || order_method[0].Equals("시장가"))
                 {
                     CpTd0311.SetInputValue(0, "1"); //매도
                     CpTd0311.SetInputValue(1, acc_text.Text); //계좌번호
