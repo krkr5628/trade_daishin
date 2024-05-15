@@ -63,7 +63,6 @@ namespace WindowsFormsApp1
             this.duplication_deny = new System.Windows.Forms.CheckBox();
             this.max_hold_text = new System.Windows.Forms.TextBox();
             this.before_time_deny = new System.Windows.Forms.CheckBox();
-            this.hold_deny = new System.Windows.Forms.CheckBox();
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
             this.setting_allowed = new System.Windows.Forms.Button();
             this.setting_open = new System.Windows.Forms.Button();
@@ -264,6 +263,7 @@ namespace WindowsFormsApp1
             this.sell_set1_after = new System.Windows.Forms.ComboBox();
             this.sell_set2_after = new System.Windows.Forms.ComboBox();
             this.label38 = new System.Windows.Forms.Label();
+            this.hold_deny = new System.Windows.Forms.CheckBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
@@ -760,23 +760,6 @@ namespace WindowsFormsApp1
             this.before_time_deny.Text = "시간전 검출 매수 금지";
             this.before_time_deny.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.before_time_deny.UseVisualStyleBackColor = false;
-            // 
-            // hold_deny
-            // 
-            this.hold_deny.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.hold_deny.AutoSize = true;
-            this.hold_deny.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.hold_deny.Font = new System.Drawing.Font("굴림", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.hold_deny.Location = new System.Drawing.Point(2, 71);
-            this.hold_deny.Margin = new System.Windows.Forms.Padding(2);
-            this.hold_deny.Name = "hold_deny";
-            this.hold_deny.Size = new System.Drawing.Size(175, 19);
-            this.hold_deny.TabIndex = 10;
-            this.hold_deny.Text = "보유 종목 매수 금지";
-            this.hold_deny.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.hold_deny.UseVisualStyleBackColor = false;
             // 
             // tableLayoutPanel5
             // 
@@ -3574,6 +3557,23 @@ namespace WindowsFormsApp1
             this.label38.Text = "매도설정";
             this.label38.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // hold_deny
+            // 
+            this.hold_deny.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.hold_deny.AutoSize = true;
+            this.hold_deny.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.hold_deny.Font = new System.Drawing.Font("굴림", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.hold_deny.Location = new System.Drawing.Point(2, 71);
+            this.hold_deny.Margin = new System.Windows.Forms.Padding(2);
+            this.hold_deny.Name = "hold_deny";
+            this.hold_deny.Size = new System.Drawing.Size(175, 19);
+            this.hold_deny.TabIndex = 10;
+            this.hold_deny.Text = "보유 종목 매수 금지";
+            this.hold_deny.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.hold_deny.UseVisualStyleBackColor = false;
+            // 
             // Setting
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
@@ -3690,7 +3690,6 @@ namespace WindowsFormsApp1
         private System.Windows.Forms.CheckBox buy_condition;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel6;
         private System.Windows.Forms.CheckBox before_time_deny;
-        private System.Windows.Forms.CheckBox hold_deny;
         private System.Windows.Forms.TextBox buy_condition_end;
         private System.Windows.Forms.TextBox textBox40;
         private System.Windows.Forms.TextBox buy_condition_start;
@@ -3902,5 +3901,6 @@ namespace WindowsFormsApp1
         private System.Windows.Forms.ComboBox sell_set1_after;
         private System.Windows.Forms.ComboBox sell_set2_after;
         private System.Windows.Forms.Label label38;
+        private System.Windows.Forms.CheckBox hold_deny;
     }
 }
