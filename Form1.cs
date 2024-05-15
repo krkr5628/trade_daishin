@@ -2982,6 +2982,7 @@ namespace WindowsFormsApp1
                 telegram_message($"[{sell_message}/주문접수/{gubun}] : {code_name}({code}) {order_acc}개 {percent}\n");
 
                 //시간외종가
+                //https://money2.creontrade.com/e5/mboard/ptype_basic/HTS_Plus_Helper/DW_Basic_Read_Page.aspx?boardseq=291&seq=177&page=1&searchString=&p=&v=&m=
                 if (market_time == 1)
                 {
                     if (sell_message.Equals("청산매도/일반") || sell_message.Equals("청산매도/수익") && !utility.clear_sell_profit_after1)
@@ -3002,16 +3003,11 @@ namespace WindowsFormsApp1
                     }
 
                     //
-                    order_method = sell_condtion_method_after.Split('/');
-                    //
-                    int edited_price_hoga = hoga_cal(Convert.ToInt32(price), order_method[1].Equals("현재가") ? 0 : Convert.ToInt32(order_method[1].Replace("호가", "")));
-                    //
                     CpTd0322.SetInputValue(0, "1"); //매도
                     CpTd0322.SetInputValue(1, acc_text.Text); //계좌번호
                     CpTd0322.SetInputValue(2, gubun); //상품관리구분코드
                     CpTd0322.SetInputValue(3, code); //종목코드
                     CpTd0322.SetInputValue(4, order_acc); //주문수량
-                    CpTd0322.SetInputValue(5, edited_price_hoga); //주문단가
 
                     int error = CpTd0322.BlockRequest();
 
@@ -3040,7 +3036,8 @@ namespace WindowsFormsApp1
 
                 }
                 //시간외단일가
-                else if(market_time == 2)
+                //https://money2.creontrade.com/e5/mboard/ptype_basic/HTS_Plus_Helper/DW_Basic_Read_Page.aspx?boardseq=284&seq=183&page=1&searchString=%eb%8b%a8%ec%9d%bc%ea%b0%80&p=8841&v=8643&m=9505
+                else if (market_time == 2)
                 {
                     if (sell_message.Equals("청산매도/일반") || sell_message.Equals("청산매도/수익") && !utility.clear_sell_profit_after2)
                     {
@@ -3059,12 +3056,17 @@ namespace WindowsFormsApp1
                         return;
                     }
 
+                    order_method = sell_condtion_method_after.Split('/');
+                    //
+                    int edited_price_hoga = hoga_cal(Convert.ToInt32(price), order_method[1].Equals("현재가") ? 0 : Convert.ToInt32(order_method[1].Replace("호가", "")));
+
                     //
                     CpTd0386.SetInputValue(0, "1"); //매도
                     CpTd0386.SetInputValue(1, acc_text.Text); //계좌번호
                     CpTd0386.SetInputValue(2, gubun); //상품관리구분코드
                     CpTd0386.SetInputValue(3, code); //종목코드
                     CpTd0386.SetInputValue(4, order_acc); //주문수량
+                    CpTd0386.SetInputValue(5, edited_price_hoga); //주문단가
 
                     int error = CpTd0386.BlockRequest();
 
