@@ -101,6 +101,8 @@ namespace WindowsFormsApp1
         public static int buy_set2;
         public static int sell_set1; //매도설정
         public static int sell_set2;
+        public static int sell_set1_after; //매도설정
+        public static int sell_set2_after;
 
         public static bool kospi_commodity;
         public static bool kosdak_commodity;
@@ -392,6 +394,11 @@ namespace WindowsFormsApp1
             String[] sell_set_tmp = reader.ReadLine().Split('/');
             sell_set1 = Convert.ToInt32(sell_set_tmp[1]);
             sell_set2 = Convert.ToInt32(sell_set_tmp[2]);
+
+            //매도설정
+            String[] sell_set_after_tmp = reader.ReadLine().Split('/');
+            sell_set1_after = Convert.ToInt32(sell_set_after_tmp[1]);
+            sell_set2_after = Convert.ToInt32(sell_set_after_tmp[2]);
 
             //코스피선물
             String[] kospi_commodity_tmp = reader.ReadLine().Split('/');

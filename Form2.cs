@@ -91,14 +91,6 @@ namespace WindowsFormsApp1
             //미사용 항목 경고창(19개)
             sell_condition.CheckedChanged += HandleCheckedChanged;
             profit_ts.CheckedChanged += HandleCheckedChanged;
-            profit_after1.CheckedChanged += HandleCheckedChanged;
-            profit_after2.CheckedChanged += HandleCheckedChanged;
-            loss_after1.CheckedChanged += HandleCheckedChanged;
-            loss_after2.CheckedChanged += HandleCheckedChanged;
-            clear_sell_profit_after1.CheckedChanged += HandleCheckedChanged;
-            clear_sell_profit_after2.CheckedChanged += HandleCheckedChanged;
-            clear_sell_loss_after1.CheckedChanged += HandleCheckedChanged;
-            clear_sell_loss_after2.CheckedChanged += HandleCheckedChanged;
             //
             hold_deny.CheckedChanged += HandleCheckedChanged;
             term_for_buy.CheckedChanged += HandleCheckedChanged;
@@ -577,12 +569,15 @@ namespace WindowsFormsApp1
         {
             //매수매도방식
             string[] mode = { "지정가", "시장가" };
+            string[] mode2 = { "지정가" };
             string[] hoo = { "5호가", "4호가", "3호가", "2호가", "1호가", "현재가", "시장가", "-1호가", "-2호가", "-3호가", "-4호가", "-5호가" };
-            string[] mode_index = { "코스피_지수", "코스닥_지수", "코스피_선물", "코스닥_선물" };
+            string[] hoo2 = { "5호가", "4호가", "3호가", "2호가", "1호가", "현재가", "-1호가", "-2호가", "-3호가", "-4호가", "-5호가" };
             buy_set1.Items.AddRange(mode);
             buy_set2.Items.AddRange(hoo);
             sell_set1.Items.AddRange(mode);
             sell_set2.Items.AddRange(hoo);
+            sell_set1_after.Items.AddRange(mode2);
+            sell_set2_after.Items.AddRange(hoo2);
         }
 
         //-----------------------------------열기 및 반영----------------------------------------
@@ -690,6 +685,7 @@ namespace WindowsFormsApp1
                     //
                     tmp.Add("매수설정/" + Convert.ToString(buy_set1.SelectedIndex) + "/" + Convert.ToString(buy_set2.SelectedIndex));
                     tmp.Add("매도설정/" + Convert.ToString(sell_set1.SelectedIndex) + "/" + Convert.ToString(sell_set2.SelectedIndex));
+                    tmp.Add("매도설정_시간외/" + Convert.ToString(sell_set1_after.SelectedIndex) + "/" + Convert.ToString(sell_set2_after.SelectedIndex));
                     //
                     tmp.Add("코스피선물/" + Convert.ToString(kospi_commodity.Checked));
                     tmp.Add("코스닥선물/" + Convert.ToString(kosdak_commodity.Checked));
@@ -978,6 +974,11 @@ namespace WindowsFormsApp1
             String[] sell_set_tmp = reader.ReadLine().Split('/');
             sell_set1.SelectedIndex = Convert.ToInt32(sell_set_tmp[1]);
             sell_set2.SelectedIndex = Convert.ToInt32(sell_set_tmp[2]);
+
+            //매도설정
+            String[] sell_set_after_tmp = reader.ReadLine().Split('/');
+            sell_set1_after.SelectedIndex = Convert.ToInt32(sell_set_after_tmp[1]);
+            sell_set2_after.SelectedIndex = Convert.ToInt32(sell_set_after_tmp[2]);
 
             //코스피선물
             String[] kospi_commodity_tmp = reader.ReadLine().Split('/');
