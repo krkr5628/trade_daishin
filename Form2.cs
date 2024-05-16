@@ -91,8 +91,6 @@ namespace WindowsFormsApp1
             //미사용 항목 경고창(19개)
             hold_deny.CheckedChanged += HandleCheckedChanged; //? 제거
             profit_ts.CheckedChanged += HandleCheckedChanged;
-            term_for_buy.CheckedChanged += HandleCheckedChanged;
-            term_for_sell.CheckedChanged += HandleCheckedChanged;
             term_for_non_buy.CheckedChanged += HandleCheckedChanged;
             term_for_non_sell.CheckedChanged += HandleCheckedChanged;
         }

@@ -989,6 +989,7 @@ namespace WindowsFormsApp1
             if (CpTd6033.GetDibStatus() == 1)
             {
                 WriteLog_System("DibRq 요청 수신대기 : 체결내역업데이트(주문번호)");
+
                 System.Threading.Thread.Sleep(1000);
                 Transaction_Detail_Check(order_number, gubun, trade);
                 return;
@@ -2566,7 +2567,9 @@ namespace WindowsFormsApp1
                 if (trade_status_already >= trade_status_limit) return "대기";
             }
 
-            //이전 종목 매수와의 TERM
+            //매수지연(기본값 200 => 프로그램 여러 호출단에서 기본 간격 200ms가 존재하므로 기본 지연 + 입력값
+            int term = 200;
+            if(utility.term_for_buy) term = Convert.ToInt32(utility.term_for_buy_text);
 
             //기존에 포함된 종목이면 따로 변경해줘야 함
             if (check)
@@ -2581,6 +2584,9 @@ namespace WindowsFormsApp1
             //매수 주문(1초에 5회)
             //주문 방식 구분
             string[] order_method = buy_condtion_method.Text.Split('/');
+
+            //매수지연
+            System.Threading.Thread.Sleep(term);
 
             //시장가 주문
             if (order_method[0].Equals("시장가"))
@@ -2599,8 +2605,6 @@ namespace WindowsFormsApp1
 
                 WriteLog_Order($"[매수주문/시장가/주문접수/{gubun}] : {code_name}({code}) {order_acc_market}개\n");
                 telegram_message($"[매수주문/시장가/주문접수/{gubun}] : {code_name}({code}) {order_acc_market}개\n");
-
-                System.Threading.Thread.Sleep(200);
 
                 //
                 CpTd0311.SetInputValue(0, "2"); //매수
@@ -2980,8 +2984,15 @@ namespace WindowsFormsApp1
                     return;
                 }
 
+                //매도지연(기본값 200 => 프로그램 여러 호출단에서 기본 간격 200ms가 존재하므로 기본 지연 + 입력값
+                int term = 200;
+                if (utility.term_for_sell) term = Convert.ToInt32(utility.term_for_sell_text);
+
                 WriteLog_Order($"[{sell_message}/주문접수/{gubun}] : {code_name}({code}) {order_acc}개 {percent}\n");
                 telegram_message($"[{sell_message}/주문접수/{gubun}] : {code_name}({code}) {order_acc}개 {percent}\n");
+
+                //매도지연
+                System.Threading.Thread.Sleep(term);
 
                 //시간외종가
                 //https://money2.creontrade.com/e5/mboard/ptype_basic/HTS_Plus_Helper/DW_Basic_Read_Page.aspx?boardseq=291&seq=177&page=1&searchString=&p=&v=&m=
