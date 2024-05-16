@@ -753,6 +753,8 @@ namespace WindowsFormsApp1
             CssAlert.Subscribe(); //실시간 편출입 받기
             CpConclusion.Subscribe(); //실시간 체결 등록
             //
+            timer2.Start(); //체결 내역 업데이트 - 100ms
+            //
             timer3.Start(); //편입 종목 감시 - 200ms
         }
 
@@ -3214,6 +3216,10 @@ namespace WindowsFormsApp1
         //#################################################여기서 부터 시작############################################
         //https://money2.daishin.com/e5/mboard/ptype_basic/HTS_Plus_Helper/DW_Basic_Read.aspx?boardseq=291&seq=155&page=3&searchString=&p=&v=&m=
         //------------주문 상태 확인 및 정정---------------------
+
+        //주문번호가 업데이트 않된 경우가 있어서 임시 저장한다.
+        private Queue<string[]> Trade_check_save = new Queue<string[]>();
+
         private void Trade_Check()
         {
             //string account = CpConclusion.GetHeaderValue(7); //계좌번호
@@ -3230,101 +3236,124 @@ namespace WindowsFormsApp1
             string hold_sum = Convert.ToString(CpConclusion.GetHeaderValue(23)); //체결기준잔고수량
             string time = DateTime.Now.ToString("HH:mm:ss"); //시간
 
-            System.Threading.Thread.Sleep(500);
+            string[] tmp = { gugu, code, code_name, order_number, trade_Gubun, hold_sum, time };
 
-            DataRow[] findRows = dtCondStock.AsEnumerable().Where(row => row.Field<string>("주문번호") == order_number).ToArray();
-            string order_sum = findRows[0]["보유수량"].ToString().Split('/')[1];
+            Trade_check_save.Enqueue(tmp);
+        }
 
-            WriteLog_Order($"[체결/{code_name}({code})/{trade_Gubun}] : {hold_sum}/{order_sum}\n");
-
-            //매수확인
-            if (trade_Gubun.Equals("매수") && order_sum == hold_sum)
+        //100ms 마다 값을 점검한다.
+        private void Trade_Check_Event(object sender, EventArgs e)
+        {
+            if(Trade_check_save.Count != 0)
             {
-                //체결내역업데이트(주문번호)
-                dtCondStock_Transaction.Clear();
-                Transaction_Detail_seperate(order_number, "매수");
-
-                System.Threading.Thread.Sleep(200);
-
-                findRows[0]["보유수량"] = $"{hold_sum}/{order_sum}";
-                findRows[0]["상태"] = "매수완료";
-                findRows[0]["매수시각"] = time;
-                dtCondStock.AcceptChanges();
-                dataGridView1.DataSource = dtCondStock;
-
-                //매도실현손익(제세금, 수수료 포함)
-                today_profit_tax_load_seperate();
-
-                System.Threading.Thread.Sleep(200);
-
-                //D+2 예수금 + 계좌 보유 종목
-                dtCondStock_hold.Clear();
-                GetCashInfo_Seperate();
-
-                //"[매수주문/시장가/주문성공] : " + code_name + "(" + code + ") " + order_acc_market + "개\n")
-                WriteLog_Order($"[매수주문/정상완료] : {code_name}({code}) {order_sum}개 {findRows[0]["편입가"]}원\n");
-                telegram_message($"[매수주문/정상완료] : {code_name}({code}) {order_sum}개 {findRows[0]["편입가"]}원\n");
-                //HTS에서 매수 처리 불가 => 체결 정보 만으로 주문 수량을 알 수 없어 주문 완료 상태 구분 불가
-            }
-            //매도확인
-            else if (trade_Gubun.Equals("매도") && hold_sum.Equals("0"))
-            {
-                //체결내역업데이트(주문번호)
-                dtCondStock_Transaction.Clear();
-                Transaction_Detail_seperate(order_number, "매도");
-
-                System.Threading.Thread.Sleep(200);
-
-                findRows[0]["보유수량"] = $"{hold_sum}/0";
-
-                //중복거래허용
-                if (!utility.duplication_deny)
+                string[] tmp = Trade_check_save.Peek();
+                DataRow[] findRows = dtCondStock.AsEnumerable().Where(row => row.Field<string>("주문번호") == tmp[3]).ToArray();
+                if (findRows.Any())
                 {
-                    //편입 차트 상태 '대기' 변경
-                    findRows[0]["상태"] = "대기";
-                    findRows[0]["매도시각"] = time;
-                    dtCondStock.AcceptChanges();
-                    dataGridView1.DataSource = dtCondStock;
+                    string gugu = tmp[0];
+                    string code = tmp[1]; //종목코드
+                    string code_name = tmp[2]; //종목명
+                    string order_number = tmp[3]; //주문번호
+                    string trade_Gubun = tmp[4]; //매매구분(1매도,2매수)
+                    string hold_sum = tmp[5]; //체결기준잔고수량
+                    string time = tmp[6]; //시간
+
+                    Trade_check_save.Dequeue();
+
+                    string order_sum = findRows[0]["보유수량"].ToString().Split('/')[1];
+
+                    WriteLog_Order($"[체결/{code_name}({code})/{trade_Gubun}] : {hold_sum}/{order_sum}\n");
+
+                    //매수확인
+                    if (trade_Gubun.Equals("매수") && order_sum == hold_sum)
+                    {
+                        //체결내역업데이트(주문번호)
+                        dtCondStock_Transaction.Clear();
+                        Transaction_Detail_seperate(order_number, "매수");
+
+                        System.Threading.Thread.Sleep(200);
+
+                        findRows[0]["보유수량"] = $"{hold_sum}/{order_sum}";
+                        findRows[0]["상태"] = "매수완료";
+                        findRows[0]["매수시각"] = time;
+                        dtCondStock.AcceptChanges();
+                        dataGridView1.DataSource = dtCondStock;
+
+                        //매도실현손익(제세금, 수수료 포함)
+                        today_profit_tax_load_seperate();
+
+                        System.Threading.Thread.Sleep(200);
+
+                        //D+2 예수금 + 계좌 보유 종목
+                        dtCondStock_hold.Clear();
+                        GetCashInfo_Seperate();
+
+                        //"[매수주문/시장가/주문성공] : " + code_name + "(" + code + ") " + order_acc_market + "개\n")
+                        WriteLog_Order($"[매수주문/정상완료] : {code_name}({code}) {order_sum}개 {findRows[0]["편입가"]}원\n");
+                        telegram_message($"[매수주문/정상완료] : {code_name}({code}) {order_sum}개 {findRows[0]["편입가"]}원\n");
+                        //HTS에서 매수 처리 불가 => 체결 정보 만으로 주문 수량을 알 수 없어 주문 완료 상태 구분 불가
+                    }
+                    //매도확인
+                    else if (trade_Gubun.Equals("매도") && hold_sum.Equals("0"))
+                    {
+                        //체결내역업데이트(주문번호)
+                        dtCondStock_Transaction.Clear();
+                        Transaction_Detail_seperate(order_number, "매도");
+
+                        System.Threading.Thread.Sleep(200);
+
+                        findRows[0]["보유수량"] = $"{hold_sum}/0";
+
+                        //중복거래허용
+                        if (!utility.duplication_deny)
+                        {
+                            //편입 차트 상태 '대기' 변경
+                            findRows[0]["상태"] = "대기";
+                            findRows[0]["매도시각"] = time;
+                            dtCondStock.AcceptChanges();
+                            dataGridView1.DataSource = dtCondStock;
+                        }
+                        //중복거래비허용
+                        else
+                        {
+                            //code 종목 실시간 해지
+                            StockCur.SetInputValue(0, code);
+                            StockCur.Unsubscribe();
+                            //
+                            findRows[0]["상태"] = "매도완료";
+                            findRows[0]["매도시각"] = time;
+                            dtCondStock.AcceptChanges();
+                            dataGridView1.DataSource = dtCondStock;
+                        }
+                        dtCondStock.AcceptChanges();
+                        dataGridView1.DataSource = dtCondStock;
+
+                        System.Threading.Thread.Sleep(200);
+
+                        //보유 수량 업데이트
+                        string[] hold_status = max_hoid.Text.Split('/');
+                        int hold = Convert.ToInt32(hold_status[0]);
+                        int hold_max = Convert.ToInt32(hold_status[1]);
+                        max_hoid.Text = $"{hold - 1}/{hold_max}";
+
+                        //당일 손익 + 당일 손일률 + 당일 수수료 업데이트
+                        today_profit_tax_load_seperate();
+
+                        //Message
+                        WriteLog_Order($"[매도주문/정상완료] : {code_name}({code}) {order_sum}개 {findRows[0]["매도가"]}원\n");
+                        telegram_message($"[매도주문/정상완료] : {code_name}({code}) {order_sum}개 {findRows[0]["매도가"]}원\n");
+
+                        //D+2 예수금 + 계좌 보유 종목
+                        dtCondStock_hold.Clear();
+                        GetCashInfo_Seperate();
+                    }
+                    else
+                    {
+                        //매수 미체결
+
+                        //매도 미체결
+                    }
                 }
-                //중복거래비허용
-                else
-                {
-                    //code 종목 실시간 해지
-                    StockCur.SetInputValue(0, code);
-                    StockCur.Unsubscribe();
-                    //
-                    findRows[0]["상태"] = "매도완료";
-                    findRows[0]["매도시각"] = time;
-                    dtCondStock.AcceptChanges();
-                    dataGridView1.DataSource = dtCondStock;
-                }
-                dtCondStock.AcceptChanges();
-                dataGridView1.DataSource = dtCondStock;
-
-                System.Threading.Thread.Sleep(200);
-
-                //보유 수량 업데이트
-                string[] hold_status = max_hoid.Text.Split('/');
-                int hold = Convert.ToInt32(hold_status[0]);
-                int hold_max = Convert.ToInt32(hold_status[1]);
-                max_hoid.Text = $"{hold - 1}/{hold_max}";
-
-                //당일 손익 + 당일 손일률 + 당일 수수료 업데이트
-                today_profit_tax_load_seperate();
-
-                //Message
-                WriteLog_Order($"[매도주문/정상완료] : {code_name}({code}) {order_sum}개 {findRows[0]["매도가"]}원\n");
-                telegram_message($"[매도주문/정상완료] : {code_name}({code}) {order_sum}개 {findRows[0]["매도가"]}원\n");
-
-                //D+2 예수금 + 계좌 보유 종목
-                dtCondStock_hold.Clear();
-                GetCashInfo_Seperate();
-            }
-            else
-            {
-                //매수 미체결
-
-                //매도 미체결
             }
         }
 
