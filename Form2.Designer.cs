@@ -264,6 +264,11 @@ namespace WindowsFormsApp1
             this.label38 = new System.Windows.Forms.Label();
             this.sell_set1_after = new System.Windows.Forms.ComboBox();
             this.sell_set2_after = new System.Windows.Forms.ComboBox();
+            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.textBox5 = new System.Windows.Forms.TextBox();
+            this.textBox6 = new System.Windows.Forms.TextBox();
+            this.textBox7 = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
@@ -1114,6 +1119,9 @@ namespace WindowsFormsApp1
             this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 5.571427F));
             this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 21.08173F));
             this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 26.20576F));
+            this.tableLayoutPanel9.Controls.Add(this.textBox6, 2, 2);
+            this.tableLayoutPanel9.Controls.Add(this.textBox5, 2, 1);
+            this.tableLayoutPanel9.Controls.Add(this.textBox4, 2, 0);
             this.tableLayoutPanel9.Controls.Add(this.profit_percent, 0, 0);
             this.tableLayoutPanel9.Controls.Add(this.profit_percent_text, 1, 0);
             this.tableLayoutPanel9.Controls.Add(this.loss_percent, 3, 0);
@@ -1128,6 +1136,7 @@ namespace WindowsFormsApp1
             this.tableLayoutPanel9.Controls.Add(this.profit_won, 0, 1);
             this.tableLayoutPanel9.Controls.Add(this.profit_ts, 0, 2);
             this.tableLayoutPanel9.Controls.Add(this.profit_won_text, 1, 1);
+            this.tableLayoutPanel9.Controls.Add(this.textBox7, 2, 3);
             this.tableLayoutPanel9.Font = new System.Drawing.Font("굴림", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.tableLayoutPanel9.Location = new System.Drawing.Point(4, 16);
             this.tableLayoutPanel9.Margin = new System.Windows.Forms.Padding(2);
@@ -1358,6 +1367,7 @@ namespace WindowsFormsApp1
             this.tableLayoutPanel10.Controls.Add(this.textBox1, 2, 1);
             this.tableLayoutPanel10.Controls.Add(this.textBox2, 2, 2);
             this.tableLayoutPanel10.Controls.Add(this.clear_index, 0, 3);
+            this.tableLayoutPanel10.Controls.Add(this.textBox3, 2, 3);
             this.tableLayoutPanel10.Font = new System.Drawing.Font("굴림", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.tableLayoutPanel10.Location = new System.Drawing.Point(4, 19);
             this.tableLayoutPanel10.Margin = new System.Windows.Forms.Padding(2);
@@ -1403,6 +1413,9 @@ namespace WindowsFormsApp1
             // 
             // textBox29
             // 
+            this.textBox29.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox29.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.textBox29.Location = new System.Drawing.Point(220, 2);
             this.textBox29.Margin = new System.Windows.Forms.Padding(2);
@@ -1549,6 +1562,9 @@ namespace WindowsFormsApp1
             // 
             // textBox1
             // 
+            this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox1.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.textBox1.Location = new System.Drawing.Point(220, 25);
             this.textBox1.Margin = new System.Windows.Forms.Padding(2);
@@ -1559,6 +1575,9 @@ namespace WindowsFormsApp1
             // 
             // textBox2
             // 
+            this.textBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox2.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.textBox2.Location = new System.Drawing.Point(220, 48);
             this.textBox2.Margin = new System.Windows.Forms.Padding(2);
@@ -3574,6 +3593,71 @@ namespace WindowsFormsApp1
             this.sell_set2_after.Size = new System.Drawing.Size(83, 21);
             this.sell_set2_after.TabIndex = 24;
             // 
+            // textBox3
+            // 
+            this.textBox3.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBox3.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.textBox3.Location = new System.Drawing.Point(220, 71);
+            this.textBox3.Margin = new System.Windows.Forms.Padding(2);
+            this.textBox3.Name = "textBox3";
+            this.textBox3.Size = new System.Drawing.Size(14, 20);
+            this.textBox3.TabIndex = 39;
+            this.textBox3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // textBox4
+            // 
+            this.textBox4.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBox4.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.textBox4.Location = new System.Drawing.Point(222, 2);
+            this.textBox4.Margin = new System.Windows.Forms.Padding(2);
+            this.textBox4.Name = "textBox4";
+            this.textBox4.Size = new System.Drawing.Size(22, 20);
+            this.textBox4.TabIndex = 40;
+            this.textBox4.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // textBox5
+            // 
+            this.textBox5.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBox5.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.textBox5.Location = new System.Drawing.Point(222, 22);
+            this.textBox5.Margin = new System.Windows.Forms.Padding(2);
+            this.textBox5.Name = "textBox5";
+            this.textBox5.Size = new System.Drawing.Size(22, 20);
+            this.textBox5.TabIndex = 41;
+            this.textBox5.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // textBox6
+            // 
+            this.textBox6.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBox6.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.textBox6.Location = new System.Drawing.Point(222, 42);
+            this.textBox6.Margin = new System.Windows.Forms.Padding(2);
+            this.textBox6.Name = "textBox6";
+            this.textBox6.Size = new System.Drawing.Size(22, 20);
+            this.textBox6.TabIndex = 42;
+            this.textBox6.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // textBox7
+            // 
+            this.textBox7.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBox7.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.textBox7.Location = new System.Drawing.Point(222, 62);
+            this.textBox7.Margin = new System.Windows.Forms.Padding(2);
+            this.textBox7.Name = "textBox7";
+            this.textBox7.Size = new System.Drawing.Size(22, 20);
+            this.textBox7.TabIndex = 43;
+            this.textBox7.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
             // Setting
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
@@ -3902,5 +3986,10 @@ namespace WindowsFormsApp1
         private System.Windows.Forms.ComboBox sell_set2_after;
         private System.Windows.Forms.Label label38;
         private System.Windows.Forms.CheckBox hold_deny;
+        private System.Windows.Forms.TextBox textBox6;
+        private System.Windows.Forms.TextBox textBox5;
+        private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.TextBox textBox7;
+        private System.Windows.Forms.TextBox textBox3;
     }
 }
