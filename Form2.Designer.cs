@@ -89,6 +89,9 @@ namespace WindowsFormsApp1
             this.textBox39 = new System.Windows.Forms.TextBox();
             this.sell_condition = new System.Windows.Forms.CheckBox();
             this.tableLayoutPanel9 = new System.Windows.Forms.TableLayoutPanel();
+            this.textBox6 = new System.Windows.Forms.TextBox();
+            this.textBox5 = new System.Windows.Forms.TextBox();
+            this.textBox4 = new System.Windows.Forms.TextBox();
             this.profit_percent = new System.Windows.Forms.CheckBox();
             this.profit_percent_text = new System.Windows.Forms.TextBox();
             this.loss_percent = new System.Windows.Forms.CheckBox();
@@ -103,6 +106,7 @@ namespace WindowsFormsApp1
             this.profit_won = new System.Windows.Forms.CheckBox();
             this.profit_ts = new System.Windows.Forms.CheckBox();
             this.profit_won_text = new System.Windows.Forms.TextBox();
+            this.textBox7 = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel10 = new System.Windows.Forms.TableLayoutPanel();
             this.clear_sell = new System.Windows.Forms.CheckBox();
             this.clear_sell_profit_text = new System.Windows.Forms.TextBox();
@@ -120,6 +124,7 @@ namespace WindowsFormsApp1
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.clear_index = new System.Windows.Forms.CheckBox();
+            this.textBox3 = new System.Windows.Forms.TextBox();
             this.Fomula_list_buy = new System.Windows.Forms.ComboBox();
             this.Fomula_list_sell = new System.Windows.Forms.ComboBox();
             this.tableLayoutPanel11 = new System.Windows.Forms.TableLayoutPanel();
@@ -264,11 +269,6 @@ namespace WindowsFormsApp1
             this.label38 = new System.Windows.Forms.Label();
             this.sell_set1_after = new System.Windows.Forms.ComboBox();
             this.sell_set2_after = new System.Windows.Forms.ComboBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.textBox5 = new System.Windows.Forms.TextBox();
-            this.textBox6 = new System.Windows.Forms.TextBox();
-            this.textBox7 = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
@@ -790,7 +790,7 @@ namespace WindowsFormsApp1
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.90253F));
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15.43321F));
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.53069F));
-            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 241F));
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 243F));
             this.tableLayoutPanel5.Controls.Add(this.setting_allowed, 4, 0);
             this.tableLayoutPanel5.Controls.Add(this.setting_open, 3, 0);
             this.tableLayoutPanel5.Controls.Add(this.save_button, 2, 0);
@@ -811,7 +811,7 @@ namespace WindowsFormsApp1
             this.setting_allowed.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.setting_allowed.Font = new System.Drawing.Font("굴림", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.setting_allowed.ForeColor = System.Drawing.Color.SpringGreen;
-            this.setting_allowed.Location = new System.Drawing.Point(642, 2);
+            this.setting_allowed.Location = new System.Drawing.Point(639, 2);
             this.setting_allowed.Margin = new System.Windows.Forms.Padding(2);
             this.setting_allowed.Name = "setting_allowed";
             this.setting_allowed.Size = new System.Drawing.Size(103, 29);
@@ -824,10 +824,10 @@ namespace WindowsFormsApp1
             this.setting_open.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.setting_open.Font = new System.Drawing.Font("굴림", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.setting_open.ForeColor = System.Drawing.Color.SpringGreen;
-            this.setting_open.Location = new System.Drawing.Point(549, 2);
+            this.setting_open.Location = new System.Drawing.Point(547, 2);
             this.setting_open.Margin = new System.Windows.Forms.Padding(2);
             this.setting_open.Name = "setting_open";
-            this.setting_open.Size = new System.Drawing.Size(89, 29);
+            this.setting_open.Size = new System.Drawing.Size(88, 29);
             this.setting_open.TabIndex = 7;
             this.setting_open.Text = "전량열기";
             this.setting_open.UseVisualStyleBackColor = false;
@@ -837,10 +837,10 @@ namespace WindowsFormsApp1
             this.save_button.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.save_button.Font = new System.Drawing.Font("굴림", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.save_button.ForeColor = System.Drawing.Color.SpringGreen;
-            this.save_button.Location = new System.Drawing.Point(450, 2);
+            this.save_button.Location = new System.Drawing.Point(449, 2);
             this.save_button.Margin = new System.Windows.Forms.Padding(2);
             this.save_button.Name = "save_button";
-            this.save_button.Size = new System.Drawing.Size(95, 29);
+            this.save_button.Size = new System.Drawing.Size(94, 29);
             this.save_button.TabIndex = 6;
             this.save_button.Text = "전량저장";
             this.save_button.UseVisualStyleBackColor = false;
@@ -854,7 +854,7 @@ namespace WindowsFormsApp1
             this.setting_name.Margin = new System.Windows.Forms.Padding(2);
             this.setting_name.Name = "setting_name";
             this.setting_name.ReadOnly = true;
-            this.setting_name.Size = new System.Drawing.Size(322, 21);
+            this.setting_name.Size = new System.Drawing.Size(321, 21);
             this.setting_name.TabIndex = 1;
             // 
             // label5
@@ -1149,6 +1149,45 @@ namespace WindowsFormsApp1
             this.tableLayoutPanel9.Size = new System.Drawing.Size(468, 80);
             this.tableLayoutPanel9.TabIndex = 10;
             // 
+            // textBox6
+            // 
+            this.textBox6.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBox6.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.textBox6.Location = new System.Drawing.Point(222, 42);
+            this.textBox6.Margin = new System.Windows.Forms.Padding(2);
+            this.textBox6.Name = "textBox6";
+            this.textBox6.Size = new System.Drawing.Size(22, 20);
+            this.textBox6.TabIndex = 42;
+            this.textBox6.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // textBox5
+            // 
+            this.textBox5.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBox5.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.textBox5.Location = new System.Drawing.Point(222, 22);
+            this.textBox5.Margin = new System.Windows.Forms.Padding(2);
+            this.textBox5.Name = "textBox5";
+            this.textBox5.Size = new System.Drawing.Size(22, 20);
+            this.textBox5.TabIndex = 41;
+            this.textBox5.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // textBox4
+            // 
+            this.textBox4.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBox4.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.textBox4.Location = new System.Drawing.Point(222, 2);
+            this.textBox4.Margin = new System.Windows.Forms.Padding(2);
+            this.textBox4.Name = "textBox4";
+            this.textBox4.Size = new System.Drawing.Size(22, 20);
+            this.textBox4.TabIndex = 40;
+            this.textBox4.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
             // profit_percent
             // 
             this.profit_percent.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -1342,6 +1381,19 @@ namespace WindowsFormsApp1
             this.profit_won_text.Name = "profit_won_text";
             this.profit_won_text.Size = new System.Drawing.Size(119, 20);
             this.profit_won_text.TabIndex = 15;
+            // 
+            // textBox7
+            // 
+            this.textBox7.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBox7.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.textBox7.Location = new System.Drawing.Point(222, 62);
+            this.textBox7.Margin = new System.Windows.Forms.Padding(2);
+            this.textBox7.Name = "textBox7";
+            this.textBox7.Size = new System.Drawing.Size(22, 20);
+            this.textBox7.TabIndex = 43;
+            this.textBox7.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // tableLayoutPanel10
             // 
@@ -1600,6 +1652,19 @@ namespace WindowsFormsApp1
             this.clear_index.Text = "지수연동";
             this.clear_index.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.clear_index.UseVisualStyleBackColor = false;
+            // 
+            // textBox3
+            // 
+            this.textBox3.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBox3.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.textBox3.Location = new System.Drawing.Point(220, 71);
+            this.textBox3.Margin = new System.Windows.Forms.Padding(2);
+            this.textBox3.Name = "textBox3";
+            this.textBox3.Size = new System.Drawing.Size(14, 20);
+            this.textBox3.TabIndex = 39;
+            this.textBox3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // Fomula_list_buy
             // 
@@ -3592,71 +3657,6 @@ namespace WindowsFormsApp1
             this.sell_set2_after.Name = "sell_set2_after";
             this.sell_set2_after.Size = new System.Drawing.Size(83, 21);
             this.sell_set2_after.TabIndex = 24;
-            // 
-            // textBox3
-            // 
-            this.textBox3.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox3.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.textBox3.Location = new System.Drawing.Point(220, 71);
-            this.textBox3.Margin = new System.Windows.Forms.Padding(2);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(14, 20);
-            this.textBox3.TabIndex = 39;
-            this.textBox3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // textBox4
-            // 
-            this.textBox4.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox4.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.textBox4.Location = new System.Drawing.Point(222, 2);
-            this.textBox4.Margin = new System.Windows.Forms.Padding(2);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(22, 20);
-            this.textBox4.TabIndex = 40;
-            this.textBox4.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // textBox5
-            // 
-            this.textBox5.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox5.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.textBox5.Location = new System.Drawing.Point(222, 22);
-            this.textBox5.Margin = new System.Windows.Forms.Padding(2);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(22, 20);
-            this.textBox5.TabIndex = 41;
-            this.textBox5.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // textBox6
-            // 
-            this.textBox6.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox6.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.textBox6.Location = new System.Drawing.Point(222, 42);
-            this.textBox6.Margin = new System.Windows.Forms.Padding(2);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(22, 20);
-            this.textBox6.TabIndex = 42;
-            this.textBox6.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // textBox7
-            // 
-            this.textBox7.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox7.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.textBox7.Location = new System.Drawing.Point(222, 62);
-            this.textBox7.Margin = new System.Windows.Forms.Padding(2);
-            this.textBox7.Name = "textBox7";
-            this.textBox7.Size = new System.Drawing.Size(22, 20);
-            this.textBox7.TabIndex = 43;
-            this.textBox7.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // Setting
             // 
