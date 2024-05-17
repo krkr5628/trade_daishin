@@ -313,6 +313,11 @@ namespace WindowsFormsApp1
             acc_isa_text.Text = utility.setting_account_number;
             total_money.Text = string.Format("{0:#,##0}", Convert.ToDecimal(utility.initial_balance));
             total_money_isa.Text = string.Format("{0:#,##0}", Convert.ToDecimal(utility.initial_balance));
+            Current_User_money.Text = "0";
+            Current_User_money_isa.Text = "0";
+            User_money.Text = "0"; 
+            User_money_isa.Text = "0";
+            max_hoid.Text = "0/0";
             //
             if (utility.buy_INDEPENDENT || utility.buy_DUAL)
             {
@@ -351,11 +356,11 @@ namespace WindowsFormsApp1
             //today_profit_percent.Text = "00.00%";
             //today_profit.Text = "0";
 
-            kospi_index.Text = "미수신";
-            kosdaq_index.Text = "미수신";
-            dow_index.Text = "미수신";
-            sp_index.Text = "미수신";
-            nasdaq_index.Text = "미수신";
+            kospi_index.Text = "-";
+            kosdaq_index.Text = "-";
+            dow_index.Text = "-";
+            sp_index.Text = "-";
+            nasdaq_index.Text = "-";
 
             //초기세팅4
             if (utility.buy_OR)
@@ -370,10 +375,6 @@ namespace WindowsFormsApp1
             {
                 trading_mode.Text = "독립_모드";
             }
-
-            //갱신 주기
-            string[] ms = { "200", "400", "500", "1000", "2000", "5000" };
-            update_interval.Items.AddRange(ms);
 
             //KIS
             KIS_RUN.Text = Convert.ToString(utility.KIS_Allow); //사용여부
