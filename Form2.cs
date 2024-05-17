@@ -83,6 +83,28 @@ namespace WindowsFormsApp1
             type5_start.Leave += Type5_start_Leave;
             type5_end.Leave += Type5_end_Leave;
 
+            type1_all_start.Leave += Type1_all_start_Leave;
+            type1_all_end.Leave += Type1_all_end_Leave;
+            type2_all_start.Leave += Type2_all_start_Leave;
+            type2_all_end.Leave += Type2_all_end_Leave;
+            type3_all_start.Leave += Type3_all_start_Leave;
+            type3_all_end.Leave += Type3_all_end_Leave;
+            type4_all_start.Leave += Type4_all_start_Leave;
+            type4_all_end.Leave += Type4_all_end_Leave;
+            type5_all_start.Leave += Type5_all_start_Leave;
+            type5_all_end.Leave += Type5_all_end_Leave;
+
+            type1_isa_start.Leave += Type1_isa_start_Leave;
+            type1_isa_end.Leave += Type1_isa_end_Leave;
+            type2_isa_start.Leave += Type2_isa_start_Leave;
+            type2_isa_end.Leave += Type2_isa_end_Leave;
+            type3_isa_start.Leave += Type3_isa_start_Leave;
+            type3_isa_end.Leave += Type3_isa_end_Leave;
+            type4_isa_start.Leave += Type4_isa_start_Leave;
+            type4_isa_end.Leave += Type4_isa_end_Leave;
+            type5_isa_start.Leave += Type5_isa_start_Leave;
+            type5_isa_end.Leave += Type5_isa_end_Leave;
+
             //시간확인
             market_start_time.Leave += Market_start_time_Leave;
             market_end_time.Leave += Market_end_time_Leave;
@@ -92,6 +114,10 @@ namespace WindowsFormsApp1
             sell_condition_end.Leave += Sell_condition_end_Leave;
             clear_sell_start.Leave += Clear_sell_start_Leave;
             clear_sell_end.Leave += Clear_sell_end_Leave;
+            Dual_Time_Start.Leave += Dual_Time_Start_Leave;
+            Dual_Time_Stop.Leave += Dual_Time_Stop_Leave;
+
+            //--------------------------------------------
 
             //조건식 동작
             Fomula_list_buy.DropDown += Fomula_list_buy_DropDown;
@@ -386,43 +412,125 @@ namespace WindowsFormsApp1
 
         private void Type1_start_Leave(object sender, EventArgs e)
         {
-            ValidateNumericInput(sender, e, type1_start, "100");
+            ValidatedecimalInput(sender, e, type1_start, type1_end, "-5");
         }
         private void Type1_end_Leave(object sender, EventArgs e)
         {
-            ValidateNumericInput(sender, e, type1_end, "1000");
+            ValidatedecimalInput2(sender, e, type1_start, type1_end, "5");
         }
         private void Type2_start_Leave(object sender, EventArgs e)
         {
-            ValidatedecimalInput(sender, e, type2_start, "100");
+            ValidatedecimalInput(sender, e, type2_start, type2_end, "-5");
         }
         private void Type2_end_Leave(object sender, EventArgs e)
         {
-            ValidatedecimalInput(sender, e, type2_end, "1000");
+            ValidatedecimalInput2(sender, e, type2_start, type2_end, "5");
         }
         private void Type3_start_Leave(object sender, EventArgs e)
         {
-            ValidatedecimalInput(sender, e, type3_start, "100");
+            ValidatedecimalInput(sender, e, type3_start, type3_end, "-5");
         }
         private void Type3_end_Leave(object sender, EventArgs e)
         {
-            ValidatedecimalInput(sender, e, type3_end, "1000");
+            ValidatedecimalInput2(sender, e, type3_start, type3_end, "5");
         }
         private void Type4_start_Leave(object sender, EventArgs e)
         {
-            ValidatedecimalInput(sender, e, type4_start, "100");
+            ValidatedecimalInput(sender, e, type4_start, type4_end, "-5");
         }
         private void Type4_end_Leave(object sender, EventArgs e)
         {
-            ValidatedecimalInput(sender, e, type4_end, "1000");
+            ValidatedecimalInput2(sender, e, type4_start, type4_end, "5");
         }
         private void Type5_start_Leave(object sender, EventArgs e)
         {
-            ValidatedecimalInput(sender, e, type5_start, "100");
+            ValidatedecimalInput(sender, e, type5_start, type5_end, "-5");
         }
         private void Type5_end_Leave(object sender, EventArgs e)
         {
-            ValidatedecimalInput(sender, e, type5_end, "1000");
+            ValidatedecimalInput2(sender, e, type5_start, type5_end, "5");
+        }
+
+        private void Type1_all_start_Leave(object sender, EventArgs e)
+        {
+            ValidatedecimalInput(sender, e, type1_all_start, type1_all_end, "-5");
+        }
+        private void Type1_all_end_Leave(object sender, EventArgs e)
+        {
+            ValidatedecimalInput2(sender, e, type1_all_start, type1_all_end, "5");
+        }
+        private void Type2_all_start_Leave(object sender, EventArgs e)
+        {
+            ValidatedecimalInput(sender, e, type2_all_start, type2_all_end, "-5");
+        }
+        private void Type2_all_end_Leave(object sender, EventArgs e)
+        {
+            ValidatedecimalInput2(sender, e, type2_all_start, type2_all_end, "5");
+        }
+        private void Type3_all_start_Leave(object sender, EventArgs e)
+        {
+            ValidatedecimalInput(sender, e, type3_all_start, type3_all_end, "-5");
+        }
+        private void Type3_all_end_Leave(object sender, EventArgs e)
+        {
+            ValidatedecimalInput2(sender, e, type3_all_start, type3_all_end, "5");
+        }
+        private void Type4_all_start_Leave(object sender, EventArgs e)
+        {
+            ValidatedecimalInput(sender, e, type4_all_start, type4_all_end, "-5");
+        }
+        private void Type4_all_end_Leave(object sender, EventArgs e)
+        {
+            ValidatedecimalInput2(sender, e, type4_all_start, type4_all_end, "5");
+        }
+        private void Type5_all_start_Leave(object sender, EventArgs e)
+        {
+            ValidatedecimalInput(sender, e, type5_all_start, type5_all_end, "-5");
+        }
+        private void Type5_all_end_Leave(object sender, EventArgs e)
+        {
+            ValidatedecimalInput2(sender, e, type5_all_start, type5_all_end, "5");
+        }
+
+        private void Type1_isa_start_Leave(object sender, EventArgs e)
+        {
+            ValidatedecimalInput(sender, e, type1_isa_start, type1_isa_end, "-5");
+        }
+        private void Type1_isa_end_Leave(object sender, EventArgs e)
+        {
+            ValidatedecimalInput2(sender, e, type1_isa_start, type1_isa_end, "5");
+        }
+        private void Type2_isa_start_Leave(object sender, EventArgs e)
+        {
+            ValidatedecimalInput(sender, e, type2_isa_start, type2_isa_end, "-5");
+        }
+        private void Type2_isa_end_Leave(object sender, EventArgs e)
+        {
+            ValidatedecimalInput2(sender, e, type2_isa_start, type2_isa_end, "5");
+        }
+        private void Type3_isa_start_Leave(object sender, EventArgs e)
+        {
+            ValidatedecimalInput(sender, e, type3_isa_start, type3_isa_end, "-5");
+        }
+        private void Type3_isa_end_Leave(object sender, EventArgs e)
+        {
+            ValidatedecimalInput2(sender, e, type3_isa_start, type3_isa_end, "5");
+        }
+        private void Type4_isa_start_Leave(object sender, EventArgs e)
+        {
+            ValidatedecimalInput(sender, e, type4_isa_start, type4_isa_end, "-5");
+        }
+        private void Type4_isa_end_Leave(object sender, EventArgs e)
+        {
+            ValidatedecimalInput2(sender, e, type4_isa_start, type4_isa_end, "5");
+        }
+        private void Type5_isa_start_Leave(object sender, EventArgs e)
+        {
+            ValidatedecimalInput(sender, e, type5_isa_start, type5_isa_end, "-5");
+        }
+        private void Type5_isa_end_Leave(object sender, EventArgs e)
+        {
+            ValidatedecimalInput2(sender, e, type5_isa_start, type5_isa_end, "5");
         }
 
         private void ValidatedecimalInput(object sender, EventArgs e, TextBox textBox, TextBox textBox2,  string defaultValue)
@@ -438,8 +546,8 @@ namespace WindowsFormsApp1
             }
 
             //숫자 혹은 소수점인지 확인
-            bool hasDecimalPoint = false;
             int decimalPointCount = 0;
+            int decimalMinusCount = 0;
 
             foreach (char c in input)
             {
@@ -447,10 +555,13 @@ namespace WindowsFormsApp1
                 {
                     continue;
                 }
-                else if (c == '.' && !hasDecimalPoint)
+                else if (c == '.')
                 {
-                    hasDecimalPoint = true;
                     decimalPointCount++;
+                }
+                else if (c == '-')
+                {
+                    decimalMinusCount++;
                 }
                 else
                 {
@@ -465,6 +576,78 @@ namespace WindowsFormsApp1
             {
                 textBox.Text = defaultValue;
                 MessageBox.Show("점을 한번만 입력하세요.", "잘못된 입력", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            //소수점 형식 이탈 확인
+            if (decimalMinusCount > 1)
+            {
+                textBox.Text = defaultValue;
+                MessageBox.Show("-을 한번만 입력하세요.", "잘못된 입력", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+        }
+
+        private void ValidatedecimalInput2(object sender, EventArgs e, TextBox textBox, TextBox textBox2, string defaultValue)
+        {
+            string input = textBox2.Text;
+
+            //입력된 값이 없을시
+            if (string.IsNullOrWhiteSpace(input))
+            {
+                textBox2.Text = defaultValue;
+                MessageBox.Show("입력된 값이 없습니다.", "잘못된 입력", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            //숫자 혹은 소수점인지 확인
+            int decimalPointCount = 0;
+            int decimalMinusCount = 0;
+
+            foreach (char c in input)
+            {
+                if (char.IsDigit(c))
+                {
+                    continue;
+                }
+                else if (c == '.')
+                {
+                    decimalPointCount++;
+                }
+                else if (c == '-')
+                {
+                    decimalMinusCount++;
+                }
+                else
+                {
+                    textBox2.Text = defaultValue;
+                    MessageBox.Show("정수 혹은 점이 아닌 값이 있습니다.", "잘못된 입력", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+            }
+
+            //소수점 형식 이탈 확인
+            if (decimalPointCount > 1)
+            {
+                textBox2.Text = defaultValue;
+                MessageBox.Show("점을 한번만 입력하세요.", "잘못된 입력", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            //크기비교
+            if (Convert.ToDouble(textBox.Text) >= Convert.ToDouble(textBox2.Text))
+            {
+                textBox2.Text = Convert.ToString(Convert.ToDouble(textBox.Text) + 1);
+                MessageBox.Show("왼쪽 값은 오른쪽 값보다 작아야 합니다.", "잘못된 입력", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            //소수점 형식 이탈 확인
+            if (decimalMinusCount > 1)
+            {
+                textBox.Text = defaultValue;
+                MessageBox.Show("-을 한번만 입력하세요.", "잘못된 입력", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
         }
@@ -509,6 +692,16 @@ namespace WindowsFormsApp1
         private void Clear_sell_end_Leave(object sender, EventArgs e)
         {
             ValidateTimeInput(sender, e, clear_sell_start, "18:00:00", new TimeSpan(9, 0, 0), new TimeSpan(18, 0, 0), clear_sell_end);
+        }
+
+        private void Dual_Time_Start_Leave(object sender, EventArgs e)
+        {
+            ValidateTimeInput(sender, e, Dual_Time_Start, "09:00:00", new TimeSpan(9, 0, 0), new TimeSpan(18, 0, 0), clear_sell_end);
+        }
+
+        private void Dual_Time_Stop_Leave(object sender, EventArgs e)
+        {
+            ValidateTimeInput(sender, e, Dual_Time_Start, "18:00:00", new TimeSpan(9, 0, 0), new TimeSpan(18, 0, 0), Dual_Time_Stop);
         }
 
         private void ValidateTimeInput(object sender, EventArgs e, TextBox textBox, string defaultValue, TimeSpan minTime, TimeSpan maxTime, TextBox comparisonTextBox = null)
