@@ -173,7 +173,7 @@ namespace WindowsFormsApp1
         {
             string time = DateTime.Now.ToString("HH:mm:ss");
             log_window.AppendText($@"{"[" + time + "] " + message}");
-            log_full.Add($"[System][{time}] : {message}\n");
+            log_full.Add($"[System][{time}] : {message}");
         }
 
         //로그창(Order)
@@ -181,8 +181,8 @@ namespace WindowsFormsApp1
         {
             string time = DateTime.Now.ToString("HH:mm:ss");
             log_window3.AppendText($@"{"[" + time + "] " + message}");
-            log_full.Add($"[Order][{time}] : {message}\n");
-            log_trade.Add($"[{time}] : {message}\n");
+            log_full.Add($"[Order][{time}] : {message}");
+            log_trade.Add($"[{time}] : {message}");
         }
 
         //로그창(Stock)
@@ -190,19 +190,19 @@ namespace WindowsFormsApp1
         {
             string time = DateTime.Now.ToString("HH:mm:ss");
             log_window2.AppendText($@"{"[" + time + "] " + message}");
-            log_full.Add($"[Stock][{time}] : {message}\n");
+            log_full.Add($"[Stock][{time}] : {message}");
         }
 
         //매매로그 맟 전체로그 저장
-        private List<string> log_trade;
-        private List<string> log_full;
+        private List<string> log_trade = new List<string>();
+        private List<string> log_full = new List<string>();
 
         //FORM CLOSED 후 LOG 저장
         //Process.Kill()에서 비정상 작동할 가능성 높음
         private void Form_FormClosed(object sender, FormClosedEventArgs e)
         {
 
-            string formattedDate = DateTime.Now.ToString("yyyyMMddHHmmss");
+            string formattedDate = DateTime.Now.ToString("yyyyMMdd");
 
             // 저장할 파일 경로
             string filePath = $@"C:\Auto_Trade_Creon\Log\{formattedDate}_full.txt";
