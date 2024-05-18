@@ -28,6 +28,12 @@ namespace WindowsFormsApp1
             // 해당 폴더의 모든 파일을 가져오기
             string[] files = Directory.GetFiles(folderPath).OrderByDescending(file => file).ToArray();
 
+            if(files.Length == 0)
+            {
+                richTextBox1.Clear();
+                richTextBox1.AppendText("파일이 없습니다.");
+            }
+
             // 파일명 출력
             foreach (string file in files)
             {
