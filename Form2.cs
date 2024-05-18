@@ -14,9 +14,14 @@ namespace WindowsFormsApp1
 {
     public partial class Setting : Form
     {
-        public Setting()
+        private Trade_Auto_Daishin _trade_Auto_Daishin;
+
+        public Setting(Trade_Auto_Daishin trade_Auto_Daishin)
         {
             InitializeComponent();
+
+            //FORM1 불러오기
+            _trade_Auto_Daishin = trade_Auto_Daishin;
 
             //초기값세팅
             setting_load_auto();
@@ -867,7 +872,12 @@ namespace WindowsFormsApp1
             await utility.setting_load_auto();
             await Task.Run(() =>
             {
-                Trade_Auto_Daishin trade_auto1 = Application.OpenForms.OfType<Trade_Auto_Daishin>().FirstOrDefault();
+                _trade_Auto_Daishin.initial_allow();
+                //
+                _trade_Auto_Daishin.real_time_stop(true);
+                //
+                _trade_Auto_Daishin.auto_allow();
+                //
                 MessageBox.Show("반영이 완료되었습니다.");
             });
         }
