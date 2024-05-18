@@ -1668,22 +1668,22 @@ namespace WindowsFormsApp1
             // 
             // Fomula_list_buy
             // 
-            this.Fomula_list_buy.Font = new System.Drawing.Font("굴림", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.Fomula_list_buy.Font = new System.Drawing.Font("굴림", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.Fomula_list_buy.FormattingEnabled = true;
             this.Fomula_list_buy.Location = new System.Drawing.Point(2, 2);
             this.Fomula_list_buy.Margin = new System.Windows.Forms.Padding(2);
             this.Fomula_list_buy.Name = "Fomula_list_buy";
-            this.Fomula_list_buy.Size = new System.Drawing.Size(464, 21);
+            this.Fomula_list_buy.Size = new System.Drawing.Size(464, 19);
             this.Fomula_list_buy.TabIndex = 11;
             // 
             // Fomula_list_sell
             // 
-            this.Fomula_list_sell.Font = new System.Drawing.Font("굴림", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.Fomula_list_sell.Font = new System.Drawing.Font("굴림", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.Fomula_list_sell.FormattingEnabled = true;
             this.Fomula_list_sell.Location = new System.Drawing.Point(4, 136);
             this.Fomula_list_sell.Margin = new System.Windows.Forms.Padding(2);
             this.Fomula_list_sell.Name = "Fomula_list_sell";
-            this.Fomula_list_sell.Size = new System.Drawing.Size(468, 21);
+            this.Fomula_list_sell.Size = new System.Drawing.Size(468, 19);
             this.Fomula_list_sell.TabIndex = 12;
             // 
             // tableLayoutPanel11
@@ -1955,6 +1955,7 @@ namespace WindowsFormsApp1
             // 
             // Fomula_list_buy_Checked_box
             // 
+            this.Fomula_list_buy_Checked_box.Font = new System.Drawing.Font("굴림", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.Fomula_list_buy_Checked_box.FormattingEnabled = true;
             this.Fomula_list_buy_Checked_box.Location = new System.Drawing.Point(4, 78);
             this.Fomula_list_buy_Checked_box.Margin = new System.Windows.Forms.Padding(2);
@@ -3379,13 +3380,13 @@ namespace WindowsFormsApp1
             this.tableLayoutPanel23.Controls.Add(this.type5_isa_start, 4, 2);
             this.tableLayoutPanel23.Controls.Add(this.type2_selection_isa, 0, 1);
             this.tableLayoutPanel23.Controls.Add(this.type4_selection_isa, 0, 2);
-            this.tableLayoutPanel23.Controls.Add(this.type1_selection_isa, 3, 0);
             this.tableLayoutPanel23.Controls.Add(this.type4_isa_start, 2, 2);
-            this.tableLayoutPanel23.Controls.Add(this.dual_index, 0, 0);
             this.tableLayoutPanel23.Controls.Add(this.type4_isa_end, 1, 2);
-            this.tableLayoutPanel23.Controls.Add(this.type1_isa_start, 4, 0);
-            this.tableLayoutPanel23.Controls.Add(this.type1_isa_end, 5, 0);
             this.tableLayoutPanel23.Controls.Add(this.type5_selection_isa, 3, 2);
+            this.tableLayoutPanel23.Controls.Add(this.dual_index, 5, 0);
+            this.tableLayoutPanel23.Controls.Add(this.type1_selection_isa, 0, 0);
+            this.tableLayoutPanel23.Controls.Add(this.type1_isa_start, 1, 0);
+            this.tableLayoutPanel23.Controls.Add(this.type1_isa_end, 2, 0);
             this.tableLayoutPanel23.Location = new System.Drawing.Point(3, 31);
             this.tableLayoutPanel23.Name = "tableLayoutPanel23";
             this.tableLayoutPanel23.RowCount = 3;
@@ -3511,9 +3512,9 @@ namespace WindowsFormsApp1
             this.type1_selection_isa.AutoSize = true;
             this.type1_selection_isa.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.type1_selection_isa.Font = new System.Drawing.Font("굴림", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.type1_selection_isa.Location = new System.Drawing.Point(238, 3);
+            this.type1_selection_isa.Location = new System.Drawing.Point(3, 3);
             this.type1_selection_isa.Name = "type1_selection_isa";
-            this.type1_selection_isa.Size = new System.Drawing.Size(72, 16);
+            this.type1_selection_isa.Size = new System.Drawing.Size(80, 16);
             this.type1_selection_isa.TabIndex = 0;
             this.type1_selection_isa.Text = "#1";
             this.type1_selection_isa.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -3538,9 +3539,9 @@ namespace WindowsFormsApp1
             this.dual_index.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.dual_index.Font = new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.dual_index.ForeColor = System.Drawing.Color.DarkOliveGreen;
-            this.dual_index.Location = new System.Drawing.Point(3, 3);
+            this.dual_index.Location = new System.Drawing.Point(393, 3);
             this.dual_index.Name = "dual_index";
-            this.dual_index.Size = new System.Drawing.Size(80, 16);
+            this.dual_index.Size = new System.Drawing.Size(72, 16);
             this.dual_index.TabIndex = 1;
             this.dual_index.Text = "지수연동";
             this.dual_index.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -3561,9 +3562,9 @@ namespace WindowsFormsApp1
             this.type1_isa_start.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.type1_isa_start.Location = new System.Drawing.Point(316, 3);
+            this.type1_isa_start.Location = new System.Drawing.Point(89, 3);
             this.type1_isa_start.Name = "type1_isa_start";
-            this.type1_isa_start.Size = new System.Drawing.Size(71, 21);
+            this.type1_isa_start.Size = new System.Drawing.Size(70, 21);
             this.type1_isa_start.TabIndex = 2;
             // 
             // type1_isa_end
@@ -3571,9 +3572,9 @@ namespace WindowsFormsApp1
             this.type1_isa_end.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.type1_isa_end.Location = new System.Drawing.Point(393, 3);
+            this.type1_isa_end.Location = new System.Drawing.Point(165, 3);
             this.type1_isa_end.Name = "type1_isa_end";
-            this.type1_isa_end.Size = new System.Drawing.Size(72, 21);
+            this.type1_isa_end.Size = new System.Drawing.Size(67, 21);
             this.type1_isa_end.TabIndex = 3;
             // 
             // type5_selection_isa

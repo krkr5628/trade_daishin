@@ -901,7 +901,7 @@ namespace WindowsFormsApp1
             }
             else if (profit_after1.Checked || profit_after2.Checked || loss_after1.Checked || loss_after2.Checked || clear_sell_profit_after1.Checked || clear_sell_profit_after2.Checked || clear_sell_loss_after1.Checked || clear_sell_loss_after2.Checked && String.IsNullOrEmpty(sell_set1_after.Text))
             {
-                MessageBox.Show("사간외 설정을 위해 매매방식(시간외) 설정 필요");
+                MessageBox.Show("시간외 설정을 위해 매매방식(시간외) 설정 필요");
             }
             else
             {
