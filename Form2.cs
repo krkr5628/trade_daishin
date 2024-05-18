@@ -28,6 +28,11 @@ namespace WindowsFormsApp1
             //즉시반영
             setting_allowed.Click += setting_allow;
 
+            //조건식 동작
+            Fomula_list_buy.DropDown += Fomula_list_buy_DropDown;
+            Fomula_list_buy_Checked_box.MouseLeave += Fomula_list_buy_Checked_box_MouseLeave;
+            Fomula_list_buy_Checked_box.ItemCheck += Fomula_list_buy_Checked_box_ItemCheck;
+
             //TELEGRAM TEST
             telegram_test_button.Click += telegram_test;
 
@@ -117,23 +122,17 @@ namespace WindowsFormsApp1
             Dual_Time_Start.Leave += Dual_Time_Start_Leave;
             Dual_Time_Stop.Leave += Dual_Time_Stop_Leave;
 
-            //--------------------------------------------
-
-            //조건식 동작
-            Fomula_list_buy.DropDown += Fomula_list_buy_DropDown;
-            Fomula_list_buy_Checked_box.MouseLeave += Fomula_list_buy_Checked_box_MouseLeave;
-            Fomula_list_buy_Checked_box.ItemCheck += Fomula_list_buy_Checked_box_ItemCheck;
-
-            //매수 조건식 확인
+            //매수 조건식 동작 확인
             buy_mode_and.Click += Buy_mode_and_Click;
             Fomula_list_buy.TextChanged += Fomula_list_buy_TextChanged;
 
+            //매도 조건식 동작 확인
+
+            //청산 동작 확인
+
+            //인덱스 동작 확인
+
         }
-
-        //----------------------------초기 항목----------------------------------------
-
-
-
 
         //----------------------------미사용 항목 경고창----------------------------------------
 
@@ -779,10 +778,10 @@ namespace WindowsFormsApp1
         //AND 모드 시 2개 이상 조건식 확인
         private void Buy_mode_and_Click(object sender, EventArgs e)
         {
-            if(!(Fomula_list_buy.Text.Split(',').Length <= 1))
+            if(Fomula_list_buy.Text.Split(',').Length != 2)
             {
                 buy_mode_or.Checked = true;
-                MessageBox.Show("AND_모드 저장하기 위해 조건식 2개 이상 설정해 주세요.");
+                MessageBox.Show("AND_모드 저장하기 위해 조건식 2개 설정해 주세요.");
             }
         }
 
@@ -792,7 +791,7 @@ namespace WindowsFormsApp1
             if (Fomula_list_buy.Text.Split(',').Length <= 1 && buy_mode_and.Checked)
             {
                 buy_mode_or.Checked = true;
-                MessageBox.Show("AND_모드 저장하기 위해 조건식 2개 이상 설정해 주세요.");
+                MessageBox.Show("AND_모드 저장하기 위해 조건식 2개 설정해 주세요.");
             }
         }
 

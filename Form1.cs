@@ -91,10 +91,14 @@ namespace WindowsFormsApp1
             //메인 시간 동작
             timer1.Start(); //시간 표시 - 1000ms
 
+            //----------종료_동작---------
+            this.FormClosed += new FormClosedEventHandler(Form_FormClosed);
+
             //-------------------버튼-------------------
             Main_menu.Click += main_menu; //메인메뉴
             Trade_setting.Click += trade_setting; //설정창
             porfoilo_btn.Click += Porfoilo_btn_Click;//매매정보
+            Log_btn.Click += Log_btn_Click;//로그정보
             update_agree_btn.Click += Update_agree_btn_Click;//업데이트 및 동의사항
 
             Stock_search_btn.Click += stock_search_btn; //종목조회
@@ -169,6 +173,7 @@ namespace WindowsFormsApp1
         {
             string time = DateTime.Now.ToString("HH:mm:ss");
             log_window.AppendText($@"{"[" + time + "] " + message}");
+            log_full.Add($"[System][{time}] : {message}\n");
         }
 
         //로그창(Order)
@@ -176,6 +181,8 @@ namespace WindowsFormsApp1
         {
             string time = DateTime.Now.ToString("HH:mm:ss");
             log_window3.AppendText($@"{"[" + time + "] " + message}");
+            log_full.Add($"[Order][{time}] : {message}\n");
+            log_trade.Add($"[{time}] : {message}\n");
         }
 
         //로그창(Stock)
@@ -183,6 +190,50 @@ namespace WindowsFormsApp1
         {
             string time = DateTime.Now.ToString("HH:mm:ss");
             log_window2.AppendText($@"{"[" + time + "] " + message}");
+            log_full.Add($"[Stock][{time}] : {message}\n");
+        }
+
+        //매매로그 맟 전체로그 저장
+        private List<string> log_trade;
+        private List<string> log_full;
+        
+        //FORM CLOSED 후 LOG 저장
+        private void Form_FormClosed(object sender, FormClosedEventArgs e)
+        {
+
+            string formattedDate = DateTime.Now.ToString("yyyyMMddHHmmss");
+
+            // 저장할 파일 경로
+            string filePath = $@"C:\Auto_Trade_Creon\Log\{formattedDate}_full.txt";
+            string filePath2 = $@"C:\Auto_Trade_Creon\Log_Trade\{formattedDate}_trade.txt";
+
+            // StreamWriter를 사용하여 파일 저장
+            try
+            {
+                using (StreamWriter writer = new StreamWriter(filePath, true))
+                {
+                    writer.Write(String.Join("",log_full));
+                }
+                WriteLog_System("파일 저장 성공: " + filePath);
+            }
+            catch (Exception ex)
+            {
+                WriteLog_System("파일 저장 중 오류 발생: " + ex.Message);
+            }
+
+            // StreamWriter를 사용하여 파일 저장
+            try
+            {
+                using (StreamWriter writer = new StreamWriter(filePath2, true))
+                {
+                    writer.Write(String.Join("", log_trade));
+                }
+                WriteLog_System("파일 저장 성공: " + filePath);
+            }
+            catch (Exception ex)
+            {
+                WriteLog_System("파일 저장 중 오류 발생: " + ex.Message);
+            }
         }
 
         //telegram_chat
@@ -446,19 +497,58 @@ namespace WindowsFormsApp1
                 return;
             }
             Setting newform2 = new Setting();
-            newform2.ShowDialog(); //form2 닫기 전까지 form1 제어 불가능
+            newform2.ShowDialog(); //form2 닫기 전까지 form1 UI 제어 불가능
         }
 
         //매매내역 확인
         private void Porfoilo_btn_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("준비중입니다.");
+            if (!utility.load_check)
+            {
+                MessageBox.Show("초기 세팅 반영중");
+                return;
+            }
+            if (arrCondition.Length == 0)
+            {
+                MessageBox.Show("조건식 로딩중");
+                return;
+            }
+            Transaction newform2 = new Transaction();
+            newform2.ShowDialog(); //form2 닫기 전까지 form1 UI 제어 불가능
+        }
+
+        //전체로그 확인
+        private void Log_btn_Click(object sender, EventArgs e)
+        {
+            if (!utility.load_check)
+            {
+                MessageBox.Show("초기 세팅 반영중");
+                return;
+            }
+            if (arrCondition.Length == 0)
+            {
+                MessageBox.Show("조건식 로딩중");
+                return;
+            }
+            Log newform2 = new Log();
+            newform2.ShowDialog(); //form2 닫기 전까지 form1 UI 제어 불가능
         }
 
         //업데이트 및 동의사항 확인
         private void Update_agree_btn_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("준비중입니다.");
+            if (!utility.load_check)
+            {
+                MessageBox.Show("초기 세팅 반영중");
+                return;
+            }
+            if (arrCondition.Length == 0)
+            {
+                MessageBox.Show("조건식 로딩중");
+                return;
+            }
+            Update newform2 = new Update();
+            newform2.ShowDialog(); //form2 닫기 전까지 form1 UI 제어 불가능
         }
 
         //종목 조회 실행
@@ -1215,7 +1305,7 @@ namespace WindowsFormsApp1
                                 index_dual = true;
                                 WriteLog_System($"[DUAL] OVER S&P500 INDEX RANGE : START({start}) - END({end}) - NOW({tmp5})\n");
                                 WriteLog_System("Trade Stop\n");
-                                telegram_message($"[DUAL]OVER S&P500 INDEX RANGE : START({start}) - END({end}) - NOW({tmp5})\n");
+                                telegram_message($"[DUAL] OVER S&P500 INDEX RANGE : START({start}) - END({end}) - NOW({tmp5})\n");
                                 telegram_message("Trade Stop\n");
                             }
                         }
