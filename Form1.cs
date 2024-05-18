@@ -196,8 +196,9 @@ namespace WindowsFormsApp1
         //매매로그 맟 전체로그 저장
         private List<string> log_trade;
         private List<string> log_full;
-        
+
         //FORM CLOSED 후 LOG 저장
+        //Process.Kill()에서 비정상 작동할 가능성 높음
         private void Form_FormClosed(object sender, FormClosedEventArgs e)
         {
 
@@ -214,11 +215,10 @@ namespace WindowsFormsApp1
                 {
                     writer.Write(String.Join("",log_full));
                 }
-                WriteLog_System("파일 저장 성공: " + filePath);
             }
             catch (Exception ex)
             {
-                WriteLog_System("파일 저장 중 오류 발생: " + ex.Message);
+                MessageBox.Show("파일 저장 중 오류 발생: " + ex.Message);
             }
 
             // StreamWriter를 사용하여 파일 저장
@@ -228,11 +228,10 @@ namespace WindowsFormsApp1
                 {
                     writer.Write(String.Join("", log_trade));
                 }
-                WriteLog_System("파일 저장 성공: " + filePath);
             }
             catch (Exception ex)
             {
-                WriteLog_System("파일 저장 중 오류 발생: " + ex.Message);
+                MessageBox.Show("파일 저장 중 오류 발생: " + ex.Message);
             }
         }
 
