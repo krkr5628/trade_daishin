@@ -16,8 +16,8 @@ namespace WindowsFormsApp1
         public Transaction()
         {
             InitializeComponent();
+            start()
         }
-
 
         private void start()
         {
