@@ -2621,18 +2621,6 @@ namespace WindowsFormsApp1
                 gubun = ISA_code;
             }
 
-            //지수 확인
-            if(gubun == Master_code && index_buy)
-            {
-                return "대기";
-            }
-
-            //지수 확인
-            if (gubun == ISA_code && index_dual)
-            {
-                return "대기";
-            }
-
             //매수 시간 확인
             if (utility.buy_DUAL && utility.Dual_Time && gubun == ISA_code)
             {
@@ -2692,6 +2680,18 @@ namespace WindowsFormsApp1
                 int trade_status_already = Convert.ToInt32(trade_status[0]);
                 int trade_status_limit = Convert.ToInt32(trade_status[1]);
                 if (trade_status_already >= trade_status_limit) return "대기";
+            }
+
+            //지수 확인
+            if (gubun == Master_code && index_buy)
+            {
+                return "대기";
+            }
+
+            //지수 확인
+            if (gubun == ISA_code && index_dual)
+            {
+                return "대기";
             }
 
             //매수지연(기본값 200 => 프로그램 여러 호출단에서 기본 간격 200ms가 존재하므로 기본 지연 + 입력값
