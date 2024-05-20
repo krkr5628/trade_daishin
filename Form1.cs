@@ -3643,9 +3643,12 @@ namespace WindowsFormsApp1
                 //
                 timer3.Stop();//계좌 탐색 중단
                 //
-                minuteTimer.Stop();
-                minuteTimer.Dispose();
-                minuteTimer = null;
+                if (minuteTimer != null)
+                {
+                    minuteTimer.Stop();
+                    minuteTimer.Dispose();
+                    minuteTimer = null;
+                }
                 //
                 if (dtCondStock.Rows.Count > 0)
                 {
