@@ -2685,12 +2685,14 @@ namespace WindowsFormsApp1
             //지수 확인
             if (gubun == Master_code && index_buy)
             {
+                WriteLog_Order($"[01] {code_name}({code}) Index 이탈\n");
                 return "대기";
             }
 
             //지수 확인
             if (gubun == ISA_code && index_dual)
             {
+                WriteLog_Order($"[11] {code_name}({code}) Index 이탈\n");
                 return "대기";
             }
 
@@ -2725,8 +2727,8 @@ namespace WindowsFormsApp1
 
                 if(order_acc_market == 0)
                 {
-                    WriteLog_Order("[매수주문/시장가/주문실패] : " + code_name + "(" + code + ") " + "예수금 부족 0개 주문\n");
-                    telegram_message("[매수주문/시장가/주문실패] : " + code_name + "(" + code + ") " + "예수금 부족 0개 주문\n");
+                    WriteLog_Order($"[매수주문/시장가/주문실패/{gubun}] : " + code_name + "(" + code + ") " + "예수금 부족 0개 주문\n");
+                    telegram_message($"[매수주문/시장가/주문실패/{gubun}] : " + code_name + "(" + code + ") " + "예수금 부족 0개 주문\n");
                     return "대기";
                 }
 
@@ -2795,8 +2797,8 @@ namespace WindowsFormsApp1
                 }
                 else
                 {
-                    WriteLog_Order("[매수주문/시장가/주문실패] : " + code_name + "(" + code + ") " + "에러코드(" + error_message(error) + ")\n");
-                    telegram_message("[매수주문/시장가/주문실패] : " + code_name + "(" + code + ") " + "에러코드(" + error_message(error) + ")\n");
+                    WriteLog_Order($"[매수주문/시장가/주문실패/{gubun}] : " + code_name + "(" + code + ") " + "에러코드(" + error_message(error) + ")\n");
+                    telegram_message($"[매수주문/시장가/주문실패/{gubun}] : " + code_name + "(" + code + ") " + "에러코드(" + error_message(error) + ")\n");
 
                     if (check)
                     {
@@ -2821,8 +2823,8 @@ namespace WindowsFormsApp1
 
                 if (order_acc == 0)
                 {
-                    WriteLog_Order("[매수주문/지정가/주문실패] : " + code_name + "(" + code + ") " + "예수금 부족 0개 주문\n");
-                    telegram_message("[매수주문/지정가/주문실패] : " + code_name + "(" + code + ") " + "예수금 부족 0개 주문\n");
+                    WriteLog_Order($"[매수주문/지정가/주문실패/{gubun}] : " + code_name + "(" + code + ") " + "예수금 부족 0개 주문\n");
+                    telegram_message($"[매수주문/지정가/주문실패/{gubun}] : " + code_name + "(" + code + ") " + "예수금 부족 0개 주문\n");
                     return "대기";
                 }
 
@@ -2890,8 +2892,8 @@ namespace WindowsFormsApp1
                 }
                 else
                 {
-                    WriteLog_Order("[매수주문/지정가매수/주문실패] : " + code_name + "(" + code + ") " + "에러코드(" + error_message(error) + "\n");
-                    telegram_message("[매수주문/지정가매수/주문실패] : " + code_name + "(" + code + ") " + "에러코드(" + error_message(error) + "\n");
+                    WriteLog_Order($"[매수주문/지정가매수/주문실패/{gubun}] : " + code_name + "(" + code + ") " + "에러코드(" + error_message(error) + "\n");
+                    telegram_message($"[매수주문/지정가매수/주문실패/{gubun}] : " + code_name + "(" + code + ") " + "에러코드(" + error_message(error) + "\n");
 
                     if (check)
                     {
@@ -3170,8 +3172,8 @@ namespace WindowsFormsApp1
                         dtCondStock.AcceptChanges();
                         dataGridView1.DataSource = dtCondStock;
 
-                        WriteLog_Order($"[{sell_message}/시간외종가//주문실패] : {code_name}({code}) {error_message(error)}\n");
-                        telegram_message($"[{sell_message}/시간외종가//주문실패] : {code_name}({code}) {error_message(error)}\n");
+                        WriteLog_Order($"[{sell_message}/시간외종가//주문실패/{gubun}] : {code_name}({code}) {error_message(error)}\n");
+                        telegram_message($"[{sell_message}/시간외종가//주문실패/{gubun}] : {code_name}({code}) {error_message(error)}\n");
                     }
 
                 }
@@ -3229,8 +3231,8 @@ namespace WindowsFormsApp1
                         dtCondStock.AcceptChanges();
                         dataGridView1.DataSource = dtCondStock;
 
-                        WriteLog_Order($"[{sell_message}/시간외종가//주문실패] : {code_name}({code}) {error_message(error)}\n");
-                        telegram_message($"[{sell_message}/시간외종가//주문실패] : {code_name}({code}) {error_message(error)}\n");
+                        WriteLog_Order($"[{sell_message}/시간외종가//주문실패/{gubun}] : {code_name}({code}) {error_message(error)}\n");
+                        telegram_message($"[{sell_message}/시간외종가//주문실패/{gubun}] : {code_name}({code}) {error_message(error)}\n");
                     }
                 }
                 //시장가 주문 + 청산주문
@@ -3266,8 +3268,8 @@ namespace WindowsFormsApp1
                         dtCondStock.AcceptChanges();
                         dataGridView1.DataSource = dtCondStock;
 
-                        WriteLog_Order($"[{sell_message}/시장가//주문실패] : {code_name}({code}) {error_message(error)}\n");
-                        telegram_message($"[{sell_message}/시장가//주문실패] : {code_name}({code}) {error_message(error)}\n");
+                        WriteLog_Order($"[{sell_message}/시장가//주문실패/{gubun}] : {code_name}({code}) {error_message(error)}\n");
+                        telegram_message($"[{sell_message}/시장가//주문실패/{gubun}] : {code_name}({code}) {error_message(error)}\n");
                     }
                 }
                 //지정가 주문
@@ -3305,8 +3307,8 @@ namespace WindowsFormsApp1
                         dtCondStock.AcceptChanges();
                         dataGridView1.DataSource = dtCondStock;
 
-                        WriteLog_Order($"[{sell_message}/지정가/주문실패] : {code_name}({code}) 초당 5회 이상 주문 불가\n");
-                        telegram_message($"[{sell_message}/지정가/주문실패] : {code_name}({code}) 초당 5회 이상 주문 불가\n");
+                        WriteLog_Order($"[{sell_message}/지정가/주문실패/{gubun}] : {code_name}({code}) 초당 5회 이상 주문 불가\n");
+                        telegram_message($"[{sell_message}/지정가/주문실패/{gubun}] : {code_name}({code}) 초당 5회 이상 주문 불가\n");
                     }
                     else
                     {
@@ -3315,8 +3317,8 @@ namespace WindowsFormsApp1
                         dtCondStock.AcceptChanges();
                         dataGridView1.DataSource = dtCondStock;
 
-                        WriteLog_Order($"[{sell_message}/지정가/주문실패] : {code_name}({code}) {error_message(error)}\n");
-                        telegram_message($"[{sell_message}/지정가/주문실패] : {code_name}({code}) {error_message(error)}\n");
+                        WriteLog_Order($"[{sell_message}/지정가/주문실패/{gubun}] : {code_name}({code}) {error_message(error)}\n");
+                        telegram_message($"[{sell_message}/지정가/주문실패/{gubun}] : {code_name}({code}) {error_message(error)}\n");
                     }
                 }             
             }
@@ -3373,8 +3375,9 @@ namespace WindowsFormsApp1
             string trade_Gubun = CpConclusion.GetHeaderValue(12) == "1" ? "매도" : "매수"; //매매구분(1매도,2매수)
             string hold_sum = Convert.ToString(CpConclusion.GetHeaderValue(23)); //체결기준잔고수량
             string time = DateTime.Now.ToString("HH:mm:ss"); //시간
+            string gubun = Convert.ToString(CpConclusion.GetHeaderValue(8)); //상품관리구분코드
 
-            string[] tmp = { gugu, code, code_name, order_number, trade_Gubun, hold_sum, time };
+            string[] tmp = { gugu, code, code_name, order_number, trade_Gubun, hold_sum, time, gubun };
 
             Trade_check_save.Enqueue(tmp);
         }
@@ -3395,12 +3398,13 @@ namespace WindowsFormsApp1
                     string trade_Gubun = tmp[4]; //매매구분(1매도,2매수)
                     string hold_sum = tmp[5]; //체결기준잔고수량
                     string time = tmp[6]; //시간
+                    string gubun = tmp[7]; //시간
 
                     Trade_check_save.Dequeue();
 
                     string order_sum = findRows[0]["보유수량"].ToString().Split('/')[1];
 
-                    WriteLog_Order($"[체결/{code_name}({code})/{trade_Gubun}] : {hold_sum}/{order_sum}\n");
+                    WriteLog_Order($"[체결/{code_name}({code})/{trade_Gubun}/{gubun}] : {hold_sum}/{order_sum}\n");
 
                     //매수확인
                     if (trade_Gubun.Equals("매수") && order_sum == hold_sum)
@@ -3427,8 +3431,8 @@ namespace WindowsFormsApp1
                         GetCashInfo_Seperate();
 
                         //"[매수주문/시장가/주문성공] : " + code_name + "(" + code + ") " + order_acc_market + "개\n")
-                        WriteLog_Order($"[매수주문/정상완료] : {code_name}({code}) {order_sum}개 {findRows[0]["편입가"]}원\n");
-                        telegram_message($"[매수주문/정상완료] : {code_name}({code}) {order_sum}개 {findRows[0]["편입가"]}원\n");
+                        WriteLog_Order($"[매수주문/정상완료/{gubun}] : {code_name}({code}) {order_sum}개 {findRows[0]["편입가"]}원\n");
+                        telegram_message($"[매수주문/정상완료/{gubun}] : {code_name}({code}) {order_sum}개 {findRows[0]["편입가"]}원\n");
                         //HTS에서 매수 처리 불가 => 체결 정보 만으로 주문 수량을 알 수 없어 주문 완료 상태 구분 불가
                     }
                     //매도확인
@@ -3478,8 +3482,8 @@ namespace WindowsFormsApp1
                         today_profit_tax_load_seperate();
 
                         //Message
-                        WriteLog_Order($"[매도주문/정상완료] : {code_name}({code}) {order_sum}개 {findRows[0]["매도가"]}원\n");
-                        telegram_message($"[매도주문/정상완료] : {code_name}({code}) {order_sum}개 {findRows[0]["매도가"]}원\n");
+                        WriteLog_Order($"[매도주문/정상완료/{gubun}] : {code_name}({code}) {order_sum}개 {findRows[0]["매도가"]}원\n");
+                        telegram_message($"[매도주문/정상완료/{gubun}] : {code_name}({code}) {order_sum}개 {findRows[0]["매도가"]}원\n");
 
                         //D+2 예수금 + 계좌 보유 종목
                         dtCondStock_hold.Clear();
