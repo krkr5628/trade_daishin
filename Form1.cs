@@ -173,7 +173,7 @@ namespace WindowsFormsApp1
         {
             string time = DateTime.Now.ToString("HH:mm:ss");
             log_window.AppendText($@"{"[" + time + "] " + message}");
-            log_full.Add($"[System][{time}] : {message}");
+            log_full.Add($"[{time}][System] : {message}");
         }
 
         //로그창(Order)
@@ -181,8 +181,8 @@ namespace WindowsFormsApp1
         {
             string time = DateTime.Now.ToString("HH:mm:ss");
             log_window3.AppendText($@"{"[" + time + "] " + message}");
-            log_full.Add($"[Order][{time}] : {message}");
-            log_trade.Add($"[{time}] : {message}");
+            log_full.Add($"[[{time}][Order] : {message}");
+            log_trade.Add($"[{time}][Order] : {message}");
         }
 
         //로그창(Stock)
@@ -190,7 +190,7 @@ namespace WindowsFormsApp1
         {
             string time = DateTime.Now.ToString("HH:mm:ss");
             log_window2.AppendText($@"{"[" + time + "] " + message}");
-            log_full.Add($"[Stock][{time}] : {message}");
+            log_full.Add($"[{time}][Stock] : {message}");
         }
 
         //매매로그 맟 전체로그 저장
@@ -1513,6 +1513,13 @@ namespace WindowsFormsApp1
                                 double end = Convert.ToDouble(utility.type1_end);
                                 if (kospi_index_series[0] < start || end < kospi_index_series[2])
                                 {
+                                    if (!index_buy)
+                                    {
+                                        WriteLog_System($"[Buy] OVER KOSPI200 Commodity RANGE : START({start}) - END({end}) - NOW({tmp5})\n");
+                                        WriteLog_System("Trade Stop\n");
+                                        telegram_message($"[Buy] OVER KOSPI200 Commodity RANGE : START({start}) - END({end}) - NOW({tmp5})\n");
+                                        telegram_message("Trade Stop\n");
+                                    }
                                     index_buy = true;
                                 }
                             }
@@ -1526,6 +1533,13 @@ namespace WindowsFormsApp1
                                 double end = Convert.ToDouble(utility.type1_end_all);
                                 if (kospi_index_series[0] < start || end < kospi_index_series[2])
                                 {
+                                    if (!index_clear)
+                                    {
+                                        WriteLog_System($"[CLEAR] OVER KOSPI200 Commodity RANGE : START({start}) - END({end}) - NOW({tmp5})\n");
+                                        WriteLog_System("Trade Stop\n");
+                                        telegram_message($"[CLEAR] OVER KOSPI200 Commodity RANGE : START({start}) - END({end}) - NOW({tmp5})\n");
+                                        telegram_message("Trade Stop\n");
+                                    }
                                     index_clear = true;
                                 }
                             }
@@ -1539,6 +1553,13 @@ namespace WindowsFormsApp1
                                 double end = Convert.ToDouble(utility.type1_end_isa);
                                 if (kospi_index_series[0] < start || end < kospi_index_series[2])
                                 {
+                                    if (!index_dual)
+                                    {
+                                        WriteLog_System($"[Dual] OVER KOSPI200 Commodity RANGE : START({start}) - END({end}) - NOW({tmp5})\n");
+                                        WriteLog_System("Trade Stop\n");
+                                        telegram_message($"[Dual] OVER KOSPI200 Commodity RANGE : START({start}) - END({end}) - NOW({tmp5})\n");
+                                        telegram_message("Trade Stop\n");
+                                    }
                                     index_dual = true;
                                 }
                             }
@@ -1592,6 +1613,13 @@ namespace WindowsFormsApp1
                                 double end = Convert.ToDouble(utility.type2_end);
                                 if (kosdaq_index_series[0] < start || end < kosdaq_index_series[2])
                                 {
+                                    if (!index_buy)
+                                    {
+                                        WriteLog_System($"[Buy] OVER KOSDAK150 Commodity RANGE : START({start}) - END({end}) - NOW({tmp5})\n");
+                                        WriteLog_System("Trade Stop\n");
+                                        telegram_message($"[Buy] OVER KOSDAK150  Commodity RANGE : START({start}) - END({end}) - NOW({tmp5})\n");
+                                        telegram_message("Trade Stop\n");
+                                    }
                                     index_buy = true;
                                 }
                             }
@@ -1605,6 +1633,13 @@ namespace WindowsFormsApp1
                                 double end = Convert.ToDouble(utility.type2_end_all);
                                 if (kosdaq_index_series[0] < start || end < kosdaq_index_series[2])
                                 {
+                                    if (!index_clear)
+                                    {
+                                        WriteLog_System($"[Clear] OVER KOSDAK150 Commodity RANGE : START({start}) - END({end}) - NOW({tmp5})\n");
+                                        WriteLog_System("Trade Stop\n");
+                                        telegram_message($"[Clear] OVER KOSDAK150  Commodity RANGE : START({start}) - END({end}) - NOW({tmp5})\n");
+                                        telegram_message("Trade Stop\n");
+                                    }
                                     index_clear = true;
                                 }
                             }
@@ -1618,6 +1653,13 @@ namespace WindowsFormsApp1
                                 double end = Convert.ToDouble(utility.type2_end_isa);
                                 if (kosdaq_index_series[0] < start || end < kosdaq_index_series[2])
                                 {
+                                    if (!index_dual)
+                                    {
+                                        WriteLog_System($"[Dual] OVER KOSDAK150 Commodity RANGE : START({start}) - END({end}) - NOW({tmp5})\n");
+                                        WriteLog_System("Trade Stop\n");
+                                        telegram_message($"[Dual] OVER KOSDAK150  Commodity RANGE : START({start}) - END({end}) - NOW({tmp5})\n");
+                                        telegram_message("Trade Stop\n");
+                                    }
                                     index_dual = true;
                                 }
                             }
