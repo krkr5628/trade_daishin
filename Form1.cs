@@ -2825,14 +2825,12 @@ namespace WindowsFormsApp1
             //지수 확인
             if (gubun == Master_code && index_buy)
             {
-                WriteLog_Order($"[01] {code_name}({code}) Index 이탈\n");
                 return "대기";
             }
 
             //지수 확인
             if (gubun == ISA_code && index_dual)
             {
-                WriteLog_Order($"[11] {code_name}({code}) Index 이탈\n");
                 return "대기";
             }
 
