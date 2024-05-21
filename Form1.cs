@@ -2370,6 +2370,67 @@ namespace WindowsFormsApp1
 
                         Stock_info(Condition_Name, Stock_Code, "0", Stock_Code, "");
                     }
+                    else if (utility.buy_INDEPENDENT || utility.buy_DUAL)
+                    {
+                        bool isentry = false;
+                        bool issingle = false;
+                        //
+                        if(findRows1.Length == 2)
+                        {
+                            for (int i = 0; i < findRows1.Length; i++)
+                            {
+                                if (Condition_Name.Equals(findRows1[i]["조건식"]) && findRows1[i]["편입"].Equals("이탈") && findRows1[i]["상태"].Equals("대기"))
+                                {
+                                    findRows1[i]["편입"] = "편입";
+                                    findRows1[i]["편입시각"] = DateTime.Now.ToString("HH:mm:ss");
+                                    isentry = true;
+                                }
+                            }
+                        }
+                        else
+                        {
+                            if (Condition_Name.Equals(findRows1[0]["조건식"]))
+                            {
+                                if(findRows1[0]["편입"].Equals("이탈") && findRows1[0]["상태"].Equals("대기"))
+                                {
+                                    findRows1[0]["편입"] = "편입";
+                                    findRows1[0]["편입시각"] = DateTime.Now.ToString("HH:mm:ss");
+                                    isentry = true;
+                                }
+                            }
+                            else
+                            {
+                                issingle = true;
+                            }
+                        }
+
+                        if (isentry)
+                        {
+                            WriteLog_Stock($"[기존종목/INDEPENDENT편입/{Condition_Name}] : {findRows1[0]["종목명"]}({Stock_Code})\n");
+
+                            dtCondStock.AcceptChanges();
+
+                            //정렬
+                            var sorted_Rows = from row in dtCondStock.AsEnumerable()
+                                              orderby row.Field<string>("편입시각") ascending
+                                              select row;
+                            dtCondStock = sorted_Rows.CopyToDataTable();
+                            dtCondStock.AcceptChanges();
+                            dataGridView1.DataSource = dtCondStock;
+                            return;
+                        }
+                        
+                        if(issingle)
+                        {
+                            if (dtCondStock.Rows.Count >= 30)
+                            {
+                                WriteLog_Stock($"[신규편입불가/{Condition_Name}/{Stock_Code}] : 최대 감시 종목(30개) 초과 \n");
+                                return;
+                            }
+
+                            Stock_info(Condition_Name, Stock_Code, "0", Stock_Code, "");
+                        }
+                    }
                     else 
                     {
                         //OR과 AND의 경우 종목당 한번만 포함된다.
@@ -2487,41 +2548,11 @@ namespace WindowsFormsApp1
                                 dataGridView1.DataSource = dtCondStock;
                                 return;
                             }
-                        }
-
-                        //INDEPENDENT의 경우 조건식이 다르면 편입한다.
-                        if (utility.buy_INDEPENDENT || utility.buy_DUAL)
-                        {
-                            bool isentry = false;
-                            for (int i = 0; i < findRows1.Length; i++)
-                            {
-                                if (Condition_Name.Equals(findRows1[i]["조건식"]) && findRows1[i]["편입"].Equals("이탈") && findRows1[i]["상태"].Equals("대기"))
-                                {
-                                    findRows1[i]["편입"] = "편입";
-                                    findRows1[i]["편입시각"] = DateTime.Now.ToString("HH:mm:ss");                                  
-                                    isentry = true;
-                                }
-                            }
-
-                            if (isentry)
-                            {
-                                WriteLog_Stock($"[기존종목/INDEPENDENT편입/{Condition_Name}] : {findRows1[0]["종목명"]}({Stock_Code})\n");
-
-                                dtCondStock.AcceptChanges();
-
-                                //정렬
-                                var sorted_Rows = from row in dtCondStock.AsEnumerable()
-                                                  orderby row.Field<string>("편입시각") ascending
-                                                  select row;
-                                dtCondStock = sorted_Rows.CopyToDataTable();
-                                dtCondStock.AcceptChanges();
-                                dataGridView1.DataSource = dtCondStock;
-                                return;
-                            }
-                        }
-
-                        WriteLog_Stock($"[기존종목/편입/{Condition_Name}] : {findRows1[0]["종목명"]}({Stock_Code}) 재편입 대상 없음\n");
+                        }  
                     }
+
+                    WriteLog_Stock($"[기존종목/편입/{Condition_Name}] : {findRows1[0]["종목명"]}({Stock_Code}) 재편입 대상 없음\n");
+
                     break;
 
                 //종목 이탈
