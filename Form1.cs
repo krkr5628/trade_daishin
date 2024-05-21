@@ -1755,11 +1755,13 @@ namespace WindowsFormsApp1
                     string.Format("{0:#,##0}", Convert.ToInt32(high)) //상한가 => long or float)
                 );
 
+                /*
                 //OR 및 AND 모드에서는 중복제거
                 if (!utility.buy_INDEPENDENT || !utility.buy_DUAL)
                 {
                     RemoveDuplicateRows(dtCondStock, utility.buy_AND);
                 }
+                */
 
                 dtCondStock.AcceptChanges();
                 dataGridView1.DataSource = dtCondStock;
