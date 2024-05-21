@@ -1680,8 +1680,6 @@ namespace WindowsFormsApp1
             MarketEye.SetInputValue(0, items);
             MarketEye.SetInputValue(1, Code);
             //
-            System.Threading.Thread.Sleep(200);
-            //
             int result = MarketEye.BlockRequest();
             //
             System.Threading.Thread.Sleep(200);
@@ -2321,7 +2319,7 @@ namespace WindowsFormsApp1
                     return;
                 }
                 //
-                WriteLog_System("[실시간조건식/시작/" + condition_name + "] : 초기 검색 종목 존재\n");
+                WriteLog_Stock("[실시간조건식/시작/" + condition_name + "] : 초기 검색 종목 존재\n");
                 telegram_message("[실시간조건식/시작/" + condition_name + "] : 초기 검색 종목 존재\n");
                 //
                 for (int i = 0; i < initial_num; i++)
