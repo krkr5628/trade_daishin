@@ -1684,6 +1684,8 @@ namespace WindowsFormsApp1
             //
             int result = MarketEye.BlockRequest();
             //
+            System.Threading.Thread.Sleep(200);
+            //
             if (result == 0)
             {
                 //
@@ -1703,21 +1705,12 @@ namespace WindowsFormsApp1
                     Status = utility.buy_AND ? "호출" : "대기";
 
                     //최소 및 최대 매수가 확인
-                    if (Native_Price < Convert.ToInt32(utility.min_price) || Native_Price > Convert.ToInt32(utility.max_price)) return;
+                    if (Native_Price < Convert.ToInt32(utility.min_price) || Native_Price > Convert.ToInt32(utility.max_price))
+                    {
+                        WriteLog_Stock($"[{condition_name}/편입실패] : {Code_name}({Code}) 최소 및 최대 범위 이탈\n");
+                        return;
+                    }
 
-                    //Independent 모드에서 조건식에 해당하는 종목이 있을시 제거
-                    if (utility.buy_INDEPENDENT || utility.buy_DUAL)
-                    {
-                        var findRows2 = dtCondStock.AsEnumerable()
-                                                .Where(row => row.Field<string>("종목코드") == Code &&
-                                                              row.Field<string>("조건식") == condition_name);
-                        if (findRows2.Any()) return;
-                    }
-                    //OR AND 모드에서 기존 보유 종목 있을시 제거
-                    else
-                    {
-                        if (dtCondStock.Select($"종목코드 = '{Code}'").Length == 1) return;
-                    }
                     //
                     lock (buy_lock)
                     {
@@ -1774,6 +1767,10 @@ namespace WindowsFormsApp1
                 //실시간 시세 등록
                 StockCur.SetInputValue(0, Code);
                 StockCur.Subscribe();
+            }
+            else
+            {
+                WriteLog_Stock($"[{condition_name}/편입] : {Code} 수신 실패\n");
             }
         }
 
@@ -2348,7 +2345,7 @@ namespace WindowsFormsApp1
                     string time1 = DateTime.Now.ToString("HH:mm:ss");
 
                     //매도 조건식일 경우
-                    if (utility.Fomula_list_sell_text.Split('^')[1] == Condition_ID)
+                    if (utility.sell_condition && utility.Fomula_list_sell_text.Split('^')[1] == Condition_ID)
                     {
                         if (findRows1.Length != 0 && findRows1[0]["상태"].Equals("매수완료"))
                         {
@@ -2358,7 +2355,17 @@ namespace WindowsFormsApp1
                     }
 
                     //기존에 포함됬던 종목
-                    if (findRows1.Length != 0)
+                    if(!findRows1.Any())
+                    {
+                        if (dtCondStock.Rows.Count >= 30)
+                        {
+                            WriteLog_Stock($"[신규편입불가/{Condition_Name}/{Stock_Code}] : 최대 감시 종목(30개) 초과 \n");
+                            return;
+                        }
+
+                        Stock_info(Condition_Name, Stock_Code, "0", Stock_Code, "");
+                    }
+                    else 
                     {
                         //OR과 AND의 경우 종목당 한번만 포함된다.
                         if (utility.buy_OR && findRows1[0]["편입"].Equals("이탈") && findRows1[0]["상태"].Equals("대기"))
@@ -2366,7 +2373,19 @@ namespace WindowsFormsApp1
                             findRows1[0]["편입"] = "편입";
                             findRows1[0]["편입시각"] = DateTime.Now.ToString("HH:mm:ss");
                             WriteLog_Stock($"[기존종목/재편입/{Condition_Name}] : {findRows1[0]["종목명"]}({Stock_Code})\n");
+
+                            dtCondStock.AcceptChanges();
+
+                            //정렬
+                            var sorted_Rows = from row in dtCondStock.AsEnumerable()
+                                              orderby row.Field<string>("편입시각") ascending
+                                              select row;
+                            dtCondStock = sorted_Rows.CopyToDataTable();
+                            dtCondStock.AcceptChanges();
+                            dataGridView1.DataSource = dtCondStock;
+                            return;
                         }
+
                         //OR과 AND의 경우 종목당 한번만 포함된다.
                         if (utility.buy_AND && findRows1[0]["편입"].Equals("이탈") && findRows1[0]["상태"].Equals("호출"))
                         {
@@ -2374,7 +2393,19 @@ namespace WindowsFormsApp1
                             findRows1[0]["편입시각"] = DateTime.Now.ToString("HH:mm:ss");
                             findRows1[0]["조건식"] = Condition_Name;
                             WriteLog_Stock($"[기존종목/재편입/{Condition_Name}] : {findRows1[0]["종목명"]}({Stock_Code})\n");
+
+                            dtCondStock.AcceptChanges();
+
+                            //정렬
+                            var sorted_Rows = from row in dtCondStock.AsEnumerable()
+                                              orderby row.Field<string>("편입시각") ascending
+                                              select row;
+                            dtCondStock = sorted_Rows.CopyToDataTable();
+                            dtCondStock.AcceptChanges();
+                            dataGridView1.DataSource = dtCondStock;
+                            return;
                         }
+
                         //OR과 AND의 경우 종목당 한번만 포함된다.
                         if (utility.buy_AND && findRows1[0]["편입"].Equals("이탈") && findRows1[0]["상태"].Equals("주문"))
                         {                   
@@ -2399,8 +2430,21 @@ namespace WindowsFormsApp1
                                     findRows1[0]["상태"] = "주문";
                                 }
                             }
+
                             WriteLog_Stock($"[기존종목/재편입/{Condition_Name}] : {findRows1[0]["종목명"]}({Stock_Code})\n");
+
+                            dtCondStock.AcceptChanges();
+
+                            //정렬
+                            var sorted_Rows = from row in dtCondStock.AsEnumerable()
+                                              orderby row.Field<string>("편입시각") ascending
+                                              select row;
+                            dtCondStock = sorted_Rows.CopyToDataTable();
+                            dtCondStock.AcceptChanges();
+                            dataGridView1.DataSource = dtCondStock;
+                            return;
                         }
+
                         //AND의 경우 포함된 종목이 한번 더 발견되어야 매수를 시작할 수 있다.
                         if (utility.buy_AND && findRows1[0]["편입"].Equals("편입") && findRows1[0]["상태"].Equals("호출"))
                         {
@@ -2426,50 +2470,66 @@ namespace WindowsFormsApp1
                                     }
                                 }
                                 WriteLog_Stock($"[기존종목/AND편입/{Condition_Name}] : {findRows1[0]["종목명"]}({Stock_Code})\n");
+
+                                dtCondStock.AcceptChanges();
+
+                                //정렬
+                                var sorted_Rows = from row in dtCondStock.AsEnumerable()
+                                                  orderby row.Field<string>("편입시각") ascending
+                                                  select row;
+                                dtCondStock = sorted_Rows.CopyToDataTable();
+                                dtCondStock.AcceptChanges();
+                                dataGridView1.DataSource = dtCondStock;
+                                return;
                             }
                         }
+
                         //INDEPENDENT의 경우 조건식이 다르면 편입한다.
                         if (utility.buy_INDEPENDENT || utility.buy_DUAL)
                         {
+                            bool isentry = false;
                             for (int i = 0; i < findRows1.Length; i++)
                             {
-                                if (findRows1[i]["편입"].Equals("이탈") && findRows1[i]["상태"].Equals("대기") && Condition_Name.Equals(findRows1[i]["조건식"]))
+                                if (Condition_Name.Equals(findRows1[i]["조건식"]) && findRows1[i]["편입"].Equals("이탈") && findRows1[i]["상태"].Equals("대기"))
                                 {
                                     findRows1[i]["편입"] = "편입";
                                     findRows1[i]["편입시각"] = DateTime.Now.ToString("HH:mm:ss");                                  
-                                    WriteLog_Stock($"[기존종목/INDEPENDENT편입/{Condition_Name}] : {findRows1[i]["종목명"]}({Stock_Code})\n");
-                                    break;
+                                    isentry = true;
                                 }
                             }
+
+                            if (isentry)
+                            {
+                                WriteLog_Stock($"[기존종목/INDEPENDENT편입/{Condition_Name}] : {findRows1[0]["종목명"]}({Stock_Code})\n");
+
+                                dtCondStock.AcceptChanges();
+
+                                //정렬
+                                var sorted_Rows = from row in dtCondStock.AsEnumerable()
+                                                  orderby row.Field<string>("편입시각") ascending
+                                                  select row;
+                                dtCondStock = sorted_Rows.CopyToDataTable();
+                                dtCondStock.AcceptChanges();
+                                dataGridView1.DataSource = dtCondStock;
+                                return;
+                            }
                         }
-                        dtCondStock.AcceptChanges();
-                        //정렬
-                        var sorted_Rows = from row in dtCondStock.AsEnumerable()
-                                          orderby row.Field<string>("편입시각") ascending
-                                          select row;
-                        dtCondStock = sorted_Rows.CopyToDataTable();
-                        dtCondStock.AcceptChanges();
-                        dataGridView1.DataSource = dtCondStock;
-                        return;
                     }
-
-                    if(dtCondStock.Rows.Count >= 30)
-                    {
-                        WriteLog_Stock($"[신규편입불가/{Condition_Name}/{Stock_Code}] : 최대 감시 종목(30개) 초과 \n");
-                        return;
-                    } 
-
-                    Stock_info(Condition_Name, Stock_Code, "0", Stock_Code, "");
                     break;
 
                 //종목 이탈
                 case "50":
                     //검출된 종목이 이미 이탈했다면(기본적으로 I D가 번갈아가면서 발생하므로 그럴릴 없음? 있는듯?)
                     DataRow[] findRows = dtCondStock.Select($"종목코드 = '{Stock_Code}'");
-                    if (findRows.Length == 0) return;
+
+                    if (findRows.Length == 0)
+                    {
+                        WriteLog_Stock($"[기존종목/이탈/{Condition_Name}] : {Stock_Code} 종목 미존재\n");
+                        return;
+                    }
 
                     //매도 조건식일 경우
-                    if (utility.Fomula_list_sell_text.Split('^')[1] == Condition_ID) return;
+                    if (utility.sell_condition &&  utility.Fomula_list_sell_text.Split('^')[1] == Condition_ID) return;
 
                     bool isExitStock = false;
                     string logMessage = "";
@@ -2484,11 +2544,12 @@ namespace WindowsFormsApp1
                         if (findRows[0]["상태"].Equals("호출"))
                         {
                             isExitStock = true;
-                            logMessage = $"[기존종목/이탈/{Condition_Name}] : {findRows[0]["종목명"]}({Stock_Code})\n";
+                            logMessage = $"[기존종목/이탈/{Condition_Name}] : {findRows[0]["종목명"]}({Stock_Code}) 완전이탈 \n";
                         }
                         else if (findRows[0]["상태"].Equals("주문"))
                         {
                             findRows[0]["상태"] = "호출";
+                            logMessage = $"[기존종목/이탈/{Condition_Name}] : {findRows[0]["종목명"]}({Stock_Code}) 부분이탈\n";
                         }
                     }
                     else if (utility.buy_INDEPENDENT || utility.buy_DUAL)
@@ -2512,7 +2573,7 @@ namespace WindowsFormsApp1
                         dtCondStock.AcceptChanges();
                         dataGridView1.DataSource = dtCondStock;
 
-                        if (findRows[0]["상태"].Equals("대기") || findRows[0]["상태"].Equals("매도완료"))
+                        if (findRows[0]["상태"].Equals("매도완료"))
                         {
                             StockCur.SetInputValue(0, Stock_code);
                             StockCur.Unsubscribe();
