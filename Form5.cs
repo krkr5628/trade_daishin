@@ -23,8 +23,8 @@ namespace WindowsFormsApp1
         private void read()
         {
             // 파일이 있는 폴더 경로
-            string folderPath = @"C:\Auto_Trade_Creon\Update\Agreement.txt";
-            string folderPath2 = @"C:\Auto_Trade_Creon\Update\Update.txt";
+            string folderPath = @"C:\Auto_Trade\Auto_Trade_Creon\Update\Agreement.txt";
+            string folderPath2 = @"C:\Auto_Trade\Auto_Trade_Creon\Update\Update.txt";
 
             try
             {
