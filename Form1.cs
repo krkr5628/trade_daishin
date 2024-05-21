@@ -1770,7 +1770,10 @@ namespace WindowsFormsApp1
             }
             else
             {
-                WriteLog_Stock($"[{condition_name}/편입] : {Code} 수신 실패\n");
+                WriteLog_Stock($"[{condition_name}/편입/수신실패] : {Code}\n");
+                int status = MarketEye.GetDibStatus();
+                string status_message = MarketEye.GetDibMsg1();
+                WriteLog_Stock($"[{condition_name}/편입/수신실패] : {status} / {status_message} \n");
             }
         }
 
@@ -2514,6 +2517,8 @@ namespace WindowsFormsApp1
                                 return;
                             }
                         }
+
+                        WriteLog_Stock($"[기존종목/편입/{Condition_Name}] : {findRows1[0]["종목명"]}({Stock_Code}) 재편입 대상 없음\n");
                     }
                     break;
 
@@ -2524,7 +2529,7 @@ namespace WindowsFormsApp1
 
                     if (findRows.Length == 0)
                     {
-                        WriteLog_Stock($"[기존종목/이탈/{Condition_Name}] : {Stock_Code} 종목 미존재\n");
+                        WriteLog_Stock($"[기존종목/이탈/{Condition_Name}] : {Stock_Code} 이탈 대상 없음\n");
                         return;
                     }
 
@@ -2579,6 +2584,7 @@ namespace WindowsFormsApp1
                             StockCur.Unsubscribe();
                         }
                     }
+
                     break;
             }
         }
