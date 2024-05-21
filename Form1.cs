@@ -1695,6 +1695,9 @@ namespace WindowsFormsApp1
                 string now_hold = hold_num;
                 string high = Convert.ToString(MarketEye.GetDataValue(5, 0));
                 //
+                WriteLog_Stock($"[{condition_name}/편입] : {Code_name}({Code})\n");
+                //telegram_message($"[{condition_name}/편입] : {Code_name}({Code})\n");
+                //
                 DataRow[] findRows = dtCondStock_hold.Select($"종목코드 = '{Code}'");
                 //
                 if (condition_name != "HTS매매" && condition_name != "전일보유")
@@ -1705,7 +1708,7 @@ namespace WindowsFormsApp1
                     //최소 및 최대 매수가 확인
                     if (Native_Price < Convert.ToInt32(utility.min_price) || Native_Price > Convert.ToInt32(utility.max_price))
                     {
-                        WriteLog_Stock($"[{condition_name}/편입실패] : {Code_name}({Code}) 최소 및 최대 범위 이탈\n");
+                        WriteLog_Stock($"[{condition_name}/편입실패] : {Code_name}({Code}) 가격 최소 및 최대 범위 이탈\n");
                         return;
                     }
 
@@ -1727,9 +1730,6 @@ namespace WindowsFormsApp1
                     order_number = tmp[2];
                     now_hold = tmp[3];
                 }
-                //
-                WriteLog_Stock($"[{condition_name}/편입] : {Code_name}({Code})\n");
-                //telegram_message($"[{condition_name}/편입] : {Code_name}({Code})\n");
                 //
                 dtCondStock.Rows.Add(
                     gubun,
