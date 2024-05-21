@@ -1687,9 +1687,20 @@ namespace WindowsFormsApp1
             MarketEye.SetInputValue(0, items);
             MarketEye.SetInputValue(1, Code);
             //
+            System.Threading.Thread.Sleep(200);
+            //
             int result = MarketEye.BlockRequest();
             //
-            System.Threading.Thread.Sleep(200);
+            //수신확인
+            if (MarketEye.GetDibStatus() == 1)
+            {
+                string status_message = MarketEye.GetDibMsg1();
+                WriteLog_Stock($"[{condition_name}/편입/수신실패] : {Code} / {status_message} \n");
+                WriteLog_System("DibRq 요청 수신대기(1초후 재시도) : 종목정보받기(주문번호)");
+                System.Threading.Thread.Sleep(1000);
+                Stock_info(condition_name, Code, hold_num, order_number, gubun);
+                return;
+            }
             //
             if (result == 0)
             {
@@ -1774,13 +1785,6 @@ namespace WindowsFormsApp1
                 //실시간 시세 등록
                 StockCur.SetInputValue(0, Code);
                 StockCur.Subscribe();
-            }
-            else
-            {
-                WriteLog_Stock($"[{condition_name}/편입/수신실패] : {Code}\n");
-                int status = MarketEye.GetDibStatus();
-                string status_message = MarketEye.GetDibMsg1();
-                WriteLog_Stock($"[{condition_name}/편입/수신실패] : {status} / {status_message} \n");
             }
         }
 
