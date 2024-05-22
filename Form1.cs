@@ -980,7 +980,7 @@ namespace WindowsFormsApp1
                 string Code = row["종목코드"].ToString();
                 string Hold_num = row["보유수량"].ToString();
                 //
-                Stock_info("전일보유", Code, Hold_num, Code, gubun, false);
+                Stock_info("전일보유", Code, Hold_num, Code, gubun);
             }
 
             //
@@ -1680,7 +1680,7 @@ namespace WindowsFormsApp1
 
         //종목 정보 받기(전일, 초기, 편출입)
         //https://money2.daishin.com/e5/mboard/ptype_basic/HTS_Plus_Helper/DW_Basic_Read.aspx?boardseq=285&seq=131&page=1&searchString=MarketEye&p=&v=&m=
-        private void Stock_info(string condition_name, string Code, string hold_num, string order_number, string gubun, bool and_mode)
+        private void Stock_info(string condition_name, string Code, string hold_num, string order_number, string gubun)
         {
             //종목코드, 시간, 현재가, 거래량, 종목명, 상한가
             int[] items = {0, 1, 4, 10, 17, 33};
@@ -1698,7 +1698,7 @@ namespace WindowsFormsApp1
                 WriteLog_Stock($"[{condition_name}/편입/수신실패] : {Code} / {status_message} \n");
                 WriteLog_System("DibRq 요청 수신대기(1초후 재시도) : 종목정보받기(주문번호)");
                 System.Threading.Thread.Sleep(1000);
-                Stock_info(condition_name, Code, hold_num, order_number, gubun, false);
+                Stock_info(condition_name, Code, hold_num, order_number, gubun);
                 return;
             }
             //
@@ -1712,9 +1712,30 @@ namespace WindowsFormsApp1
                 string Status = "매수완료";
                 string now_hold = hold_num;
                 string high = Convert.ToString(MarketEye.GetDataValue(5, 0));
+
                 //
-                WriteLog_Stock($"[{condition_name}/편입] : {Code_name}({Code})\n");
+                DataRow[] findRows1 = dtCondStock.Select($"종목코드 = '{Code}'");
+
+                bool and_mode = false;
+
+                if (findRows1.Any() && utility.buy_OR)
+                {
+                    WriteLog_Stock($"[{condition_name}/편입] : {Code_name}({Code}) OR 모드 중복\n");
+                    return;
+                }
+
+                if (findRows1.Any() && utility.buy_AND && condition_name != findRows1[0]["조건식"])
+                {
+                    WriteLog_Stock($"[{condition_name}/편입] : {Code_name}({Code}) AND 모드 중복\n");
+                    and_mode = true;
+                }
+                //
+                if (!and_mode)
+                {
+                    WriteLog_Stock($"[{condition_name}/편입] : {Code_name}({Code})\n");
+                }
                 //telegram_message($"[{condition_name}/편입] : {Code_name}({Code})\n");
+
                 //
                 DataRow[] findRows = dtCondStock_hold.Select($"종목코드 = '{Code}'");
                 //
@@ -2348,21 +2369,7 @@ namespace WindowsFormsApp1
                 for (int i = 0; i < initial_num; i++)
                 {
                     string code = Convert.ToString(CssStgFind.GetDataValue(0, i));
-                    DataRow[] findRows1 = dtCondStock.Select($"종목코드 = '{code}'");
-
-                    if (findRows1.Any() && utility.buy_OR)
-                    {
-                        WriteLog_Stock($"[{condition_name}/편입] : {code} OR 모드 중복\n");
-                        continue;
-                    }
-
-                    if(findRows1.Any() && utility.buy_AND)
-                    {
-                        WriteLog_Stock($"[{condition_name}/편입] : {code} AND 모드 중복\n");
-                        Stock_info(condition_name, code, "0", code, "", true);
-                        continue;
-                    }
-                    Stock_info(condition_name, code, "0", code, "", false) ;
+                    Stock_info(condition_name, code, "0", code, "") ;
                 }
             }
         }
@@ -2404,7 +2411,7 @@ namespace WindowsFormsApp1
                             return;
                         }
 
-                        Stock_info(Condition_Name, Stock_Code, "0", Stock_Code, "", false);
+                        Stock_info(Condition_Name, Stock_Code, "0", Stock_Code, "");
                     }
                     else if (utility.buy_INDEPENDENT || utility.buy_DUAL)
                     {
@@ -2470,7 +2477,7 @@ namespace WindowsFormsApp1
                                 return;
                             }
 
-                            Stock_info(Condition_Name, Stock_Code, "0", Stock_Code, "", false);
+                            Stock_info(Condition_Name, Stock_Code, "0", Stock_Code, "");
                         }
                     }
                     else 
