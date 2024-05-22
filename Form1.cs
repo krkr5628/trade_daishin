@@ -1737,8 +1737,6 @@ namespace WindowsFormsApp1
                 //telegram_message($"[{condition_name}/편입] : {Code_name}({Code})\n");
 
                 //
-                DataRow[] findRows = dtCondStock_hold.Select($"종목코드 = '{Code}'");
-                //
                 if (condition_name != "HTS매매" && condition_name != "전일보유")
                 {
                     //
@@ -1776,6 +1774,10 @@ namespace WindowsFormsApp1
                         }
                     }
                 }
+
+                //HTS매매 혹은 전일보유 종목일 경우
+                DataRow[] findRows = dtCondStock_hold.Select($"종목코드 = '{Code}'");
+
                 //"매수중/" + real_gubun + "/" + order_number + "/" + order_acc_market;
                 if (Status.StartsWith("매수중"))
                 {
