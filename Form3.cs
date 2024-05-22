@@ -22,7 +22,7 @@ namespace WindowsFormsApp1
         private void start()
         {
             // 파일이 있는 폴더 경로
-            string folderPath = @"C:\Auto_Trade\Auto_Trade_Creon\Log_Trade";
+            string folderPath = @"C:\Auto_Trade_Creon\Log_Trade";
 
             // 해당 폴더의 모든 파일을 가져오기
             string[] files = Directory.GetFiles(folderPath).OrderByDescending(file => file).ToArray();
