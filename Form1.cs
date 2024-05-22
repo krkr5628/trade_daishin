@@ -1748,7 +1748,8 @@ namespace WindowsFormsApp1
                             {
                                 if (!buy_runningCodes.ContainsKey(Code) && !utility.buy_AND)
                                 {
-                                    Status = buy_check(Code, Code_name, string.Format("{0:#,##0}", Current_Price), time, high, false, condition_name);
+                                    buy_check(Code, Code_name, string.Format("{0:#,##0}", Current_Price), time, high, true, condition_name);
+                                    return;
                                 }
                             }
                         }
@@ -2351,11 +2352,13 @@ namespace WindowsFormsApp1
 
                     if (findRows1.Any() && utility.buy_OR)
                     {
+                        WriteLog_Stock($"[{condition_name}/편입] : {code} OR 모드 중복\n");
                         continue;
                     }
 
                     if(findRows1.Any() && utility.buy_AND)
                     {
+                        WriteLog_Stock($"[{condition_name}/편입] : {code} AND 모드 중복\n");
                         Stock_info(condition_name, code, "0", code, "", true);
                         continue;
                     }
