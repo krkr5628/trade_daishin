@@ -2833,14 +2833,38 @@ namespace WindowsFormsApp1
                 if (trade_status_already >= trade_status_limit) return "대기";
             }
 
+            //보유 종목 매수 확인
+            if (utility.hold_deny && gubun == Master_code)
+            {
+                var findRows2 = dtCondStock.AsEnumerable()
+                                                .Where(row2 => row2.Field<string>("종목코드") == code &&
+                                                              row2.Field<string>("구분코드") == Master_code);
+                if (findRows2.Any())
+                {
+                    return "대기";
+                }
+            }
+
+            //보유 종목 매수 확인
+            if (utility.hold_deny && gubun == ISA_code)
+            {
+                var findRows2 = dtCondStock.AsEnumerable()
+                                                .Where(row2 => row2.Field<string>("종목코드") == code &&
+                                                              row2.Field<string>("구분코드") == ISA_code);
+                if (findRows2.Any())
+                {
+                    return "대기";
+                }
+            }
+
             //지수 확인
-            if (gubun == Master_code && index_buy)
+            if (index_buy && gubun == Master_code)
             {
                 return "대기";
             }
 
             //지수 확인
-            if (gubun == ISA_code && index_dual)
+            if (index_dual && gubun == ISA_code)
             {
                 return "대기";
             }
