@@ -2836,7 +2836,7 @@ namespace WindowsFormsApp1
             //보유 종목 매수 확인
             if (utility.hold_deny && gubun == Master_code)
             {
-                var findRows2 = dtCondStock.AsEnumerable()
+                var findRows2 = dtCondStock_hold.AsEnumerable()
                                                 .Where(row2 => row2.Field<string>("종목코드") == code &&
                                                               row2.Field<string>("구분코드") == Master_code);
                 if (findRows2.Any())
@@ -2848,7 +2848,7 @@ namespace WindowsFormsApp1
             //보유 종목 매수 확인
             if (utility.hold_deny && gubun == ISA_code)
             {
-                var findRows2 = dtCondStock.AsEnumerable()
+                var findRows2 = dtCondStock_hold.AsEnumerable()
                                                 .Where(row2 => row2.Field<string>("종목코드") == code &&
                                                               row2.Field<string>("구분코드") == ISA_code);
                 if (findRows2.Any())
