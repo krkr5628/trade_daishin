@@ -1771,13 +1771,11 @@ namespace WindowsFormsApp1
                     string.Format("{0:#,##0}", Convert.ToInt32(high)) //상한가 => long or float)
                 );
 
-                /*
-                //OR 및 AND 모드에서는 중복제거
+                //OR 및 AND 모드에서는 중복제거 => 초기 종목 검색시 중복 제거 필수
                 if (!utility.buy_INDEPENDENT || !utility.buy_DUAL)
                 {
                     RemoveDuplicateRows(dtCondStock, utility.buy_AND);
                 }
-                */
 
                 dtCondStock.AcceptChanges();
                 dataGridView1.DataSource = dtCondStock;
@@ -1864,22 +1862,15 @@ namespace WindowsFormsApp1
         private void Stock_real_price()
         {
             string Stock_code = StockCur.GetHeaderValue(0);//종목코드 => string
-
-            //종목 확인
-            DataRow[] findRows = dtCondStock.Select($"종목코드 = '{Stock_code}'");
-
-            if (findRows.Length == 0) return;
-
-            //신규 값 받기
             string price = Convert.ToString(StockCur.GetHeaderValue(13)); //새로운 현재가
             string amount = Convert.ToString(StockCur.GetHeaderValue(9)); //새로운 거래량
             string percent = "";
 
-            //값 등록
+            //종목 확인
+            DataRow[] findRows = dtCondStock.Select($"종목코드 = '{Stock_code}'");
+
             if (findRows.Length != 0)
             {
-                bool ischanged = false;
-
                 for (int i = 0; i < findRows.Length; i++)
                 {
                     //신규 값 계산
@@ -1909,61 +1900,50 @@ namespace WindowsFormsApp1
                     if (!price.Equals(""))
                     {
                         findRows[i]["현재가"] = string.Format("{0:#,##0}", Convert.ToInt32(price)); //새로운 현재가
-                        ischanged = true;
                     }
                     if (!amount.Equals(""))
                     {
                         findRows[i]["거래량"] = string.Format("{0:#,##0}", Convert.ToInt32(amount)); //새로운 거래량
-                        ischanged = true;
                     }
                     if (!percent.Equals(""))
                     {
                         findRows[i]["수익률"] = percent;
-                        ischanged = true;
                     }
                 }
 
-                if (ischanged)
-                {
-                    //적용
-                    dtCondStock.AcceptChanges();
-                    dataGridView1.DataSource = dtCondStock;
-                }
-            }             
+                //적용
+                dtCondStock.AcceptChanges();
+                dataGridView1.DataSource = dtCondStock;
+            }
 
             DataRow[] findRows2 = dtCondStock_hold.Select($"종목코드 = '{Stock_code}'");
 
-            //
             if (findRows2.Length != 0)
             {
-                bool ischanged = false;
-
                 //Dual 모드라면 구분코드로 인해 동일 종목에 대하여 2개 들어올 수 있음(수정 요망)
-                if (!price.Equals(""))
+                for (int i = 0; i < findRows2.Length; i++)
                 {
-                    findRows2[0]["현재가"] = string.Format("{0:#,##0}", Convert.ToInt32(price)); //새로운 현재가
-                    findRows2[0]["평가금액"] = string.Format("{0:#,##0}", Convert.ToInt32(price) * Convert.ToInt32(findRows2[0]["보유수량"].ToString().Replace(",", "")));
-                    ischanged = true;
-                }
-                if (!percent.Equals(""))
-                {
-                    findRows2[0]["수익률"] = percent;
-                    findRows2[0]["손익금액"] = string.Format("{0:#,##0}", Convert.ToInt32(Convert.ToInt32(findRows2[0]["평가금액"].ToString().Replace(",", "")) * Convert.ToDouble(percent.Replace("%", "")) / 100));
-                    ischanged = true;
+                    if (!price.Equals(""))
+                    {
+                        findRows2[i]["현재가"] = string.Format("{0:#,##0}", Convert.ToInt32(price)); //새로운 현재가
+                        findRows2[i]["평가금액"] = string.Format("{0:#,##0}", Convert.ToInt32(price) * Convert.ToInt32(findRows2[i]["보유수량"].ToString().Replace(",", "")));
+                    }
+                    if (!percent.Equals(""))
+                    {
+                        findRows2[i]["수익률"] = percent;
+                        findRows2[i]["손익금액"] = string.Format("{0:#,##0}", Convert.ToInt32(Convert.ToInt32(findRows2[i]["평가금액"].ToString().Replace(",", "")) * Convert.ToDouble(percent.Replace("%", "")) / 100));
+                    }
                 }
 
-                if (ischanged)
-                {
-                    //적용
-                    dtCondStock_hold.AcceptChanges();
-                    dataGridView2.DataSource = dtCondStock_hold;
-                }
+                //적용
+                dtCondStock_hold.AcceptChanges();
+                dataGridView2.DataSource = dtCondStock_hold;
             }
         }
 
         //------------------------------------조건식 등록 절차---------------------------------
 
-        //조건식 조회(조건식이 있어야 initial 작동 / initial을 통해 계좌를 받아와야 GetCashInfo)
+            //조건식 조회(조건식이 있어야 initial 작동 / initial을 통해 계좌를 받아와야 GetCashInfo)
         class ConditionInfo
         {
             public string Index { get; set; }
@@ -2445,6 +2425,12 @@ namespace WindowsFormsApp1
                         
                         if(issingle)
                         {
+                            if (dtCondStock.Rows.Count >= 30)
+                            {
+                                WriteLog_Stock($"[신규편입불가/{Condition_Name}/{Stock_Code}] : 최대 감시 종목(30개) 초과 \n");
+                                return;
+                            }
+
                             if (dtCondStock.Rows.Count >= 30)
                             {
                                 WriteLog_Stock($"[신규편입불가/{Condition_Name}/{Stock_Code}] : 최대 감시 종목(30개) 초과 \n");
