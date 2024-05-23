@@ -970,13 +970,13 @@ namespace WindowsFormsApp1
                     tmp.Add("type2/" + Convert.ToString(type2_selection.Checked) + "/" + type2_start.Text + "/" + type2_end.Text);
                     tmp.Add("type3/" + Convert.ToString(type3_selection.Checked) + "/" + type3_start.Text + "/" + type3_end.Text);
                     tmp.Add("type4/" + Convert.ToString(type4_selection.Checked) + "/" + type4_start.Text + "/" + type4_end.Text);
-                    tmp.Add("type5/" + Convert.ToString(type5_selection.Checked) + "/" + type4_start.Text + "/" + type4_end.Text);
+                    tmp.Add("type5/" + Convert.ToString(type5_selection.Checked) + "/" + type5_start.Text + "/" + type5_end.Text);
                     //
                     tmp.Add("type1_ALL/" + Convert.ToString(type1_selection_all.Checked) + "/" + type1_all_start.Text + "/" + type1_all_end.Text);
                     tmp.Add("type2_ALL/" + Convert.ToString(type2_selection_all.Checked) + "/" + type2_all_start.Text + "/" + type2_all_end.Text);
                     tmp.Add("type3_ALL/" + Convert.ToString(type3_selection_all.Checked) + "/" + type3_all_start.Text + "/" + type3_all_end.Text);
                     tmp.Add("type4_ALL/" + Convert.ToString(type4_selection_all.Checked) + "/" + type4_all_start.Text + "/" + type4_all_end.Text);
-                    tmp.Add("type5_ALL/" + Convert.ToString(type5_selection_all.Checked) + "/" + type4_all_start.Text + "/" + type4_all_end.Text);
+                    tmp.Add("type5_ALL/" + Convert.ToString(type5_selection_all.Checked) + "/" + type5_all_start.Text + "/" + type5_all_end.Text);
                     //
                     tmp.Add("Telegram_Allow/" + Convert.ToString(Telegram_Allow.Checked));
                     tmp.Add("텔레그램ID/" + telegram_user_id.Text);
