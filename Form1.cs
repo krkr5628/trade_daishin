@@ -844,7 +844,7 @@ namespace WindowsFormsApp1
             CssAlert.Subscribe(); //실시간 편출입 받기
             CpConclusion.Subscribe(); //실시간 체결 등록
             //
-            timer2.Start(); //체결 내역 업데이트 - 100ms
+            timer2.Start(); //체결 내역 업데이트 - 200ms
             //
             timer3.Start(); //편입 종목 감시 - 200ms
         }
@@ -2673,9 +2673,9 @@ namespace WindowsFormsApp1
             }
         }
 
-        //--------------편입 이후 종목에 대한 매수 매도 감시(200ms)---------------------
+        //--------------편입 이후 종목에 대한 매수 매도 감시(500ms)---------------------
 
-        //timer3(200ms) : 09시 30분 이후 매수 시작인 것에 대하여 이전에 진입한 종목 중 편입 상태인 종목에 대한 매수
+        //timer3(500ms) : 편입된 종목에 대하여 매수 및 청산 확인
         private void Transfer_Timer(object sender, EventArgs e)
         {
             //편입 상태 이면서 대기 종목인 녀석에 대한 검증
