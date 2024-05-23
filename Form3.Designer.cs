@@ -52,8 +52,7 @@ namespace WindowsFormsApp1
             // 
             // Transaction
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(565, 450);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.listBox1);

@@ -2138,8 +2138,7 @@ namespace WindowsFormsApp1
             // 
             // Trade_Auto_Daishin
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(1566, 837);
             this.Controls.Add(this.tableLayoutPanel4);
             this.Controls.Add(this.groupBox9);
