@@ -1509,7 +1509,7 @@ namespace WindowsFormsApp1
 
                     this.Invoke((MethodInvoker)delegate
                     {
-                        kospi_index.Text = kospi_index_series[0] + "/" + kospi_index_series[2];
+                        kospi_index.Text = String.Format($"L({kospi_index_series[0]}) /  H({kospi_index_series[2]}) / C({kospi_index_series[1]})");
                         //WriteLog_System($"{tmp}/{tmp1}/{tmp3}/{tmp4.ToString()}/{tmp5.ToString()}/{tmp6.ToString()}/{tmp7.ToString()}\n");
 
                         if (utility.buy_condition_index)
@@ -1609,7 +1609,7 @@ namespace WindowsFormsApp1
 
                     this.Invoke((MethodInvoker)delegate
                     {
-                        kosdaq_index.Text = kosdaq_index_series[0] + "/" + kosdaq_index_series[2];
+                        kosdaq_index.Text = String.Format($"L({kospi_index_series[0]}) /  H({kospi_index_series[2]}) / C({kospi_index_series[1]})");
                         //WriteLog_System($"{tmp}/{tmp1}/{tmp3}/{tmp4.ToString()}/{tmp5.ToString()}/{tmp6.ToString()}/{tmp7.ToString()}\n");
 
                         if (utility.buy_condition_index)
