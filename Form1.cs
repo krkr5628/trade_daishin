@@ -1203,9 +1203,9 @@ namespace WindowsFormsApp1
                             if(tmp5 < start || end < tmp5)
                             {
                                 index_buy = true;
-                                WriteLog_System($"[BUY] OVER DOW30 INDEX RANGE : START({start}) - END({end}) - NOW({tmp5})\n");
+                                WriteLog_System($"[BUY] OVER DOW30 INDEX RANGE : START({start}) <=  NOW({tmp5}) <= END({end})\n");
                                 WriteLog_System("Trade Stop\n");
-                                telegram_message($"[BUY] OVER DOW30 INDEX RANGE : START({start}) - END({end}) - NOW({tmp5})\n");
+                                telegram_message($"[BUY] OVER DOW30 INDEX RANGE : START({start}) <=  NOW({tmp5}) <= END({end})\n");
                                 telegram_message("Trade Stop\n");
                             }
                         }
@@ -1220,9 +1220,9 @@ namespace WindowsFormsApp1
                             if (tmp5 < start || end < tmp5)
                             {
                                 index_clear = true;
-                                WriteLog_System($"[CLEAR] OVER DOW30 INDEX RANGE : START({start}) - END({end}) - NOW({tmp5})\n");
+                                WriteLog_System($"[CLEAR] OVER DOW30 INDEX RANGE : START({start}) <=  NOW({tmp5}) <= END({end})\n");
                                 WriteLog_System("Trade Stop\n");
-                                telegram_message($"[CLEAR] OVER DOW30 INDEX RANGE : START({start}) - END({end}) - NOW({tmp5})\n");
+                                telegram_message($"[CLEAR] OVER DOW30 INDEX RANGE : START({start}) <=  NOW({tmp5}) <= END({end})\n");
                                 telegram_message("Trade Stop\n");
                             }
                         }
@@ -1237,9 +1237,9 @@ namespace WindowsFormsApp1
                             if (tmp5 < start || end < tmp5)
                             {
                                 index_dual = true;
-                                WriteLog_System($"[DUAL] OVER DOW30 INDEX RANGE : START({start}) - END({end}) - NOW({tmp5})\n");
+                                WriteLog_System($"[DUAL] OVER DOW30 INDEX RANGE : START({start}) <=  NOW({tmp5}) <= END({end})\n");
                                 WriteLog_System("Trade Stop\n");
-                                telegram_message($"[DUAL]OVER DOW30 INDEX RANGE : START({start}) - END({end}) - NOW({tmp5})\n");
+                                telegram_message($"[DUAL]OVER DOW30 INDEX RANGE : START({start}) <=  NOW({tmp5}) <= END({end})\n");
                                 telegram_message("Trade Stop\n");
                             }
                         }
@@ -1276,9 +1276,9 @@ namespace WindowsFormsApp1
                             if (tmp5 < start || end < tmp5)
                             {
                                 index_buy = true;
-                                WriteLog_System($"[BUY] OVER S&P500 INDEX RANGE : START({start}) - END({end}) - NOW({tmp5})\n");
+                                WriteLog_System($"[BUY] OVER S&P500 INDEX RANGE : START({start}) <=  NOW({tmp5}) <= END({end})\n");
                                 WriteLog_System("Trade Stop\n");
-                                telegram_message($"[BUY] OVER S&P500 INDEX RANGE : START({start}) - END({end}) - NOW({tmp5})\n");
+                                telegram_message($"[BUY] OVER S&P500 INDEX RANGE : START({start}) <=  NOW({tmp5}) <= END({end})\n");
                                 telegram_message("Trade Stop\n");
                             }
                         }
@@ -1293,9 +1293,9 @@ namespace WindowsFormsApp1
                             if (tmp5 < start || end < tmp5)
                             {
                                 index_clear = true;
-                                WriteLog_System($"[CLEAR] OVER S&P500 INDEX RANGE : START({start}) - END({end}) - NOW({tmp5})\n");
+                                WriteLog_System($"[CLEAR] OVER S&P500 INDEX RANGE : START({start}) <=  NOW({tmp5}) <= END({end})\n");
                                 WriteLog_System("Trade Stop\n");
-                                telegram_message($"[CLEAR] OVER S&P500 INDEX RANGE : START({start}) - END({end}) - NOW({tmp5})\n");
+                                telegram_message($"[CLEAR] OVER S&P500 INDEX RANGE : START({start}) <=  NOW({tmp5}) <= END({end})\n");
                                 telegram_message("Trade Stop\n");
                             }
                         }
@@ -1310,9 +1310,9 @@ namespace WindowsFormsApp1
                             if (tmp5 < start || end < tmp5)
                             {
                                 index_dual = true;
-                                WriteLog_System($"[DUAL] OVER S&P500 INDEX RANGE : START({start}) - END({end}) - NOW({tmp5})\n");
+                                WriteLog_System($"[DUAL] OVER S&P500 INDEX RANGE : START({start}) <=  NOW({tmp5}) <= END({end})\n");
                                 WriteLog_System("Trade Stop\n");
-                                telegram_message($"[DUAL] OVER S&P500 INDEX RANGE : START({start}) - END({end}) - NOW({tmp5})\n");
+                                telegram_message($"[DUAL] OVER S&P500 INDEX RANGE : START({start}) <=  NOW({tmp5}) <= END({end})\n");
                                 telegram_message("Trade Stop\n");
                             }
                         }
@@ -1349,9 +1349,9 @@ namespace WindowsFormsApp1
                             if (tmp5 < start || end < tmp5)
                             {
                                 index_buy = true;
-                                WriteLog_System($"[BUY] OVER NASDAQ INDEX RANGE : START({start}) - END({end}) - NOW({tmp5})\n");
+                                WriteLog_System($"[BUY] OVER NASDAQ INDEX RANGE : START({start}) <=  NOW({tmp5}) <= END({end})\n");
                                 WriteLog_System("Trade Stop\n");
-                                telegram_message($"[BUY] OVER NASDAQ INDEX RANGE : START({start}) - END({end}) - NOW({tmp5})\n");
+                                telegram_message($"[BUY] OVER NASDAQ INDEX RANGE : START({start}) <=  NOW({tmp5}) <= END({end})\n");
                                 telegram_message("Trade Stop\n");
                             }
                         }
@@ -1366,9 +1366,9 @@ namespace WindowsFormsApp1
                             if (tmp5 < start || end < tmp5)
                             {
                                 index_clear = true;
-                                WriteLog_System($"[CLEAR] OVER NASDAQ INDEX RANGE : START({start}) - END({end}) - NOW({tmp5})\n");
+                                WriteLog_System($"[CLEAR] OVER NASDAQ INDEX RANGE : START({start}) <=  NOW({tmp5}) <= END({end})\n");
                                 WriteLog_System("Trade Stop\n");
-                                telegram_message($"[CLEAR] OVER NASDAQ INDEX RANGE : START({start}) - END({end}) - NOW({tmp5})\n");
+                                telegram_message($"[CLEAR] OVER NASDAQ INDEX RANGE : START({start}) <=  NOW({tmp5}) <= END({end})\n");
                                 telegram_message("Trade Stop\n");
                             }
                         }
@@ -1383,9 +1383,9 @@ namespace WindowsFormsApp1
                             if (tmp5 < start || end < tmp5)
                             {
                                 index_dual = true;
-                                WriteLog_System($"[DUAL] OVER NASDAQ INDEX RANGE : START({start}) - END({end}) - NOW({tmp5})\n");
+                                WriteLog_System($"[DUAL] OVER NASDAQ INDEX RANGE : START({start}) <=  NOW({tmp5}) <= END({end})\n");
                                 WriteLog_System("Trade Stop\n");
-                                telegram_message($"[DUAL]OVER NASDAQ INDEX RANGE : START({start}) - END({end}) - NOW({tmp5})\n");
+                                telegram_message($"[DUAL]OVER NASDAQ INDEX RANGE : START({start}) <=  NOW({tmp5}) <= END({end})\n");
                                 telegram_message("Trade Stop\n");
                             }
                         }
@@ -1504,7 +1504,7 @@ namespace WindowsFormsApp1
                     
                     //저가,종가,고가
                     kospi_index_series[0] = Math.Round((tmp6 - tmp4) / tmp4 * 100, 2); //저가
-                    kospi_index_series[1] = Math.Round((tmp5 - tmp4) / tmp4 * 100, 2); //종가
+                    kospi_index_series[1] = Math.Round((tmp5 - tmp4) / tmp4 * 100, 2); //현재가
                     kospi_index_series[2] = Math.Round((tmp7 - tmp4) / tmp4 * 100, 2); //고가
 
                     this.Invoke((MethodInvoker)delegate
@@ -1522,9 +1522,9 @@ namespace WindowsFormsApp1
                                 {
                                     if (!index_buy)
                                     {
-                                        WriteLog_System($"[Buy] OVER KOSPI200 Commodity RANGE : START({start}) - END({end}) - NOW({tmp5})\n");
+                                        WriteLog_System($"[Buy] OVER KOSPI200 Commodity RANGE : SET_LOW({start}) <= LOW({kospi_index_series[0]}) && HIGH({kospi_index_series[2]}) <= SET_HIGH({end})\n");
                                         WriteLog_System("Trade Stop\n");
-                                        telegram_message($"[Buy] OVER KOSPI200 Commodity RANGE : START({start}) - END({end}) - NOW({tmp5})\n");
+                                        telegram_message($"[Buy] OVER KOSPI200 Commodity RANGE : SET_LOW({start}) <= LOW({kospi_index_series[0]}) && HIGH({kospi_index_series[2]}) <= SET_HIGH({end})\n");
                                         telegram_message("Trade Stop\n");
                                     }
                                     index_buy = true;
@@ -1542,9 +1542,9 @@ namespace WindowsFormsApp1
                                 {
                                     if (!index_clear)
                                     {
-                                        WriteLog_System($"[CLEAR] OVER KOSPI200 Commodity RANGE : START({start}) - END({end}) - NOW({tmp5})\n");
+                                        WriteLog_System($"[CLEAR] OVER KOSPI200 Commodity RANGE : SET_LOW({start}) <= LOW({kospi_index_series[0]}) && HIGH({kospi_index_series[2]}) <= SET_HIGH({end})\n");
                                         WriteLog_System("Trade Stop\n");
-                                        telegram_message($"[CLEAR] OVER KOSPI200 Commodity RANGE : START({start}) - END({end}) - NOW({tmp5})\n");
+                                        telegram_message($"[CLEAR] OVER KOSPI200 Commodity RANGE : SET_LOW({start}) <= LOW({kospi_index_series[0]}) && HIGH({kospi_index_series[2]}) <= SET_HIGH({end})\n");
                                         telegram_message("Trade Stop\n");
                                     }
                                     index_clear = true;
@@ -1562,9 +1562,9 @@ namespace WindowsFormsApp1
                                 {
                                     if (!index_dual)
                                     {
-                                        WriteLog_System($"[Dual] OVER KOSPI200 Commodity RANGE : START({start}) - END({end}) - NOW({tmp5})\n");
+                                        WriteLog_System($"[Dual] OVER KOSPI200 Commodity RANGE : SET_LOW({start}) <= LOW({kospi_index_series[0]}) && HIGH({kospi_index_series[2]}) <= SET_HIGH({end})\n");
                                         WriteLog_System("Trade Stop\n");
-                                        telegram_message($"[Dual] OVER KOSPI200 Commodity RANGE : START({start}) - END({end}) - NOW({tmp5})\n");
+                                        telegram_message($"[Dual] OVER KOSPI200 Commodity RANGE : SET_LOW({start}) <= LOW({kospi_index_series[0]}) && HIGH({kospi_index_series[2]}) <= SET_HIGH({end})\n");
                                         telegram_message("Trade Stop\n");
                                     }
                                     index_dual = true;
@@ -1622,9 +1622,9 @@ namespace WindowsFormsApp1
                                 {
                                     if (!index_buy)
                                     {
-                                        WriteLog_System($"[Buy] OVER KOSDAK150 Commodity RANGE : START({start}) - END({end}) - NOW({tmp5})\n");
+                                        WriteLog_System($"[Buy] OVER KOSDAK150 Commodity RANGE : SET_LOW({start}) <= LOW({kospi_index_series[0]}) && HIGH({kospi_index_series[2]}) <= SET_HIGH({end})\n");
                                         WriteLog_System("Trade Stop\n");
-                                        telegram_message($"[Buy] OVER KOSDAK150  Commodity RANGE : START({start}) - END({end}) - NOW({tmp5})\n");
+                                        telegram_message($"[Buy] OVER KOSDAK150  Commodity RANGE : SET_LOW({start}) <= LOW({kospi_index_series[0]}) && HIGH({kospi_index_series[2]}) <= SET_HIGH({end})\n");
                                         telegram_message("Trade Stop\n");
                                     }
                                     index_buy = true;
@@ -1642,9 +1642,9 @@ namespace WindowsFormsApp1
                                 {
                                     if (!index_clear)
                                     {
-                                        WriteLog_System($"[Clear] OVER KOSDAK150 Commodity RANGE : START({start}) - END({end}) - NOW({tmp5})\n");
+                                        WriteLog_System($"[Clear] OVER KOSDAK150 Commodity RANGE : SET_LOW({start}) <= LOW({kospi_index_series[0]}) && HIGH({kospi_index_series[2]}) <= SET_HIGH({end})\n");
                                         WriteLog_System("Trade Stop\n");
-                                        telegram_message($"[Clear] OVER KOSDAK150  Commodity RANGE : START({start}) - END({end}) - NOW({tmp5})\n");
+                                        telegram_message($"[Clear] OVER KOSDAK150  Commodity RANGE : SET_LOW({start}) <= LOW({kospi_index_series[0]}) && HIGH({kospi_index_series[2]}) <= SET_HIGH({end})\n");
                                         telegram_message("Trade Stop\n");
                                     }
                                     index_clear = true;
@@ -1662,9 +1662,9 @@ namespace WindowsFormsApp1
                                 {
                                     if (!index_dual)
                                     {
-                                        WriteLog_System($"[Dual] OVER KOSDAK150 Commodity RANGE : START({start}) - END({end}) - NOW({tmp5})\n");
+                                        WriteLog_System($"[Dual] OVER KOSDAK150 Commodity RANGE : SET_LOW({start}) <= LOW({kospi_index_series[0]}) && HIGH({kospi_index_series[2]}) <= SET_HIGH({end})\n");
                                         WriteLog_System("Trade Stop\n");
-                                        telegram_message($"[Dual] OVER KOSDAK150  Commodity RANGE : START({start}) - END({end}) - NOW({tmp5})\n");
+                                        telegram_message($"[Dual] OVER KOSDAK150  Commodity RANGE : SET_LOW({start}) <= LOW({kospi_index_series[0]}) && HIGH({kospi_index_series[2]}) <= SET_HIGH({end})\n");
                                         telegram_message("Trade Stop\n");
                                     }
                                     index_dual = true;
