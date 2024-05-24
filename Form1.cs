@@ -1449,7 +1449,10 @@ namespace WindowsFormsApp1
                 KOR_INDEX();
             };
             minuteTimer.AutoReset = false;
-            minuteTimer.Start(); 
+            minuteTimer.Start();
+
+            // 특정 함수 호출
+            KOR_INDEX();
         }
 
         private void StartMinuteTimer()
@@ -1509,7 +1512,7 @@ namespace WindowsFormsApp1
 
                     this.Invoke((MethodInvoker)delegate
                     {
-                        kospi_index.Text = String.Format($"L({kospi_index_series[0]}) /  H({kospi_index_series[2]}) / C({kospi_index_series[1]})");
+                        kospi_index.Text = String.Format($"L({kospi_index_series[0]})/H({kospi_index_series[2]})");
                         //WriteLog_System($"{tmp}/{tmp1}/{tmp3}/{tmp4.ToString()}/{tmp5.ToString()}/{tmp6.ToString()}/{tmp7.ToString()}\n");
 
                         if (utility.buy_condition_index)
@@ -1609,7 +1612,7 @@ namespace WindowsFormsApp1
 
                     this.Invoke((MethodInvoker)delegate
                     {
-                        kosdaq_index.Text = String.Format($"L({kospi_index_series[0]}) /  H({kospi_index_series[2]}) / C({kospi_index_series[1]})");
+                        kosdaq_index.Text = String.Format($"L({kosdaq_index_series[0]})/H({kosdaq_index_series[2]})");
                         //WriteLog_System($"{tmp}/{tmp1}/{tmp3}/{tmp4.ToString()}/{tmp5.ToString()}/{tmp6.ToString()}/{tmp7.ToString()}\n");
 
                         if (utility.buy_condition_index)
@@ -3713,11 +3716,6 @@ namespace WindowsFormsApp1
             //실시간 중단이 선언되면 '실시간시작'이 가능해진다.
             Real_time_stop_btn.Enabled = false;
             Real_time_search_btn.Enabled = true;
-
-            //지수 업데이트 중단
-            minuteTimer.Stop();
-            minuteTimer.Dispose();
-            minuteTimer = null;
 
             //매수 조건식 중단
             if (utility.buy_condition && Condition_Profile.Count != 0)
