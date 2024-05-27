@@ -2890,7 +2890,7 @@ namespace WindowsFormsApp1
             }
             else if(utility.clear_sell_mode)
             {
-                if (!utility.clear_sell_profit || !utility.clear_sell_loss)
+                if (!utility.clear_sell_profit && !utility.clear_sell_loss)
                 {
                     WriteLog_System("청산 모드 선택 요청\n");
                     telegram_message("청산 모드 선택 요청\n");
