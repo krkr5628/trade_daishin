@@ -2862,8 +2862,31 @@ namespace WindowsFormsApp1
         {
             if (utility.clear_sell)
             {
-                All_clear_btn_Click(null, EventArgs.Empty);
-                return;
+                //특저 열 추출
+                DataColumn columnStateColumn = dtCondStock.Columns["상태"];
+
+                //AsEnumerable()은 DataTable의 행을 열거형으로 변환
+                var filteredRows = dtCondStock.AsEnumerable().Where(row => row.Field<string>(columnStateColumn) == "매수완료").ToList();
+
+                //검출 종목에 대한 확인
+                if (filteredRows.Count > 0)
+                {
+                    foreach (DataRow row in filteredRows)
+                    {
+                        lock (sell_lock)
+                        {
+                            string order_num = row.Field<string>("주문번호"); ;
+                            if (!sell_runningCodes.ContainsKey(order_num))
+                            {
+                                sell_runningCodes[order_num] = true;
+                                //
+                                sell_order("Nan", "청산매도/일반", order_num, row.Field<string>("수익률"), row.Field<string>("구분코드"));
+                                //
+                                sell_runningCodes.Remove(order_num);
+                            }
+                        }
+                    }
+                }
             }
             else if(utility.clear_sell_mode)
             {
