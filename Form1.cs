@@ -2926,6 +2926,18 @@ namespace WindowsFormsApp1
                 gubun = ISA_code;
             }
 
+            //지수 확인
+            if (index_buy && gubun == Master_code)
+            {
+                return "대기";
+            }
+
+            //지수 확인
+            if (index_dual && gubun == ISA_code)
+            {
+                return "대기";
+            }
+
             //매수 시간 확인
             if (utility.buy_DUAL && utility.Dual_Time && gubun == ISA_code)
             {
@@ -3009,18 +3021,6 @@ namespace WindowsFormsApp1
                 {
                     return "대기";
                 }
-            }
-
-            //지수 확인
-            if (index_buy && gubun == Master_code)
-            {
-                return "대기";
-            }
-
-            //지수 확인
-            if (index_dual && gubun == ISA_code)
-            {
-                return "대기";
             }
 
             //매수지연(기본값 200 => 프로그램 여러 호출단에서 기본 간격 200ms가 존재하므로 기본 지연 + 입력값
