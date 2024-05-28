@@ -1517,7 +1517,7 @@ namespace WindowsFormsApp1
 
         private void StartMinuteTimer()
         {
-            minuteTimer = new System.Timers.Timer(30000); // 1분 = 60,000 밀리초
+            minuteTimer = new System.Timers.Timer(60000); // 1분 = 60,000 밀리초
             minuteTimer.Elapsed += OnTimedEvent;
             minuteTimer.AutoReset = true;
             minuteTimer.Enabled = true;
@@ -1557,8 +1557,8 @@ namespace WindowsFormsApp1
                 if (FutOptChart.GetDibStatus() == 1)
                 {
                     string status_message = FutOptChart.GetDibMsg1();
-                    WriteLog_System("[KOSPI200/수신실패] : DibRq 요청 수신대기(30초후 재시도)\n");
-                    telegram_message("[KOSPI200/수신실패] : DibRq 요청 수신대기(30초후 재시도)\n"); 
+                    WriteLog_System("[KOSPI200/수신실패] : DibRq 요청 수신대기(60초후 재시도)\n");
+                    telegram_message("[KOSPI200/수신실패] : DibRq 요청 수신대기(60초후 재시도)\n"); 
                     return;
                 }
                 //
@@ -1577,7 +1577,7 @@ namespace WindowsFormsApp1
                     if (tmp4 == 0 || tmp5 == 0 || tmp6 == 0 || tmp7 == 0)
                     {
                         WriteLog_System($"[수신오류] KOSPI200 : 전일종가({tmp4}), 종가({tmp5}), 저가({tmp6}), 고가({tmp7})\n");
-                        telegram_message($"[수신오류] KOSPI200 : 30초 뒤 재시도\n");
+                        telegram_message($"[수신오류] KOSPI200 : 60초 뒤 재시도\n");
                         return;
                     }
 
@@ -1683,8 +1683,8 @@ namespace WindowsFormsApp1
                 if (FutOptChart.GetDibStatus() == 1)
                 {
                     string status_message = FutOptChart.GetDibMsg1();
-                    WriteLog_System("[KOSDAK150 /수신실패] : DibRq 요청 수신대기(30초후 재시도)\n");
-                    telegram_message("[KOSDAK150 수신실패] : DibRq 요청 수신대기(30초후 재시도)\n");
+                    WriteLog_System("[KOSDAK150 /수신실패] : DibRq 요청 수신대기(60초후 재시도)\n");
+                    telegram_message("[KOSDAK150 수신실패] : DibRq 요청 수신대기(60초후 재시도)\n");
                     return;
                 }
                 //
@@ -1703,7 +1703,7 @@ namespace WindowsFormsApp1
                     if (tmp4 == 0 || tmp5 == 0 || tmp6 == 0 || tmp7 == 0)
                     {
                         WriteLog_System($"[수신오류] KOSDAK150 : 전일종가({tmp4}), 종가({tmp5}), 저가({tmp6}), 고가({tmp7})\n");
-                        telegram_message($"[수신오류] KOSDAK150 : 30초 뒤 재시도\n");
+                        telegram_message($"[수신오류] KOSDAK150 : 60초 뒤 재시도\n");
                         return;
                     }
 
@@ -2793,6 +2793,12 @@ namespace WindowsFormsApp1
             //편입 상태 이면서 대기 종목인 녀석에 대한 검증
             account_check_buy();
 
+            //지수연동청산
+            if (index_clear)
+            {
+                account_check_sell();
+            }
+
             //매도 완료 종목에 대한 청산 검증
             if (utility.clear_sell || utility.clear_sell_mode)
             {
@@ -2805,13 +2811,6 @@ namespace WindowsFormsApp1
 
                 account_check_sell();
             }
-
-            //지수연동청산
-            if (index_clear)
-            {
-                account_check_sell();
-            }
-
         }
 
         private void account_check_buy()

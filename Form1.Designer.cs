@@ -1594,7 +1594,7 @@ namespace WindowsFormsApp1
             // 
             // timer3
             // 
-            this.timer3.Interval = 200;
+            this.timer3.Interval = 300;
             this.timer3.Tick += new System.EventHandler(this.Transfer_Timer);
             // 
             // groupBox5
