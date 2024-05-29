@@ -407,6 +407,7 @@ namespace WindowsFormsApp1
             //today_profit_percent.Text = "00.00%";
             //today_profit.Text = "0";
 
+            Foreign.Text = "-";
             kospi_index.Text = "-";
             kosdaq_index.Text = "-";
             dow_index.Text = "-";
@@ -1550,114 +1551,96 @@ namespace WindowsFormsApp1
         {
             //FOREIGNER
             //https://money2.creontrade.com/e5/mboard/ptype_basic/HTS_Plus_Helper/DW_Basic_Read_Page.aspx?boardseq=284&seq=146&page=2&searchString=%ec%98%b5%ec%85%98&p=&v=&m=
-            CpSvrNew7224.SetInputValue(0, '1');
-            CpSvrNew7224.SetInputValue(1, 'D');
-            CpSvrNew7224.SetInputValue(2, 2);
-            CpSvrNew7224.SetInputValue(3, '2');
-            CpSvrNew7224.SetInputValue(4, '1');
-            CpSvrNew7224.SetInputValue(5, 5);
-            CpSvrNew7224.SetInputValue(6, Convert.ToInt32(index_time));
-            CpSvrNew7224.SetInputValue(7, Convert.ToInt32(index_time));
-            CpSvrNew7224.SetInputValue(8, '1');
-            //
-            int result = CpSvrNew7224.BlockRequest();
-            //
-            if (CpSvrNew7224.GetDibStatus() == 1)
+            if (utility.Foreign_commodity)
             {
-                string status_message = CpFore8312.GetDibMsg1();
-                WriteLog_System($"[선물/수신실패] : DibRq 요청 수신대기(60초후 재시도) - {status_message}\n");
-                telegram_message("[선물/수신실패] : DibRq 요청 수신대기(60초후 재시도)\n");
-                return;
-            }
-            //
-            if (result == 0)
-            {
-                string tmp6 = Convert.ToString(CpSvrNew7224.GetDataValue(0, 0)); //일자(long)
-                string tmp7 = Convert.ToString(CpSvrNew7224.GetDataValue(1, 0)); //매도수량(long)
-                string tmp8 = Convert.ToString(CpSvrNew7224.GetDataValue(5, 0)); //매수수량(long)
-                string tmp9 = Convert.ToString(CpSvrNew7224.GetDataValue(9, 0)); //순매수수량(long)
-
-                //8시 45분전에 수신시 혹은 최초 수신시 0값이 나오는 경우가 있음
-                if (tmp6 == "0" || tmp7 == "0" || tmp8 == "0" || tmp9 == "0")
+                CpSvrNew7224.SetInputValue(0, '1');
+                CpSvrNew7224.SetInputValue(1, 'D');
+                CpSvrNew7224.SetInputValue(2, 2);
+                CpSvrNew7224.SetInputValue(3, '2');
+                CpSvrNew7224.SetInputValue(4, '1');
+                CpSvrNew7224.SetInputValue(5, 5);
+                CpSvrNew7224.SetInputValue(6, Convert.ToInt32(index_time));
+                CpSvrNew7224.SetInputValue(7, Convert.ToInt32(index_time));
+                CpSvrNew7224.SetInputValue(8, '1');
+                //
+                int result = CpSvrNew7224.BlockRequest();
+                //
+                if (CpSvrNew7224.GetDibStatus() == 1)
                 {
-                    WriteLog_System($"[수신오류] 외국인 선물 누적 : 일자({tmp6}), 매도수량({tmp7}), 매수수량({tmp8}), 순매수수량({tmp9})\n");
-                    telegram_message($"[수신오류] 외국인 선물 누적  : 60초 뒤 재시도\n");
+                    string status_message = CpFore8312.GetDibMsg1();
+                    WriteLog_System($"[선물/수신실패] : DibRq 요청 수신대기(60초후 재시도) - {status_message}\n");
+                    telegram_message("[선물/수신실패] : DibRq 요청 수신대기(60초후 재시도)\n");
                     return;
                 }
-
-                Foreign.Text = tmp9;
-
-                /*
-                if (utility.buy_condition_index)
+                //
+                if (result == 0)
                 {
-                    if (utility.type1_selection && !index_buy)
+                    string tmp6 = Convert.ToString(CpSvrNew7224.GetDataValue(0, 0)); //일자(long)
+                    string tmp7 = Convert.ToString(CpSvrNew7224.GetDataValue(1, 0)); //매도수량(long)
+                    string tmp8 = Convert.ToString(CpSvrNew7224.GetDataValue(5, 0)); //매수수량(long)
+                    long tmp9 = Convert.ToInt32(CpSvrNew7224.GetDataValue(9, 0)); //순매수수량(long)
+
+                    //8시 45분전에 수신시 혹은 최초 수신시 0값이 나오는 경우가 있음
+                    if (tmp6 == "0" || tmp7 == "0" || tmp8 == "0" || tmp9 == 0)
                     {
-                        double start = Convert.ToDouble(utility.type1_start);
-                        double end = Convert.ToDouble(utility.type1_end);
-                        if (kospi_index_series[0] < start || end < kospi_index_series[2])
+                        WriteLog_System($"[수신오류] 외국인 선물 누적 : 일자({tmp6}), 매도수량({tmp7}), 매수수량({tmp8}), 순매수수량({tmp9})\n");
+                        telegram_message($"[수신오류] 외국인 선물 누적  : 60초 뒤 재시도\n");
+                        return;
+                    }
+
+                    Foreign.Text = tmp9.ToString();
+
+                    if (utility.buy_condition_index)
+                    {
+                        if (utility.type0_selection)
                         {
-                            WriteLog_System($"[Buy/이탈] KOSPI200 RANGE\n");
-                            WriteLog_System($"SET_LOW({start}) <= LOW({kospi_index_series[0]})\n");
-                            WriteLog_System($"HIGH({kospi_index_series[2]}) <= SET_HIGH({end})\n");
-                            WriteLog_System("Trade Stop\n");
+                            double start = Convert.ToDouble(utility.type0_start);
+                            double end = Convert.ToDouble(utility.type0_end);
+                            if (tmp9 < start || end < tmp9)
+                            {
+                                index_buy = true;
+                                WriteLog_System($"[BUY/이탈] FOREIGN RANGE : START({start}) <=  NOW({tmp9}) <= END({end})\n");
+                                WriteLog_System("Trade Stop\n");
+                                telegram_message($"[BUY/이탈] FOREIGN RANGE : START({start}) <=  NOW({tmp9}) <= END({end})\n");
+                                telegram_message("Trade Stop\n");
+                            }
+                        }
+                    }
 
-                            telegram_message($"[Buy/이탈] KOSPI200 RANGE\n");
-                            telegram_message($"SET_LOW({start}) <= LOW({kospi_index_series[0]})\n");
-                            telegram_message($"HIGH({kospi_index_series[2]}) <= SET_HIGH({end})\n");
-                            telegram_message("Trade Stop\n");
+                    if (utility.clear_index)
+                    {
+                        if (utility.type0_selection_all)
+                        {
+                            double start = Convert.ToDouble(utility.type0_start_all);
+                            double end = Convert.ToDouble(utility.type0_end_all);
+                            if (tmp9 < start || end < tmp9)
+                            {
+                                index_clear = true;
+                                WriteLog_System($"[CLEAR/이탈] FOREIGNRANGE : START({start}) <=  NOW({tmp9}) <= END({end})\n");
+                                WriteLog_System("Trade Stop\n");
+                                telegram_message($"[CLEAR/이탈] FOREIGN RANGE : START({start}) <=  NOW({tmp9}) <= END({end})\n");
+                                telegram_message("Trade Stop\n");
+                            }
+                        }
+                    }
 
-                            index_buy = true;
+                    if (utility.Dual_Index)
+                    {
+                        if (utility.type0_selection_isa)
+                        {
+                            double start = Convert.ToDouble(utility.type0_start_isa);
+                            double end = Convert.ToDouble(utility.type0_end_isa);
+                            if (tmp9 < start || end < tmp9)
+                            {
+                                index_dual = true;
+                                WriteLog_System($"[DUAL/이탈] FOREIGN RANGE : START({start}) <=  NOW({tmp9}) <= END({end})\n");
+                                WriteLog_System("Trade Stop\n");
+                                telegram_message($"[DUAL/이탈] FOREIGN RANGE : START({start}) <=  NOW({tmp9}) <= END({end})\n");
+                                telegram_message("Trade Stop\n");
+                            }
                         }
                     }
                 }
-
-                if (utility.clear_index)
-                {
-                    if (utility.type1_selection_all && !index_clear)
-                    {
-                        double start = Convert.ToDouble(utility.type1_start_all);
-                        double end = Convert.ToDouble(utility.type1_end_all);
-                        if (kospi_index_series[0] < start || end < kospi_index_series[2])
-                        {
-                            WriteLog_System($"[CLEAR/이탈] KOSPI200 RANGE\n");
-                            WriteLog_System($"SET_LOW({start}) <= LOW({kospi_index_series[0]})\n");
-                            WriteLog_System($"HIGH({kospi_index_series[2]}) <= SET_HIGH({end})\n");
-                            WriteLog_System("Trade Stop\n");
-
-                            telegram_message($"[CLEAR/이탈] KOSPI200 RANGE\n");
-                            telegram_message($"SET_LOW({start}) <= LOW({kospi_index_series[0]})\n");
-                            telegram_message($"HIGH({kospi_index_series[2]}) <= SET_HIGH({end})\n");
-                            telegram_message("Trade Stop\n");
-
-                            index_clear = true;
-                        }
-                    }
-                }
-
-                if (utility.Dual_Index)
-                {
-                    if (utility.type1_selection_isa && !index_dual)
-                    {
-                        double start = Convert.ToDouble(utility.type1_start_isa);
-                        double end = Convert.ToDouble(utility.type1_end_isa);
-                        if (kospi_index_series[0] < start || end < kospi_index_series[2])
-                        {
-                            WriteLog_System($"[DUAL/이탈] KOSPI200 RANGE\n");
-                            WriteLog_System($"SET_LOW({start}) <= LOW({kospi_index_series[0]})\n");
-                            WriteLog_System($"HIGH({kospi_index_series[2]}) <= SET_HIGH({end})\n");
-                            WriteLog_System("Trade Stop\n");
-
-                            telegram_message($"[DUAL/이탈] KOSPI200 RANGE\n");
-                            telegram_message($"SET_LOW({start}) <= LOW({kospi_index_series[0]})\n");
-                            telegram_message($"HIGH({kospi_index_series[2]}) <= SET_HIGH({end})\n");
-                            telegram_message("Trade Stop\n");
-
-                            index_dual = true;
-                        }
-                    }
-                }
-                */
-
             }
 
             //KOSPI 200 FUTURES

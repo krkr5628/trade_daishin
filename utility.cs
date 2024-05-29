@@ -103,12 +103,16 @@ namespace WindowsFormsApp1
         public static int sell_set1_after; //매도설정
         public static int sell_set2_after;
 
+        public static bool Foreign_commodity;
         public static bool kospi_commodity;
         public static bool kosdak_commodity;
         public static bool dow_index;
         public static bool sp_index;
         public static bool nasdaq_index;
 
+        public static bool type0_selection;
+        public static string type0_start;
+        public static string type0_end;
         public static bool type1_selection;
         public static string type1_start;
         public static string type1_end;
@@ -125,6 +129,9 @@ namespace WindowsFormsApp1
         public static string type5_start;
         public static string type5_end;
 
+        public static bool type0_selection_all;
+        public static string type0_start_all;
+        public static string type0_end_all;
         public static bool type1_selection_all;
         public static string type1_start_all;
         public static string type1_end_all;
@@ -157,6 +164,9 @@ namespace WindowsFormsApp1
         public static string Dual_Time_Stop;
 
         public static bool Dual_Index;
+        public static bool type0_selection_isa;
+        public static string type0_start_isa;
+        public static string type0_end_isa;
         public static bool type1_selection_isa;
         public static string type1_start_isa;
         public static string type1_end_isa;
@@ -398,6 +408,10 @@ namespace WindowsFormsApp1
             sell_set1_after = Convert.ToInt32(sell_set_after_tmp[1]);
             sell_set2_after = Convert.ToInt32(sell_set_after_tmp[2]);
 
+            //외국인선물
+            String[] Foreign_commodity_tmp = reader.ReadLine().Split('/');
+            Foreign_commodity = Convert.ToBoolean(Foreign_commodity_tmp[1]);
+
             //코스피선물
             String[] kospi_commodity_tmp = reader.ReadLine().Split('/');
             kospi_commodity = Convert.ToBoolean(kospi_commodity_tmp[1]);
@@ -417,6 +431,12 @@ namespace WindowsFormsApp1
             //NASDAQ100
             String[] nasdaq_index_tmp = reader.ReadLine().Split('/');
             nasdaq_index = Convert.ToBoolean(nasdaq_index_tmp[1]);
+
+            //#0
+            String[] type0_selection_tmp = reader.ReadLine().Split('/');
+            type0_selection = Convert.ToBoolean(type0_selection_tmp[1]);
+            type0_start = Convert.ToString(type0_selection_tmp[2]);
+            type0_end = Convert.ToString(type0_selection_tmp[3]);
 
             //#1
             String[] type1_selection_tmp = reader.ReadLine().Split('/');
@@ -447,6 +467,12 @@ namespace WindowsFormsApp1
             type5_selection = Convert.ToBoolean(type5_selection_tmp[1]);
             type5_start = Convert.ToString(type5_selection_tmp[2]);
             type5_end = Convert.ToString(type5_selection_tmp[3]);
+
+            //#0
+            String[] type0_selection_all_tmp = reader.ReadLine().Split('/');
+            type0_selection_all = Convert.ToBoolean(type0_selection_all_tmp[1]);
+            type0_start_all = Convert.ToString(type0_selection_all_tmp[2]);
+            type0_end_all = Convert.ToString(type0_selection_all_tmp[3]);
 
             //#1
             String[] type1_selection_all_tmp = reader.ReadLine().Split('/');
@@ -529,6 +555,12 @@ namespace WindowsFormsApp1
             //Dual_Time_Stop
             String[] Dual_Index_tmp = reader.ReadLine().Split('/');
             Dual_Index = Convert.ToBoolean(Dual_Index_tmp[1]);
+
+            //#0
+            String[] type0_selection_isa_tmp = reader.ReadLine().Split('/');
+            type0_selection_isa = Convert.ToBoolean(type0_selection_isa_tmp[1]);
+            type0_start_isa = Convert.ToString(type0_selection_isa_tmp[2]);
+            type0_end_isa = Convert.ToString(type0_selection_isa_tmp[3]);
 
             //#1
             String[] type1_selection_isa_tmp = reader.ReadLine().Split('/');
