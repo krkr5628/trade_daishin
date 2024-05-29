@@ -2116,12 +2116,13 @@ namespace WindowsFormsApp1
             // 
             // timer2
             // 
-            this.timer2.Interval = 200;
+            this.timer2.Interval = 300;
             this.timer2.Tick += new System.EventHandler(this.Trade_Check_Event);
             // 
             // Trade_Auto_Daishin
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+            this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(1566, 837);
             this.Controls.Add(this.tableLayoutPanel4);
             this.Controls.Add(this.groupBox9);

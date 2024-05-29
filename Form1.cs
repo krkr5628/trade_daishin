@@ -3049,16 +3049,6 @@ namespace WindowsFormsApp1
             int term = 200;
             if(utility.term_for_buy) term = Convert.ToInt32(utility.term_for_buy_text);
 
-            //기존에 포함된 종목이면 따로 변경해줘야 함
-            if (check)
-            {
-                //편입 차트 상태 '매수중' 변경
-                DataRow[] findRows = dtCondStock.Select($"종목코드 = '{code}'");
-                findRows[0]["상태"] = "매수중";
-                dtCondStock.AcceptChanges();
-                dataGridView1.DataSource = dtCondStock;
-            }
-
             //매수 주문(1초에 5회)
             //주문 방식 구분
             string[] order_method = buy_condtion_method.Text.Split('/');
@@ -3083,7 +3073,6 @@ namespace WindowsFormsApp1
 
                 WriteLog_Order($"[매수주문/시장가/주문접수/{gubun}] : {code_name}({code}) {order_acc_market}개\n");
                 telegram_message($"[매수주문/시장가/주문접수/{gubun}] : {code_name}({code}) {order_acc_market}개\n");
-
                 //
                 CpTd0311.SetInputValue(0, "2"); //매수
                 CpTd0311.SetInputValue(1, acc_text.Text); //계좌번호
@@ -3095,6 +3084,13 @@ namespace WindowsFormsApp1
                 CpTd0311.SetInputValue(8, "03"); //시장가
                 //
                 int error = CpTd0311.BlockRequest();
+                //
+                //
+                if (CpTd0311.GetDibStatus() == 1)
+                {
+                    string status_message = CpTd0311.GetDibMsg1();
+                    WriteLog_System($"[주문결과/수신실패] : DibRq 요청 수신대기 / {status_message}\n");
+                }
                 //
                 if (error == 0)
                 {
@@ -3111,6 +3107,19 @@ namespace WindowsFormsApp1
                     int hold_update = Convert.ToInt32(hold_status_update[0]);
                     int hold_max_update = Convert.ToInt32(hold_status_update[1]);
                     max_hoid.Text = (hold_update + 1) + "/" + hold_max_update;
+
+                    //기존 종목 포함 및 AND 모드 포함
+                    if (check)
+                    {
+                        DataRow[] findRows = dtCondStock.AsEnumerable().Where(row2 => row2.Field<string>("종목코드") == code && row2.Field<string>("조건식") == condition_name).ToArray();
+
+                        findRows[0]["상태"] = "매수중";
+                        findRows[0]["주문번호"] = order_number;
+                        findRows[0]["보유수량"] = 0 + "/" + order_acc_market;
+
+                        dtCondStock.AcceptChanges();
+                        dataGridView1.DataSource = dtCondStock;
+                    }
 
                     //매매 횟수업데이트
                     if (utility.buy_INDEPENDENT || utility.buy_DUAL)
@@ -3728,6 +3737,8 @@ namespace WindowsFormsApp1
 
             string[] tmp = { gugu, code, code_name, order_number, trade_Gubun, hold_sum, time, gubun };
 
+            //WriteLog_System($"[체결수신] : {gugu}/{code}/{code_name}/{order_number}/{trade_Gubun}/{hold_sum}/{gubun}\n");
+
             Trade_check_save.Enqueue(tmp);
         }
 
@@ -3737,7 +3748,9 @@ namespace WindowsFormsApp1
             if(Trade_check_save.Count != 0)
             {
                 string[] tmp = Trade_check_save.Peek();
+
                 DataRow[] findRows = dtCondStock.AsEnumerable().Where(row => row.Field<string>("주문번호") == tmp[3]).ToArray();
+
                 if (findRows.Any())
                 {
                     string gugu = tmp[0];
@@ -3753,7 +3766,7 @@ namespace WindowsFormsApp1
 
                     string order_sum = findRows[0]["보유수량"].ToString().Split('/')[1];
 
-                    WriteLog_Order($"[체결/{code_name}({code})/{trade_Gubun}/{gubun}] : {hold_sum}/{order_sum}\n");
+                    WriteLog_Order($"[체결상세/{code_name}({code})/{trade_Gubun}/{gubun}] : {hold_sum}/{order_sum}\n");
 
                     //매수확인
                     if (trade_Gubun.Equals("매수") && order_sum == hold_sum)
@@ -3836,6 +3849,10 @@ namespace WindowsFormsApp1
 
                         //매도 미체결
                     }
+                }
+                else
+                {
+                    WriteLog_System($"[체결내역] 주문번호 없음 - {tmp[3]}\n");
                 }
             }
         }
