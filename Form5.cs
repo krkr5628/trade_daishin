@@ -18,6 +18,9 @@ namespace WindowsFormsApp1
             InitializeComponent();
             //
             read();
+
+            //인증 기능 추가
+
         }
 
         private void read()

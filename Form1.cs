@@ -692,6 +692,7 @@ namespace WindowsFormsApp1
         }
 
         bool first_index = false;
+        bool second_index = false;
 
         //운영시간 확인
         private async void Opeartion_Time()
@@ -721,11 +722,19 @@ namespace WindowsFormsApp1
             }
 
             //인덱스전송
-            DateTime index = DateTime.Parse("09:00:00");
+            DateTime index1 = DateTime.Parse("08:59:00");
+            DateTime index2 = DateTime.Parse("09:00:00");
 
-            if (!first_index && index <= t_now)
+            if (!first_index && index1 <= t_now)
             {
                 first_index = true;
+                WriteLog_System($"[INDEX/{t_now}] : {Foreign.Text}/{kospi_index.Text}/{kosdaq_index.Text}/{dow_index.Text}/{sp_index.Text}/{nasdaq_index.Text}\n");
+                telegram_message($"[INDEX/{t_now}] : {Foreign.Text}/{kospi_index.Text}/{kosdaq_index.Text}/{dow_index.Text}/{sp_index.Text}/{nasdaq_index.Text}\n");
+            }
+
+            if (!second_index && index1 <= t_now)
+            {
+                second_index = true;
                 WriteLog_System($"[INDEX/{t_now}] : {Foreign.Text}/{kospi_index.Text}/{kosdaq_index.Text}/{dow_index.Text}/{sp_index.Text}/{nasdaq_index.Text}\n");
                 telegram_message($"[INDEX/{t_now}] : {Foreign.Text}/{kospi_index.Text}/{kosdaq_index.Text}/{dow_index.Text}/{sp_index.Text}/{nasdaq_index.Text}\n");
             }
