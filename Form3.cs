@@ -24,6 +24,7 @@ namespace WindowsFormsApp1
 
         //실시간 조건 검색 용 테이블(누적 저장)
         private DataTable Trade_History = new DataTable();
+        private DataTable Trade_History2 = new DataTable();
 
         private void initial_Table()
         {
@@ -37,6 +38,19 @@ namespace WindowsFormsApp1
             dataTable.Columns.Add("편입가", typeof(string));
             Trade_History = dataTable;
             dataGridView1.DataSource = Trade_History;
+
+            DataTable dataTable2 = new DataTable();
+            dataTable2.Columns.Add("구분", typeof(string));       
+            dataTable2.Columns.Add("종목코드", typeof(string));
+            dataTable2.Columns.Add("종목명", typeof(string));
+            dataTable2.Columns.Add("총매수(개)", typeof(string));
+            dataTable2.Columns.Add("총매수(원)", typeof(string));
+            dataTable2.Columns.Add("총매도(개)", typeof(string));
+            dataTable2.Columns.Add("총매도(원)", typeof(string));
+            dataTable2.Columns.Add("총수익(원)", typeof(string));
+            dataTable2.Columns.Add("총수익(%)", typeof(string));
+            Trade_History2 = dataTable2;
+            dataGridView2.DataSource = Trade_History2;
         }
 
         private void start()
@@ -73,6 +87,7 @@ namespace WindowsFormsApp1
                 using (StreamReader reader = new StreamReader(folderPath + listBox1.SelectedItem.ToString()))
                 {
                     Trade_History.Clear();
+                    Trade_History2.Clear();
                     string line;
 
                     while ((line = reader.ReadLine()) != null)
@@ -96,10 +111,106 @@ namespace WindowsFormsApp1
 
                                 Trade_History.AcceptChanges();
                                 dataGridView1.DataSource = Trade_History;
+
+                                /*
+                                    dataTable2.Columns.Add("구분", typeof(string));       
+                                    dataTable2.Columns.Add("종목코드", typeof(string));
+                                    dataTable2.Columns.Add("종목명", typeof(string));
+                                    dataTable2.Columns.Add("매수시간", typeof(string));
+                                    dataTable2.Columns.Add("총매수(개)", typeof(string));
+                                    dataTable2.Columns.Add("총매수(원)", typeof(string));
+                                    dataTable2.Columns.Add("매도시간", typeof(string));
+                                    dataTable2.Columns.Add("총매도(개)", typeof(string));
+                                    dataTable2.Columns.Add("총매도(원)", typeof(string));
+                                    dataTable2.Columns.Add("총수익(원)", typeof(string));
+                                    dataTable2.Columns.Add("총수익(%)", typeof(string));
+                                */
+                                //
+                                if (match.Groups[2].Value.Substring(0, 2).Equals("매수"))
+                                {
+                                    DataRow[] findRows = Trade_History2.AsEnumerable().Where(row => row.Field<string>("구분") == match.Groups[4].Value && row.Field<string>("종목코드") == match.Groups[6].Value).ToArray();
+
+                                    if (findRows.Any())
+                                    {
+                                        Int64 tmp_cnt = findRows[0]["총매수(개)"].ToString() == "" ? 0 : Convert.ToInt64(findRows[0]["총매수(개)"]);
+                                        Int64 tmp_won = findRows[0]["총매수(원)"].ToString() == "" ? 0 : Convert.ToInt64(findRows[0]["총매수(원)"]);
+                                        Int64 tmp_sell_won = findRows[0]["총매도(원)"].ToString() == "" ? 0 : Convert.ToInt64(findRows[0]["총매도(원)"]);
+
+                                        Int64 tmp = tmp_won + Convert.ToInt64(match.Groups[7].Value) * Convert.ToInt64(match.Groups[8].Value.Replace(",", ""));
+                                        Int64 tmp2 = tmp_sell_won - tmp;
+
+                                        findRows[0]["총매수(개)"] = Convert.ToString(tmp_cnt + Convert.ToInt64(match.Groups[7].Value));
+                                        findRows[0]["총매수(원)"] = Convert.ToString(tmp);
+                                        findRows[0]["총수익(원)"] = Convert.ToString(tmp2);
+                                        findRows[0]["총수익(%)"] = Convert.ToString(Math.Round((double)tmp2 / tmp * 100, 3));
+
+                                        Trade_History2.AcceptChanges();
+                                        dataGridView2.DataSource = Trade_History2;
+                                    }
+                                    else
+                                    {
+                                        Trade_History2.Rows.Add(
+                                            match.Groups[4].Value, // 01
+                                            match.Groups[6].Value, // A083450
+                                            match.Groups[5].Value, // GST
+                                            match.Groups[7].Value, // 851
+                                            Convert.ToString(Convert.ToInt64(match.Groups[7].Value) * Convert.ToInt64(match.Groups[8].Value.Replace(",", ""))),
+                                            "", //매도(개)
+                                            "", //매도(원)
+                                            "", //총수익(원)
+                                            "" //총수익(%)
+                                        );
+
+                                        Trade_History2.AcceptChanges();
+                                        dataGridView2.DataSource = Trade_History2;
+                                    }
+                                }
+                                else
+                                {
+                                    DataRow[] findRows = Trade_History2.AsEnumerable().Where(row => row.Field<string>("구분") == match.Groups[4].Value && row.Field<string>("종목코드") == match.Groups[6].Value).ToArray();
+
+                                    if (findRows.Any())
+                                    {
+                                        Int64 tmp_cnt = findRows[0]["총매도(개)"].ToString() == "" ? 0 : Convert.ToInt64(findRows[0]["총매도(개)"]);
+                                        Int64 tmp_won = findRows[0]["총매도(원)"].ToString() == "" ? 0 : Convert.ToInt64(findRows[0]["총매도(원)"]);
+                                        Int64 tmp_sell_won = findRows[0]["총매수(원)"].ToString() == "" ? 0 : Convert.ToInt64(findRows[0]["총매수(원)"]);
+
+                                        Int64 tmp = tmp_won + Convert.ToInt64(match.Groups[7].Value) * Convert.ToInt64(match.Groups[8].Value.Replace(",", ""));
+                                        Int64 tmp2 = tmp_sell_won - tmp;
+
+                                        findRows[0]["총매도(개)"] = Convert.ToString(tmp_cnt + Convert.ToInt64(match.Groups[7].Value));
+                                        findRows[0]["총매도(원)"] = Convert.ToString(tmp);
+                                        findRows[0]["총수익(원)"] = Convert.ToString(tmp2);
+                                        findRows[0]["총수익(%)"] = Convert.ToString(Math.Round((double)tmp2 / tmp * 100, 3));
+
+                                        Trade_History2.AcceptChanges();
+                                        dataGridView2.DataSource = Trade_History2;
+                                    }
+                                    else
+                                    {
+                                        Trade_History2.Rows.Add(
+                                            match.Groups[4].Value, // 01
+                                            match.Groups[6].Value, // A083450
+                                            match.Groups[5].Value, // GST
+                                            "", //매수(개)
+                                            "", //매수(원)
+                                            match.Groups[7].Value, // 851
+                                            Convert.ToString(Convert.ToInt64(match.Groups[7].Value) * Convert.ToInt64(match.Groups[8].Value.Replace(",", ""))),
+                                            "", //총수익(원)
+                                            "" //총수익(%)
+                                        );
+
+                                        Trade_History2.AcceptChanges();
+                                        dataGridView2.DataSource = Trade_History2;
+                                    }
+                                }
                             }
                         }
                     }
+                    reader.Close();
                 }
+                //
+
             }
             catch (Exception ex)
             {
