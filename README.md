@@ -33,21 +33,27 @@
 
 # 디자인
 - FORM0 : 자동실행 및 업데이트
+
 ![image](https://github.com/krkr5628/trade_daishin/assets/75410553/e132d15e-d9e1-40a8-8594-83193ffa7f37)
 
 - FORM1 : 메인 화면
+
 ![image](https://github.com/krkr5628/trade_daishin/assets/75410553/ce374564-c849-41fb-8d50-15461ea946f0)
 
 - FORM2 : 매매 설정
+
 ![image](https://github.com/krkr5628/trade_daishin/assets/75410553/dd9131f1-177f-4925-8df7-24da50a03afd)
 
 - FORM3 : 매매 확인
+
 ![image](https://github.com/krkr5628/trade_daishin/assets/75410553/7c7e8635-0493-4530-a218-7ca3c88e793a)
 
 - FORM4 : 로그 확인
+  
 ![image](https://github.com/krkr5628/trade_daishin/assets/75410553/ad3000c8-926a-469c-9118-1447d5482d79)
 
 - FORM5 : 업데이트 및 동의사항
+
 ![image](https://github.com/krkr5628/trade_daishin/assets/75410553/45af573c-95ee-4a1a-8634-f4c18ebd9f99)
 
 # 특징
