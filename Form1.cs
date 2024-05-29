@@ -41,6 +41,7 @@ namespace WindowsFormsApp1
         private CPUTILLib.CpCybos CpCybos; //?
         private CPUTILLib.CpStockCode CpStockCode; //?
         private CPUTILLib.CpCodeMgr CpCodeMgr; //?
+        private CPSYSDIBLib.CpSvrNew7224 CpSvrNew7224; //외국인선물
         private CPUTILLib.CpFutureCode cpFuture; //코스피선물옵션
         private CPUTILLib.CpKFutureCode cpKFuture; //코스닥선물옵션
         private CPSYSDIBLib.FutOptChart FutOptChart; //선물옵션차트
@@ -444,6 +445,7 @@ namespace WindowsFormsApp1
         {
             CpCybos = new CPUTILLib.CpCybos();
             CpTdUtil = new CPTRADELib.CpTdUtil();
+            CpSvrNew7224 = new CPSYSDIBLib.CpSvrNew7224(); //외국인선물
             cpFuture = new CPUTILLib.CpFutureCode(); //코스피 선물옵션
             cpKFuture = new CPUTILLib.CpKFutureCode(); //코스닥선물옵션
             FutOptChart = new CPSYSDIBLib.FutOptChart(); //선물옵션차트
@@ -682,11 +684,13 @@ namespace WindowsFormsApp1
             if (utility.load_check && utility.Telegram_Allow && telegram_chat.Count > 0)
             {
                 telegram_send(telegram_chat.Dequeue());
-            }
+            }    
 
             if (utility.load_check) Opeartion_Time();
 
         }
+
+        bool first_index = false;
 
         //운영시간 확인
         private async void Opeartion_Time()
@@ -713,6 +717,16 @@ namespace WindowsFormsApp1
             {
                 isRunned = false;
                 real_time_stop(true);
+            }
+
+            //인덱스전송
+            DateTime index = DateTime.Parse("09:00:00");
+
+            if (!first_index && index <= t_now)
+            {
+                first_index = true;
+                WriteLog_System($"[INDEX/{t_now}] : {Foreign.Text}/{kospi_index.Text}/{kosdaq_index.Text}/{dow_index.Text}/{sp_index.Text}/{nasdaq_index.Text}\n");
+                telegram_message($"[INDEX/{t_now}] : {Foreign.Text}/{kospi_index.Text}/{kosdaq_index.Text}/{dow_index.Text}/{sp_index.Text}/{nasdaq_index.Text}\n");
             }
         }
 
@@ -1172,7 +1186,7 @@ namespace WindowsFormsApp1
 
         //------------------------------------인덱스 목록 받기---------------------------------        
         private void Index_load()
-        {
+        {         
             US_INDEX();
 
             System.Threading.Thread.Sleep(200);
@@ -1461,6 +1475,7 @@ namespace WindowsFormsApp1
         private string sKCode1 = "";
         private string sKCode2 = "";
 
+        //https://money2.creontrade.com/e5/mboard/ptype_basic/HTS_Plus_Helper/DW_Basic_Read_Page.aspx?boardseq=284&seq=6&page=5&searchString=%ec%84%a0%eb%ac%bc&p=8841&v=8643&m=9505
         private void Initial_kor_index()
         {
             //월물확인
@@ -1531,14 +1546,122 @@ namespace WindowsFormsApp1
         private double[] kospi_index_series = new double[3];
         private double[] kosdaq_index_series = new double[3];
 
-        //https://money2.creontrade.com/e5/mboard/ptype_basic/HTS_Plus_Helper/DW_Basic_Read_Page.aspx?boardseq=284&seq=6&page=5&searchString=%ec%84%a0%eb%ac%bc&p=8841&v=8643&m=9505
-        //https://money2.creontrade.com/e5/mboard/ptype_basic/HTS_Plus_Helper/DW_Basic_Read_Page.aspx?boardseq=287&seq=9&page=1&searchString=&p=&v=&m=
-        //https://money2.creontrade.com/e5/mboard/ptype_basic/HTS_Plus_Helper/DW_Basic_Read_Page.aspx?boardseq=284&seq=105&page=3&searchString=%ec%84%a0%eb%ac%bc&p=8841&v=8643&m=9505
         private void KOR_INDEX()
         {
-            //KOSPI 200 OPTIONS
+            //FOREIGNER
+            //https://money2.creontrade.com/e5/mboard/ptype_basic/HTS_Plus_Helper/DW_Basic_Read_Page.aspx?boardseq=284&seq=146&page=2&searchString=%ec%98%b5%ec%85%98&p=&v=&m=
+            CpSvrNew7224.SetInputValue(0, '1');
+            CpSvrNew7224.SetInputValue(1, 'D');
+            CpSvrNew7224.SetInputValue(2, 2);
+            CpSvrNew7224.SetInputValue(3, '2');
+            CpSvrNew7224.SetInputValue(4, '1');
+            CpSvrNew7224.SetInputValue(5, 5);
+            CpSvrNew7224.SetInputValue(6, Convert.ToInt32(index_time));
+            CpSvrNew7224.SetInputValue(7, Convert.ToInt32(index_time));
+            CpSvrNew7224.SetInputValue(8, '1');
+            //
+            int result = CpSvrNew7224.BlockRequest();
+            //
+            if (CpSvrNew7224.GetDibStatus() == 1)
+            {
+                string status_message = CpFore8312.GetDibMsg1();
+                WriteLog_System($"[선물/수신실패] : DibRq 요청 수신대기(60초후 재시도) - {status_message}\n");
+                telegram_message("[선물/수신실패] : DibRq 요청 수신대기(60초후 재시도)\n");
+                return;
+            }
+            //
+            if (result == 0)
+            {
+                string tmp6 = Convert.ToString(CpSvrNew7224.GetDataValue(0, 0)); //일자(long)
+                string tmp7 = Convert.ToString(CpSvrNew7224.GetDataValue(1, 0)); //매도수량(long)
+                string tmp8 = Convert.ToString(CpSvrNew7224.GetDataValue(5, 0)); //매수수량(long)
+                string tmp9 = Convert.ToString(CpSvrNew7224.GetDataValue(9, 0)); //순매수수량(long)
+
+                //8시 45분전에 수신시 혹은 최초 수신시 0값이 나오는 경우가 있음
+                if (tmp6 == "0" || tmp7 == "0" || tmp8 == "0" || tmp9 == "0")
+                {
+                    WriteLog_System($"[수신오류] 외국인 선물 누적 : 일자({tmp6}), 매도수량({tmp7}), 매수수량({tmp8}), 순매수수량({tmp9})\n");
+                    telegram_message($"[수신오류] 외국인 선물 누적  : 60초 뒤 재시도\n");
+                    return;
+                }
+
+                Foreign.Text = tmp9;
+
+                /*
+                if (utility.buy_condition_index)
+                {
+                    if (utility.type1_selection && !index_buy)
+                    {
+                        double start = Convert.ToDouble(utility.type1_start);
+                        double end = Convert.ToDouble(utility.type1_end);
+                        if (kospi_index_series[0] < start || end < kospi_index_series[2])
+                        {
+                            WriteLog_System($"[Buy/이탈] KOSPI200 RANGE\n");
+                            WriteLog_System($"SET_LOW({start}) <= LOW({kospi_index_series[0]})\n");
+                            WriteLog_System($"HIGH({kospi_index_series[2]}) <= SET_HIGH({end})\n");
+                            WriteLog_System("Trade Stop\n");
+
+                            telegram_message($"[Buy/이탈] KOSPI200 RANGE\n");
+                            telegram_message($"SET_LOW({start}) <= LOW({kospi_index_series[0]})\n");
+                            telegram_message($"HIGH({kospi_index_series[2]}) <= SET_HIGH({end})\n");
+                            telegram_message("Trade Stop\n");
+
+                            index_buy = true;
+                        }
+                    }
+                }
+
+                if (utility.clear_index)
+                {
+                    if (utility.type1_selection_all && !index_clear)
+                    {
+                        double start = Convert.ToDouble(utility.type1_start_all);
+                        double end = Convert.ToDouble(utility.type1_end_all);
+                        if (kospi_index_series[0] < start || end < kospi_index_series[2])
+                        {
+                            WriteLog_System($"[CLEAR/이탈] KOSPI200 RANGE\n");
+                            WriteLog_System($"SET_LOW({start}) <= LOW({kospi_index_series[0]})\n");
+                            WriteLog_System($"HIGH({kospi_index_series[2]}) <= SET_HIGH({end})\n");
+                            WriteLog_System("Trade Stop\n");
+
+                            telegram_message($"[CLEAR/이탈] KOSPI200 RANGE\n");
+                            telegram_message($"SET_LOW({start}) <= LOW({kospi_index_series[0]})\n");
+                            telegram_message($"HIGH({kospi_index_series[2]}) <= SET_HIGH({end})\n");
+                            telegram_message("Trade Stop\n");
+
+                            index_clear = true;
+                        }
+                    }
+                }
+
+                if (utility.Dual_Index)
+                {
+                    if (utility.type1_selection_isa && !index_dual)
+                    {
+                        double start = Convert.ToDouble(utility.type1_start_isa);
+                        double end = Convert.ToDouble(utility.type1_end_isa);
+                        if (kospi_index_series[0] < start || end < kospi_index_series[2])
+                        {
+                            WriteLog_System($"[DUAL/이탈] KOSPI200 RANGE\n");
+                            WriteLog_System($"SET_LOW({start}) <= LOW({kospi_index_series[0]})\n");
+                            WriteLog_System($"HIGH({kospi_index_series[2]}) <= SET_HIGH({end})\n");
+                            WriteLog_System("Trade Stop\n");
+
+                            telegram_message($"[DUAL/이탈] KOSPI200 RANGE\n");
+                            telegram_message($"SET_LOW({start}) <= LOW({kospi_index_series[0]})\n");
+                            telegram_message($"HIGH({kospi_index_series[2]}) <= SET_HIGH({end})\n");
+                            telegram_message("Trade Stop\n");
+
+                            index_dual = true;
+                        }
+                    }
+                }
+                */
+
+            }
 
             //KOSPI 200 FUTURES
+            //https://money2.creontrade.com/e5/mboard/ptype_basic/HTS_Plus_Helper/DW_Basic_Read_Page.aspx?boardseq=284&seq=105&page=3&searchString=%ec%84%a0%eb%ac%bc&p=8841&v=8643&m=9505
             if (utility.kospi_commodity)
             {
                 FutOptChart.SetInputValue(0, sCode1); //종목코드
@@ -1557,7 +1680,7 @@ namespace WindowsFormsApp1
                 if (FutOptChart.GetDibStatus() == 1)
                 {
                     string status_message = FutOptChart.GetDibMsg1();
-                    WriteLog_System("[KOSPI200/수신실패] : DibRq 요청 수신대기(60초후 재시도)\n");
+                    WriteLog_System($"[KOSPI200/수신실패] : DibRq 요청 수신대기(60초후 재시도) - {status_message}\n");
                     telegram_message("[KOSPI200/수신실패] : DibRq 요청 수신대기(60초후 재시도)\n"); 
                     return;
                 }
@@ -1665,6 +1788,7 @@ namespace WindowsFormsApp1
             System.Threading.Thread.Sleep(200);
 
             //KOSDAK 150 FUTURES
+            //https://money2.creontrade.com/e5/mboard/ptype_basic/HTS_Plus_Helper/DW_Basic_Read_Page.aspx?boardseq=287&seq=9&page=1&searchString=&p=&v=&m=
             if (utility.kosdak_commodity)
             {
                 FutOptChart.SetInputValue(0, sKCode1); //종목코드
@@ -1683,7 +1807,7 @@ namespace WindowsFormsApp1
                 if (FutOptChart.GetDibStatus() == 1)
                 {
                     string status_message = FutOptChart.GetDibMsg1();
-                    WriteLog_System("[KOSDAK150 /수신실패] : DibRq 요청 수신대기(60초후 재시도)\n");
+                    WriteLog_System($"[KOSDAK150 /수신실패] : DibRq 요청 수신대기(60초후 재시도) - {status_message}\n");
                     telegram_message("[KOSDAK150 수신실패] : DibRq 요청 수신대기(60초후 재시도)\n");
                     return;
                 }
