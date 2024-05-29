@@ -755,7 +755,7 @@ namespace WindowsFormsApp1
             }
             else
             {
-                WriteLog_System("관리자 권한 실행 요망");
+                WriteLog_System("관리자 권한 실행 요망\n");
                 return;
             }
 
