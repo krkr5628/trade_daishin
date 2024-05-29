@@ -1601,7 +1601,7 @@ namespace WindowsFormsApp1
 
                     if (utility.buy_condition_index)
                     {
-                        if (utility.type0_selection)
+                        if (utility.type0_selection && !index_buy)
                         {
                             double start = Convert.ToDouble(utility.type0_start);
                             double end = Convert.ToDouble(utility.type0_end);
@@ -1618,7 +1618,7 @@ namespace WindowsFormsApp1
 
                     if (utility.clear_index)
                     {
-                        if (utility.type0_selection_all)
+                        if (utility.type0_selection_all && !index_clear)
                         {
                             double start = Convert.ToDouble(utility.type0_start_all);
                             double end = Convert.ToDouble(utility.type0_end_all);
@@ -1635,7 +1635,7 @@ namespace WindowsFormsApp1
 
                     if (utility.Dual_Index)
                     {
-                        if (utility.type0_selection_isa)
+                        if (utility.type0_selection_isa && !index_dual)
                         {
                             double start = Convert.ToDouble(utility.type0_start_isa);
                             double end = Convert.ToDouble(utility.type0_end_isa);
