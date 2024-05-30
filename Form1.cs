@@ -3332,6 +3332,19 @@ namespace WindowsFormsApp1
                     int hold_max_update = Convert.ToInt32(hold_status_update[1]);
                     max_hoid.Text = (hold_update + 1) + "/" + hold_max_update;
 
+                    //기존 종목 포함 및 AND 모드 포함
+                    if (check)
+                    {
+                        DataRow[] findRows = dtCondStock.AsEnumerable().Where(row2 => row2.Field<string>("종목코드") == code && row2.Field<string>("조건식") == condition_name).ToArray();
+
+                        findRows[0]["상태"] = "매수중";
+                        findRows[0]["주문번호"] = order_number;
+                        findRows[0]["보유수량"] = 0 + "/" + order_acc_market;
+
+                        dtCondStock.AcceptChanges();
+                        dataGridView1.DataSource = dtCondStock;
+                    }
+
                     //매매 횟수업데이트(Independent Mode)
                     if (utility.buy_INDEPENDENT || utility.buy_DUAL)
                     {
