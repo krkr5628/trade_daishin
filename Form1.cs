@@ -21,6 +21,7 @@ using System.Timers;
 using Microsoft.Win32;
 using System.Diagnostics;
 using System.Security.Principal;
+using Newtonsoft.Json.Linq;
 //
 using CPUTILLib; //Daishin
 using CPTRADELib; //Daishin
@@ -399,6 +400,39 @@ namespace WindowsFormsApp1
         }
 
         //Telegram 메시지 수신
+        private async Task Telegram_Receive()
+        {
+            string apiUrl = $"https://api.telegram.org/bot{utility.telegram_token}/getUpdates";
+            
+            while (true)
+            {
+                try
+                {
+                    WebRequest request = WebRequest.Create(apiUrl);
+                    using (WebResponse response = await request.GetResponseAsync())
+                    using (Stream stream = response.GetResponseStream())
+                    using (StreamReader reader = new StreamReader(stream))
+                    {
+                        string response_message = await reader.ReadToEndAsync();
+                        JObject jsonData = JObject.Parse(response_message);
+
+                        string message = Convert.ToString(jsonData["result"][0]["message"]["text"]);
+                        WriteLog_System($"[TELEGRAM] : {message}\n"); // 수신된 메시지 확인
+                    }
+                }
+                catch (Exception ex)
+                {
+                    WriteLog_System($"[TELEGRAM/ERROR] : {ex.Message}\n");
+                }
+
+                // 일정한 간격으로 API를 호출하여 새로운 메시지 확인
+                await Task.Delay(1000); // 1초마다 확인
+            }
+            /*           
+            {"ok":true,"result":[{"update_id":000000000,"message":{"message_id":22222,"from":{"id":34566778,"is_bot":false,"first_name":"Sy","last_name":"CH","username":"k456","language_code":"ko"},"chat":{"id":69sdfg,"first_name":"Ssdfg","last_name":"CsdfgI","username":"ksdfg28","type":"private"},"date":1717078874,"text":"Hello"}}]}
+
+             */
+        }
 
         //매매로그 맟 전체로그 저장
         private List<string> log_trade = new List<string>();
@@ -1952,11 +1986,14 @@ namespace WindowsFormsApp1
             DateTime t_end = DateTime.Parse(utility.market_end_time);
 
             //메인 동작 실행
+            //기본 값 모두 실행 후 각 종 값 수신
             if (!isRunned2 && t_now >= t_start && t_now <= t_end)
             {
                 isRunned2 = true;
 
                 auto_allow_check();
+
+                //Telegram_Receive();
 
                 timer3.Start(); //체결 내역 업데이트 - 200ms
 
@@ -1976,15 +2013,15 @@ namespace WindowsFormsApp1
             if (!first_index && index1 <= t_now)
             {
                 first_index = true;
-                WriteLog_System($"[INDEX/{t_now}] : {Foreign.Text}/{kospi_index.Text}/{kosdaq_index.Text}/{dow_index.Text}/{sp_index.Text}/{nasdaq_index.Text}\n");
-                telegram_message($"[INDEX/{t_now}] : {Foreign.Text}/{kospi_index.Text}/{kosdaq_index.Text}/{dow_index.Text}/{sp_index.Text}/{nasdaq_index.Text}\n");
+                WriteLog_System($"[INDEX/08:59:00] : {Foreign.Text}/{kospi_index.Text}/{kosdaq_index.Text}/{dow_index.Text}/{sp_index.Text}/{nasdaq_index.Text}\n");
+                telegram_message($"[INDEX/08:59:00] : {Foreign.Text}/{kospi_index.Text}/{kosdaq_index.Text}/{dow_index.Text}/{sp_index.Text}/{nasdaq_index.Text}\n");
             }
 
             if (!second_index && index2 <= t_now)
             {
                 second_index = true;
-                WriteLog_System($"[INDEX/{t_now}] : {Foreign.Text}/{kospi_index.Text}/{kosdaq_index.Text}/{dow_index.Text}/{sp_index.Text}/{nasdaq_index.Text}\n");
-                telegram_message($"[INDEX/{t_now}] : {Foreign.Text}/{kospi_index.Text}/{kosdaq_index.Text}/{dow_index.Text}/{sp_index.Text}/{nasdaq_index.Text}\n");
+                WriteLog_System($"[INDEX/09:00:00] : {Foreign.Text}/{kospi_index.Text}/{kosdaq_index.Text}/{dow_index.Text}/{sp_index.Text}/{nasdaq_index.Text}\n");
+                telegram_message($"[INDEX/09:00:00] : {Foreign.Text}/{kospi_index.Text}/{kosdaq_index.Text}/{dow_index.Text}/{sp_index.Text}/{nasdaq_index.Text}\n");
             }
         }
 
