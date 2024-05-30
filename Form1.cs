@@ -172,7 +172,7 @@ namespace WindowsFormsApp1
         //로그창(System)
         private void WriteLog_System(string message)
         {
-            string time = DateTime.Now.ToString("HH:mm:ss");
+            string time = DateTime.Now.ToString("HH:mm:ss:fff");
             log_window.AppendText($@"{"[" + time + "] " + message}");
             log_full.Add($"[{time}][System] : {message}");
         }
@@ -180,7 +180,7 @@ namespace WindowsFormsApp1
         //로그창(Order)
         private void WriteLog_Order(string message)
         {
-            string time = DateTime.Now.ToString("HH:mm:ss");
+            string time = DateTime.Now.ToString("HH:mm:ss:fff");
             log_window3.AppendText($@"{"[" + time + "] " + message}");
             log_full.Add($"[[{time}][Order] : {message}");
             log_trade.Add($"[{time}][Order] : {message}");
@@ -189,7 +189,7 @@ namespace WindowsFormsApp1
         //로그창(Stock)
         private void WriteLog_Stock(string message)
         {
-            string time = DateTime.Now.ToString("HH:mm:ss");
+            string time = DateTime.Now.ToString("HH:mm:ss:fff");
             log_window2.AppendText($@"{"[" + time + "] " + message}");
             log_full.Add($"[{time}][Stock] : {message}");
         }
@@ -239,7 +239,7 @@ namespace WindowsFormsApp1
         //telegram_chat
         private void telegram_message(string message)
         {
-            string time = DateTime.Now.ToString("HH:mm:ss");
+            string time = DateTime.Now.ToString("HH:mm:ss:fff");
             string message_edtied = "[" + time + "] " + message;
             telegram_chat.Enqueue(message_edtied);
         }
@@ -732,7 +732,7 @@ namespace WindowsFormsApp1
                 telegram_message($"[INDEX/{t_now}] : {Foreign.Text}/{kospi_index.Text}/{kosdaq_index.Text}/{dow_index.Text}/{sp_index.Text}/{nasdaq_index.Text}\n");
             }
 
-            if (!second_index && index1 <= t_now)
+            if (!second_index && index2 <= t_now)
             {
                 second_index = true;
                 WriteLog_System($"[INDEX/{t_now}] : {Foreign.Text}/{kospi_index.Text}/{kosdaq_index.Text}/{dow_index.Text}/{sp_index.Text}/{nasdaq_index.Text}\n");
@@ -3339,7 +3339,7 @@ namespace WindowsFormsApp1
 
                         findRows[0]["상태"] = "매수중";
                         findRows[0]["주문번호"] = order_number;
-                        findRows[0]["보유수량"] = 0 + "/" + order_acc_market;
+                        findRows[0]["보유수량"] = 0 + "/" + order_acc;
 
                         dtCondStock.AcceptChanges();
                         dataGridView1.DataSource = dtCondStock;
