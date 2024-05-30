@@ -115,7 +115,7 @@ namespace WindowsFormsApp1
         //-----------------------------------storage----------------------------------------
 
         //telegram용 초당 1회 전송 저장소
-        private Queue<String> telegram_chat = new Queue<string>();
+        //private Queue<String> telegram_chat = new Queue<string>();
 
         //실시간 조건 검색 용 테이블(누적 저장)
         private DataTable dtCondStock = new DataTable();
@@ -194,6 +194,53 @@ namespace WindowsFormsApp1
             log_full.Add($"[{time}][Stock] : {message}");
         }
 
+        //telegram_chat
+        private void telegram_message(string message)
+        {
+            string time = DateTime.Now.ToString("HH:mm:ss:fff");
+            string message_edtied = "[" + time + "] " + message;
+            telegram_send(message_edtied);
+        }
+
+        //telegram_send(초당 100개 제한)
+        private async void telegram_send(string message)
+        {
+            string urlString = $"https://api.telegram.org/bot{utility.telegram_token}/sendMessage?chat_id={utility.telegram_user_id}&text={message}";
+
+            bool success = false;
+
+            while (!success)
+            {
+                try
+                {
+                    WebRequest request = WebRequest.Create(urlString);
+                    request.Timeout = 60000; // 60초로 Timeout 설정
+
+                    //await은 비동기 작업이 완료될떄까지 기다린다.
+                    //using 문은 IDisposable 인터페이스를 구현한 객체의 리소스를 안전하게 해제하는 데 사용
+                    using (WebResponse response = await request.GetResponseAsync())
+                    using (Stream stream = response.GetResponseStream())
+                    using (StreamReader reader = new StreamReader(stream))
+                    {
+                        string responseString = await reader.ReadToEndAsync();
+                        success = true;
+                    }
+                }
+                catch (WebException ex)
+                {
+                    if (ex.Response is HttpWebResponse response && response.StatusCode == (HttpStatusCode)429)
+                    {
+                        WriteLog_System($"FLOOD_WAIT: Waiting for 30s...");
+                        await Task.Delay(30000);
+                    }
+                    else
+                    {
+                        WriteLog_System("Telegram 전송 오류 발생 : " + ex.Message);
+                    }
+                }
+            }
+        }
+
         //매매로그 맟 전체로그 저장
         private List<string> log_trade = new List<string>();
         private List<string> log_full = new List<string>();
@@ -236,31 +283,6 @@ namespace WindowsFormsApp1
             }
         }
 
-        //telegram_chat
-        private void telegram_message(string message)
-        {
-            string time = DateTime.Now.ToString("HH:mm:ss:fff");
-            string message_edtied = "[" + time + "] " + message;
-            telegram_chat.Enqueue(message_edtied);
-        }
-
-        //telegram_send(초당 1개씩 전송)
-        private async void telegram_send(string message)
-        {
-            string urlString = $"https://api.telegram.org/bot{utility.telegram_token}/sendMessage?chat_id={utility.telegram_user_id}&text={message}";
-
-            WebRequest request = WebRequest.Create(urlString);
-            request.Timeout = 60000; // 60초로 Timeout 설정
-
-            //await은 비동기 작업이 완료될떄까지 기다린다.
-            //using 문은 IDisposable 인터페이스를 구현한 객체의 리소스를 안전하게 해제하는 데 사용
-            using (WebResponse response = await request.GetResponseAsync())
-            using (Stream stream = response.GetResponseStream())
-            using (StreamReader reader = new StreamReader(stream))
-            {
-                string responseString = await reader.ReadToEndAsync();
-            }
-        }
 
         //일련번호 받기
         //https://money2.creontrade.com/e5/mboard/ptype_basic/HTS_Plus_Helper/DW_Basic_Read_Page.aspx?boardseq=284&seq=239&page=1&searchString=CssWatchStgSubscribe&p=8841&v=8643&m=9505
@@ -679,13 +701,7 @@ namespace WindowsFormsApp1
         private void ClockEvent(object sender, EventArgs e)
         {
             //시간표시
-            timetimer.Text = DateTime.Now.ToString("yy MM-dd (ddd) HH:mm:ss");
-
-            //Telegram 전송
-            if (utility.load_check && utility.Telegram_Allow && telegram_chat.Count > 0)
-            {
-                telegram_send(telegram_chat.Dequeue());
-            }    
+            timetimer.Text = DateTime.Now.ToString("yy MM-dd (ddd) HH:mm:ss");   
 
             if (utility.load_check) Opeartion_Time();
 
