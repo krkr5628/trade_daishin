@@ -34,7 +34,6 @@ namespace WindowsFormsApp1
         public static string[] arrCondition = { };
         public static string[] account;
         public int login_check = 1;
-        private bool isRunned = false;
 
         //-----------------------------------공통 Obj----------------------------------------
 
@@ -72,432 +71,6 @@ namespace WindowsFormsApp1
         private bool Checked_Trade_Init; //?
         private string Master_Condition = "";
         private string ISA_Condition = "";
-
-        //-----------------------------------------------Main------------------------------------------------
-        public Trade_Auto_Daishin()
-        {
-            InitializeComponent();
-
-            //-------------------초기 동작-------------------
-
-            //테이블 초기 세팅
-            initial_Table();
-
-            //기존 세팅 로드
-            utility.setting_load_auto();
-
-            //초기 선언
-            initial_load();
-
-            //메인 시간 동작
-            timer1.Start(); //시간 표시 - 1000ms
-
-            //----------종료_동작---------
-            this.FormClosed += new FormClosedEventHandler(Form_FormClosed);
-
-            //-------------------버튼-------------------
-            Main_menu.Click += main_menu; //메인메뉴
-            Trade_setting.Click += trade_setting; //설정창
-            porfoilo_btn.Click += Porfoilo_btn_Click;//매매정보
-            Log_btn.Click += Log_btn_Click;//로그정보
-            update_agree_btn.Click += Update_agree_btn_Click;//업데이트 및 동의사항
-
-            Stock_search_btn.Click += stock_search_btn; //종목조회
-
-            Real_time_search_btn.Click += real_time_search_btn; //실시간 조건식 등록
-            Real_time_stop_btn.Click += real_time_stop_btn; //조건식 실시간 전체 중단
-
-            All_clear_btn.Click += All_clear_btn_Click;
-            profit_clear_btn.Click += Profit_clear_btn_Click;
-            loss_clear_btn.Click += Loss_clear_btn_Click;
-        }
-
-        //-----------------------------------storage----------------------------------------
-
-        //telegram용 초당 1회 전송 저장소
-        //private Queue<String> telegram_chat = new Queue<string>();
-
-        //실시간 조건 검색 용 테이블(누적 저장)
-        private DataTable dtCondStock = new DataTable();
-
-        //실시간 계좌 보유 현황 용 테이블(누적 저장)
-        private DataTable dtCondStock_hold = new DataTable();
-
-        //
-        private DataTable dtCondStock_Transaction = new DataTable();
-
-        //-----------------------------------lock---------------------------------------- 
-        // 락 객체 생성
-        private static object buy_lock = new object();
-        private static object sell_lock = new object();
-
-        private static Dictionary<string, bool> buy_runningCodes = new Dictionary<string, bool>();
-        private static Dictionary<string, bool> sell_runningCodes = new Dictionary<string, bool>();
-
-        //------------------------------------------공용기능-------------------------------------------
-
-        //모든주문오브젝트는사용하기전에, 필수적으로 TradeInit을호출
-        private bool TradeInit()
-        {
-            if (Checked_Trade_Init)
-                return true;
-
-            int rv = CpTdUtil.TradeInit(0);
-
-            if (rv == 0)
-            {
-                Checked_Trade_Init = true;
-                return true;
-            }
-            else if (rv == -1)
-            {
-                MessageBox.Show("계좌 비밀번호 오류 포함 에러.");
-                Checked_Trade_Init = false;
-                return false;
-            }
-            else if (rv == 1)
-            {
-                MessageBox.Show("OTP/보안카드키가 잘못되었습니다.");
-                Checked_Trade_Init = false;
-                return false;
-            }
-            else
-            {
-                MessageBox.Show("Error");
-                Checked_Trade_Init = false;
-                return false;
-            }
-        }
-
-        //로그창(System)
-        private void WriteLog_System(string message)
-        {
-            string time = DateTime.Now.ToString("HH:mm:ss:fff");
-            log_window.AppendText($@"{"[" + time + "] " + message}");
-            log_full.Add($"[{time}][System] : {message}");
-        }
-
-        //로그창(Order)
-        private void WriteLog_Order(string message)
-        {
-            string time = DateTime.Now.ToString("HH:mm:ss:fff");
-            log_window3.AppendText($@"{"[" + time + "] " + message}");
-            log_full.Add($"[[{time}][Order] : {message}");
-            log_trade.Add($"[{time}][Order] : {message}");
-        }
-
-        //로그창(Stock)
-        private void WriteLog_Stock(string message)
-        {
-            string time = DateTime.Now.ToString("HH:mm:ss:fff");
-            log_window2.AppendText($@"{"[" + time + "] " + message}");
-            log_full.Add($"[{time}][Stock] : {message}");
-        }
-
-        //telegram_chat
-        private void telegram_message(string message)
-        {
-            string time = DateTime.Now.ToString("HH:mm:ss:fff");
-            string message_edtied = "[" + time + "] " + message;
-            telegram_send(message_edtied);
-        }
-
-        //telegram_send(초당 100개 제한)
-        private async void telegram_send(string message)
-        {
-            string urlString = $"https://api.telegram.org/bot{utility.telegram_token}/sendMessage?chat_id={utility.telegram_user_id}&text={message}";
-
-            bool success = false;
-
-            while (!success)
-            {
-                try
-                {
-                    WebRequest request = WebRequest.Create(urlString);
-                    request.Timeout = 60000; // 60초로 Timeout 설정
-
-                    //await은 비동기 작업이 완료될떄까지 기다린다.
-                    //using 문은 IDisposable 인터페이스를 구현한 객체의 리소스를 안전하게 해제하는 데 사용
-                    using (WebResponse response = await request.GetResponseAsync())
-                    using (Stream stream = response.GetResponseStream())
-                    using (StreamReader reader = new StreamReader(stream))
-                    {
-                        string responseString = await reader.ReadToEndAsync();
-                        success = true;
-                    }
-                }
-                catch (WebException ex)
-                {
-                    if (ex.Response is HttpWebResponse response && response.StatusCode == (HttpStatusCode)429)
-                    {
-                        WriteLog_System($"FLOOD_WAIT: Waiting for 30s...");
-                        await Task.Delay(30000);
-                    }
-                    else
-                    {
-                        WriteLog_System("Telegram 전송 오류 발생 : " + ex.Message);
-                    }
-                }
-            }
-        }
-
-        //매매로그 맟 전체로그 저장
-        private List<string> log_trade = new List<string>();
-        private List<string> log_full = new List<string>();
-
-        //FORM CLOSED 후 LOG 저장
-        //Process.Kill()에서 비정상 작동할 가능성 높음
-        private void Form_FormClosed(object sender, FormClosedEventArgs e)
-        {
-
-            string formattedDate = DateTime.Now.ToString("yyyyMMdd");
-
-            // 저장할 파일 경로
-            string filePath = $@"C:\Auto_Trade_Creon\Log\{formattedDate}_full.txt";
-            string filePath2 = $@"C:\Auto_Trade_Creon\Log_Trade\{formattedDate}_trade.txt";
-
-            // StreamWriter를 사용하여 파일 저장
-            try
-            {
-                using (StreamWriter writer = new StreamWriter(filePath, true))
-                {
-                    writer.Write(String.Join("",log_full));
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("파일 저장 중 오류 발생: " + ex.Message);
-            }
-
-            // StreamWriter를 사용하여 파일 저장
-            try
-            {
-                using (StreamWriter writer = new StreamWriter(filePath2, true))
-                {
-                    writer.Write(String.Join("", log_trade));
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("파일 저장 중 오류 발생: " + ex.Message);
-            }
-        }
-
-
-        //일련번호 받기
-        //https://money2.creontrade.com/e5/mboard/ptype_basic/HTS_Plus_Helper/DW_Basic_Read_Page.aspx?boardseq=284&seq=239&page=1&searchString=CssWatchStgSubscribe&p=8841&v=8643&m=9505
-        private int condition_sub_code(string condition_code)
-        {
-            CssWatchStgSubscribe.SetInputValue(0, condition_code);
-            //
-            int result = CssWatchStgSubscribe.BlockRequest();
-            if (result == 0)
-            {
-                return CssWatchStgSubscribe.GetHeaderValue(0);
-            }
-            return -1;
-        }
-
-        private string error_message(int error)
-        {
-            switch (error)
-            {
-                case 1:
-                    return "통신요청실패";
-                case 2:
-                    return "주문확인창에서취소";
-                case 3:
-                    return "그외의내부오류";
-                case 4:
-                    return "주문요청제한개수초과";
-            }
-            return "기타에러(" + error.ToString() + ")";
-        }
-
-        //-----------------------------------------initial-------------------------------------
-
-        //초기 Table 값 입력
-        private void initial_Table()
-        {
-            DataTable dataTable = new DataTable();
-            dataTable.Columns.Add("구분코드", typeof(string));
-            dataTable.Columns.Add("편입", typeof(string)); // '편입' '이탈'
-            dataTable.Columns.Add("상태", typeof(string)); // '대기' '매수중 '매수완료' '매도중' '매도완료'
-            dataTable.Columns.Add("종목코드", typeof(string));
-            dataTable.Columns.Add("종목명", typeof(string));
-            dataTable.Columns.Add("현재가", typeof(string)); // + - 부호를 통해 매수호가인지 매도 호가인지 현재가인지 파악한다.
-            dataTable.Columns.Add("거래량", typeof(string));
-            dataTable.Columns.Add("편입상태", typeof(string));
-            dataTable.Columns.Add("편입가", typeof(string));
-            dataTable.Columns.Add("매도가", typeof(string));
-            dataTable.Columns.Add("수익률", typeof(string));
-            dataTable.Columns.Add("보유수량", typeof(string)); //보유수량
-            dataTable.Columns.Add("조건식", typeof(string));
-            dataTable.Columns.Add("편입시각", typeof(string));
-            dataTable.Columns.Add("이탈시각", typeof(string));
-            dataTable.Columns.Add("매수시각", typeof(string));
-            dataTable.Columns.Add("매도시각", typeof(string));
-            dataTable.Columns.Add("주문번호", typeof(string));
-            dataTable.Columns.Add("상한가", typeof(string)); //상한가 => 시장가 계산용
-            dtCondStock = dataTable;
-            dataGridView1.DataSource = dtCondStock;
-
-            DataTable dataTable2 = new DataTable();
-            dataTable2.Columns.Add("구분코드", typeof(string));
-            dataTable2.Columns.Add("종목코드", typeof(string)); //고정
-            dataTable2.Columns.Add("종목명", typeof(string)); //고정
-            dataTable2.Columns.Add("현재가", typeof(string)); //실시간 변경
-            dataTable2.Columns.Add("보유수량", typeof(string)); //고정
-            dataTable2.Columns.Add("평균단가", typeof(string)); //고정
-            dataTable2.Columns.Add("평가금액", typeof(string));
-            dataTable2.Columns.Add("수익률", typeof(string)); //실시간 변경
-            dataTable2.Columns.Add("손익금액", typeof(string));
-            dataTable2.Columns.Add("체결수량", typeof(string)); //고정
-            dtCondStock_hold = dataTable2;
-            dataGridView2.DataSource = dtCondStock_hold;
-
-            DataTable dataTable3 = new DataTable();
-            dataTable3.Columns.Add("구분코드", typeof(string));
-            dataTable3.Columns.Add("종목번호", typeof(string));
-            dataTable3.Columns.Add("종목명", typeof(string));
-            dataTable3.Columns.Add("주문번호", typeof(string));
-            dataTable3.Columns.Add("매매구분", typeof(string));
-            dataTable3.Columns.Add("주문구분", typeof(string));
-            dataTable3.Columns.Add("주문수량", typeof(string));
-            dataTable3.Columns.Add("체결수량", typeof(string));
-            dataTable3.Columns.Add("체결단가", typeof(string));
-            dtCondStock_Transaction = dataTable3;
-            dataGridView3.DataSource = dtCondStock_Transaction;
-
-        }
-
-        //초기 설정 변수
-        private string sell_condtion_method_after;
-
-        //초기 설정 반영
-        public async Task initial_allow()
-        {
-            string[] mode = { "지정가", "시장가" };
-            string[] hoo = { "5호가", "4호가", "3호가", "2호가", "1호가", "현재가", "시장가", "-1호가", "-2호가", "-3호가", "-4호가", "-5호가" };
-            string[] hoo2 = { "5호가", "4호가", "3호가", "2호가", "1호가", "현재가", "-1호가", "-2호가", "-3호가", "-4호가", "-5호가" };
-
-            //초기 세팅
-            acc_text.Text = utility.setting_account_number;
-            acc_isa_text.Text = utility.setting_account_number;
-            total_money.Text = string.Format("{0:#,##0}", Convert.ToDecimal(utility.initial_balance));
-            total_money_isa.Text = string.Format("{0:#,##0}", Convert.ToDecimal(utility.initial_balance));
-            Current_User_money.Text = "0";
-            Current_User_money_isa.Text = "0";
-            User_money.Text = "0"; 
-            User_money_isa.Text = "0";
-            max_hoid.Text = "0/0";
-            //
-            if (utility.buy_INDEPENDENT || utility.buy_DUAL)
-            {
-                maxbuy_acc.Text = string.Concat(Enumerable.Repeat("0/", utility.Fomula_list_buy_text.Split(',').Length)) + utility.maxbuy_acc;
-            }
-            else
-            {
-                maxbuy_acc.Text = "0/" + utility.maxbuy_acc;
-            }
-            //
-            User_id.Text = utility.real_id;
-            operation_start.Text = utility.market_start_time;
-            operation_stop.Text = utility.market_end_time;
-            search_start.Text = utility.buy_condition_start;
-            search_stop.Text = utility.buy_condition_end;
-            clear_sell.Text = Convert.ToString(utility.clear_sell);
-            clear_sell_time.Text = utility.clear_sell_start;
-            profit.Text = utility.profit_percent_text;
-            loss.Text = utility.loss_percent_text;
-            buy_condition.Text = utility.Fomula_list_buy_text;
-            buy_condtion_method.Text = mode[utility.buy_set1] + "/" + hoo[utility.buy_set2];
-            sell_condtion.Text = utility.Fomula_list_sell_text;
-            sell_condtion_method.Text = mode[utility.sell_set1] + "/" + hoo[utility.sell_set2];
-            sell_condtion_method_after = mode[utility.sell_set1_after] + "/" + hoo2[utility.sell_set2_after];
-
-            //초기세팅2
-            all_profit.Text = "0";
-            all_profit_percent.Text = "00.00%";
-            all_profit_isa.Text = "0";
-            all_profit_percent_isa.Text = "00.00%";
-            //today_tax.Text = "0";
-            today_profit_percent_tax.Text = "00.00%";
-            today_profit_tax.Text = "0";
-            today_profit_percent_tax_isa.Text = "00.00%";
-            today_profit_tax_isa.Text = "0";
-            //today_profit_percent.Text = "00.00%";
-            //today_profit.Text = "0";
-
-            Foreign.Text = "-";
-            kospi_index.Text = "-";
-            kosdaq_index.Text = "-";
-            dow_index.Text = "-";
-            sp_index.Text = "-";
-            nasdaq_index.Text = "-";
-
-            //초기세팅4
-            if (utility.buy_OR)
-            {
-                trading_mode.Text = "OR_모드";
-            }
-            else if (utility.buy_AND)
-            {
-                trading_mode.Text = "AND_모드";
-            }
-            else
-            {
-                trading_mode.Text = "독립_모드";
-            }
-
-            //KIS
-            KIS_RUN.Text = Convert.ToString(utility.KIS_Allow); //사용여부
-            KIS_Independent.Text = Convert.ToString(utility.KIS_Independent);
-            KIS_Account_Number.Text = utility.KIS_Account;
-            KIS_N.Text = utility.KIS_amount; //N등분
-            KIS_ACCOUNT.Text = "0";//예수금
-            KIS_Profit.Text = "0";
-
-            //
-            WriteLog_System("세팅 반영 완료\n");
-            telegram_message("세팅 반영 완료\n");
-        }
-
-        //초기선언
-        private void initial_load()
-        {
-            CpCybos = new CPUTILLib.CpCybos();
-            CpTdUtil = new CPTRADELib.CpTdUtil();
-            CpSvrNew7224 = new CPSYSDIBLib.CpSvrNew7224(); //외국인선물
-            cpFuture = new CPUTILLib.CpFutureCode(); //코스피 선물옵션
-            cpKFuture = new CPUTILLib.CpKFutureCode(); //코스닥선물옵션
-            FutOptChart = new CPSYSDIBLib.FutOptChart(); //선물옵션차트
-            CpUsCode = new CPUTILLib.CpUsCode(); //해외지수
-            CpTd6033 = new CPTRADELib.CpTd6033(); //계좌별 D+2 예수금 현황
-            CpTdNew5331B = new  CPTRADELib.CpTdNew5331B();//계좌별 매도 가능 수량
-            CpTd6032 = new CPTRADELib.CpTd6032();//매도실현손익(제세금, 수수료 포함)
-            CpTd5341 = new CPTRADELib.CpTd5341(); //매매내역
-            CpUsCode = new CPUTILLib.CpUsCode(); //해외지수
-            CpFore8312 = new DSCBO1Lib.CpFore8312(); //해외지수 수신
-            CssStgList = new CPSYSDIBLib.CssStgList(); //조건식 받기
-            //CssWatchStgControl = new CPSYSDIBLib.CssWatchStgControl(); // 실시간 조건식 등록 및 해제
-            CssStgFind = new CPSYSDIBLib.CssStgFind(); //초기 종목 검색 리스트
-            MarketEye = new CPSYSDIBLib.MarketEye(); //초기 종목 검색 정보
-            CssWatchStgSubscribe = new CPSYSDIBLib.CssWatchStgSubscribe(); // 일련번호 받기
-            CssAlert = new CPSYSDIBLib.CssAlert(); // 종목 편출입
-            CssAlert.Received += new CPSYSDIBLib._ISysDibEvents_ReceivedEventHandler(stock_in_out);
-            StockCur = new DSCBO1Lib.StockCur(); // 실시간 종목 시세(관심종목)
-            StockCur.Received += new DSCBO1Lib._IDibEvents_ReceivedEventHandler(Stock_real_price);
-            //
-            CpTd0311 = new CPTRADELib.CpTd0311(); //현금주문
-            CpTd0322 = new CPTRADELib.CpTd0322(); //시간외종가
-            CpTd0386 = new CPTRADELib.CpTd0386(); //시간외단일가
-                                              //
-            CpConclusion = new DSCBO1Lib.CpConclusion(); //실시간 체결 내역
-            CpConclusion.Received += new DSCBO1Lib._IDibEvents_ReceivedEventHandler(Trade_Check);
-            //
-            Checked_Trade_Init = false;
-        }
 
         //------------------------------기본 BUTTON 모음-------------------------------------
 
@@ -695,33 +268,275 @@ namespace WindowsFormsApp1
             }
         }
 
-        //------------------------------------Main_Start---------------------------------
+        //-----------------------------------------------Main------------------------------------------------
+
+        public Trade_Auto_Daishin()
+        {
+            InitializeComponent();
+
+            //-------------------초기 동작-------------------
+
+            //기존 세팅 로드
+            utility.setting_load_auto();
+
+            //메인 시간 동작
+            timer1.Start(); //시간 표시 - 1000ms
+
+            //----------종료_동작---------
+            this.FormClosed += new FormClosedEventHandler(Form_FormClosed);
+
+            //-------------------버튼-------------------
+            Main_menu.Click += main_menu; //메인메뉴
+            Trade_setting.Click += trade_setting; //설정창
+            porfoilo_btn.Click += Porfoilo_btn_Click;//매매정보
+            Log_btn.Click += Log_btn_Click;//로그정보
+            update_agree_btn.Click += Update_agree_btn_Click;//업데이트 및 동의사항
+
+            Stock_search_btn.Click += stock_search_btn; //종목조회
+
+            Real_time_search_btn.Click += real_time_search_btn; //실시간 조건식 등록
+            Real_time_stop_btn.Click += real_time_stop_btn; //조건식 실시간 전체 중단
+
+            All_clear_btn.Click += All_clear_btn_Click;
+            profit_clear_btn.Click += Profit_clear_btn_Click;
+            loss_clear_btn.Click += Loss_clear_btn_Click;
+        }
+
+        //-----------------------------------storage----------------------------------------
+
+        //telegram용 초당 1회 전송 저장소
+        //private Queue<String> telegram_chat = new Queue<string>();
+
+        //실시간 조건 검색 용 테이블(누적 저장)
+        private DataTable dtCondStock = new DataTable();
+
+        //실시간 계좌 보유 현황 용 테이블(누적 저장)
+        private DataTable dtCondStock_hold = new DataTable();
+
+        //
+        private DataTable dtCondStock_Transaction = new DataTable();
+
+        //-----------------------------------lock---------------------------------------- 
+        // 락 객체 생성
+        private static object buy_lock = new object();
+        private static object sell_lock = new object();
+
+        private static Dictionary<string, bool> buy_runningCodes = new Dictionary<string, bool>();
+        private static Dictionary<string, bool> sell_runningCodes = new Dictionary<string, bool>();
+
+        //------------------------------------------로그-------------------------------------------
+
+        //로그창(System)
+        private void WriteLog_System(string message)
+        {
+            string time = DateTime.Now.ToString("HH:mm:ss:fff");
+            log_window.AppendText($@"{"[" + time + "] " + message}");
+            log_full.Add($"[{time}][System] : {message}");
+        }
+
+        //로그창(Order)
+        private void WriteLog_Order(string message)
+        {
+            string time = DateTime.Now.ToString("HH:mm:ss:fff");
+            log_window3.AppendText($@"{"[" + time + "] " + message}");
+            log_full.Add($"[[{time}][Order] : {message}");
+            log_trade.Add($"[{time}][Order] : {message}");
+        }
+
+        //로그창(Stock)
+        private void WriteLog_Stock(string message)
+        {
+            string time = DateTime.Now.ToString("HH:mm:ss:fff");
+            log_window2.AppendText($@"{"[" + time + "] " + message}");
+            log_full.Add($"[{time}][Stock] : {message}");
+        }
+
+        //telegram_chat
+        private void telegram_message(string message)
+        {
+            string time = DateTime.Now.ToString("HH:mm:ss:fff");
+            string message_edtied = "[" + time + "] " + message;
+            telegram_send(message_edtied);
+        }
+
+        //telegram_send(초당 100개 제한)
+        private async void telegram_send(string message)
+        {
+            string urlString = $"https://api.telegram.org/bot{utility.telegram_token}/sendMessage?chat_id={utility.telegram_user_id}&text={message}";
+
+            bool success = false;
+
+            while (!success)
+            {
+                try
+                {
+                    WebRequest request = WebRequest.Create(urlString);
+                    request.Timeout = 60000; // 60초로 Timeout 설정
+
+                    //await은 비동기 작업이 완료될떄까지 기다린다.
+                    //using 문은 IDisposable 인터페이스를 구현한 객체의 리소스를 안전하게 해제하는 데 사용
+                    using (WebResponse response = await request.GetResponseAsync())
+                    using (Stream stream = response.GetResponseStream())
+                    using (StreamReader reader = new StreamReader(stream))
+                    {
+                        string responseString = await reader.ReadToEndAsync();
+                        success = true;
+                    }
+                }
+                catch (WebException ex)
+                {
+                    if (ex.Response is HttpWebResponse response && response.StatusCode == (HttpStatusCode)429)
+                    {
+                        WriteLog_System($"FLOOD_WAIT: Waiting for 30s...");
+                        await Task.Delay(30000);
+                    }
+                    else
+                    {
+                        WriteLog_System("Telegram 전송 오류 발생 : " + ex.Message);
+                    }
+                }
+            }
+        }
+
+        //Telegram 메시지 수신
+
+        //매매로그 맟 전체로그 저장
+        private List<string> log_trade = new List<string>();
+        private List<string> log_full = new List<string>();
+
+        //FORM CLOSED 후 LOG 저장
+        //Process.Kill()에서 비정상 작동할 가능성 높음
+        private void Form_FormClosed(object sender, FormClosedEventArgs e)
+        {
+
+            string formattedDate = DateTime.Now.ToString("yyyyMMdd");
+
+            // 저장할 파일 경로
+            string filePath = $@"C:\Auto_Trade_Creon\Log\{formattedDate}_full.txt";
+            string filePath2 = $@"C:\Auto_Trade_Creon\Log_Trade\{formattedDate}_trade.txt";
+
+            // StreamWriter를 사용하여 파일 저장
+            try
+            {
+                using (StreamWriter writer = new StreamWriter(filePath, true))
+                {
+                    writer.Write(String.Join("", log_full));
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("파일 저장 중 오류 발생: " + ex.Message);
+            }
+
+            // StreamWriter를 사용하여 파일 저장
+            try
+            {
+                using (StreamWriter writer = new StreamWriter(filePath2, true))
+                {
+                    writer.Write(String.Join("", log_trade));
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("파일 저장 중 오류 발생: " + ex.Message);
+            }
+        }
+
+        //------------------------------------------공용기능-------------------------------------------
+
+        //모든주문오브젝트는사용하기전에, 필수적으로 TradeInit을호출
+        private bool TradeInit()
+        {
+            if (Checked_Trade_Init)
+                return true;
+
+            int rv = CpTdUtil.TradeInit(0);
+
+            if (rv == 0)
+            {
+                Checked_Trade_Init = true;
+                return true;
+            }
+            else if (rv == -1)
+            {
+                MessageBox.Show("계좌 비밀번호 오류 포함 에러.");
+                Checked_Trade_Init = false;
+                return false;
+            }
+            else if (rv == 1)
+            {
+                MessageBox.Show("OTP/보안카드키가 잘못되었습니다.");
+                Checked_Trade_Init = false;
+                return false;
+            }
+            else
+            {
+                MessageBox.Show("Error");
+                Checked_Trade_Init = false;
+                return false;
+            }
+        }
+
+        //일련번호 받기
+        //https://money2.creontrade.com/e5/mboard/ptype_basic/HTS_Plus_Helper/DW_Basic_Read_Page.aspx?boardseq=284&seq=239&page=1&searchString=CssWatchStgSubscribe&p=8841&v=8643&m=9505
+        private int condition_sub_code(string condition_code)
+        {
+            CssWatchStgSubscribe.SetInputValue(0, condition_code);
+            //
+            int result = CssWatchStgSubscribe.BlockRequest();
+            if (result == 0)
+            {
+                return CssWatchStgSubscribe.GetHeaderValue(0);
+            }
+            return -1;
+        }
+
+        private string error_message(int error)
+        {
+            switch (error)
+            {
+                case 1:
+                    return "통신요청실패";
+                case 2:
+                    return "주문확인창에서취소";
+                case 3:
+                    return "그외의내부오류";
+                case 4:
+                    return "주문요청제한개수초과";
+            }
+            return "기타에러(" + error.ToString() + ")";
+        }
+
+        //--------------------------------------------------------------Main_Timer1---------------------------------------------------------------
+        //08:45:00 ~ 18:00:00
 
         //timer1(1000ms) : 주기 고정
         private void ClockEvent(object sender, EventArgs e)
         {
             //시간표시
-            timetimer.Text = DateTime.Now.ToString("yy MM-dd (ddd) HH:mm:ss");   
+            timetimer.Text = DateTime.Now.ToString("yy MM-dd (ddd) HH:mm:ss");
 
             if (utility.load_check) Opeartion_Time();
 
         }
 
-        bool first_index = false;
-        bool second_index = false;
-
+        private bool isRunned = false;
+       
         //운영시간 확인
         private async void Opeartion_Time()
         {
-            //운영시간 확인
-            DateTime t_now = DateTime.Now;
-            DateTime t_start = DateTime.Parse(utility.market_start_time);
-            DateTime t_end = DateTime.Parse(utility.market_end_time);
 
-            //운영시간 아님
-            if (!isRunned && t_now >= t_start && t_now <= t_end)
+            //초기 반영 및 로그인
+            if (!isRunned)
             {
                 isRunned = true;
+
+                //테이블 초기 세팅
+                await initial_Table();
+
+                //초기 선언
+                await initial_load();
+
                 //초기 설정 반영
                 await initial_allow();
 
@@ -730,31 +545,194 @@ namespace WindowsFormsApp1
                 {
                     Initial_Daishin();
                 });
-            }
-            else if (isRunned && t_now > t_end)
-            {
-                isRunned = false;
-                real_time_stop(true);
-            }
 
-            //인덱스전송
-            DateTime index1 = DateTime.Parse("08:59:00");
-            DateTime index2 = DateTime.Parse("09:00:00");
-
-            if (!first_index && index1 <= t_now)
-            {
-                first_index = true;
-                WriteLog_System($"[INDEX/{t_now}] : {Foreign.Text}/{kospi_index.Text}/{kosdaq_index.Text}/{dow_index.Text}/{sp_index.Text}/{nasdaq_index.Text}\n");
-                telegram_message($"[INDEX/{t_now}] : {Foreign.Text}/{kospi_index.Text}/{kosdaq_index.Text}/{dow_index.Text}/{sp_index.Text}/{nasdaq_index.Text}\n");
-            }
-
-            if (!second_index && index2 <= t_now)
-            {
-                second_index = true;
-                WriteLog_System($"[INDEX/{t_now}] : {Foreign.Text}/{kospi_index.Text}/{kosdaq_index.Text}/{dow_index.Text}/{sp_index.Text}/{nasdaq_index.Text}\n");
-                telegram_message($"[INDEX/{t_now}] : {Foreign.Text}/{kospi_index.Text}/{kosdaq_index.Text}/{dow_index.Text}/{sp_index.Text}/{nasdaq_index.Text}\n");
             }
         }
+
+        //-----------------------------------------initial-------------------------------------
+
+        //초기 Table 값 입력
+        private async Task initial_Table()
+        {
+            DataTable dataTable = new DataTable();
+            dataTable.Columns.Add("구분코드", typeof(string));
+            dataTable.Columns.Add("편입", typeof(string)); // '편입' '이탈'
+            dataTable.Columns.Add("상태", typeof(string)); // '대기' '매수중 '매수완료' '매도중' '매도완료'
+            dataTable.Columns.Add("종목코드", typeof(string));
+            dataTable.Columns.Add("종목명", typeof(string));
+            dataTable.Columns.Add("현재가", typeof(string)); // + - 부호를 통해 매수호가인지 매도 호가인지 현재가인지 파악한다.
+            dataTable.Columns.Add("거래량", typeof(string));
+            dataTable.Columns.Add("편입상태", typeof(string));
+            dataTable.Columns.Add("편입가", typeof(string));
+            dataTable.Columns.Add("매도가", typeof(string));
+            dataTable.Columns.Add("수익률", typeof(string));
+            dataTable.Columns.Add("보유수량", typeof(string)); //보유수량
+            dataTable.Columns.Add("조건식", typeof(string));
+            dataTable.Columns.Add("편입시각", typeof(string));
+            dataTable.Columns.Add("이탈시각", typeof(string));
+            dataTable.Columns.Add("매수시각", typeof(string));
+            dataTable.Columns.Add("매도시각", typeof(string));
+            dataTable.Columns.Add("주문번호", typeof(string));
+            dataTable.Columns.Add("상한가", typeof(string)); //상한가 => 시장가 계산용
+            dtCondStock = dataTable;
+            dataGridView1.DataSource = dtCondStock;
+
+            DataTable dataTable2 = new DataTable();
+            dataTable2.Columns.Add("구분코드", typeof(string));
+            dataTable2.Columns.Add("종목코드", typeof(string)); //고정
+            dataTable2.Columns.Add("종목명", typeof(string)); //고정
+            dataTable2.Columns.Add("현재가", typeof(string)); //실시간 변경
+            dataTable2.Columns.Add("보유수량", typeof(string)); //고정
+            dataTable2.Columns.Add("평균단가", typeof(string)); //고정
+            dataTable2.Columns.Add("평가금액", typeof(string));
+            dataTable2.Columns.Add("수익률", typeof(string)); //실시간 변경
+            dataTable2.Columns.Add("손익금액", typeof(string));
+            dataTable2.Columns.Add("체결수량", typeof(string)); //고정
+            dtCondStock_hold = dataTable2;
+            dataGridView2.DataSource = dtCondStock_hold;
+
+            DataTable dataTable3 = new DataTable();
+            dataTable3.Columns.Add("구분코드", typeof(string));
+            dataTable3.Columns.Add("종목번호", typeof(string));
+            dataTable3.Columns.Add("종목명", typeof(string));
+            dataTable3.Columns.Add("주문번호", typeof(string));
+            dataTable3.Columns.Add("매매구분", typeof(string));
+            dataTable3.Columns.Add("주문구분", typeof(string));
+            dataTable3.Columns.Add("주문수량", typeof(string));
+            dataTable3.Columns.Add("체결수량", typeof(string));
+            dataTable3.Columns.Add("체결단가", typeof(string));
+            dtCondStock_Transaction = dataTable3;
+            dataGridView3.DataSource = dtCondStock_Transaction;
+
+        }
+
+        //초기선언
+        private async Task initial_load()
+        {
+            CpCybos = new CPUTILLib.CpCybos();
+            CpTdUtil = new CPTRADELib.CpTdUtil();
+            CpSvrNew7224 = new CPSYSDIBLib.CpSvrNew7224(); //외국인선물
+            cpFuture = new CPUTILLib.CpFutureCode(); //코스피 선물옵션
+            cpKFuture = new CPUTILLib.CpKFutureCode(); //코스닥선물옵션
+            FutOptChart = new CPSYSDIBLib.FutOptChart(); //선물옵션차트
+            CpUsCode = new CPUTILLib.CpUsCode(); //해외지수
+            CpTd6033 = new CPTRADELib.CpTd6033(); //계좌별 D+2 예수금 현황
+            CpTdNew5331B = new  CPTRADELib.CpTdNew5331B();//계좌별 매도 가능 수량
+            CpTd6032 = new CPTRADELib.CpTd6032();//매도실현손익(제세금, 수수료 포함)
+            CpTd5341 = new CPTRADELib.CpTd5341(); //매매내역
+            CpUsCode = new CPUTILLib.CpUsCode(); //해외지수
+            CpFore8312 = new DSCBO1Lib.CpFore8312(); //해외지수 수신
+            CssStgList = new CPSYSDIBLib.CssStgList(); //조건식 받기
+            //CssWatchStgControl = new CPSYSDIBLib.CssWatchStgControl(); // 실시간 조건식 등록 및 해제
+            CssStgFind = new CPSYSDIBLib.CssStgFind(); //초기 종목 검색 리스트
+            MarketEye = new CPSYSDIBLib.MarketEye(); //초기 종목 검색 정보
+            CssWatchStgSubscribe = new CPSYSDIBLib.CssWatchStgSubscribe(); // 일련번호 받기
+            CssAlert = new CPSYSDIBLib.CssAlert(); // 종목 편출입
+            CssAlert.Received += new CPSYSDIBLib._ISysDibEvents_ReceivedEventHandler(stock_in_out);
+            StockCur = new DSCBO1Lib.StockCur(); // 실시간 종목 시세(관심종목)
+            StockCur.Received += new DSCBO1Lib._IDibEvents_ReceivedEventHandler(Stock_real_price);
+            //
+            CpTd0311 = new CPTRADELib.CpTd0311(); //현금주문
+            CpTd0322 = new CPTRADELib.CpTd0322(); //시간외종가
+            CpTd0386 = new CPTRADELib.CpTd0386(); //시간외단일가
+                                              //
+            CpConclusion = new DSCBO1Lib.CpConclusion(); //실시간 체결 내역
+            CpConclusion.Received += new DSCBO1Lib._IDibEvents_ReceivedEventHandler(Trade_Check);
+            //
+            Checked_Trade_Init = false;
+        }
+
+        //초기 설정 변수
+        private string sell_condtion_method_after;
+
+        //초기 설정 반영
+        public async Task initial_allow()
+        {
+            string[] mode = { "지정가", "시장가" };
+            string[] hoo = { "5호가", "4호가", "3호가", "2호가", "1호가", "현재가", "시장가", "-1호가", "-2호가", "-3호가", "-4호가", "-5호가" };
+            string[] hoo2 = { "5호가", "4호가", "3호가", "2호가", "1호가", "현재가", "-1호가", "-2호가", "-3호가", "-4호가", "-5호가" };
+
+            //초기 세팅
+            acc_text.Text = utility.setting_account_number;
+            acc_isa_text.Text = utility.setting_account_number;
+            total_money.Text = string.Format("{0:#,##0}", Convert.ToDecimal(utility.initial_balance));
+            total_money_isa.Text = string.Format("{0:#,##0}", Convert.ToDecimal(utility.initial_balance));
+            Current_User_money.Text = "0";
+            Current_User_money_isa.Text = "0";
+            User_money.Text = "0";
+            User_money_isa.Text = "0";
+            max_hoid.Text = "0/0";
+            //
+            if (utility.buy_INDEPENDENT || utility.buy_DUAL)
+            {
+                maxbuy_acc.Text = string.Concat(Enumerable.Repeat("0/", utility.Fomula_list_buy_text.Split(',').Length)) + utility.maxbuy_acc;
+            }
+            else
+            {
+                maxbuy_acc.Text = "0/" + utility.maxbuy_acc;
+            }
+            //
+            User_id.Text = utility.real_id;
+            operation_start.Text = utility.market_start_time;
+            operation_stop.Text = utility.market_end_time;
+            search_start.Text = utility.buy_condition_start;
+            search_stop.Text = utility.buy_condition_end;
+            clear_sell.Text = Convert.ToString(utility.clear_sell);
+            clear_sell_time.Text = utility.clear_sell_start;
+            profit.Text = utility.profit_percent_text;
+            loss.Text = utility.loss_percent_text;
+            buy_condition.Text = utility.Fomula_list_buy_text;
+            buy_condtion_method.Text = mode[utility.buy_set1] + "/" + hoo[utility.buy_set2];
+            sell_condtion.Text = utility.Fomula_list_sell_text;
+            sell_condtion_method.Text = mode[utility.sell_set1] + "/" + hoo[utility.sell_set2];
+            sell_condtion_method_after = mode[utility.sell_set1_after] + "/" + hoo2[utility.sell_set2_after];
+
+            //초기세팅2
+            all_profit.Text = "0";
+            all_profit_percent.Text = "00.00%";
+            all_profit_isa.Text = "0";
+            all_profit_percent_isa.Text = "00.00%";
+            //today_tax.Text = "0";
+            today_profit_percent_tax.Text = "00.00%";
+            today_profit_tax.Text = "0";
+            today_profit_percent_tax_isa.Text = "00.00%";
+            today_profit_tax_isa.Text = "0";
+            //today_profit_percent.Text = "00.00%";
+            //today_profit.Text = "0";
+
+            Foreign.Text = "-";
+            kospi_index.Text = "-";
+            kosdaq_index.Text = "-";
+            dow_index.Text = "-";
+            sp_index.Text = "-";
+            nasdaq_index.Text = "-";
+
+            //초기세팅4
+            if (utility.buy_OR)
+            {
+                trading_mode.Text = "OR_모드";
+            }
+            else if (utility.buy_AND)
+            {
+                trading_mode.Text = "AND_모드";
+            }
+            else
+            {
+                trading_mode.Text = "독립_모드";
+            }
+
+            //KIS
+            KIS_RUN.Text = Convert.ToString(utility.KIS_Allow); //사용여부
+            KIS_Independent.Text = Convert.ToString(utility.KIS_Independent);
+            KIS_Account_Number.Text = utility.KIS_Account;
+            KIS_N.Text = utility.KIS_amount; //N등분
+            KIS_ACCOUNT.Text = "0";//예수금
+            KIS_Profit.Text = "0";
+
+            //
+            WriteLog_System("세팅 반영 완료\n");
+            telegram_message("세팅 반영 완료\n");
+        }        
 
         //------------------------------------Login---------------------------------
 
@@ -905,11 +883,9 @@ namespace WindowsFormsApp1
             CssAlert.Subscribe(); //실시간 편출입 받기
             CpConclusion.Subscribe(); //실시간 체결 등록
 
-            //
-            timer2.Start(); //체결 내역 업데이트 - 200ms
+            System.Threading.Thread.Sleep(200);
 
-            //
-            timer3.Start(); //편입 종목 감시 - 200ms
+            timer2.Start();
         }
 
         //계좌번호목록(마스터계좌)
@@ -1920,6 +1896,449 @@ namespace WindowsFormsApp1
             }
         }
 
+        //------------------------------------조건식 등록 절차---------------------------------
+
+        //조건식 조회(조건식이 있어야 initial 작동 / initial을 통해 계좌를 받아와야 GetCashInfo)
+        class ConditionInfo
+        {
+            public string Index { get; set; }
+            public string Name { get; set; }
+            public DateTime? LastRequestTime { get; set; }
+        }
+
+        private List<ConditionInfo> conditionInfo = new List<ConditionInfo>();
+
+        private void Condition_load()
+        {
+            CssStgList.SetInputValue(0, '1');
+            //
+            int result = CssStgList.BlockRequest();
+            //
+            if (result == 0)
+            {
+                List<String> condi_tmp = new List<string>();
+                //초기화
+                conditionInfo.Clear();
+                //
+                for (int i = 0; i < Convert.ToInt32(CssStgList.GetHeaderValue(0)); i++)
+                {
+                    string index_tmp = CssStgList.GetDataValue(1, i); //전략ID
+                    string name_tmp = CssStgList.GetDataValue(0, i); //전략명
+                    conditionInfo.Add(new ConditionInfo
+                    {
+                        Index = index_tmp,
+                        Name = name_tmp
+                    });
+                    condi_tmp.Add(index_tmp + "^" + name_tmp);
+                }
+                //
+                WriteLog_System("조건식 조회 성공\n");
+                arrCondition = condi_tmp.ToArray();
+            }
+        }
+
+        //------------------------------------계좌 탐색 및 조건식 등록 절차 실행---------------------------------
+
+        private bool isRunned2 = false;
+
+        bool first_index = false;
+        bool second_index = false;
+
+        private void condition_spider(object sender, EventArgs e)
+        {
+            //운영시간 확인
+            DateTime t_now = DateTime.Now;
+            DateTime t_start = DateTime.Parse(utility.market_start_time);
+            DateTime t_end = DateTime.Parse(utility.market_end_time);
+
+            //메인 동작 실행
+            if (!isRunned2 && t_now >= t_start && t_now <= t_end)
+            {
+                isRunned2 = true;
+
+                auto_allow_check();
+
+                timer3.Start(); //체결 내역 업데이트 - 200ms
+
+                timer4.Start(); //편입 종목 감시 - 200ms
+
+            }
+            else if (isRunned2 && t_now > t_end)
+            {
+                isRunned2 = false;
+                real_time_stop(true);
+            }
+
+            //인덱스전송
+            DateTime index1 = DateTime.Parse("08:59:00");
+            DateTime index2 = DateTime.Parse("09:00:00");
+
+            if (!first_index && index1 <= t_now)
+            {
+                first_index = true;
+                WriteLog_System($"[INDEX/{t_now}] : {Foreign.Text}/{kospi_index.Text}/{kosdaq_index.Text}/{dow_index.Text}/{sp_index.Text}/{nasdaq_index.Text}\n");
+                telegram_message($"[INDEX/{t_now}] : {Foreign.Text}/{kospi_index.Text}/{kosdaq_index.Text}/{dow_index.Text}/{sp_index.Text}/{nasdaq_index.Text}\n");
+            }
+
+            if (!second_index && index2 <= t_now)
+            {
+                second_index = true;
+                WriteLog_System($"[INDEX/{t_now}] : {Foreign.Text}/{kospi_index.Text}/{kosdaq_index.Text}/{dow_index.Text}/{sp_index.Text}/{nasdaq_index.Text}\n");
+                telegram_message($"[INDEX/{t_now}] : {Foreign.Text}/{kospi_index.Text}/{kosdaq_index.Text}/{dow_index.Text}/{sp_index.Text}/{nasdaq_index.Text}\n");
+            }
+        }
+
+        //------------------------------실시간 실행 초기 시작 모음-------------------------------------
+
+        //
+        private void auto_allow_check()
+        {
+            //계좌 없으면 이탈
+            if (!account.Contains(utility.setting_account_number))
+            {
+                WriteLog_System("계좌번호 재설정 요청\n");
+                telegram_message("계좌번호 재설정 요청\n");
+                WriteLog_System("자동 매매 정지\n");
+                telegram_message("자동 매매 정지\n");
+                return;
+            }
+
+            int condition_length = utility.Fomula_list_buy_text.Split(',').Length;
+
+            //조건식 없으면 이탈
+            if (utility.buy_condition && condition_length == 0)
+            {
+                WriteLog_System("설정된 매수 조건식 없음\n");
+                telegram_message("설정된 매수 조건식 없음\n");
+                WriteLog_System("자동 매매 정지\n");
+                telegram_message("자동 매매 정지\n");
+                return;
+            }
+
+            int condition_length2 = utility.Fomula_list_sell_text == "9999" ? 0 : 1;
+
+            //조건식 없으면 이탈
+            if (utility.sell_condition && condition_length2 == 0)
+            {
+                WriteLog_System("설정된 매도 조건식 없음\n");
+                telegram_message("설정된 매도 조건식 없음\n");
+                WriteLog_System("자동 매매 정지\n");
+                telegram_message("자동 매매 정지\n");
+                return;
+            }
+
+            //AND 모드에서는 조건식이 2개 이상이어야 한다.
+            if (utility.buy_AND && condition_length < 2)
+            {
+                WriteLog_System("AND 모드 조건식 2개 이상 필요\n");
+                telegram_message("AND 모드 조건식 2개 이상 필요\n");
+                WriteLog_System("자동 매매 정지\n");
+                telegram_message("자동 매매 정지\n");
+                return;
+            }
+
+            //Dual 모드에서는 조건식이 2개 이상이어야 한다.
+            if (utility.buy_DUAL && condition_length != 2)
+            {
+                WriteLog_System("DUAL 모드 조건식 2개 필요\n");
+                telegram_message("DUAL 모드 조건식 2개 필요\n");
+                WriteLog_System("자동 매매 정지\n");
+                telegram_message("자동 매매 정지\n");
+                return;
+            }
+
+            //자동 설정 여부
+            if (utility.auto_trade_allow)
+            {
+                auto_allow();
+            }
+            else
+            {
+                WriteLog_System("자동 매매 실행 미설정\n");
+                telegram_message("자동 매매 실행 미설정\n");
+            }
+        }
+
+        //초기 매매 설정
+        public void auto_allow()
+        {
+            //DUAL 모드에서 계좌별 조건식 설정
+            if (utility.buy_DUAL)
+            {
+                string[] tmp = utility.Fomula_list_buy_text.Split(',');
+                Master_Condition = tmp[0].Split('^')[1];
+                ISA_Condition = tmp[1].Split('^')[1];
+            }
+
+            //자동 매수 조건식 설정 여부
+            if (utility.buy_condition)
+            {
+                real_time_search(null, EventArgs.Empty);
+            }
+            else
+            {
+                WriteLog_System("자동 조건식 매수 미설정\n");
+                telegram_message("자동 조건식 매수 미설정\n");
+            }
+
+            //자동 매도 조건식 설정 여부
+            if (utility.sell_condition)
+            {
+                WriteLog_System("실시간 조건식 매도 시작\n");
+                telegram_message("실시간 조건식 매도 시작\n");
+                real_time_search(null, EventArgs.Empty);
+
+            }
+            else
+            {
+                WriteLog_System("자동 조건식 매도 미설정\n");
+                telegram_message("자동 조건식 매도 미설정\n");
+            }
+        }
+
+        //조건식 감시 등록 목록
+        private List<CPSYSDIBLib.CssWatchStgControl> Condition_Profile2 = new List<CPSYSDIBLib.CssWatchStgControl>();
+
+        //매도 전용 조건식 검색
+        private void normal_search(object sender, EventArgs e)
+        {
+            //실시간 검색이 시작되면 '일반 검색'이 불가능해 진다.
+            Real_time_stop_btn.Enabled = true;
+            Real_time_search_btn.Enabled = false;
+
+            //조건식이 로딩되었는지
+            if (string.IsNullOrEmpty(utility.Fomula_list_sell_text))
+            {
+                WriteLog_System("매도 조건식 선택 요청\n");
+                telegram_message("매도 조건식 선택 요청\n");
+                WriteLog_System("실시간 매매 중단\n");
+                telegram_message("실시간 매매 중단\n");
+                Real_time_stop_btn.Enabled = false;
+                Real_time_search_btn.Enabled = true;
+                return;
+            }
+
+            //검색된 조건식이 있을시
+            string[] condition = utility.Fomula_list_sell_text.Split('^');
+            var condInfo = conditionInfo.Find(f => f.Index == condition[0] && f.Name == condition[1]);
+
+            //로드된 조건식 목록에 설정된 조건식이 존재하지 않는 경우 이탈
+            if (condInfo == null)
+            {
+                WriteLog_System("[실시간매도조건식/미존재/" + utility.Fomula_list_sell_text + "] : HTS 조건식 리스트 미포함\n");
+                telegram_message("[실시간매도조건식/미존재/" + utility.Fomula_list_sell_text + "] : HTS 조건식 리스트 미포함\n");
+                Real_time_stop_btn.Enabled = false;
+                Real_time_search_btn.Enabled = true;
+                return;
+            }
+
+            //조건식에 대한 검색은 60초 마다 가능
+            if (condInfo.LastRequestTime != null && condInfo.LastRequestTime >= DateTime.Now.AddSeconds(-60))
+            {
+                int second = 60 - (DateTime.Now - condInfo.LastRequestTime.Value).Seconds;
+                WriteLog_System($"{second}초 후에 조회 가능합니다.\n");
+                Real_time_stop_btn.Enabled = false;
+                Real_time_search_btn.Enabled = true;
+                return;
+            }
+
+            //마지막 조건식 검색 시각 업데이트
+            condInfo.LastRequestTime = DateTime.Now;
+
+            //실시간 조건식 등록 및 해제
+            CPSYSDIBLib.CssWatchStgControl CssWatchStgControl = new CPSYSDIBLib.CssWatchStgControl();
+            Condition_Profile2.Add(CssWatchStgControl);
+
+            //일련번호
+            int condition_serial = condition_sub_code(condition[0]);
+
+            //종목 검색 요청
+            CssWatchStgControl.SetInputValue(0, condition[0]); //전략ID
+            CssWatchStgControl.SetInputValue(1, condition_serial); //감시 일련번호
+            CssWatchStgControl.SetInputValue(2, '1'); //감시시작
+
+            System.Threading.Thread.Sleep(200);
+
+            int result = CssWatchStgControl.BlockRequest();
+            //
+            if (result == 0)
+            {
+                int result_type = Convert.ToInt32(CssWatchStgControl.GetHeaderValue(0));
+                if (result_type == 0)
+                {
+                    WriteLog_System($"매도[조건식/등록/{condition[1]}] : 초기상태 \n");
+                    telegram_message($"[매도조건식/등록/{condition[1]}] : 초기상태 \n");
+                    WriteLog_System($"[매도조건식/등록/{condition[1]}] : 메시지({CssWatchStgControl.GetDibMsg1()})\n");
+                }
+                else if (result_type == 1)
+                {
+                    WriteLog_System($"[매도조건식/등록/{condition[1]}] : 감시중 \n");
+                    telegram_message($"[매도조건식/등록/{condition[1]}] : 감시중 \n");
+                    WriteLog_System($"[매도조건식/등록/{condition[1]}] : 메시지({CssWatchStgControl.GetDibMsg1()})\n");
+                }
+                else if (result_type == 2)
+                {
+                    WriteLog_System($"[매도조건식/등록/{condition[1]}] : 감시중단 \n");
+                    telegram_message($"[매도조건식/등록/{condition[1]}] : 감시중단 \n");
+                    WriteLog_System($"[매도조건식/등록/{condition[1]}] : 메시지({CssWatchStgControl.GetDibMsg1()})\n");
+                }
+                else
+                {
+                    WriteLog_System($"[매도조건식/등록/{condition[1]}] : 등록취소 \n");
+                    telegram_message($"[매도조건식/등록/{condition[1]}] : 등록취소 \n");
+                    WriteLog_System($"[매도조건식/등록/{condition[1]}] : 메시지({CssWatchStgControl.GetDibMsg1()})\n");
+                }
+            }
+            else
+            {
+                WriteLog_System("[실시간조건식/등록실패/" + utility.Fomula_list_sell_text + "] : 고유번호 및 이름 확인\n");
+                telegram_message("[실시간조건식/등록실패/" + utility.Fomula_list_sell_text + "] : 고유번호 및 이름 확인\n");
+                WriteLog_System($"[조건식/등록/{condition[1]}] : 메시지({CssWatchStgControl.GetDibMsg1()})\n");
+            }
+        }
+
+        //조건식 감시 등록 목록
+        private List<CPSYSDIBLib.CssWatchStgControl> Condition_Profile = new List<CPSYSDIBLib.CssWatchStgControl>();
+
+        //실시간 검색(조건식 로드 후 사용가능하다)
+        private void real_time_search(object sender, EventArgs e)
+        {
+            //실시간 검색이 시작되면 '일반 검색'이 불가능해 진다.
+            Real_time_stop_btn.Enabled = true;
+            Real_time_search_btn.Enabled = false;
+
+            //조건식이 로딩되었는지
+            if (string.IsNullOrEmpty(utility.Fomula_list_buy_text))
+            {
+                WriteLog_System("매수 조건식 선택 요청\n");
+                telegram_message("매수 조건식 선택 요청\n");
+                WriteLog_System("실시간 매매 중단\n");
+                telegram_message("실시간 매매 중단\n");
+                Real_time_stop_btn.Enabled = false;
+                Real_time_search_btn.Enabled = true;
+                return;
+            }
+
+            foreach (string Fomula in utility.Fomula_list_buy_text.Split(','))
+            {
+                //검색된 조건식이 있을시
+                string[] condition = Fomula.Split('^');
+                var condInfo = conditionInfo.Find(f => f.Index == condition[0] && f.Name == condition[1]);
+
+                //로드된 조건식 목록에 설정된 조건식이 존재하지 않는 경우 이탈
+                if (condInfo == null)
+                {
+                    WriteLog_System("[실시간조건식/미존재/" + Fomula + "] : HTS 조건식 리스트 미포함\n");
+                    telegram_message("[실시간조건식/미존재/" + Fomula + "] : HTS 조건식 리스트 미포함\n");
+                    Real_time_stop_btn.Enabled = false;
+                    Real_time_search_btn.Enabled = true;
+                    continue;
+                }
+
+                //조건식에 대한 검색은 60초 마다 가능
+                if (condInfo.LastRequestTime != null && condInfo.LastRequestTime >= DateTime.Now.AddSeconds(-60))
+                {
+                    int second = 60 - (DateTime.Now - condInfo.LastRequestTime.Value).Seconds;
+                    WriteLog_System($"{second}초 후에 조회 가능합니다.\n");
+                    Real_time_stop_btn.Enabled = false;
+                    Real_time_search_btn.Enabled = true;
+                    return;
+                }
+
+                //마지막 조건식 검색 시각 업데이트
+                condInfo.LastRequestTime = DateTime.Now;
+
+                //실시간 조건식 등록 및 해제
+                CPSYSDIBLib.CssWatchStgControl CssWatchStgControl = new CPSYSDIBLib.CssWatchStgControl();
+                Condition_Profile.Add(CssWatchStgControl);
+
+                //초기종목받기
+                stock_initial(condition[0], condition[1]);
+
+                //일련번호
+                int condition_serial = condition_sub_code(condition[0]);
+
+                //종목 검색 요청
+                CssWatchStgControl.SetInputValue(0, condition[0]); //전략ID
+                CssWatchStgControl.SetInputValue(1, condition_serial); //감시 일련번호
+                CssWatchStgControl.SetInputValue(2, '1'); //감시시작
+
+                System.Threading.Thread.Sleep(200);
+
+                int result = CssWatchStgControl.BlockRequest();
+                //
+                if (result == 0)
+                {
+                    int result_type = Convert.ToInt32(CssWatchStgControl.GetHeaderValue(0));
+                    if (result_type == 0)
+                    {
+                        WriteLog_System($"[조건식/등록/{condition[1]}] : 초기상태 \n");
+                        telegram_message($"[조건식/등록/{condition[1]}] : 초기상태 \n");
+                        WriteLog_System($"[조건식/등록/{condition[1]}] : 메시지({CssWatchStgControl.GetDibMsg1()})\n");
+                    }
+                    else if (result_type == 1)
+                    {
+                        WriteLog_System($"[조건식/등록/{condition[1]}] : 감시중 \n");
+                        telegram_message($"[조건식/등록/{condition[1]}] : 감시중 \n");
+                        WriteLog_System($"[조건식/등록/{condition[1]}] : 메시지({CssWatchStgControl.GetDibMsg1()})\n");
+                    }
+                    else if (result_type == 2)
+                    {
+                        WriteLog_System($"[조건식/등록/{condition[1]}] : 감시중단 \n");
+                        telegram_message($"[조건식/등록/{condition[1]}] : 감시중단 \n");
+                        WriteLog_System($"[조건식/등록/{condition[1]}] : 메시지({CssWatchStgControl.GetDibMsg1()})\n");
+                    }
+                    else
+                    {
+                        WriteLog_System($"[조건식/등록/{condition[1]}] : 등록취소 \n");
+                        telegram_message($"[조건식/등록/{condition[1]}] : 등록취소 \n");
+                        WriteLog_System($"[조건식/등록/{condition[1]}] : 메시지({CssWatchStgControl.GetDibMsg1()})\n");
+                    }
+                }
+                else
+                {
+                    WriteLog_System("[실시간조건식/등록실패/" + Fomula + "] : 고유번호 및 이름 확인\n");
+                    telegram_message("[실시간조건식/등록실패/" + Fomula + "] : 고유번호 및 이름 확인\n");
+                    WriteLog_System($"[조건식/등록/{condition[1]}] : 메시지({CssWatchStgControl.GetDibMsg1()})\n");
+                }
+            }
+        }
+
+        //-----------------------실시간 조건 검색------------------------------
+
+        //초기 종목 검색
+        //https://money2.daishin.com/e5/mboard/ptype_basic/HTS_Plus_Helper/DW_Basic_Read.aspx?boardseq=284&seq=238&page=1&searchString=CssStgFind&p=&v=&m=
+        private void stock_initial(string condition_code, string condition_name)
+        {
+            CssStgFind.SetInputValue(0, condition_code); //전략ID
+            CssStgFind.SetInputValue(1, 'N'); //전략ID
+
+            System.Threading.Thread.Sleep(200);
+            //
+            int result = CssStgFind.BlockRequest();
+            //
+            if (result == 0)
+            {
+                int initial_num = Convert.ToInt32(CssStgFind.GetHeaderValue(1));
+                //
+                if (initial_num == 0)
+                {
+                    WriteLog_Stock("[실시간조건식/시작/" + condition_name + "] : 초기 검색 종목 없음\n");
+                    telegram_message("[실시간조건식/시작/" + condition_name + "] : 초기 검색 종목 없음\n");
+                    return;
+                }
+                //
+                WriteLog_Stock("[실시간조건식/시작/" + condition_name + "] : 초기 검색 종목 존재\n");
+                telegram_message("[실시간조건식/시작/" + condition_name + "] : 초기 검색 종목 존재\n");
+                //
+                for (int i = 0; i < initial_num; i++)
+                {
+                    string code = Convert.ToString(CssStgFind.GetDataValue(0, i));
+                    Stock_info(condition_name, code, "0", code, "");
+                }
+            }
+        }
+
         //------------------------------------종목 정보 받기 및 시세 등록---------------------------------
 
         //종목 정보 받기(전일, 초기, 편출입)
@@ -2226,399 +2645,7 @@ namespace WindowsFormsApp1
             }
         }
 
-        //------------------------------------조건식 등록 절차---------------------------------
-
-            //조건식 조회(조건식이 있어야 initial 작동 / initial을 통해 계좌를 받아와야 GetCashInfo)
-        class ConditionInfo
-        {
-            public string Index { get; set; }
-            public string Name { get; set; }
-            public DateTime? LastRequestTime { get; set; }
-        }
-
-        private List<ConditionInfo> conditionInfo = new List<ConditionInfo>();
-
-        private void Condition_load()
-        {
-            CssStgList.SetInputValue(0, '1');
-            //
-            int result = CssStgList.BlockRequest();
-            //
-            if (result == 0)
-            {
-                List<String> condi_tmp = new List<string>();
-                //초기화
-                conditionInfo.Clear();
-                //
-                for (int i = 0; i < Convert.ToInt32(CssStgList.GetHeaderValue(0)); i++)
-                {
-                    string index_tmp = CssStgList.GetDataValue(1, i); //전략ID
-                    string name_tmp = CssStgList.GetDataValue(0, i); //전략명
-                    conditionInfo.Add(new ConditionInfo
-                    {
-                        Index = index_tmp,
-                        Name = name_tmp
-                    });
-                    condi_tmp.Add(index_tmp + "^" + name_tmp);
-                }
-                //
-                WriteLog_System("조건식 조회 성공\n");
-                arrCondition = condi_tmp.ToArray();
-            }
-            //
-            auto_allow_check();
-        }
-
-        //
-        private void auto_allow_check()
-        {
-            //계좌 없으면 이탈
-            if (!account.Contains(utility.setting_account_number))
-            {
-                WriteLog_System("계좌번호 재설정 요청\n");
-                telegram_message("계좌번호 재설정 요청\n");
-                WriteLog_System("자동 매매 정지\n");
-                telegram_message("자동 매매 정지\n");
-                return;
-            }
-
-            int condition_length = utility.Fomula_list_buy_text.Split(',').Length;
-
-            //조건식 없으면 이탈
-            if (utility.buy_condition && condition_length == 0)
-            {
-                WriteLog_System("설정된 매수 조건식 없음\n");
-                telegram_message("설정된 매수 조건식 없음\n");
-                WriteLog_System("자동 매매 정지\n");
-                telegram_message("자동 매매 정지\n");
-                return;
-            }
-
-            int condition_length2 = utility.Fomula_list_sell_text == "9999" ? 0 : 1;
-
-            //조건식 없으면 이탈
-            if (utility.sell_condition && condition_length2 == 0)
-            {
-                WriteLog_System("설정된 매도 조건식 없음\n");
-                telegram_message("설정된 매도 조건식 없음\n");
-                WriteLog_System("자동 매매 정지\n");
-                telegram_message("자동 매매 정지\n");
-                return;
-            }
-
-            //AND 모드에서는 조건식이 2개 이상이어야 한다.
-            if (utility.buy_AND && condition_length < 2)
-            {
-                WriteLog_System("AND 모드 조건식 2개 이상 필요\n");
-                telegram_message("AND 모드 조건식 2개 이상 필요\n");
-                WriteLog_System("자동 매매 정지\n");
-                telegram_message("자동 매매 정지\n");
-                return;
-            }
-
-            //Dual 모드에서는 조건식이 2개 이상이어야 한다.
-            if (utility.buy_DUAL && condition_length != 2)
-            {
-                WriteLog_System("DUAL 모드 조건식 2개 필요\n");
-                telegram_message("DUAL 모드 조건식 2개 필요\n");
-                WriteLog_System("자동 매매 정지\n");
-                telegram_message("자동 매매 정지\n");
-                return;
-            }
-
-            //자동 설정 여부
-            if (utility.auto_trade_allow)
-            {
-                auto_allow();
-            }
-            else
-            {
-                WriteLog_System("자동 매매 실행 미설정\n");
-                telegram_message("자동 매매 실행 미설정\n");
-            }
-        }
-
-        //초기 매매 설정
-        public void auto_allow()
-        {
-            //DUAL 모드에서 계좌별 조건식 설정
-            if (utility.buy_DUAL)
-            {
-                string[] tmp = utility.Fomula_list_buy_text.Split(',');
-                Master_Condition = tmp[0].Split('^')[1];
-                ISA_Condition = tmp[1].Split('^')[1];
-            }
-
-            //자동 매수 조건식 설정 여부
-            if (utility.buy_condition)
-            {
-                real_time_search(null, EventArgs.Empty);
-            }
-            else
-            {
-                WriteLog_System("자동 조건식 매수 미설정\n");
-                telegram_message("자동 조건식 매수 미설정\n");
-            }
-
-            //자동 매도 조건식 설정 여부
-            if (utility.sell_condition)
-            {
-                WriteLog_System("실시간 조건식 매도 시작\n");
-                telegram_message("실시간 조건식 매도 시작\n");
-                real_time_search(null, EventArgs.Empty);
-
-            }
-            else
-            {
-                WriteLog_System("자동 조건식 매도 미설정\n");
-                telegram_message("자동 조건식 매도 미설정\n");
-            }
-        }
-
-        //------------------------------실시간 실행 초기 시작 모음-------------------------------------
-
-        //조건식 감시 등록 목록
-        private List<CPSYSDIBLib.CssWatchStgControl> Condition_Profile2 = new List<CPSYSDIBLib.CssWatchStgControl>();
-
-        //매도 전용 조건식 검색
-        private void normal_search(object sender, EventArgs e)
-        {
-            //실시간 검색이 시작되면 '일반 검색'이 불가능해 진다.
-            Real_time_stop_btn.Enabled = true;
-            Real_time_search_btn.Enabled = false;
-
-            //조건식이 로딩되었는지
-            if (string.IsNullOrEmpty(utility.Fomula_list_sell_text))
-            {
-                WriteLog_System("매도 조건식 선택 요청\n");
-                telegram_message("매도 조건식 선택 요청\n");
-                WriteLog_System("실시간 매매 중단\n");
-                telegram_message("실시간 매매 중단\n");
-                Real_time_stop_btn.Enabled = false;
-                Real_time_search_btn.Enabled = true;
-                return;
-            }
-
-            //검색된 조건식이 있을시
-            string[] condition = utility.Fomula_list_sell_text.Split('^');
-            var condInfo = conditionInfo.Find(f => f.Index == condition[0] && f.Name == condition[1]);
-
-            //로드된 조건식 목록에 설정된 조건식이 존재하지 않는 경우 이탈
-            if (condInfo == null)
-            {
-                WriteLog_System("[실시간매도조건식/미존재/" + utility.Fomula_list_sell_text + "] : HTS 조건식 리스트 미포함\n");
-                telegram_message("[실시간매도조건식/미존재/" + utility.Fomula_list_sell_text + "] : HTS 조건식 리스트 미포함\n");
-                Real_time_stop_btn.Enabled = false;
-                Real_time_search_btn.Enabled = true;
-                return;
-            }
-
-            //조건식에 대한 검색은 60초 마다 가능
-            if (condInfo.LastRequestTime != null && condInfo.LastRequestTime >= DateTime.Now.AddSeconds(-60))
-            {
-                int second = 60 - (DateTime.Now - condInfo.LastRequestTime.Value).Seconds;
-                WriteLog_System($"{second}초 후에 조회 가능합니다.\n");
-                Real_time_stop_btn.Enabled = false;
-                Real_time_search_btn.Enabled = true;
-                return;
-            }
-
-            //마지막 조건식 검색 시각 업데이트
-            condInfo.LastRequestTime = DateTime.Now;
-
-            //실시간 조건식 등록 및 해제
-            CPSYSDIBLib.CssWatchStgControl CssWatchStgControl = new CPSYSDIBLib.CssWatchStgControl();
-            Condition_Profile2.Add(CssWatchStgControl);
-
-            //일련번호
-            int condition_serial = condition_sub_code(condition[0]);
-
-            //종목 검색 요청
-            CssWatchStgControl.SetInputValue(0, condition[0]); //전략ID
-            CssWatchStgControl.SetInputValue(1, condition_serial); //감시 일련번호
-            CssWatchStgControl.SetInputValue(2, '1'); //감시시작
-
-            System.Threading.Thread.Sleep(200);
-
-            int result = CssWatchStgControl.BlockRequest();
-            //
-            if (result == 0)
-            {
-                int result_type = Convert.ToInt32(CssWatchStgControl.GetHeaderValue(0));
-                if (result_type == 0)
-                {
-                    WriteLog_System($"매도[조건식/등록/{condition[1]}] : 초기상태 \n");
-                    telegram_message($"[매도조건식/등록/{condition[1]}] : 초기상태 \n");
-                    WriteLog_System($"[매도조건식/등록/{condition[1]}] : 메시지({CssWatchStgControl.GetDibMsg1()})\n");
-                }
-                else if (result_type == 1)
-                {
-                    WriteLog_System($"[매도조건식/등록/{condition[1]}] : 감시중 \n");
-                    telegram_message($"[매도조건식/등록/{condition[1]}] : 감시중 \n");
-                    WriteLog_System($"[매도조건식/등록/{condition[1]}] : 메시지({CssWatchStgControl.GetDibMsg1()})\n");
-                }
-                else if (result_type == 2)
-                {
-                    WriteLog_System($"[매도조건식/등록/{condition[1]}] : 감시중단 \n");
-                    telegram_message($"[매도조건식/등록/{condition[1]}] : 감시중단 \n");
-                    WriteLog_System($"[매도조건식/등록/{condition[1]}] : 메시지({CssWatchStgControl.GetDibMsg1()})\n");
-                }
-                else
-                {
-                    WriteLog_System($"[매도조건식/등록/{condition[1]}] : 등록취소 \n");
-                    telegram_message($"[매도조건식/등록/{condition[1]}] : 등록취소 \n");
-                    WriteLog_System($"[매도조건식/등록/{condition[1]}] : 메시지({CssWatchStgControl.GetDibMsg1()})\n");
-                }
-            }
-            else
-            {
-                WriteLog_System("[실시간조건식/등록실패/" + utility.Fomula_list_sell_text + "] : 고유번호 및 이름 확인\n");
-                telegram_message("[실시간조건식/등록실패/" + utility.Fomula_list_sell_text + "] : 고유번호 및 이름 확인\n");
-                WriteLog_System($"[조건식/등록/{condition[1]}] : 메시지({CssWatchStgControl.GetDibMsg1()})\n");
-            }
-        }
-
-        //조건식 감시 등록 목록
-        private List<CPSYSDIBLib.CssWatchStgControl> Condition_Profile = new List<CPSYSDIBLib.CssWatchStgControl>();
-
-        //실시간 검색(조건식 로드 후 사용가능하다)
-        private void real_time_search(object sender, EventArgs e)
-        {
-            //실시간 검색이 시작되면 '일반 검색'이 불가능해 진다.
-            Real_time_stop_btn.Enabled = true;
-            Real_time_search_btn.Enabled = false;
-
-            //조건식이 로딩되었는지
-            if (string.IsNullOrEmpty(utility.Fomula_list_buy_text))
-            {
-                WriteLog_System("매수 조건식 선택 요청\n");
-                telegram_message("매수 조건식 선택 요청\n");
-                WriteLog_System("실시간 매매 중단\n");
-                telegram_message("실시간 매매 중단\n");
-                Real_time_stop_btn.Enabled = false;
-                Real_time_search_btn.Enabled = true;
-                return;
-            }
-
-            foreach (string Fomula in utility.Fomula_list_buy_text.Split(','))
-            {
-                //검색된 조건식이 있을시
-                string[] condition = Fomula.Split('^');
-                var condInfo = conditionInfo.Find(f => f.Index == condition[0] && f.Name == condition[1]);
-
-                //로드된 조건식 목록에 설정된 조건식이 존재하지 않는 경우 이탈
-                if (condInfo == null)
-                {
-                    WriteLog_System("[실시간조건식/미존재/" + Fomula + "] : HTS 조건식 리스트 미포함\n");
-                    telegram_message("[실시간조건식/미존재/" + Fomula + "] : HTS 조건식 리스트 미포함\n");
-                    Real_time_stop_btn.Enabled = false;
-                    Real_time_search_btn.Enabled = true;
-                    continue;
-                }
-
-                //조건식에 대한 검색은 60초 마다 가능
-                if (condInfo.LastRequestTime != null && condInfo.LastRequestTime >= DateTime.Now.AddSeconds(-60))
-                {
-                    int second = 60 - (DateTime.Now - condInfo.LastRequestTime.Value).Seconds;
-                    WriteLog_System($"{second}초 후에 조회 가능합니다.\n");
-                    Real_time_stop_btn.Enabled = false;
-                    Real_time_search_btn.Enabled = true;
-                    return;
-                }
-
-                //마지막 조건식 검색 시각 업데이트
-                condInfo.LastRequestTime = DateTime.Now;
-
-                //실시간 조건식 등록 및 해제
-                CPSYSDIBLib.CssWatchStgControl CssWatchStgControl = new CPSYSDIBLib.CssWatchStgControl();
-                Condition_Profile.Add(CssWatchStgControl);
-
-                //초기종목받기
-                stock_initial(condition[0], condition[1]);
-
-                //일련번호
-                int condition_serial = condition_sub_code(condition[0]);
-
-                //종목 검색 요청
-                CssWatchStgControl.SetInputValue(0, condition[0]); //전략ID
-                CssWatchStgControl.SetInputValue(1, condition_serial); //감시 일련번호
-                CssWatchStgControl.SetInputValue(2, '1'); //감시시작
-
-                System.Threading.Thread.Sleep(200);
-
-                int result = CssWatchStgControl.BlockRequest();
-                //
-                if (result == 0)
-                {
-                    int result_type = Convert.ToInt32(CssWatchStgControl.GetHeaderValue(0));
-                    if (result_type == 0)
-                    {
-                        WriteLog_System($"[조건식/등록/{condition[1]}] : 초기상태 \n");
-                        telegram_message($"[조건식/등록/{condition[1]}] : 초기상태 \n");
-                        WriteLog_System($"[조건식/등록/{condition[1]}] : 메시지({CssWatchStgControl.GetDibMsg1()})\n");
-                    }
-                    else if (result_type == 1)
-                    {
-                        WriteLog_System($"[조건식/등록/{condition[1]}] : 감시중 \n");
-                        telegram_message($"[조건식/등록/{condition[1]}] : 감시중 \n");
-                        WriteLog_System($"[조건식/등록/{condition[1]}] : 메시지({CssWatchStgControl.GetDibMsg1()})\n");
-                    }
-                    else if (result_type == 2)
-                    {
-                        WriteLog_System($"[조건식/등록/{condition[1]}] : 감시중단 \n");
-                        telegram_message($"[조건식/등록/{condition[1]}] : 감시중단 \n");
-                        WriteLog_System($"[조건식/등록/{condition[1]}] : 메시지({CssWatchStgControl.GetDibMsg1()})\n");
-                    }
-                    else
-                    {
-                        WriteLog_System($"[조건식/등록/{condition[1]}] : 등록취소 \n");
-                        telegram_message($"[조건식/등록/{condition[1]}] : 등록취소 \n");
-                        WriteLog_System($"[조건식/등록/{condition[1]}] : 메시지({CssWatchStgControl.GetDibMsg1()})\n");
-                    }
-                }
-                else
-                {
-                    WriteLog_System("[실시간조건식/등록실패/" + Fomula + "] : 고유번호 및 이름 확인\n");
-                    telegram_message("[실시간조건식/등록실패/" + Fomula + "] : 고유번호 및 이름 확인\n");
-                    WriteLog_System($"[조건식/등록/{condition[1]}] : 메시지({CssWatchStgControl.GetDibMsg1()})\n");
-                }
-            }
-        }
-
-        //-----------------------실시간 조건 검색------------------------------
-
-        //초기 종목 검색
-        //https://money2.daishin.com/e5/mboard/ptype_basic/HTS_Plus_Helper/DW_Basic_Read.aspx?boardseq=284&seq=238&page=1&searchString=CssStgFind&p=&v=&m=
-        private void stock_initial(string condition_code, string condition_name)
-        {
-            CssStgFind.SetInputValue(0, condition_code); //전략ID
-            CssStgFind.SetInputValue(1, 'N'); //전략ID
-
-            System.Threading.Thread.Sleep(200);
-            //
-            int result = CssStgFind.BlockRequest();
-            //
-            if (result == 0)
-            {
-                int initial_num = Convert.ToInt32(CssStgFind.GetHeaderValue(1));
-                //
-                if (initial_num == 0)
-                {
-                    WriteLog_Stock("[실시간조건식/시작/" + condition_name + "] : 초기 검색 종목 없음\n");
-                    telegram_message("[실시간조건식/시작/" + condition_name + "] : 초기 검색 종목 없음\n");
-                    return;
-                }
-                //
-                WriteLog_Stock("[실시간조건식/시작/" + condition_name + "] : 초기 검색 종목 존재\n");
-                telegram_message("[실시간조건식/시작/" + condition_name + "] : 초기 검색 종목 존재\n");
-                //
-                for (int i = 0; i < initial_num; i++)
-                {
-                    string code = Convert.ToString(CssStgFind.GetDataValue(0, i));
-                    Stock_info(condition_name, code, "0", code, "") ;
-                }
-            }
-        }
+        //-----------------------종목 편출입------------------------------
 
         //실시간 종목 편입 이탈
         //https://money2.daishin.com/e5/mboard/ptype_basic/HTS_Plus_Helper/DW_Basic_Read.aspx?boardseq=288&seq=241&page=1&searchString=CssAlert&p=&v=&m=      
@@ -4139,7 +4166,8 @@ namespace WindowsFormsApp1
                 CssAlert.Unsubscribe(); //실시간 편출입 해지
                 CpConclusion.Unsubscribe(); //실시간 체결 해지
                 //
-                timer3.Stop();//계좌 탐색 중단
+                timer3.Stop();//체결내역업데이트 중단
+                timer4.Stop();//계좌 탐색 중단
                 //
                 if (minuteTimer != null)
                 {

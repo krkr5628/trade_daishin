@@ -151,64 +151,75 @@ namespace WindowsFormsApp1
             this.groupBox8 = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel17 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel22 = new System.Windows.Forms.TableLayoutPanel();
+            this.type0_all_end = new System.Windows.Forms.TextBox();
+            this.label41 = new System.Windows.Forms.Label();
+            this.type0_all_start = new System.Windows.Forms.TextBox();
+            this.type0_selection_all = new System.Windows.Forms.CheckBox();
+            this.label39 = new System.Windows.Forms.Label();
+            this.label31 = new System.Windows.Forms.Label();
+            this.label32 = new System.Windows.Forms.Label();
+            this.label33 = new System.Windows.Forms.Label();
+            this.label36 = new System.Windows.Forms.Label();
             this.type5_selection_all = new System.Windows.Forms.CheckBox();
             this.type4_selection_all = new System.Windows.Forms.CheckBox();
             this.type3_selection_all = new System.Windows.Forms.CheckBox();
             this.type2_selection_all = new System.Windows.Forms.CheckBox();
+            this.type1_selection_all = new System.Windows.Forms.CheckBox();
+            this.type5_all_start = new System.Windows.Forms.TextBox();
+            this.type4_all_start = new System.Windows.Forms.TextBox();
+            this.type3_all_start = new System.Windows.Forms.TextBox();
+            this.type2_all_start = new System.Windows.Forms.TextBox();
+            this.type1_all_start = new System.Windows.Forms.TextBox();
+            this.type5_all_end = new System.Windows.Forms.TextBox();
+            this.type4_all_end = new System.Windows.Forms.TextBox();
+            this.type3_all_end = new System.Windows.Forms.TextBox();
+            this.type2_all_end = new System.Windows.Forms.TextBox();
+            this.type1_all_end = new System.Windows.Forms.TextBox();
+            this.label30 = new System.Windows.Forms.Label();
             this.label27 = new System.Windows.Forms.Label();
+            this.label35 = new System.Windows.Forms.Label();
+            this.label34 = new System.Windows.Forms.Label();
             this.label28 = new System.Windows.Forms.Label();
             this.label29 = new System.Windows.Forms.Label();
-            this.type2_all_end = new System.Windows.Forms.TextBox();
-            this.type3_all_end = new System.Windows.Forms.TextBox();
-            this.type4_all_end = new System.Windows.Forms.TextBox();
-            this.label30 = new System.Windows.Forms.Label();
-            this.label31 = new System.Windows.Forms.Label();
-            this.label32 = new System.Windows.Forms.Label();
-            this.label33 = new System.Windows.Forms.Label();
-            this.label34 = new System.Windows.Forms.Label();
-            this.label35 = new System.Windows.Forms.Label();
-            this.type1_all_end = new System.Windows.Forms.TextBox();
-            this.type2_all_start = new System.Windows.Forms.TextBox();
-            this.type3_all_start = new System.Windows.Forms.TextBox();
-            this.type4_all_start = new System.Windows.Forms.TextBox();
-            this.type5_all_start = new System.Windows.Forms.TextBox();
-            this.label36 = new System.Windows.Forms.Label();
-            this.type5_all_end = new System.Windows.Forms.TextBox();
-            this.type1_all_start = new System.Windows.Forms.TextBox();
-            this.type1_selection_all = new System.Windows.Forms.CheckBox();
             this.tableLayoutPanel18 = new System.Windows.Forms.TableLayoutPanel();
             this.sp_index = new System.Windows.Forms.CheckBox();
             this.nasdaq_index = new System.Windows.Forms.CheckBox();
             this.dow_index = new System.Windows.Forms.CheckBox();
             this.tableLayoutPanel19 = new System.Windows.Forms.TableLayoutPanel();
-            this.kospi_commodity = new System.Windows.Forms.CheckBox();
+            this.Foreign_commodity = new System.Windows.Forms.CheckBox();
             this.kosdak_commodity = new System.Windows.Forms.CheckBox();
+            this.kospi_commodity = new System.Windows.Forms.CheckBox();
             this.tableLayoutPanel12 = new System.Windows.Forms.TableLayoutPanel();
+            this.label40 = new System.Windows.Forms.Label();
+            this.type0_start = new System.Windows.Forms.TextBox();
+            this.type0_selection = new System.Windows.Forms.CheckBox();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
+            this.label18 = new System.Windows.Forms.Label();
             this.type5_selection = new System.Windows.Forms.CheckBox();
             this.type4_selection = new System.Windows.Forms.CheckBox();
             this.type3_selection = new System.Windows.Forms.CheckBox();
             this.type2_selection = new System.Windows.Forms.CheckBox();
-            this.label25 = new System.Windows.Forms.Label();
-            this.label20 = new System.Windows.Forms.Label();
-            this.label17 = new System.Windows.Forms.Label();
-            this.type2_end = new System.Windows.Forms.TextBox();
-            this.type3_end = new System.Windows.Forms.TextBox();
-            this.type4_end = new System.Windows.Forms.TextBox();
-            this.label12 = new System.Windows.Forms.Label();
-            this.label14 = new System.Windows.Forms.Label();
-            this.label16 = new System.Windows.Forms.Label();
-            this.label18 = new System.Windows.Forms.Label();
-            this.label19 = new System.Windows.Forms.Label();
-            this.label21 = new System.Windows.Forms.Label();
-            this.type1_end = new System.Windows.Forms.TextBox();
-            this.type1_start = new System.Windows.Forms.TextBox();
-            this.type4_start = new System.Windows.Forms.TextBox();
-            this.type5_start = new System.Windows.Forms.TextBox();
-            this.label26 = new System.Windows.Forms.Label();
-            this.type5_end = new System.Windows.Forms.TextBox();
             this.type1_selection = new System.Windows.Forms.CheckBox();
+            this.type5_start = new System.Windows.Forms.TextBox();
+            this.type4_start = new System.Windows.Forms.TextBox();
             this.type3_start = new System.Windows.Forms.TextBox();
             this.type2_start = new System.Windows.Forms.TextBox();
+            this.type5_end = new System.Windows.Forms.TextBox();
+            this.type4_end = new System.Windows.Forms.TextBox();
+            this.label26 = new System.Windows.Forms.Label();
+            this.type3_end = new System.Windows.Forms.TextBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.type2_end = new System.Windows.Forms.TextBox();
+            this.type1_end = new System.Windows.Forms.TextBox();
+            this.type1_start = new System.Windows.Forms.TextBox();
+            this.label25 = new System.Windows.Forms.Label();
+            this.label21 = new System.Windows.Forms.Label();
+            this.label19 = new System.Windows.Forms.Label();
+            this.label20 = new System.Windows.Forms.Label();
+            this.label17 = new System.Windows.Forms.Label();
+            this.label37 = new System.Windows.Forms.Label();
+            this.type0_end = new System.Windows.Forms.TextBox();
             this.groupBox9 = new System.Windows.Forms.GroupBox();
             this.Telegram_Allow = new System.Windows.Forms.CheckBox();
             this.tableLayoutPanel13 = new System.Windows.Forms.TableLayoutPanel();
@@ -264,25 +275,14 @@ namespace WindowsFormsApp1
             this.type1_isa_end = new System.Windows.Forms.TextBox();
             this.type1_isa_start = new System.Windows.Forms.TextBox();
             this.type1_selection_isa = new System.Windows.Forms.CheckBox();
+            this.type0_selection_isa = new System.Windows.Forms.CheckBox();
+            this.type0_isa_start = new System.Windows.Forms.TextBox();
+            this.type0_isa_end = new System.Windows.Forms.TextBox();
             this.groupBox14 = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel25 = new System.Windows.Forms.TableLayoutPanel();
             this.label38 = new System.Windows.Forms.Label();
             this.sell_set1_after = new System.Windows.Forms.ComboBox();
             this.sell_set2_after = new System.Windows.Forms.ComboBox();
-            this.label37 = new System.Windows.Forms.Label();
-            this.label39 = new System.Windows.Forms.Label();
-            this.type0_selection = new System.Windows.Forms.CheckBox();
-            this.type0_start = new System.Windows.Forms.TextBox();
-            this.type0_end = new System.Windows.Forms.TextBox();
-            this.label40 = new System.Windows.Forms.Label();
-            this.type0_selection_all = new System.Windows.Forms.CheckBox();
-            this.type0_all_start = new System.Windows.Forms.TextBox();
-            this.label41 = new System.Windows.Forms.Label();
-            this.type0_all_end = new System.Windows.Forms.TextBox();
-            this.type0_selection_isa = new System.Windows.Forms.CheckBox();
-            this.type0_isa_start = new System.Windows.Forms.TextBox();
-            this.type0_isa_end = new System.Windows.Forms.TextBox();
-            this.Foreign_commodity = new System.Windows.Forms.CheckBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
@@ -2101,6 +2101,127 @@ namespace WindowsFormsApp1
             this.tableLayoutPanel22.Size = new System.Drawing.Size(255, 122);
             this.tableLayoutPanel22.TabIndex = 39;
             // 
+            // type0_all_end
+            // 
+            this.type0_all_end.Location = new System.Drawing.Point(188, 2);
+            this.type0_all_end.Margin = new System.Windows.Forms.Padding(2);
+            this.type0_all_end.Name = "type0_all_end";
+            this.type0_all_end.Size = new System.Drawing.Size(64, 20);
+            this.type0_all_end.TabIndex = 49;
+            // 
+            // label41
+            // 
+            this.label41.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label41.AutoSize = true;
+            this.label41.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.label41.Location = new System.Drawing.Point(166, 0);
+            this.label41.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label41.Name = "label41";
+            this.label41.Size = new System.Drawing.Size(18, 20);
+            this.label41.TabIndex = 48;
+            this.label41.Text = "~";
+            this.label41.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // type0_all_start
+            // 
+            this.type0_all_start.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.type0_all_start.Location = new System.Drawing.Point(102, 2);
+            this.type0_all_start.Margin = new System.Windows.Forms.Padding(2);
+            this.type0_all_start.Name = "type0_all_start";
+            this.type0_all_start.Size = new System.Drawing.Size(60, 20);
+            this.type0_all_start.TabIndex = 47;
+            // 
+            // type0_selection_all
+            // 
+            this.type0_selection_all.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.type0_selection_all.AutoSize = true;
+            this.type0_selection_all.Location = new System.Drawing.Point(32, 3);
+            this.type0_selection_all.Name = "type0_selection_all";
+            this.type0_selection_all.Size = new System.Drawing.Size(65, 14);
+            this.type0_selection_all.TabIndex = 46;
+            this.type0_selection_all.Text = "checkBox1";
+            this.type0_selection_all.UseVisualStyleBackColor = true;
+            // 
+            // label39
+            // 
+            this.label39.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label39.AutoSize = true;
+            this.label39.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.label39.Location = new System.Drawing.Point(3, 0);
+            this.label39.Name = "label39";
+            this.label39.Size = new System.Drawing.Size(23, 20);
+            this.label39.TabIndex = 45;
+            this.label39.Text = "#0";
+            this.label39.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label31
+            // 
+            this.label31.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label31.AutoSize = true;
+            this.label31.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.label31.Location = new System.Drawing.Point(166, 20);
+            this.label31.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label31.Name = "label31";
+            this.label31.Size = new System.Drawing.Size(18, 21);
+            this.label31.TabIndex = 21;
+            this.label31.Text = "~";
+            this.label31.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label32
+            // 
+            this.label32.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label32.AutoSize = true;
+            this.label32.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.label32.Location = new System.Drawing.Point(166, 41);
+            this.label32.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label32.Name = "label32";
+            this.label32.Size = new System.Drawing.Size(18, 19);
+            this.label32.TabIndex = 23;
+            this.label32.Text = "~";
+            this.label32.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label33
+            // 
+            this.label33.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label33.AutoSize = true;
+            this.label33.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.label33.Location = new System.Drawing.Point(166, 60);
+            this.label33.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label33.Name = "label33";
+            this.label33.Size = new System.Drawing.Size(18, 20);
+            this.label33.TabIndex = 25;
+            this.label33.Text = "~";
+            this.label33.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label36
+            // 
+            this.label36.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label36.AutoSize = true;
+            this.label36.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.label36.Location = new System.Drawing.Point(166, 80);
+            this.label36.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label36.Name = "label36";
+            this.label36.Size = new System.Drawing.Size(18, 20);
+            this.label36.TabIndex = 37;
+            this.label36.Text = "~";
+            this.label36.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // type5_selection_all
             // 
             this.type5_selection_all.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -2153,6 +2274,129 @@ namespace WindowsFormsApp1
             this.type2_selection_all.Text = "checkBox1";
             this.type2_selection_all.UseVisualStyleBackColor = true;
             // 
+            // type1_selection_all
+            // 
+            this.type1_selection_all.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.type1_selection_all.AutoSize = true;
+            this.type1_selection_all.Location = new System.Drawing.Point(32, 23);
+            this.type1_selection_all.Name = "type1_selection_all";
+            this.type1_selection_all.Size = new System.Drawing.Size(65, 15);
+            this.type1_selection_all.TabIndex = 39;
+            this.type1_selection_all.Text = "checkBox1";
+            this.type1_selection_all.UseVisualStyleBackColor = true;
+            // 
+            // type5_all_start
+            // 
+            this.type5_all_start.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.type5_all_start.Location = new System.Drawing.Point(102, 102);
+            this.type5_all_start.Margin = new System.Windows.Forms.Padding(2);
+            this.type5_all_start.Name = "type5_all_start";
+            this.type5_all_start.Size = new System.Drawing.Size(60, 20);
+            this.type5_all_start.TabIndex = 36;
+            // 
+            // type4_all_start
+            // 
+            this.type4_all_start.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.type4_all_start.Location = new System.Drawing.Point(102, 82);
+            this.type4_all_start.Margin = new System.Windows.Forms.Padding(2);
+            this.type4_all_start.Name = "type4_all_start";
+            this.type4_all_start.Size = new System.Drawing.Size(60, 20);
+            this.type4_all_start.TabIndex = 16;
+            // 
+            // type3_all_start
+            // 
+            this.type3_all_start.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.type3_all_start.Location = new System.Drawing.Point(102, 62);
+            this.type3_all_start.Margin = new System.Windows.Forms.Padding(2);
+            this.type3_all_start.Name = "type3_all_start";
+            this.type3_all_start.Size = new System.Drawing.Size(60, 20);
+            this.type3_all_start.TabIndex = 7;
+            // 
+            // type2_all_start
+            // 
+            this.type2_all_start.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.type2_all_start.Location = new System.Drawing.Point(102, 43);
+            this.type2_all_start.Margin = new System.Windows.Forms.Padding(2);
+            this.type2_all_start.Name = "type2_all_start";
+            this.type2_all_start.Size = new System.Drawing.Size(60, 20);
+            this.type2_all_start.TabIndex = 12;
+            // 
+            // type1_all_start
+            // 
+            this.type1_all_start.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.type1_all_start.Location = new System.Drawing.Point(102, 22);
+            this.type1_all_start.Margin = new System.Windows.Forms.Padding(2);
+            this.type1_all_start.Name = "type1_all_start";
+            this.type1_all_start.Size = new System.Drawing.Size(60, 20);
+            this.type1_all_start.TabIndex = 4;
+            // 
+            // type5_all_end
+            // 
+            this.type5_all_end.Location = new System.Drawing.Point(188, 102);
+            this.type5_all_end.Margin = new System.Windows.Forms.Padding(2);
+            this.type5_all_end.Name = "type5_all_end";
+            this.type5_all_end.Size = new System.Drawing.Size(64, 20);
+            this.type5_all_end.TabIndex = 38;
+            // 
+            // type4_all_end
+            // 
+            this.type4_all_end.Location = new System.Drawing.Point(188, 82);
+            this.type4_all_end.Margin = new System.Windows.Forms.Padding(2);
+            this.type4_all_end.Name = "type4_all_end";
+            this.type4_all_end.Size = new System.Drawing.Size(64, 20);
+            this.type4_all_end.TabIndex = 18;
+            // 
+            // type3_all_end
+            // 
+            this.type3_all_end.Location = new System.Drawing.Point(188, 62);
+            this.type3_all_end.Margin = new System.Windows.Forms.Padding(2);
+            this.type3_all_end.Name = "type3_all_end";
+            this.type3_all_end.Size = new System.Drawing.Size(64, 20);
+            this.type3_all_end.TabIndex = 14;
+            // 
+            // type2_all_end
+            // 
+            this.type2_all_end.Location = new System.Drawing.Point(188, 43);
+            this.type2_all_end.Margin = new System.Windows.Forms.Padding(2);
+            this.type2_all_end.Name = "type2_all_end";
+            this.type2_all_end.Size = new System.Drawing.Size(64, 20);
+            this.type2_all_end.TabIndex = 10;
+            // 
+            // type1_all_end
+            // 
+            this.type1_all_end.Location = new System.Drawing.Point(188, 22);
+            this.type1_all_end.Margin = new System.Windows.Forms.Padding(2);
+            this.type1_all_end.Name = "type1_all_end";
+            this.type1_all_end.Size = new System.Drawing.Size(64, 20);
+            this.type1_all_end.TabIndex = 6;
+            // 
+            // label30
+            // 
+            this.label30.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label30.AutoSize = true;
+            this.label30.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.label30.Location = new System.Drawing.Point(166, 100);
+            this.label30.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label30.Name = "label30";
+            this.label30.Size = new System.Drawing.Size(18, 22);
+            this.label30.TabIndex = 19;
+            this.label30.Text = "~";
+            this.label30.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // label27
             // 
             this.label27.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -2167,6 +2411,36 @@ namespace WindowsFormsApp1
             this.label27.TabIndex = 34;
             this.label27.Text = "#5";
             this.label27.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label35
+            // 
+            this.label35.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label35.AutoSize = true;
+            this.label35.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.label35.Location = new System.Drawing.Point(2, 80);
+            this.label35.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label35.Name = "label35";
+            this.label35.Size = new System.Drawing.Size(25, 20);
+            this.label35.TabIndex = 29;
+            this.label35.Text = "#4";
+            this.label35.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label34
+            // 
+            this.label34.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label34.AutoSize = true;
+            this.label34.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.label34.Location = new System.Drawing.Point(2, 60);
+            this.label34.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label34.Name = "label34";
+            this.label34.Size = new System.Drawing.Size(25, 20);
+            this.label34.TabIndex = 27;
+            this.label34.Text = "#3";
+            this.label34.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label28
             // 
@@ -2197,219 +2471,6 @@ namespace WindowsFormsApp1
             this.label29.TabIndex = 26;
             this.label29.Text = "#1";
             this.label29.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // type2_all_end
-            // 
-            this.type2_all_end.Location = new System.Drawing.Point(188, 43);
-            this.type2_all_end.Margin = new System.Windows.Forms.Padding(2);
-            this.type2_all_end.Name = "type2_all_end";
-            this.type2_all_end.Size = new System.Drawing.Size(64, 20);
-            this.type2_all_end.TabIndex = 10;
-            // 
-            // type3_all_end
-            // 
-            this.type3_all_end.Location = new System.Drawing.Point(188, 62);
-            this.type3_all_end.Margin = new System.Windows.Forms.Padding(2);
-            this.type3_all_end.Name = "type3_all_end";
-            this.type3_all_end.Size = new System.Drawing.Size(64, 20);
-            this.type3_all_end.TabIndex = 14;
-            // 
-            // type4_all_end
-            // 
-            this.type4_all_end.Location = new System.Drawing.Point(188, 82);
-            this.type4_all_end.Margin = new System.Windows.Forms.Padding(2);
-            this.type4_all_end.Name = "type4_all_end";
-            this.type4_all_end.Size = new System.Drawing.Size(64, 20);
-            this.type4_all_end.TabIndex = 18;
-            // 
-            // label30
-            // 
-            this.label30.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label30.AutoSize = true;
-            this.label30.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.label30.Location = new System.Drawing.Point(166, 100);
-            this.label30.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label30.Name = "label30";
-            this.label30.Size = new System.Drawing.Size(18, 22);
-            this.label30.TabIndex = 19;
-            this.label30.Text = "~";
-            this.label30.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label31
-            // 
-            this.label31.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label31.AutoSize = true;
-            this.label31.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.label31.Location = new System.Drawing.Point(166, 20);
-            this.label31.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label31.Name = "label31";
-            this.label31.Size = new System.Drawing.Size(18, 21);
-            this.label31.TabIndex = 21;
-            this.label31.Text = "~";
-            this.label31.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label32
-            // 
-            this.label32.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label32.AutoSize = true;
-            this.label32.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.label32.Location = new System.Drawing.Point(166, 41);
-            this.label32.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label32.Name = "label32";
-            this.label32.Size = new System.Drawing.Size(18, 19);
-            this.label32.TabIndex = 23;
-            this.label32.Text = "~";
-            this.label32.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label33
-            // 
-            this.label33.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label33.AutoSize = true;
-            this.label33.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.label33.Location = new System.Drawing.Point(166, 60);
-            this.label33.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label33.Name = "label33";
-            this.label33.Size = new System.Drawing.Size(18, 20);
-            this.label33.TabIndex = 25;
-            this.label33.Text = "~";
-            this.label33.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label34
-            // 
-            this.label34.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label34.AutoSize = true;
-            this.label34.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.label34.Location = new System.Drawing.Point(2, 60);
-            this.label34.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label34.Name = "label34";
-            this.label34.Size = new System.Drawing.Size(25, 20);
-            this.label34.TabIndex = 27;
-            this.label34.Text = "#3";
-            this.label34.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label35
-            // 
-            this.label35.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label35.AutoSize = true;
-            this.label35.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.label35.Location = new System.Drawing.Point(2, 80);
-            this.label35.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label35.Name = "label35";
-            this.label35.Size = new System.Drawing.Size(25, 20);
-            this.label35.TabIndex = 29;
-            this.label35.Text = "#4";
-            this.label35.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // type1_all_end
-            // 
-            this.type1_all_end.Location = new System.Drawing.Point(188, 22);
-            this.type1_all_end.Margin = new System.Windows.Forms.Padding(2);
-            this.type1_all_end.Name = "type1_all_end";
-            this.type1_all_end.Size = new System.Drawing.Size(64, 20);
-            this.type1_all_end.TabIndex = 6;
-            // 
-            // type2_all_start
-            // 
-            this.type2_all_start.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.type2_all_start.Location = new System.Drawing.Point(102, 43);
-            this.type2_all_start.Margin = new System.Windows.Forms.Padding(2);
-            this.type2_all_start.Name = "type2_all_start";
-            this.type2_all_start.Size = new System.Drawing.Size(60, 20);
-            this.type2_all_start.TabIndex = 12;
-            // 
-            // type3_all_start
-            // 
-            this.type3_all_start.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.type3_all_start.Location = new System.Drawing.Point(102, 62);
-            this.type3_all_start.Margin = new System.Windows.Forms.Padding(2);
-            this.type3_all_start.Name = "type3_all_start";
-            this.type3_all_start.Size = new System.Drawing.Size(60, 20);
-            this.type3_all_start.TabIndex = 7;
-            // 
-            // type4_all_start
-            // 
-            this.type4_all_start.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.type4_all_start.Location = new System.Drawing.Point(102, 82);
-            this.type4_all_start.Margin = new System.Windows.Forms.Padding(2);
-            this.type4_all_start.Name = "type4_all_start";
-            this.type4_all_start.Size = new System.Drawing.Size(60, 20);
-            this.type4_all_start.TabIndex = 16;
-            // 
-            // type5_all_start
-            // 
-            this.type5_all_start.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.type5_all_start.Location = new System.Drawing.Point(102, 102);
-            this.type5_all_start.Margin = new System.Windows.Forms.Padding(2);
-            this.type5_all_start.Name = "type5_all_start";
-            this.type5_all_start.Size = new System.Drawing.Size(60, 20);
-            this.type5_all_start.TabIndex = 36;
-            // 
-            // label36
-            // 
-            this.label36.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label36.AutoSize = true;
-            this.label36.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.label36.Location = new System.Drawing.Point(166, 80);
-            this.label36.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label36.Name = "label36";
-            this.label36.Size = new System.Drawing.Size(18, 20);
-            this.label36.TabIndex = 37;
-            this.label36.Text = "~";
-            this.label36.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // type5_all_end
-            // 
-            this.type5_all_end.Location = new System.Drawing.Point(188, 102);
-            this.type5_all_end.Margin = new System.Windows.Forms.Padding(2);
-            this.type5_all_end.Name = "type5_all_end";
-            this.type5_all_end.Size = new System.Drawing.Size(64, 20);
-            this.type5_all_end.TabIndex = 38;
-            // 
-            // type1_all_start
-            // 
-            this.type1_all_start.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.type1_all_start.Location = new System.Drawing.Point(102, 22);
-            this.type1_all_start.Margin = new System.Windows.Forms.Padding(2);
-            this.type1_all_start.Name = "type1_all_start";
-            this.type1_all_start.Size = new System.Drawing.Size(60, 20);
-            this.type1_all_start.TabIndex = 4;
-            // 
-            // type1_selection_all
-            // 
-            this.type1_selection_all.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.type1_selection_all.AutoSize = true;
-            this.type1_selection_all.Location = new System.Drawing.Point(32, 23);
-            this.type1_selection_all.Name = "type1_selection_all";
-            this.type1_selection_all.Size = new System.Drawing.Size(65, 15);
-            this.type1_selection_all.TabIndex = 39;
-            this.type1_selection_all.Text = "checkBox1";
-            this.type1_selection_all.UseVisualStyleBackColor = true;
             // 
             // tableLayoutPanel18
             // 
@@ -2496,22 +2557,22 @@ namespace WindowsFormsApp1
             this.tableLayoutPanel19.Size = new System.Drawing.Size(255, 18);
             this.tableLayoutPanel19.TabIndex = 2;
             // 
-            // kospi_commodity
+            // Foreign_commodity
             // 
-            this.kospi_commodity.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.Foreign_commodity.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.kospi_commodity.AutoSize = true;
-            this.kospi_commodity.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.kospi_commodity.Font = new System.Drawing.Font("굴림", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.kospi_commodity.Location = new System.Drawing.Point(86, 2);
-            this.kospi_commodity.Margin = new System.Windows.Forms.Padding(2);
-            this.kospi_commodity.Name = "kospi_commodity";
-            this.kospi_commodity.Size = new System.Drawing.Size(80, 14);
-            this.kospi_commodity.TabIndex = 2;
-            this.kospi_commodity.Text = "코스피선물";
-            this.kospi_commodity.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.kospi_commodity.UseVisualStyleBackColor = false;
+            this.Foreign_commodity.AutoSize = true;
+            this.Foreign_commodity.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.Foreign_commodity.Font = new System.Drawing.Font("굴림", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.Foreign_commodity.Location = new System.Drawing.Point(2, 2);
+            this.Foreign_commodity.Margin = new System.Windows.Forms.Padding(2);
+            this.Foreign_commodity.Name = "Foreign_commodity";
+            this.Foreign_commodity.Size = new System.Drawing.Size(81, 14);
+            this.Foreign_commodity.TabIndex = 4;
+            this.Foreign_commodity.Text = "외국인선물";
+            this.Foreign_commodity.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.Foreign_commodity.UseVisualStyleBackColor = false;
             // 
             // kosdak_commodity
             // 
@@ -2521,14 +2582,31 @@ namespace WindowsFormsApp1
             this.kosdak_commodity.AutoSize = true;
             this.kosdak_commodity.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.kosdak_commodity.Font = new System.Drawing.Font("굴림", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.kosdak_commodity.Location = new System.Drawing.Point(170, 2);
+            this.kosdak_commodity.Location = new System.Drawing.Point(172, 2);
             this.kosdak_commodity.Margin = new System.Windows.Forms.Padding(2);
             this.kosdak_commodity.Name = "kosdak_commodity";
-            this.kosdak_commodity.Size = new System.Drawing.Size(83, 14);
+            this.kosdak_commodity.Size = new System.Drawing.Size(81, 14);
             this.kosdak_commodity.TabIndex = 3;
             this.kosdak_commodity.Text = "코스닥선물";
             this.kosdak_commodity.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.kosdak_commodity.UseVisualStyleBackColor = false;
+            // 
+            // kospi_commodity
+            // 
+            this.kospi_commodity.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.kospi_commodity.AutoSize = true;
+            this.kospi_commodity.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.kospi_commodity.Font = new System.Drawing.Font("굴림", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.kospi_commodity.Location = new System.Drawing.Point(87, 2);
+            this.kospi_commodity.Margin = new System.Windows.Forms.Padding(2);
+            this.kospi_commodity.Name = "kospi_commodity";
+            this.kospi_commodity.Size = new System.Drawing.Size(81, 14);
+            this.kospi_commodity.TabIndex = 2;
+            this.kospi_commodity.Text = "코스피선물";
+            this.kospi_commodity.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.kospi_commodity.UseVisualStyleBackColor = false;
             // 
             // tableLayoutPanel12
             // 
@@ -2582,6 +2660,90 @@ namespace WindowsFormsApp1
             this.tableLayoutPanel12.Size = new System.Drawing.Size(255, 119);
             this.tableLayoutPanel12.TabIndex = 0;
             // 
+            // label40
+            // 
+            this.label40.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label40.AutoSize = true;
+            this.label40.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.label40.Location = new System.Drawing.Point(164, 0);
+            this.label40.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label40.Name = "label40";
+            this.label40.Size = new System.Drawing.Size(20, 19);
+            this.label40.TabIndex = 48;
+            this.label40.Text = "~";
+            this.label40.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // type0_start
+            // 
+            this.type0_start.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.type0_start.Location = new System.Drawing.Point(102, 2);
+            this.type0_start.Margin = new System.Windows.Forms.Padding(2);
+            this.type0_start.Name = "type0_start";
+            this.type0_start.Size = new System.Drawing.Size(58, 20);
+            this.type0_start.TabIndex = 46;
+            // 
+            // type0_selection
+            // 
+            this.type0_selection.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.type0_selection.AutoSize = true;
+            this.type0_selection.Location = new System.Drawing.Point(32, 3);
+            this.type0_selection.Name = "type0_selection";
+            this.type0_selection.Size = new System.Drawing.Size(65, 13);
+            this.type0_selection.TabIndex = 45;
+            this.type0_selection.Text = "checkBox1";
+            this.type0_selection.UseVisualStyleBackColor = true;
+            // 
+            // label14
+            // 
+            this.label14.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label14.AutoSize = true;
+            this.label14.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.label14.Location = new System.Drawing.Point(164, 19);
+            this.label14.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(20, 19);
+            this.label14.TabIndex = 21;
+            this.label14.Text = "~";
+            this.label14.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label16
+            // 
+            this.label16.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label16.AutoSize = true;
+            this.label16.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.label16.Location = new System.Drawing.Point(164, 38);
+            this.label16.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(20, 19);
+            this.label16.TabIndex = 23;
+            this.label16.Text = "~";
+            this.label16.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label18
+            // 
+            this.label18.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label18.AutoSize = true;
+            this.label18.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.label18.Location = new System.Drawing.Point(164, 57);
+            this.label18.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(20, 19);
+            this.label18.TabIndex = 25;
+            this.label18.Text = "~";
+            this.label18.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // type5_selection
             // 
             this.type5_selection.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -2634,6 +2796,144 @@ namespace WindowsFormsApp1
             this.type2_selection.Text = "checkBox1";
             this.type2_selection.UseVisualStyleBackColor = true;
             // 
+            // type1_selection
+            // 
+            this.type1_selection.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.type1_selection.AutoSize = true;
+            this.type1_selection.Location = new System.Drawing.Point(32, 22);
+            this.type1_selection.Name = "type1_selection";
+            this.type1_selection.Size = new System.Drawing.Size(65, 13);
+            this.type1_selection.TabIndex = 39;
+            this.type1_selection.Text = "checkBox1";
+            this.type1_selection.UseVisualStyleBackColor = true;
+            // 
+            // type5_start
+            // 
+            this.type5_start.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.type5_start.Location = new System.Drawing.Point(102, 97);
+            this.type5_start.Margin = new System.Windows.Forms.Padding(2);
+            this.type5_start.Name = "type5_start";
+            this.type5_start.Size = new System.Drawing.Size(58, 20);
+            this.type5_start.TabIndex = 36;
+            // 
+            // type4_start
+            // 
+            this.type4_start.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.type4_start.Location = new System.Drawing.Point(102, 78);
+            this.type4_start.Margin = new System.Windows.Forms.Padding(2);
+            this.type4_start.Name = "type4_start";
+            this.type4_start.Size = new System.Drawing.Size(58, 20);
+            this.type4_start.TabIndex = 16;
+            // 
+            // type3_start
+            // 
+            this.type3_start.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.type3_start.Location = new System.Drawing.Point(102, 59);
+            this.type3_start.Margin = new System.Windows.Forms.Padding(2);
+            this.type3_start.Name = "type3_start";
+            this.type3_start.Size = new System.Drawing.Size(58, 20);
+            this.type3_start.TabIndex = 12;
+            // 
+            // type2_start
+            // 
+            this.type2_start.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.type2_start.Location = new System.Drawing.Point(102, 40);
+            this.type2_start.Margin = new System.Windows.Forms.Padding(2);
+            this.type2_start.Name = "type2_start";
+            this.type2_start.Size = new System.Drawing.Size(58, 20);
+            this.type2_start.TabIndex = 7;
+            // 
+            // type5_end
+            // 
+            this.type5_end.Location = new System.Drawing.Point(188, 97);
+            this.type5_end.Margin = new System.Windows.Forms.Padding(2);
+            this.type5_end.Name = "type5_end";
+            this.type5_end.Size = new System.Drawing.Size(63, 20);
+            this.type5_end.TabIndex = 38;
+            // 
+            // type4_end
+            // 
+            this.type4_end.Location = new System.Drawing.Point(188, 78);
+            this.type4_end.Margin = new System.Windows.Forms.Padding(2);
+            this.type4_end.Name = "type4_end";
+            this.type4_end.Size = new System.Drawing.Size(63, 20);
+            this.type4_end.TabIndex = 18;
+            // 
+            // label26
+            // 
+            this.label26.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label26.AutoSize = true;
+            this.label26.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.label26.Location = new System.Drawing.Point(164, 95);
+            this.label26.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label26.Name = "label26";
+            this.label26.Size = new System.Drawing.Size(20, 24);
+            this.label26.TabIndex = 37;
+            this.label26.Text = "~";
+            this.label26.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // type3_end
+            // 
+            this.type3_end.Location = new System.Drawing.Point(188, 59);
+            this.type3_end.Margin = new System.Windows.Forms.Padding(2);
+            this.type3_end.Name = "type3_end";
+            this.type3_end.Size = new System.Drawing.Size(63, 20);
+            this.type3_end.TabIndex = 14;
+            // 
+            // label12
+            // 
+            this.label12.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label12.AutoSize = true;
+            this.label12.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.label12.Location = new System.Drawing.Point(164, 76);
+            this.label12.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(20, 19);
+            this.label12.TabIndex = 19;
+            this.label12.Text = "~";
+            this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // type2_end
+            // 
+            this.type2_end.Location = new System.Drawing.Point(188, 40);
+            this.type2_end.Margin = new System.Windows.Forms.Padding(2);
+            this.type2_end.Name = "type2_end";
+            this.type2_end.Size = new System.Drawing.Size(63, 20);
+            this.type2_end.TabIndex = 10;
+            // 
+            // type1_end
+            // 
+            this.type1_end.Location = new System.Drawing.Point(188, 21);
+            this.type1_end.Margin = new System.Windows.Forms.Padding(2);
+            this.type1_end.Name = "type1_end";
+            this.type1_end.Size = new System.Drawing.Size(63, 20);
+            this.type1_end.TabIndex = 6;
+            // 
+            // type1_start
+            // 
+            this.type1_start.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.type1_start.Location = new System.Drawing.Point(102, 21);
+            this.type1_start.Margin = new System.Windows.Forms.Padding(2);
+            this.type1_start.Name = "type1_start";
+            this.type1_start.Size = new System.Drawing.Size(58, 20);
+            this.type1_start.TabIndex = 4;
+            // 
             // label25
             // 
             this.label25.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -2648,6 +2948,36 @@ namespace WindowsFormsApp1
             this.label25.TabIndex = 34;
             this.label25.Text = "#5";
             this.label25.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label21
+            // 
+            this.label21.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label21.AutoSize = true;
+            this.label21.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.label21.Location = new System.Drawing.Point(2, 76);
+            this.label21.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(25, 19);
+            this.label21.TabIndex = 29;
+            this.label21.Text = "#4";
+            this.label21.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label19
+            // 
+            this.label19.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label19.AutoSize = true;
+            this.label19.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.label19.Location = new System.Drawing.Point(2, 57);
+            this.label19.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(25, 19);
+            this.label19.TabIndex = 27;
+            this.label19.Text = "#3";
+            this.label19.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label20
             // 
@@ -2679,218 +3009,27 @@ namespace WindowsFormsApp1
             this.label17.Text = "#1";
             this.label17.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // type2_end
+            // label37
             // 
-            this.type2_end.Location = new System.Drawing.Point(188, 40);
-            this.type2_end.Margin = new System.Windows.Forms.Padding(2);
-            this.type2_end.Name = "type2_end";
-            this.type2_end.Size = new System.Drawing.Size(63, 20);
-            this.type2_end.TabIndex = 10;
-            // 
-            // type3_end
-            // 
-            this.type3_end.Location = new System.Drawing.Point(188, 59);
-            this.type3_end.Margin = new System.Windows.Forms.Padding(2);
-            this.type3_end.Name = "type3_end";
-            this.type3_end.Size = new System.Drawing.Size(63, 20);
-            this.type3_end.TabIndex = 14;
-            // 
-            // type4_end
-            // 
-            this.type4_end.Location = new System.Drawing.Point(188, 78);
-            this.type4_end.Margin = new System.Windows.Forms.Padding(2);
-            this.type4_end.Name = "type4_end";
-            this.type4_end.Size = new System.Drawing.Size(63, 20);
-            this.type4_end.TabIndex = 18;
-            // 
-            // label12
-            // 
-            this.label12.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.label37.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.label12.AutoSize = true;
-            this.label12.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.label12.Location = new System.Drawing.Point(164, 76);
-            this.label12.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(20, 19);
-            this.label12.TabIndex = 19;
-            this.label12.Text = "~";
-            this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label37.AutoSize = true;
+            this.label37.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.label37.Location = new System.Drawing.Point(3, 0);
+            this.label37.Name = "label37";
+            this.label37.Size = new System.Drawing.Size(23, 19);
+            this.label37.TabIndex = 44;
+            this.label37.Text = "#0";
+            this.label37.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // label14
+            // type0_end
             // 
-            this.label14.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label14.AutoSize = true;
-            this.label14.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.label14.Location = new System.Drawing.Point(164, 19);
-            this.label14.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(20, 19);
-            this.label14.TabIndex = 21;
-            this.label14.Text = "~";
-            this.label14.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label16
-            // 
-            this.label16.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label16.AutoSize = true;
-            this.label16.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.label16.Location = new System.Drawing.Point(164, 38);
-            this.label16.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(20, 19);
-            this.label16.TabIndex = 23;
-            this.label16.Text = "~";
-            this.label16.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label18
-            // 
-            this.label18.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label18.AutoSize = true;
-            this.label18.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.label18.Location = new System.Drawing.Point(164, 57);
-            this.label18.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(20, 19);
-            this.label18.TabIndex = 25;
-            this.label18.Text = "~";
-            this.label18.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label19
-            // 
-            this.label19.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label19.AutoSize = true;
-            this.label19.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.label19.Location = new System.Drawing.Point(2, 57);
-            this.label19.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(25, 19);
-            this.label19.TabIndex = 27;
-            this.label19.Text = "#3";
-            this.label19.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label21
-            // 
-            this.label21.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label21.AutoSize = true;
-            this.label21.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.label21.Location = new System.Drawing.Point(2, 76);
-            this.label21.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(25, 19);
-            this.label21.TabIndex = 29;
-            this.label21.Text = "#4";
-            this.label21.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // type1_end
-            // 
-            this.type1_end.Location = new System.Drawing.Point(188, 21);
-            this.type1_end.Margin = new System.Windows.Forms.Padding(2);
-            this.type1_end.Name = "type1_end";
-            this.type1_end.Size = new System.Drawing.Size(63, 20);
-            this.type1_end.TabIndex = 6;
-            // 
-            // type1_start
-            // 
-            this.type1_start.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.type1_start.Location = new System.Drawing.Point(102, 21);
-            this.type1_start.Margin = new System.Windows.Forms.Padding(2);
-            this.type1_start.Name = "type1_start";
-            this.type1_start.Size = new System.Drawing.Size(58, 20);
-            this.type1_start.TabIndex = 4;
-            // 
-            // type4_start
-            // 
-            this.type4_start.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.type4_start.Location = new System.Drawing.Point(102, 78);
-            this.type4_start.Margin = new System.Windows.Forms.Padding(2);
-            this.type4_start.Name = "type4_start";
-            this.type4_start.Size = new System.Drawing.Size(58, 20);
-            this.type4_start.TabIndex = 16;
-            // 
-            // type5_start
-            // 
-            this.type5_start.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.type5_start.Location = new System.Drawing.Point(102, 97);
-            this.type5_start.Margin = new System.Windows.Forms.Padding(2);
-            this.type5_start.Name = "type5_start";
-            this.type5_start.Size = new System.Drawing.Size(58, 20);
-            this.type5_start.TabIndex = 36;
-            // 
-            // label26
-            // 
-            this.label26.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label26.AutoSize = true;
-            this.label26.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.label26.Location = new System.Drawing.Point(164, 95);
-            this.label26.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label26.Name = "label26";
-            this.label26.Size = new System.Drawing.Size(20, 24);
-            this.label26.TabIndex = 37;
-            this.label26.Text = "~";
-            this.label26.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // type5_end
-            // 
-            this.type5_end.Location = new System.Drawing.Point(188, 97);
-            this.type5_end.Margin = new System.Windows.Forms.Padding(2);
-            this.type5_end.Name = "type5_end";
-            this.type5_end.Size = new System.Drawing.Size(63, 20);
-            this.type5_end.TabIndex = 38;
-            // 
-            // type1_selection
-            // 
-            this.type1_selection.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.type1_selection.AutoSize = true;
-            this.type1_selection.Location = new System.Drawing.Point(32, 22);
-            this.type1_selection.Name = "type1_selection";
-            this.type1_selection.Size = new System.Drawing.Size(65, 13);
-            this.type1_selection.TabIndex = 39;
-            this.type1_selection.Text = "checkBox1";
-            this.type1_selection.UseVisualStyleBackColor = true;
-            // 
-            // type3_start
-            // 
-            this.type3_start.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.type3_start.Location = new System.Drawing.Point(102, 59);
-            this.type3_start.Margin = new System.Windows.Forms.Padding(2);
-            this.type3_start.Name = "type3_start";
-            this.type3_start.Size = new System.Drawing.Size(58, 20);
-            this.type3_start.TabIndex = 12;
-            // 
-            // type2_start
-            // 
-            this.type2_start.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.type2_start.Location = new System.Drawing.Point(102, 40);
-            this.type2_start.Margin = new System.Windows.Forms.Padding(2);
-            this.type2_start.Name = "type2_start";
-            this.type2_start.Size = new System.Drawing.Size(58, 20);
-            this.type2_start.TabIndex = 7;
+            this.type0_end.Location = new System.Drawing.Point(188, 2);
+            this.type0_end.Margin = new System.Windows.Forms.Padding(2);
+            this.type0_end.Name = "type0_end";
+            this.type0_end.Size = new System.Drawing.Size(63, 20);
+            this.type0_end.TabIndex = 47;
             // 
             // groupBox9
             // 
@@ -3627,6 +3766,36 @@ namespace WindowsFormsApp1
             this.type1_selection_isa.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.type1_selection_isa.UseVisualStyleBackColor = false;
             // 
+            // type0_selection_isa
+            // 
+            this.type0_selection_isa.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.type0_selection_isa.AutoSize = true;
+            this.type0_selection_isa.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.type0_selection_isa.Font = new System.Drawing.Font("굴림", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.type0_selection_isa.Location = new System.Drawing.Point(3, 3);
+            this.type0_selection_isa.Name = "type0_selection_isa";
+            this.type0_selection_isa.Size = new System.Drawing.Size(79, 16);
+            this.type0_selection_isa.TabIndex = 7;
+            this.type0_selection_isa.Text = "#0";
+            this.type0_selection_isa.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.type0_selection_isa.UseVisualStyleBackColor = false;
+            // 
+            // type0_isa_start
+            // 
+            this.type0_isa_start.Location = new System.Drawing.Point(88, 3);
+            this.type0_isa_start.Name = "type0_isa_start";
+            this.type0_isa_start.Size = new System.Drawing.Size(69, 21);
+            this.type0_isa_start.TabIndex = 8;
+            // 
+            // type0_isa_end
+            // 
+            this.type0_isa_end.Location = new System.Drawing.Point(163, 3);
+            this.type0_isa_end.Name = "type0_isa_end";
+            this.type0_isa_end.Size = new System.Drawing.Size(66, 21);
+            this.type0_isa_end.TabIndex = 9;
+            // 
             // groupBox14
             // 
             this.groupBox14.Controls.Add(this.tableLayoutPanel25);
@@ -3692,175 +3861,6 @@ namespace WindowsFormsApp1
             this.sell_set2_after.Name = "sell_set2_after";
             this.sell_set2_after.Size = new System.Drawing.Size(83, 21);
             this.sell_set2_after.TabIndex = 24;
-            // 
-            // label37
-            // 
-            this.label37.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label37.AutoSize = true;
-            this.label37.BackColor = System.Drawing.SystemColors.AppWorkspace;
-            this.label37.Location = new System.Drawing.Point(3, 0);
-            this.label37.Name = "label37";
-            this.label37.Size = new System.Drawing.Size(23, 19);
-            this.label37.TabIndex = 44;
-            this.label37.Text = "#0";
-            this.label37.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label39
-            // 
-            this.label39.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label39.AutoSize = true;
-            this.label39.BackColor = System.Drawing.SystemColors.AppWorkspace;
-            this.label39.Location = new System.Drawing.Point(3, 0);
-            this.label39.Name = "label39";
-            this.label39.Size = new System.Drawing.Size(23, 20);
-            this.label39.TabIndex = 45;
-            this.label39.Text = "#0";
-            this.label39.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // type0_selection
-            // 
-            this.type0_selection.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.type0_selection.AutoSize = true;
-            this.type0_selection.Location = new System.Drawing.Point(32, 3);
-            this.type0_selection.Name = "type0_selection";
-            this.type0_selection.Size = new System.Drawing.Size(65, 13);
-            this.type0_selection.TabIndex = 45;
-            this.type0_selection.Text = "checkBox1";
-            this.type0_selection.UseVisualStyleBackColor = true;
-            // 
-            // type0_start
-            // 
-            this.type0_start.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.type0_start.Location = new System.Drawing.Point(102, 2);
-            this.type0_start.Margin = new System.Windows.Forms.Padding(2);
-            this.type0_start.Name = "type0_start";
-            this.type0_start.Size = new System.Drawing.Size(58, 20);
-            this.type0_start.TabIndex = 46;
-            // 
-            // type0_end
-            // 
-            this.type0_end.Location = new System.Drawing.Point(188, 2);
-            this.type0_end.Margin = new System.Windows.Forms.Padding(2);
-            this.type0_end.Name = "type0_end";
-            this.type0_end.Size = new System.Drawing.Size(63, 20);
-            this.type0_end.TabIndex = 47;
-            // 
-            // label40
-            // 
-            this.label40.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label40.AutoSize = true;
-            this.label40.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.label40.Location = new System.Drawing.Point(164, 0);
-            this.label40.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label40.Name = "label40";
-            this.label40.Size = new System.Drawing.Size(20, 19);
-            this.label40.TabIndex = 48;
-            this.label40.Text = "~";
-            this.label40.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // type0_selection_all
-            // 
-            this.type0_selection_all.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.type0_selection_all.AutoSize = true;
-            this.type0_selection_all.Location = new System.Drawing.Point(32, 3);
-            this.type0_selection_all.Name = "type0_selection_all";
-            this.type0_selection_all.Size = new System.Drawing.Size(65, 14);
-            this.type0_selection_all.TabIndex = 46;
-            this.type0_selection_all.Text = "checkBox1";
-            this.type0_selection_all.UseVisualStyleBackColor = true;
-            // 
-            // type0_all_start
-            // 
-            this.type0_all_start.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.type0_all_start.Location = new System.Drawing.Point(102, 2);
-            this.type0_all_start.Margin = new System.Windows.Forms.Padding(2);
-            this.type0_all_start.Name = "type0_all_start";
-            this.type0_all_start.Size = new System.Drawing.Size(60, 20);
-            this.type0_all_start.TabIndex = 47;
-            // 
-            // label41
-            // 
-            this.label41.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label41.AutoSize = true;
-            this.label41.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.label41.Location = new System.Drawing.Point(166, 0);
-            this.label41.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label41.Name = "label41";
-            this.label41.Size = new System.Drawing.Size(18, 20);
-            this.label41.TabIndex = 48;
-            this.label41.Text = "~";
-            this.label41.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // type0_all_end
-            // 
-            this.type0_all_end.Location = new System.Drawing.Point(188, 2);
-            this.type0_all_end.Margin = new System.Windows.Forms.Padding(2);
-            this.type0_all_end.Name = "type0_all_end";
-            this.type0_all_end.Size = new System.Drawing.Size(64, 20);
-            this.type0_all_end.TabIndex = 49;
-            // 
-            // type0_selection_isa
-            // 
-            this.type0_selection_isa.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.type0_selection_isa.AutoSize = true;
-            this.type0_selection_isa.BackColor = System.Drawing.SystemColors.AppWorkspace;
-            this.type0_selection_isa.Font = new System.Drawing.Font("굴림", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.type0_selection_isa.Location = new System.Drawing.Point(3, 3);
-            this.type0_selection_isa.Name = "type0_selection_isa";
-            this.type0_selection_isa.Size = new System.Drawing.Size(79, 16);
-            this.type0_selection_isa.TabIndex = 7;
-            this.type0_selection_isa.Text = "#0";
-            this.type0_selection_isa.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.type0_selection_isa.UseVisualStyleBackColor = false;
-            // 
-            // type0_isa_start
-            // 
-            this.type0_isa_start.Location = new System.Drawing.Point(88, 3);
-            this.type0_isa_start.Name = "type0_isa_start";
-            this.type0_isa_start.Size = new System.Drawing.Size(69, 21);
-            this.type0_isa_start.TabIndex = 8;
-            // 
-            // type0_isa_end
-            // 
-            this.type0_isa_end.Location = new System.Drawing.Point(163, 3);
-            this.type0_isa_end.Name = "type0_isa_end";
-            this.type0_isa_end.Size = new System.Drawing.Size(66, 21);
-            this.type0_isa_end.TabIndex = 9;
-            // 
-            // Foreign_commodity
-            // 
-            this.Foreign_commodity.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.Foreign_commodity.AutoSize = true;
-            this.Foreign_commodity.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.Foreign_commodity.Font = new System.Drawing.Font("굴림", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.Foreign_commodity.Location = new System.Drawing.Point(2, 2);
-            this.Foreign_commodity.Margin = new System.Windows.Forms.Padding(2);
-            this.Foreign_commodity.Name = "Foreign_commodity";
-            this.Foreign_commodity.Size = new System.Drawing.Size(80, 14);
-            this.Foreign_commodity.TabIndex = 4;
-            this.Foreign_commodity.Text = "외국인선물";
-            this.Foreign_commodity.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.Foreign_commodity.UseVisualStyleBackColor = false;
             // 
             // Setting
             // 
