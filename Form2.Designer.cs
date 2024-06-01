@@ -1846,7 +1846,7 @@ namespace WindowsFormsApp1
             this.groupBox3.Size = new System.Drawing.Size(267, 75);
             this.groupBox3.TabIndex = 16;
             this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "자동 실행 여부";
+            this.groupBox3.Text = "자동 실행(08:45:00~18:00:00)";
             // 
             // groupBox4
             // 

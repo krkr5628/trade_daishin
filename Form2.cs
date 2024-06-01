@@ -38,22 +38,7 @@ namespace WindowsFormsApp1
             Fomula_list_buy_Checked_box.MouseLeave += Fomula_list_buy_Checked_box_MouseLeave;
             Fomula_list_buy_Checked_box.ItemCheck += Fomula_list_buy_Checked_box_ItemCheck;
 
-            //TELEGRAM TEST
-            telegram_test_button.Click += telegram_test;
-
-            //미사용 항목 경고창(19개)
-            hold_deny.CheckedChanged += HandleCheckedChanged; //? 제거
-            profit_ts.CheckedChanged += HandleCheckedChanged;
-            term_for_non_buy.CheckedChanged += HandleCheckedChanged;
-            term_for_non_sell.CheckedChanged += HandleCheckedChanged;
-
-            //--------------------------------------------
-
-            // KIS 및 텔레그램 체크시 확인 => 빈값인지 확인
-            KIS_Allow.CheckedChanged += KIS_Allow_CheckedChanged;
-            Telegram_Allow.CheckedChanged += Telegram_Allow_CheckedChanged;
-
-            //매매방식 확인
+            //매매방식 자동 동작
             buy_set1.Leave += Buy_set_Leave;
             buy_set2.Leave += Buy_set_Leave;
             sell_set1.Leave += Sell_set_Leave;
@@ -61,7 +46,17 @@ namespace WindowsFormsApp1
             sell_set1_after.Leave += Sell_set_after_Leave;
             sell_set2_after.Leave += Sell_set_after_Leave;
 
-            //매매설정 => 소수점이 포함된 양의 숫자이거나 양의 정수인지 확인
+            //TELEGRAM TEST
+            telegram_test_button.Click += telegram_test;
+
+            //미사용 항목 경고창(19개)
+            profit_ts.CheckedChanged += HandleCheckedChanged;
+            term_for_non_buy.CheckedChanged += HandleCheckedChanged;
+            term_for_non_sell.CheckedChanged += HandleCheckedChanged;
+
+            //--------------------------------------------
+
+            //소수점 범위 확인
             profit_percent_text.Leave += Profit_percent_text_Leave;
             loss_percent_text.Leave += Loss_percent_text_Leave;
             profit_ts_text.Leave += Profit_ts_text_Leave;
@@ -71,15 +66,36 @@ namespace WindowsFormsApp1
             //정수값인지확인
             setting_account_number.Leave += Setting_Positive_numver;
             initial_balance.Leave += Initial_balance_Leave;
+
             maxbuy.Leave += Maxbuy_Leave;
             maxbuy_acc.Leave += Maxbuy_acc_Leave;
             min_price.Leave += Min_price_Leave;
             max_price.Leave += Max_price_Leave;
+
             max_hold_text.Leave += Max_hold_text_Leave;
+
             profit_won_text.Leave += Profit_won_text_Leave;
+
             loss_won_text.Leave += Loss_won_text_Leave;
+
             term_for_buy_text.Leave += Term_for_buy_text_Leave;
             term_for_sell_text.Leave += Term_for_sell_text_Leave;
+
+            //시간확인
+            market_start_time.Leave += Market_start_time_Leave;
+            market_end_time.Leave += Market_end_time_Leave;
+
+            buy_condition_start.Leave += Buy_condition_start_Leave;
+            buy_condition_end.Leave += Buy_condition_end_Leave;
+
+            sell_condition_start.Leave += Sell_condition_start_Leave;
+            sell_condition_end.Leave += Sell_condition_end_Leave;
+
+            clear_sell_start.Leave += Clear_sell_start_Leave;
+            clear_sell_end.Leave += Clear_sell_end_Leave;
+
+            Dual_Time_Start.Leave += Dual_Time_Start_Leave;
+            Dual_Time_Stop.Leave += Dual_Time_Stop_Leave;
 
             //소수점이거나 정수인지 확인
             type0_start.Leave += Type0_start_Leave;
@@ -120,29 +136,6 @@ namespace WindowsFormsApp1
             type4_isa_end.Leave += Type4_isa_end_Leave;
             type5_isa_start.Leave += Type5_isa_start_Leave;
             type5_isa_end.Leave += Type5_isa_end_Leave;
-
-            //시간확인
-            market_start_time.Leave += Market_start_time_Leave;
-            market_end_time.Leave += Market_end_time_Leave;
-            buy_condition_start.Leave += Buy_condition_start_Leave;
-            buy_condition_end.Leave += Buy_condition_end_Leave;
-            sell_condition_start.Leave += Sell_condition_start_Leave;
-            sell_condition_end.Leave += Sell_condition_end_Leave;
-            clear_sell_start.Leave += Clear_sell_start_Leave;
-            clear_sell_end.Leave += Clear_sell_end_Leave;
-            Dual_Time_Start.Leave += Dual_Time_Start_Leave;
-            Dual_Time_Stop.Leave += Dual_Time_Stop_Leave;
-
-            //매수 조건식 동작 확인
-            buy_mode_and.Click += Buy_mode_and_Click;
-            Fomula_list_buy.TextChanged += Fomula_list_buy_TextChanged;
-
-            //매도 조건식 동작 확인
-
-            //청산 동작 확인
-
-            //인덱스 동작 확인
-
         }
 
         //----------------------------미사용 항목 경고창----------------------------------------
@@ -158,39 +151,6 @@ namespace WindowsFormsApp1
             checkedCheckBox.Checked = false;
         }
 
-        //----------------------------KIS 및 텔레그램 체크시 확인----------------------------------------
-
-        private void KIS_Allow_CheckedChanged(object sender, EventArgs e)
-        {
-            CheckBox checkBox = (CheckBox)sender;
-            bool isChecked = checkBox.Checked;
-
-            if (isChecked)
-            {
-                if(KIS_Account.Text.Equals("") || appkey.Text.Equals("") || appsecret.Text.Equals("") || kis_amount.Text.Equals(""))
-                {
-                    KIS_Allow.Checked = false;
-                    MessageBox.Show("모든 값을 입력해주세요.", "잘못된 입력", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
-            }
-        }
-        private void Telegram_Allow_CheckedChanged(object sender, EventArgs e)
-        {
-            CheckBox checkBox = (CheckBox)sender;
-            bool isChecked = checkBox.Checked;
-
-            if (isChecked)
-            {
-                if (telegram_user_id.Text.Equals("") || telegram_token.Text.Equals(""))
-                {
-                    Telegram_Allow.Checked = false;
-                    MessageBox.Show("모든 값을 입력해주세요.", "잘못된 입력", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
-            }
-        }
-
         //----------------------------매매방식 확인----------------------------------------
 
         private void Buy_set_Leave(object sender, EventArgs e)
@@ -202,27 +162,6 @@ namespace WindowsFormsApp1
         private void Sell_set_Leave(object sender, EventArgs e)
         {
             ValidateOrderType(sender, e, sell_set1, sell_set2);
-        }
-
-
-        private void Sell_set_after_Leave(object sender, EventArgs e)
-        {
-            ValidateOrderType(sender, e, sell_set1_after, sell_set2_after);
-
-            if (sell_set1_after.Text.Equals(""))
-            {
-                sell_set1_after.SelectedIndex = 1;
-                sell_set2_after.SelectedIndex = 5;
-                MessageBox.Show("선택된 매매방식이 없습니다.", "잘못된 입력", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            if (!sell_set1_after.Text.Equals("") || sell_set2_after.Text.Equals(""))
-            {
-                sell_set2_after.SelectedIndex = 5;
-                MessageBox.Show("선택된 호가가 없습니다.", "잘못된 입력", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
         }
 
         private void ValidateOrderType(object sender, EventArgs e, ComboBox orderType, ComboBox orderPrice)
@@ -245,6 +184,25 @@ namespace WindowsFormsApp1
             {
                 orderPrice.SelectedIndex = 5;
                 MessageBox.Show("지정가는 시장가를 선택할 수 없습니다.", "잘못된 입력", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+
+        private void Sell_set_after_Leave(object sender, EventArgs e)
+        {
+            if (sell_set1_after.Text.Equals(""))
+            {
+                sell_set1_after.SelectedIndex = 1;
+                sell_set2_after.SelectedIndex = 5;
+                MessageBox.Show("선택된 매매방식이 없습니다.", "잘못된 입력", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (!sell_set1_after.Text.Equals("") || sell_set2_after.Text.Equals(""))
+            {
+                sell_set2_after.SelectedIndex = 5;
+                MessageBox.Show("선택된 호가가 없습니다.", "잘못된 입력", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
             }
         }
 
@@ -805,28 +763,6 @@ namespace WindowsFormsApp1
                 }
             }
             Fomula_list_buy.Text = String.Join(",", SelectedIndexText_join_tmp);
-        }
-
-        //-----------------------------------조건식 입력 오류 확인----------------------------------------
-
-        //AND 모드 시 2개 이상 조건식 확인
-        private void Buy_mode_and_Click(object sender, EventArgs e)
-        {
-            if(Fomula_list_buy.Text.Split(',').Length != 2)
-            {
-                buy_mode_or.Checked = true;
-                MessageBox.Show("AND_모드 저장하기 위해 조건식 2개 설정해 주세요.");
-            }
-        }
-
-        //조건식 1개 인데 AND 모드인지 확인
-        private void Fomula_list_buy_TextChanged(object sender, EventArgs e)
-        {
-            if (Fomula_list_buy.Text.Split(',').Length <= 1 && buy_mode_and.Checked)
-            {
-                buy_mode_or.Checked = true;
-                MessageBox.Show("AND_모드 저장하기 위해 조건식 2개 설정해 주세요.");
-            }
         }
 
         //-----------------------------------초기 실행---------------------------------------
