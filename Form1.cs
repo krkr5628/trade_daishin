@@ -516,8 +516,37 @@ namespace WindowsFormsApp1
         private int condition_sub_code(string condition_code)
         {
             CssWatchStgSubscribe.SetInputValue(0, condition_code);
+
+            int check = 0;
+
+            //수신확인
+            while (true)
+            {
+                if (CssWatchStgSubscribe.GetDibStatus() == 1)
+                {
+                    check++;
+                    WriteLog_System("[DibRq요청/수신대기/5초] : 일련번호\n");
+                    System.Threading.Thread.Sleep(5000);
+                }
+                else if(check == 5)
+                {
+                    break;
+                }
+                else
+                {
+                    break;
+                }
+            }
+            //
+            if(check == 5)
+            {
+                WriteLog_System("[일련번호/수신실패] : 재부팅 요망\n");
+                telegram_message("[일련번호/수신실패] : 재부팅 요망\n");
+                return -1;
+            }
             //
             int result = CssWatchStgSubscribe.BlockRequest();
+            //
             if (result == 0)
             {
                 return CssWatchStgSubscribe.GetHeaderValue(0);
@@ -875,6 +904,7 @@ namespace WindowsFormsApp1
 
         private bool hold_update_initial = true;
 
+        //함수간 간격 200ms
         private void initial_process()
         {
             //계좌 번호
@@ -951,7 +981,10 @@ namespace WindowsFormsApp1
         private void GetCashInfo_Seperate()
         {
             GetCashInfo(Master_code);
-            if(utility.buy_DUAL) GetCashInfo(ISA_code);
+
+            System.Threading.Thread.Sleep(200);
+
+            if (utility.buy_DUAL) GetCashInfo(ISA_code);
         }
 
         private void GetCashInfo(string acc_gubun)
@@ -962,6 +995,34 @@ namespace WindowsFormsApp1
                 CpTd6033.SetInputValue(1, acc_gubun);
                 CpTd6033.SetInputValue(2, 14);
                 CpTd6033.SetInputValue(3, "1");
+                //
+                int check = 0;
+                //
+                //수신확인
+                while (true)
+                {
+                    if (CpTd6033.GetDibStatus() == 1)
+                    {
+                        check++;
+                        WriteLog_System("[DibRq요청/수신대기/5초] : 예수금 정보(D+2) + 계좌보유수량\n");
+                        System.Threading.Thread.Sleep(5000);
+                    }
+                    else if (check == 5)
+                    {
+                        break;
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+                //
+                if (check == 5)
+                {
+                    WriteLog_System("[예수금 정보(D+2) + 계좌보유수량/수신실패] : 재부팅 요망\n");
+                    telegram_message("[예수금 정보(D+2) + 계좌보유수량/수신실패] : 재부팅 요망\n");
+                    return;
+                }
                 //
                 int result = CpTd6033.BlockRequest();
                 //
@@ -1073,6 +1134,9 @@ namespace WindowsFormsApp1
         private void today_profit_tax_load_seperate()
         {
             today_profit_tax_load("", Master_code);
+
+            System.Threading.Thread.Sleep(200);
+
             if (utility.buy_DUAL) today_profit_tax_load("", ISA_code);
         }
 
@@ -1084,6 +1148,34 @@ namespace WindowsFormsApp1
             {
                 CpTd6032.SetInputValue(0, acc_text.Text);
                 CpTd6032.SetInputValue(1, acc_gubun);
+                //
+                int check = 0;
+                //
+                //수신확인
+                while (true)
+                {
+                    if (CpTd6032.GetDibStatus() == 1)
+                    {
+                        check++;
+                        WriteLog_System("[DibRq요청/수신대기/5초] : 매도실현손익\n");
+                        System.Threading.Thread.Sleep(5000);
+                    }
+                    else if (check == 5)
+                    {
+                        break;
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+                //
+                if (check == 5)
+                {
+                    WriteLog_System("[매도실현손익/수신실패] : 재부팅 요망\n");
+                    telegram_message("[매도실현손익/수신실패] : 재부팅 요망\n");
+                    return;
+                }
                 //
                 int result = CpTd6032.BlockRequest();
                 //
@@ -1130,6 +1222,9 @@ namespace WindowsFormsApp1
         private void Transaction_Detail_seperate(string order_number, string trade)
         {
             Transaction_Detail(order_number, Master_code, trade);
+
+            System.Threading.Thread.Sleep(200);
+
             if (utility.buy_DUAL) Transaction_Detail(order_number, ISA_code, trade);
         }
 
@@ -1143,26 +1238,34 @@ namespace WindowsFormsApp1
             CpTd5341.SetInputValue(4, '1'); //정렬 '1' 역순
             CpTd5341.SetInputValue(5, 20);
             CpTd5341.SetInputValue(6, '3');
-
-            Transaction_Detail_Check(order_number, gubun, trade);
-        }
-
-        private void Transaction_Detail_Check(string order_number, string gubun, string trade) 
-        {
+            //
+            int check = 0;
+            //
             //수신확인
-            if (CpTd6033.GetDibStatus() == 1)
+            while (true)
             {
-                WriteLog_System("DibRq 요청 수신대기 : 체결내역업데이트(주문번호)");
-
-                System.Threading.Thread.Sleep(1000);
-                Transaction_Detail_Check(order_number, gubun, trade);
+                if (CpTd5341.GetDibStatus() == 1)
+                {
+                    check++;
+                    WriteLog_System("[DibRq요청/수신대기/5초] : 체결내역업데이트\n");
+                    System.Threading.Thread.Sleep(5000);
+                }
+                else if (check == 5)
+                {
+                    break;
+                }
+                else
+                {
+                    break;
+                }
+            }
+            //
+            if (check == 5)
+            {
+                WriteLog_System("[체결내역업데이트/수신실패] : 재부팅 요망\n");
+                telegram_message("[체결내역업데이트/수신실패] : 재부팅 요망\n");
                 return;
             }
-            Transaction_Detail_Request(order_number, gubun, trade);
-        }
-
-        private void Transaction_Detail_Request(string order_number, string gubun, string trade)
-        {
             //정상조회확인
             int result = CpTd5341.BlockRequest();
             //
@@ -1190,7 +1293,8 @@ namespace WindowsFormsApp1
                                 WriteLog_Order($"[매수주문/정상완료/{gubun}] : {row["종목명"]}({row["종목코드"]}) {order_sum}개 {average_price}원\n");
                                 telegram_message($"[매수주문/정상완료/{gubun}] : {row["종목명"]}({row["종목코드"]}) {order_sum}개 {average_price}원\n");
                             }
-                            else{
+                            else
+                            {
                                 row["매도가"] = average_price;
                                 //
                                 WriteLog_Order($"[매도주문/정상완료/{gubun}] : {row["종목명"]}({row["종목코드"]}) {order_sum}개 {average_price}원\n");
@@ -1213,13 +1317,12 @@ namespace WindowsFormsApp1
                         Convert.ToString(CpTd5341.GetDataValue(7, i)), //주문수량 => long
                         order_sum, //총체결수량 => long
                         average_price
-                    );    
+                    );
                 }
                 dtCondStock_Transaction.AcceptChanges();
                 dataGridView3.DataSource = dtCondStock_Transaction;
             }
         }
-
         //------------------------------------인덱스 목록 받기---------------------------------        
         private void Index_load()
         {         
@@ -1257,17 +1360,34 @@ namespace WindowsFormsApp1
                 CpFore8312.SetInputValue(1, '2');
                 CpFore8312.SetInputValue(2, 2);
                 //
-                int result = CpFore8312.BlockRequest();
+                int check = 0;
                 //
-                if (CpFore8312.GetDibStatus() == 1)
+                //수신확인
+                while (true)
                 {
-                    string status_message = CpFore8312.GetDibMsg1();
-                    WriteLog_System("[DOW30/수신실패] : DibRq 요청 수신대기(5초후 재시도)\n");
-                    telegram_message("[DOW30/수신실패] : DibRq 요청 수신대기(5초후 재시도)\n");
-                    System.Threading.Thread.Sleep(5000);
-                    US_INDEX();
+                    if (CpFore8312.GetDibStatus() == 1)
+                    {
+                        check++;
+                        WriteLog_System("[DibRq요청/수신대기/5초] : DOW30\n");
+                        System.Threading.Thread.Sleep(5000);
+                    }
+                    else if (check == 5)
+                    {
+                        break;
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+                //
+                if (check == 5)
+                {
+                    WriteLog_System("[DOW30/수신실패] : 재부팅 요망\n");
+                    telegram_message("[DOW30/수신실패] : 재부팅 요망\n");
                     return;
                 }
+                int result = CpFore8312.BlockRequest();
                 //
                 if (result == 0)
                 {
@@ -1342,17 +1462,35 @@ namespace WindowsFormsApp1
                 CpFore8312.SetInputValue(1, '2');
                 CpFore8312.SetInputValue(2, 2);
                 //
-                int result2 = CpFore8312.BlockRequest();
+                int check = 0;
                 //
-                if (CpFore8312.GetDibStatus() == 1)
+                //수신확인
+                while (true)
                 {
-                    string status_message = CpFore8312.GetDibMsg1();
-                    WriteLog_System("[S&P500/수신실패] : DibRq 요청 수신대기(5초후 재시도)\n");
-                    telegram_message("[S&P500/수신실패] : DibRq 요청 수신대기(5초후 재시도)\n");
-                    System.Threading.Thread.Sleep(5000);
-                    US_INDEX();
+                    if (CpFore8312.GetDibStatus() == 1)
+                    {
+                        check++;
+                        WriteLog_System("[DibRq요청/수신대기/5초] : S&P500\n");
+                        System.Threading.Thread.Sleep(5000);
+                    }
+                    else if (check == 5)
+                    {
+                        break;
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+                //
+                if (check == 5)
+                {
+                    WriteLog_System("[S&P500/수신실패] : 재부팅 요망\n");
+                    telegram_message("[S&P500/수신실패] : 재부팅 요망\n");
                     return;
                 }
+                //
+                int result2 = CpFore8312.BlockRequest();
                 //
                 if (result2 == 0)
                 {
@@ -1427,17 +1565,35 @@ namespace WindowsFormsApp1
                 CpFore8312.SetInputValue(1, '2');
                 CpFore8312.SetInputValue(2, 2);
                 //
-                int result3 = CpFore8312.BlockRequest();
+                int check = 0;
                 //
-                if (CpFore8312.GetDibStatus() == 1)
+                //수신확인
+                while (true)
                 {
-                    string status_message = CpFore8312.GetDibMsg1();
-                    WriteLog_System("[NASDAQ100/수신실패] : DibRq 요청 수신대기(5초후 재시도)\n");
-                    telegram_message("[NASDAQ100/수신실패] : DibRq 요청 수신대기(5초후 재시도)\n");
-                    System.Threading.Thread.Sleep(5000);
-                    US_INDEX();
+                    if (CpFore8312.GetDibStatus() == 1)
+                    {
+                        check++;
+                        WriteLog_System("[DibRq요청/수신대기/5초] : NASDAQ1000\n");
+                        System.Threading.Thread.Sleep(5000);
+                    }
+                    else if (check == 5)
+                    {
+                        break;
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+                //
+                if (check == 5)
+                {
+                    WriteLog_System("[NASDAQ100/수신실패] : 재부팅 요망\n");
+                    telegram_message("[NASDAQ100/수신실패] : 재부팅 요망\n");
                     return;
                 }
+                //
+                int result3 = CpFore8312.BlockRequest();
                 //
                 if (result3 == 0)
                 {
@@ -1598,6 +1754,34 @@ namespace WindowsFormsApp1
                 CpSvrNew7224.SetInputValue(7, Convert.ToInt32(index_time));
                 CpSvrNew7224.SetInputValue(8, '1');
                 //
+                int check = 0;
+                //
+                //수신확인
+                while (true)
+                {
+                    if (CpSvrNew7224.GetDibStatus() == 1)
+                    {
+                        check++;
+                        WriteLog_System("[DibRq요청/수신대기/5초] : 외국인선물\n");
+                        System.Threading.Thread.Sleep(5000);
+                    }
+                    else if (check == 5)
+                    {
+                        break;
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+                //
+                if (check == 5)
+                {
+                    WriteLog_System("[외국인선물/수신실패] : 재부팅 요망\n");
+                    telegram_message("[외국인선물/수신실패] : 재부팅 요망\n");
+                    return;
+                }
+                //
                 int result = CpSvrNew7224.BlockRequest();
                 //
                 if (CpSvrNew7224.GetDibStatus() == 1)
@@ -1678,6 +1862,8 @@ namespace WindowsFormsApp1
                 }
             }
 
+            System.Threading.Thread.Sleep(200);
+
             //KOSPI 200 FUTURES
             //https://money2.creontrade.com/e5/mboard/ptype_basic/HTS_Plus_Helper/DW_Basic_Read_Page.aspx?boardseq=284&seq=105&page=3&searchString=%ec%84%a0%eb%ac%bc&p=8841&v=8643&m=9505
             if (utility.kospi_commodity)
@@ -1692,16 +1878,36 @@ namespace WindowsFormsApp1
                 FutOptChart.SetInputValue(7, (short)1); //주기?
                 FutOptChart.SetInputValue(8, '0'); //갭보정여부
                 FutOptChart.SetInputValue(9, '0'); //수정주가
-                                                   //
-                int reuslt_kospi = FutOptChart.BlockRequest();
                 //
-                if (FutOptChart.GetDibStatus() == 1)
+                int check = 0;
+                //
+                //수신확인
+                while (true)
                 {
-                    string status_message = FutOptChart.GetDibMsg1();
-                    WriteLog_System($"[KOSPI200/수신실패] : DibRq 요청 수신대기(60초후 재시도) - {status_message}\n");
-                    telegram_message("[KOSPI200/수신실패] : DibRq 요청 수신대기(60초후 재시도)\n"); 
+                    if (FutOptChart.GetDibStatus() == 1)
+                    {
+                        check++;
+                        WriteLog_System("[DibRq요청/수신대기/5초] : KOSPI200\n");
+                        System.Threading.Thread.Sleep(5000);
+                    }
+                    else if (check == 5)
+                    {
+                        break;
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+                //
+                if (check == 5)
+                {
+                    WriteLog_System("[KOSPI200/수신실패] : 재부팅 요망\n");
+                    telegram_message("[KOSPI200/수신실패] : 재부팅 요망\n");
                     return;
                 }
+                //                                   //
+                int reuslt_kospi = FutOptChart.BlockRequest();
                 //
                 if (reuslt_kospi == 0)
                 {
@@ -1820,15 +2026,35 @@ namespace WindowsFormsApp1
                 FutOptChart.SetInputValue(8, '0'); //갭보정여부
                 FutOptChart.SetInputValue(9, '0'); //수정주가
                 //
-                int reuslt_kosdask = FutOptChart.BlockRequest();
+                int check = 0;
                 //
-                if (FutOptChart.GetDibStatus() == 1)
+                //수신확인
+                while (true)
                 {
-                    string status_message = FutOptChart.GetDibMsg1();
-                    WriteLog_System($"[KOSDAK150 /수신실패] : DibRq 요청 수신대기(60초후 재시도) - {status_message}\n");
-                    telegram_message("[KOSDAK150 수신실패] : DibRq 요청 수신대기(60초후 재시도)\n");
+                    if (FutOptChart.GetDibStatus() == 1)
+                    {
+                        check++;
+                        WriteLog_System("[DibRq요청/수신대기/5초] : KOSDAK150\n");
+                        System.Threading.Thread.Sleep(5000);
+                    }
+                    else if (check == 5)
+                    {
+                        break;
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+                //
+                if (check == 5)
+                {
+                    WriteLog_System("[KOSDAK150/수신실패] : 재부팅 요망\n");
+                    telegram_message("[KOSDAK150/수신실패] : 재부팅 요망\n");
                     return;
                 }
+                // 
+                int reuslt_kosdask = FutOptChart.BlockRequest();
                 //
                 if (reuslt_kosdask == 0)
                 {
@@ -1945,6 +2171,34 @@ namespace WindowsFormsApp1
         private void Condition_load()
         {
             CssStgList.SetInputValue(0, '1');
+            //
+            int check = 0;
+            //
+            //수신확인
+            while (true)
+            {
+                if (CssStgList.GetDibStatus() == 1)
+                {
+                    check++;
+                    WriteLog_System("[DibRq요청/수신대기/5초] : 조건식 조회\n");
+                    System.Threading.Thread.Sleep(5000);
+                }
+                else if (check == 5)
+                {
+                    break;
+                }
+                else
+                {
+                    break;
+                }
+            }
+            //
+            if (check == 5)
+            {
+                WriteLog_System("[조건식 조회/수신실패] : 재부팅 요망\n");
+                telegram_message("[조건식 조회/수신실패] : 재부팅 요망\n");
+                return;
+            }
             //
             int result = CssStgList.BlockRequest();
             //
@@ -2118,12 +2372,14 @@ namespace WindowsFormsApp1
                 telegram_message("자동 조건식 매수 미설정\n");
             }
 
+            System.Threading.Thread.Sleep(200);
+
             //자동 매도 조건식 설정 여부
             if (utility.sell_condition)
             {
                 WriteLog_System("실시간 조건식 매도 시작\n");
                 telegram_message("실시간 조건식 매도 시작\n");
-                real_time_search(null, EventArgs.Empty);
+                normal_search(null, EventArgs.Empty);
 
             }
             else
@@ -2193,9 +2449,35 @@ namespace WindowsFormsApp1
             CssWatchStgControl.SetInputValue(0, condition[0]); //전략ID
             CssWatchStgControl.SetInputValue(1, condition_serial); //감시 일련번호
             CssWatchStgControl.SetInputValue(2, '1'); //감시시작
-
-            System.Threading.Thread.Sleep(200);
-
+            //
+            int check = 0;
+            //
+            //수신확인
+            while (true)
+            {
+                if (CssWatchStgControl.GetDibStatus() == 1)
+                {
+                    check++;
+                    WriteLog_System("[DibRq요청/수신대기/5초] : 매도 전용 조건식 검색\n");
+                    System.Threading.Thread.Sleep(5000);
+                }
+                else if (check == 5)
+                {
+                    break;
+                }
+                else
+                {
+                    break;
+                }
+            }
+            //
+            if (check == 5)
+            {
+                WriteLog_System("[매도 전용 조건식 검색/수신실패] : 재부팅 요망\n");
+                telegram_message("[매도 전용 조건식 검색/수신실패] : 재부팅 요망\n");
+                return;
+            }
+            //
             int result = CssWatchStgControl.BlockRequest();
             //
             if (result == 0)
@@ -2292,6 +2574,8 @@ namespace WindowsFormsApp1
                 //초기종목받기
                 stock_initial(condition[0], condition[1]);
 
+                System.Threading.Thread.Sleep(200);
+
                 //일련번호
                 int condition_serial = condition_sub_code(condition[0]);
 
@@ -2299,9 +2583,35 @@ namespace WindowsFormsApp1
                 CssWatchStgControl.SetInputValue(0, condition[0]); //전략ID
                 CssWatchStgControl.SetInputValue(1, condition_serial); //감시 일련번호
                 CssWatchStgControl.SetInputValue(2, '1'); //감시시작
-
-                System.Threading.Thread.Sleep(200);
-
+                //
+                int check = 0;
+                //
+                //수신확인
+                while (true)
+                {
+                    if (CssWatchStgControl.GetDibStatus() == 1)
+                    {
+                        check++;
+                        WriteLog_System("[DibRq요청/수신대기/5초] : 매수 전용 조건식 검색\n");
+                        System.Threading.Thread.Sleep(5000);
+                    }
+                    else if (check == 5)
+                    {
+                        break;
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+                //
+                if (check == 5)
+                {
+                    WriteLog_System("[매수 전용 조건식 검색/수신실패] : 재부팅 요망\n");
+                    telegram_message("[매수 전용 조건식 검색/수신실패] : 재부팅 요망\n");
+                    return;
+                }
+                //
                 int result = CssWatchStgControl.BlockRequest();
                 //
                 if (result == 0)
@@ -2349,8 +2659,34 @@ namespace WindowsFormsApp1
         {
             CssStgFind.SetInputValue(0, condition_code); //전략ID
             CssStgFind.SetInputValue(1, 'N'); //전략ID
-
-            System.Threading.Thread.Sleep(200);
+            //
+            int check = 0;
+            //
+            //수신확인
+            while (true)
+            {
+                if (CssStgFind.GetDibStatus() == 1)
+                {
+                    check++;
+                    WriteLog_System("[DibRq요청/수신대기/5초] : 초기 종목 검색\n");
+                    System.Threading.Thread.Sleep(5000);
+                }
+                else if (check == 5)
+                {
+                    break;
+                }
+                else
+                {
+                    break;
+                }
+            }
+            //
+            if (check == 5)
+            {
+                WriteLog_System("[초기 종목 검색/수신실패] : 재부팅 요망\n");
+                telegram_message("[초기 종목 검색/수신실패] : 재부팅 요망\n");
+                return;
+            }
             //
             int result = CssStgFind.BlockRequest();
             //
@@ -2382,25 +2718,43 @@ namespace WindowsFormsApp1
         //https://money2.daishin.com/e5/mboard/ptype_basic/HTS_Plus_Helper/DW_Basic_Read.aspx?boardseq=285&seq=131&page=1&searchString=MarketEye&p=&v=&m=
         private void Stock_info(string condition_name, string Code, string hold_num, string order_number, string gubun)
         {
+            //
+            System.Threading.Thread.Sleep(200);
+
             //종목코드, 시간, 현재가, 거래량, 종목명, 상한가
             int[] items = {0, 1, 4, 10, 17, 33};
             MarketEye.SetInputValue(0, items);
             MarketEye.SetInputValue(1, Code);
             //
-            System.Threading.Thread.Sleep(200);
-            //
-            int result = MarketEye.BlockRequest();
+            int check = 0;
             //
             //수신확인
-            if (MarketEye.GetDibStatus() == 1)
+            while (true)
             {
-                string status_message = MarketEye.GetDibMsg1();
-                WriteLog_Stock($"[{condition_name}/편입/수신실패] : {Code} / {status_message} \n");
-                WriteLog_System("DibRq 요청 수신대기(1초후 재시도) : 종목정보받기(주문번호)");
-                System.Threading.Thread.Sleep(1000);
-                Stock_info(condition_name, Code, hold_num, order_number, gubun);
+                if (MarketEye.GetDibStatus() == 1)
+                {
+                    check++;
+                    WriteLog_System("[DibRq요청/수신대기/5초] : 종목 정보 받기\n");
+                    System.Threading.Thread.Sleep(5000);
+                }
+                else if (check == 5)
+                {
+                    break;
+                }
+                else
+                {
+                    break;
+                }
+            }
+            //
+            if (check == 5)
+            {
+                WriteLog_System("[종목 정보 받기/수신실패] : 재부팅 요망\n");
+                telegram_message("[종목 정보 받기/수신실패] : 재부팅 요망\n");
                 return;
             }
+            //
+            int result = MarketEye.BlockRequest();
             //
             if (result == 0)
             {
@@ -3257,6 +3611,8 @@ namespace WindowsFormsApp1
                 last_buy_time = t_now.ToString();
             }
 
+            System.Threading.Thread.Sleep(200);
+
             //매수 주문(1초에 5회)
             //주문 방식 구분
             string[] order_method = buy_condtion_method.Text.Split('/');
@@ -3288,14 +3644,35 @@ namespace WindowsFormsApp1
                 CpTd0311.SetInputValue(7, "0"); //주문조건구분코드
                 CpTd0311.SetInputValue(8, "03"); //시장가
                 //
-                int error = CpTd0311.BlockRequest();
+                int check2 = 0;
                 //
-                //
-                if (CpTd0311.GetDibStatus() == 1)
+                //수신확인
+                while (true)
                 {
-                    string status_message = CpTd0311.GetDibMsg1();
-                    WriteLog_System($"[주문결과/수신실패] : DibRq 요청 수신대기 / {status_message}\n");
+                    if (CpTd0311.GetDibStatus() == 1)
+                    {
+                        check2++;
+                        WriteLog_System("[DibRq요청/수신대기/5초] : 시장가 주문\n");
+                        System.Threading.Thread.Sleep(5000);
+                    }
+                    else if (check2 == 5)
+                    {
+                        break;
+                    }
+                    else
+                    {
+                        break;
+                    }
                 }
+                //
+                if (check2 == 5)
+                {
+                    WriteLog_System("[시장가 주문/수신실패] : 재부팅 요망\n");
+                    telegram_message("[시장가 주문/수신실패] : 재부팅 요망\n");
+                    return "대기";
+                }
+                //
+                int error = CpTd0311.BlockRequest();
                 //
                 if (error == 0)
                 {
@@ -3403,8 +3780,36 @@ namespace WindowsFormsApp1
                 CpTd0311.SetInputValue(7, "0"); //주문조건구분코드
                 CpTd0311.SetInputValue(8, "01"); //지장가
                 //
+                int check2 = 0;
+                //
+                //수신확인
+                while (true)
+                {
+                    if (CpTd0311.GetDibStatus() == 1)
+                    {
+                        check2++;
+                        WriteLog_System("[DibRq요청/수신대기/5초] : 지정가 주문\n");
+                        System.Threading.Thread.Sleep(5000);
+                    }
+                    else if (check2 == 5)
+                    {
+                        break;
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+                //
+                if (check2 == 5)
+                {
+                    WriteLog_System("[지정가 주문/수신실패] : 재부팅 요망\n");
+                    telegram_message("[지정가 주문/수신실패] : 재부팅 요망\n");
+                    return "대기";
+                }
+                //
                 int error = CpTd0311.BlockRequest();
-  
+                //
                 if (error == 0)
                 {
                     //
@@ -3678,6 +4083,8 @@ namespace WindowsFormsApp1
                     last_buy_time2 = t_now.ToString();
                 }
 
+                System.Threading.Thread.Sleep(200);
+
                 TimeSpan t_time0 = TimeSpan.Parse("15:30:00");
                 TimeSpan t_time1 = TimeSpan.Parse("15:40:00");
                 TimeSpan t_time2 = TimeSpan.Parse("16:00:00");
@@ -3739,9 +4146,37 @@ namespace WindowsFormsApp1
                     CpTd0322.SetInputValue(2, gubun); //상품관리구분코드
                     CpTd0322.SetInputValue(3, code); //종목코드
                     CpTd0322.SetInputValue(4, order_acc); //주문수량
-
+                    //
+                    int check2 = 0;
+                    //
+                    //수신확인
+                    while (true)
+                    {
+                        if (CpTd0322.GetDibStatus() == 1)
+                        {
+                            check2++;
+                            WriteLog_System("[DibRq요청/수신대기/5초] : 시간외종가 주문\n");
+                            System.Threading.Thread.Sleep(5000);
+                        }
+                        else if (check2 == 5)
+                        {
+                            break;
+                        }
+                        else
+                        {
+                            break;
+                        }
+                    }
+                    //
+                    if (check2 == 5)
+                    {
+                        WriteLog_System("[시간외종가 주문/수신실패] : 재부팅 요망\n");
+                        telegram_message("[시간외종가 주문/수신실패] : 재부팅 요망\n");
+                        return;
+                    }
+                    //
                     int error = CpTd0322.BlockRequest();
-
+                    //
                     if (error == 0)
                     {
 
@@ -3798,9 +4233,37 @@ namespace WindowsFormsApp1
                     CpTd0386.SetInputValue(3, code); //종목코드
                     CpTd0386.SetInputValue(4, order_acc); //주문수량
                     CpTd0386.SetInputValue(5, edited_price_hoga); //주문단가
-
+                    //
+                    int check2 = 0;
+                    //
+                    //수신확인
+                    while (true)
+                    {
+                        if (CpTd0386.GetDibStatus() == 1)
+                        {
+                            check2++;
+                            WriteLog_System("[DibRq요청/수신대기/5초] : 시간외단일가 주문\n");
+                            System.Threading.Thread.Sleep(5000);
+                        }
+                        else if (check2 == 5)
+                        {
+                            break;
+                        }
+                        else
+                        {
+                            break;
+                        }
+                    }
+                    //
+                    if (check2 == 5)
+                    {
+                        WriteLog_System("[시간외단일가 주문/수신실패] : 재부팅 요망\n");
+                        telegram_message("[시간외단일가 주문/수신실패] : 재부팅 요망\n");
+                        return;
+                    }
+                    //
                     int error = CpTd0386.BlockRequest();
-
+                    //
                     if (error == 0)
                     {
 
@@ -3835,9 +4298,36 @@ namespace WindowsFormsApp1
                     CpTd0311.SetInputValue(5, 0); //주문단가
                     CpTd0311.SetInputValue(7, "0"); //주문조건구분코드
                     CpTd0311.SetInputValue(8, "03"); //시장가
-                    
+                    //
+                    int check2 = 0;
+                    //
+                    //수신확인
+                    while (true)
+                    {
+                        if (CpTd0311.GetDibStatus() == 1)
+                        {
+                            check2++;
+                            WriteLog_System("[DibRq요청/수신대기/5초] : 시장가 주문\n");
+                            System.Threading.Thread.Sleep(5000);
+                        }
+                        else if (check2 == 5)
+                        {
+                            break;
+                        }
+                        else
+                        {
+                            break;
+                        }
+                    }
+                    //
+                    if (check2 == 5)
+                    {
+                        WriteLog_System("[시장가 주문/수신실패] : 재부팅 요망\n");
+                        telegram_message("[시장가 주문/수신실패] : 재부팅 요망\n");
+                        return;
+                    }
                     int error = CpTd0311.BlockRequest();
-
+                    //
                     if (error == 0)
                     {
 
@@ -3874,9 +4364,36 @@ namespace WindowsFormsApp1
                     CpTd0311.SetInputValue(5, edited_price_hoga); //주문단가
                     CpTd0311.SetInputValue(7, "0"); //주문조건구분코드
                     CpTd0311.SetInputValue(8, "01"); //지정가
-
+                    //
+                    int check2 = 0;
+                    //
+                    //수신확인
+                    while (true)
+                    {
+                        if (CpTd0311.GetDibStatus() == 1)
+                        {
+                            check2++;
+                            WriteLog_System("[DibRq요청/수신대기/5초] : 지정가 주문\n");
+                            System.Threading.Thread.Sleep(5000);
+                        }
+                        else if (check2 == 5)
+                        {
+                            break;
+                        }
+                        else
+                        {
+                            break;
+                        }
+                    }
+                    //
+                    if (check2 == 5)
+                    {
+                        WriteLog_System("[지정가 주문/수신실패] : 재부팅 요망\n");
+                        telegram_message("[지정가 주문/수신실패] : 재부팅 요망\n");
+                        return;
+                    }
                     int error = CpTd0311.BlockRequest();
-
+                    //
                     if (error == 0)
                     {
 
@@ -4127,7 +4644,34 @@ namespace WindowsFormsApp1
                         CssWatchStgControl.SetInputValue(0, tmp[0]); //전략ID
                         CssWatchStgControl.SetInputValue(1, conditon_SubCode); //감시 일련번호
                         CssWatchStgControl.SetInputValue(2, '3'); //감시 취소
-                                                                  //
+                        //
+                        int check2 = 0;
+                        //
+                        //수신확인
+                        while (true)
+                        {
+                            if (CssWatchStgControl.GetDibStatus() == 1)
+                            {
+                                check2++;
+                                WriteLog_System("[DibRq요청/수신대기/5초] : 매수 조건식 중단\n");
+                                System.Threading.Thread.Sleep(5000);
+                            }
+                            else if (check2 == 5)
+                            {
+                                break;
+                            }
+                            else
+                            {
+                                break;
+                            }
+                        }
+                        //
+                        if (check2 == 5)
+                        {
+                            WriteLog_System("[매수 조건식 중단/수신실패] : 재부팅 요망\n");
+                            telegram_message("[매수 조건식 중단/수신실패] : 재부팅 요망\n");
+                            return;
+                        }                                          //
                         int result = CssWatchStgControl.BlockRequest();
                         //
                         if (result == 0)
@@ -4157,6 +4701,8 @@ namespace WindowsFormsApp1
                     }
                 }
             }
+
+            System.Threading.Thread.Sleep(200);
 
             //매도 조건식 중단
             if (utility.sell_condition && Condition_Profile2.Count != 0)
@@ -4188,7 +4734,34 @@ namespace WindowsFormsApp1
                         CssWatchStgControl.SetInputValue(0, tmp[0]); //전략ID
                         CssWatchStgControl.SetInputValue(1, conditon_SubCode); //감시 일련번호
                         CssWatchStgControl.SetInputValue(2, '3'); //감시 취소
-                                                                  //
+                        //
+                        int check2 = 0;
+                        //
+                        //수신확인
+                        while (true)
+                        {
+                            if (CssWatchStgControl.GetDibStatus() == 1)
+                            {
+                                check2++;
+                                WriteLog_System("[DibRq요청/수신대기/5초] : 매도 조건식 중단\n");
+                                System.Threading.Thread.Sleep(5000);
+                            }
+                            else if (check2 == 5)
+                            {
+                                break;
+                            }
+                            else
+                            {
+                                break;
+                            }
+                        }
+                        //
+                        if (check2 == 5)
+                        {
+                            WriteLog_System("[매도 조건식 중단/수신실패] : 재부팅 요망\n");
+                            telegram_message("[매도 조건식 중단/수신실패] : 재부팅 요망\n");
+                            return;
+                        }                                          //
                         int result = CssWatchStgControl.BlockRequest();
                         //
                         if (result == 0)
