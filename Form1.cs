@@ -3133,6 +3133,8 @@ namespace WindowsFormsApp1
 
         //--------------실시간 매수 조건 확인 및 매수 주문---------------------
 
+        private string last_buy_time = "08:59:59";
+
         //매수 가능한 상태인지 확인
         //https://money2.daishin.com/e5/mboard/ptype_basic/HTS_Plus_Helper/DW_Basic_Read.aspx?boardseq=291&seq=159&page=3&searchString=&p=&v=&m=
         private string buy_check(string code, string code_name, string price, string time, string high, bool check, string condition_name)
@@ -3241,16 +3243,23 @@ namespace WindowsFormsApp1
                 }
             }
 
-            //매수지연(기본값 200 => 프로그램 여러 호출단에서 기본 간격 200ms가 존재하므로 기본 지연 + 입력값
-            int term = 200;
-            if(utility.term_for_buy) term = Convert.ToInt32(utility.term_for_buy_text);
+            //최소 주문간 간격 200ms
+            if (utility.term_for_buy)
+            {
+                TimeSpan t_now = TimeSpan.Parse(time);
+                TimeSpan t_last = TimeSpan.Parse(last_buy_time);
+
+                if (t_now - t_last < TimeSpan.FromMilliseconds(Convert.ToInt32(utility.term_for_buy_text)))
+                {
+                    //WriteLog_Order($"[매수간격] 설정({utility.term_for_buy_text}), 현재({(t_now - t_last2).ToString()})\n");
+                    return "대기";
+                }
+                last_buy_time = t_now.ToString();
+            }
 
             //매수 주문(1초에 5회)
             //주문 방식 구분
             string[] order_method = buy_condtion_method.Text.Split('/');
-
-            //매수지연
-            System.Threading.Thread.Sleep(term);
 
             //시장가 주문
             if (order_method[0].Equals("시장가"))
@@ -3625,6 +3634,8 @@ namespace WindowsFormsApp1
 
         //--------------실시간 매도 주문---------------------
 
+        private string last_buy_time2 = "08:59:59";
+
         //매도 주문(1초에 5회)
         //https://money2.daishin.com/e5/mboard/ptype_basic/HTS_Plus_Helper/DW_Basic_Read.aspx?boardseq=291&seq=159&page=3&searchString=&p=&v=&m=
         private void sell_order(string price, string sell_message, string order_num, string percent, string gubun)
@@ -3653,6 +3664,20 @@ namespace WindowsFormsApp1
                 int market_time = 0;
 
                 TimeSpan t_now = TimeSpan.Parse(DateTime.Now.ToString("HH:mm:ss"));
+
+                //주문간 간격
+                if (utility.term_for_sell)
+                {
+                    TimeSpan t_last2 = TimeSpan.Parse(last_buy_time);
+
+                    if (t_now - t_last2 < TimeSpan.FromMilliseconds(Convert.ToInt32(utility.term_for_sell_text)))
+                    {
+                        //WriteLog_Order($"[매도간격] 설정({utility.term_for_sell_text}), 현재({(t_now - t_last2).ToString()})\n");
+                        return;
+                    }
+                    last_buy_time2 = t_now.ToString();
+                }
+
                 TimeSpan t_time0 = TimeSpan.Parse("15:30:00");
                 TimeSpan t_time1 = TimeSpan.Parse("15:40:00");
                 TimeSpan t_time2 = TimeSpan.Parse("16:00:00");
@@ -3686,9 +3711,6 @@ namespace WindowsFormsApp1
 
                 WriteLog_Order($"[{sell_message}/주문접수/{gubun}] : {code_name}({code}) {order_acc}개 {percent}\n");
                 telegram_message($"[{sell_message}/주문접수/{gubun}] : {code_name}({code}) {order_acc}개 {percent}\n");
-
-                //매도지연
-                System.Threading.Thread.Sleep(term);
 
                 //시간외종가
                 //https://money2.creontrade.com/e5/mboard/ptype_basic/HTS_Plus_Helper/DW_Basic_Read_Page.aspx?boardseq=291&seq=177&page=1&searchString=&p=&v=&m=
