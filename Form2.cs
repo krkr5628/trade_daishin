@@ -60,6 +60,7 @@ namespace WindowsFormsApp1
             profit_percent_text.Leave += Profit_percent_text_Leave;
             loss_percent_text.Leave += Loss_percent_text_Leave;
             profit_ts_text.Leave += Profit_ts_text_Leave;
+
             clear_sell_profit_text.Leave += Clear_sell_profit_text_Leave;
             clear_sell_loss_text.Leave += Clear_sell_loss_text_Leave;
 
@@ -81,6 +82,15 @@ namespace WindowsFormsApp1
             term_for_buy_text.Leave += Term_for_buy_text_Leave;
             term_for_sell_text.Leave += Term_for_sell_text_Leave;
 
+            type0_start.Leave += Type0_start_Leave;
+            type0_end.Leave += Type0_end_Leave;
+
+            type0_all_start.Leave += Type0_all_start_Leave;
+            type0_all_end.Leave += Type0_all_end_Leave;
+
+            type0_isa_start.Leave += Type0_isa_start_Leave;
+            type0_isa_end.Leave += Type0_isa_end_Leave;
+
             //시간확인
             market_start_time.Leave += Market_start_time_Leave;
             market_end_time.Leave += Market_end_time_Leave;
@@ -98,8 +108,6 @@ namespace WindowsFormsApp1
             Dual_Time_Stop.Leave += Dual_Time_Stop_Leave;
 
             //소수점이거나 정수인지 확인
-            type0_start.Leave += Type0_start_Leave;
-            type0_end.Leave += Type0_end_Leave;
             type1_start.Leave += Type1_start_Leave;
             type1_end.Leave += Type1_end_Leave;
             type2_start.Leave += Type2_start_Leave;
@@ -111,8 +119,6 @@ namespace WindowsFormsApp1
             type5_start.Leave += Type5_start_Leave;
             type5_end.Leave += Type5_end_Leave;
 
-            type0_all_start.Leave += Type0_all_start_Leave;
-            type0_all_end.Leave += Type0_all_end_Leave;
             type1_all_start.Leave += Type1_all_start_Leave;
             type1_all_end.Leave += Type1_all_end_Leave;
             type2_all_start.Leave += Type2_all_start_Leave;
@@ -124,8 +130,6 @@ namespace WindowsFormsApp1
             type5_all_start.Leave += Type5_all_start_Leave;
             type5_all_end.Leave += Type5_all_end_Leave;
 
-            type0_isa_start.Leave += Type0_isa_start_Leave;
-            type0_isa_end.Leave += Type0_isa_end_Leave;
             type1_isa_start.Leave += Type1_isa_start_Leave;
             type1_isa_end.Leave += Type1_isa_end_Leave;
             type2_isa_start.Leave += Type2_isa_start_Leave;
@@ -330,7 +334,7 @@ namespace WindowsFormsApp1
                 else
                 {
                     textBox.Text = defaultValue;
-                    MessageBox.Show("정수 혹은 점이 아닌 값이 있습니다.", "잘못된 입력", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("양수 혹은 점이 아닌 값이 있습니다.", "잘못된 입력", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
             }
@@ -356,7 +360,7 @@ namespace WindowsFormsApp1
 
         }
 
-        //-----------------------------------숫자 입력 오류 확인----------------------------------------
+        //-----------------------------------양 정수 확인----------------------------------------
 
         private void Setting_Positive_numver(object sender, EventArgs e)
         {
@@ -390,7 +394,7 @@ namespace WindowsFormsApp1
 
         private void Max_hold_text_Leave(object sender, EventArgs e)
         {
-            ValidateNumericInput(sender, e, max_hold_text, "0", maxValue: 100);
+            ValidateNumericInput(sender, e, max_hold_text, "0", maxValue: 50);
         }
 
         private void Profit_won_text_Leave(object sender, EventArgs e)
@@ -405,23 +409,16 @@ namespace WindowsFormsApp1
 
         private void Term_for_buy_text_Leave(object sender, EventArgs e)
         {
-            ValidateNumericInput(sender, e, term_for_buy_text, "30");
+            ValidateNumericInput(sender, e, term_for_buy_text, "10000");
         }
         private void Term_for_sell_text_Leave(object sender, EventArgs e)
         {
-            ValidateNumericInput(sender, e, term_for_sell_text, "30");
+            ValidateNumericInput(sender, e, term_for_sell_text, "10000");
         }
 
         private void ValidateNumericInput(object sender, EventArgs e, TextBox textBox, string defaultValue, int? maxLength = null, int? minValue = null, int? maxValue = null)
         {
             string input = textBox.Text;
-
-            if (string.IsNullOrWhiteSpace(input))
-            {
-                textBox.Text = defaultValue;
-                MessageBox.Show("입력된 값이 없습니다.", "잘못된 입력", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
 
             foreach (char c in input)
             {
@@ -455,8 +452,7 @@ namespace WindowsFormsApp1
             }
         }
 
-        //-----------------------------------양 혹은 음 소수점 확인-------------------------------------
-
+        //-----------------------------------양 혹은 음의 정수-------------------------------------
         private void Type0_start_Leave(object sender, EventArgs e)
         {
             ValidatedecimalInput(sender, e, type0_start, type0_end, "-5000");
@@ -465,6 +461,24 @@ namespace WindowsFormsApp1
         {
             ValidatedecimalInput2(sender, e, type0_start, type0_end, "5000");
         }
+        private void Type0_all_start_Leave(object sender, EventArgs e)
+        {
+            ValidatedecimalInput(sender, e, type0_all_start, type0_all_end, "-5000");
+        }
+        private void Type0_all_end_Leave(object sender, EventArgs e)
+        {
+            ValidatedecimalInput2(sender, e, type0_all_start, type0_all_end, "5000");
+        }
+        private void Type0_isa_start_Leave(object sender, EventArgs e)
+        {
+            ValidatedecimalInput(sender, e, type0_isa_start, type0_isa_end, "-5");
+        }
+        private void Type0_isa_end_Leave(object sender, EventArgs e)
+        {
+            ValidatedecimalInput2(sender, e, type0_isa_start, type0_isa_end, "5");
+        }
+
+        //-----------------------------------양 혹은 음 소수점 확인-------------------------------------
         private void Type1_start_Leave(object sender, EventArgs e)
         {
             ValidatedecimalInput(sender, e, type1_start, type1_end, "-5");
@@ -505,14 +519,7 @@ namespace WindowsFormsApp1
         {
             ValidatedecimalInput2(sender, e, type5_start, type5_end, "5");
         }
-        private void Type0_all_start_Leave(object sender, EventArgs e)
-        {
-            ValidatedecimalInput(sender, e, type0_all_start, type0_all_end, "-5000");
-        }
-        private void Type0_all_end_Leave(object sender, EventArgs e)
-        {
-            ValidatedecimalInput2(sender, e, type0_all_start, type0_all_end, "5000");
-        }
+
         private void Type1_all_start_Leave(object sender, EventArgs e)
         {
             ValidatedecimalInput(sender, e, type1_all_start, type1_all_end, "-5");
@@ -553,15 +560,7 @@ namespace WindowsFormsApp1
         {
             ValidatedecimalInput2(sender, e, type5_all_start, type5_all_end, "5");
         }
-
-        private void Type0_isa_start_Leave(object sender, EventArgs e)
-        {
-            ValidatedecimalInput(sender, e, type0_isa_start, type0_isa_end, "-5");
-        }
-        private void Type0_isa_end_Leave(object sender, EventArgs e)
-        {
-            ValidatedecimalInput2(sender, e, type0_isa_start, type0_isa_end, "5");
-        }
+        
         private void Type1_isa_start_Leave(object sender, EventArgs e)
         {
             ValidatedecimalInput(sender, e, type1_isa_start, type1_isa_end, "-5");
