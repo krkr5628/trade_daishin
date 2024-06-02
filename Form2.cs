@@ -793,23 +793,109 @@ namespace WindowsFormsApp1
 
         private bool check()
         {
-            //최종점검
+            //로그인 및 자동실행
+
+            //기본설정 및 추가 옵션 설정
             if (String.IsNullOrEmpty(account_list.Text))
             {
                 MessageBox.Show("계좌번호를설정해주세요");
                 return true;
             }
 
+
+            //매매방식 및 매매방식(시간외)
+            if (buy_set1.Text == "" || buy_set2.Text == "" || sell_set1.Text == "" || sell_set2.Text == "" || sell_set1_after.Text == "" || sell_set2_after.Text == "")
+            {
+                MessageBox.Show("모든 매매 방식을 설정해주세요.");
+                return true;
+            }
+
+            if(buy_set1.Text == "지정가" && buy_set2.Text == "시장가")
+            {
+                MessageBox.Show("지정가로 선택시 호가를 선택하세요.");
+                return true;
+            }
+
+            if (buy_set1.Text == "시장가" && !(buy_set2.Text == "시장가"))
+            {
+                MessageBox.Show("시장가로 선택시 시장가를 선택하세요.");
+                return true;
+            }
+
+            if (sell_set1.Text == "지정가" && sell_set2.Text == "시장가")
+            {
+                MessageBox.Show("지정가로 선택시 호가를 선택하세요.");
+                return true;
+            }
+
+            if (sell_set1.Text == "시장가" && !(sell_set2.Text == "시장가"))
+            {
+                MessageBox.Show("시장가로 선택시 시장가를 선택하세요.");
+                return true;
+            }
+
+
+            //조건설정
             if (buy_condition.Checked && String.IsNullOrEmpty(Fomula_list_buy.Text) || sell_condition.Checked && String.IsNullOrEmpty(Fomula_list_sell.Text))
             {
                 MessageBox.Show("저장하기 위해 조건식 1개 혹은 2개 필요");
                 return true;
             }
 
-            if (profit_after1.Checked || profit_after2.Checked || loss_after1.Checked || loss_after2.Checked || clear_sell_profit_after1.Checked || clear_sell_profit_after2.Checked || clear_sell_loss_after1.Checked || clear_sell_loss_after2.Checked && String.IsNullOrEmpty(sell_set1_after.Text))
+
+            //매매설정
+
+
+            //청산설정
+
+
+            //지연설정
+
+
+            //DUAL
+
+
+            //지수 선물 연동
+
+
+            //Telegram
+            if (Telegram_Allow.Checked)
             {
-                MessageBox.Show("시간외 설정을 위해 매매방식(시간외) 설정 필요");
+                if (telegram_user_id.Text == "" || telegram_token.Text == "")
+                {
+                    MessageBox.Show("TELEGRAM USER_ID와 TOKE을 모두 입력하세요.");
+                    return true;
+                }
+            }
+
+            //KIS
+            if (KIS_Independent.Checked && !KIS_Allow.Checked)
+            {
+                MessageBox.Show("KIS_Allow 를 체크하세요.");
                 return true;
+            }
+
+            if (KIS_Allow.Checked)
+            {
+                if(KIS_Account.Text == "" || appkey.Text == "" || appsecret.Text == "" || kis_amount.Text == "")
+                {
+                    MessageBox.Show("KIS 계좌번호, appkey, appsecret, amount를 모두 입력하세요.");
+                    return true;
+                }
+
+                if (int.TryParse(kis_amount.Text, out int result))
+                {
+                    if(result < 0)
+                    {
+                        MessageBox.Show("amount를 양의 정수로 입력하세요.");
+                        return true;
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("amount를 양의 정수로 입력하세요.");
+                    return true;
+                }
             }
 
             return false;

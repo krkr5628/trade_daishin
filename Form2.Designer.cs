@@ -2029,7 +2029,7 @@ namespace WindowsFormsApp1
             this.groupBox8.Size = new System.Drawing.Size(267, 314);
             this.groupBox8.TabIndex = 21;
             this.groupBox8.TabStop = false;
-            this.groupBox8.Text = "지수 선물 연동(불가)";
+            this.groupBox8.Text = "지수 선물 연동";
             // 
             // tableLayoutPanel17
             // 
