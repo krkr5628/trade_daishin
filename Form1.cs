@@ -455,6 +455,7 @@ namespace WindowsFormsApp1
                 using (StreamWriter writer = new StreamWriter(filePath, true))
                 {
                     writer.Write(String.Join("", log_full));
+                    writer.Close();
                 }
             }
             catch (Exception ex)
@@ -468,6 +469,7 @@ namespace WindowsFormsApp1
                 using (StreamWriter writer = new StreamWriter(filePath2, true))
                 {
                     writer.Write(String.Join("", log_trade));
+                    writer.Close();
                 }
             }
             catch (Exception ex)

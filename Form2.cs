@@ -789,6 +789,32 @@ namespace WindowsFormsApp1
             }
         }
 
+        //-----------------------------------최종확인----------------------------------------
+
+        private bool check()
+        {
+            //최종점검
+            if (String.IsNullOrEmpty(account_list.Text))
+            {
+                MessageBox.Show("계좌번호를설정해주세요");
+                return true;
+            }
+
+            if (buy_condition.Checked && String.IsNullOrEmpty(Fomula_list_buy.Text) || sell_condition.Checked && String.IsNullOrEmpty(Fomula_list_sell.Text))
+            {
+                MessageBox.Show("저장하기 위해 조건식 1개 혹은 2개 필요");
+                return true;
+            }
+
+            if (profit_after1.Checked || profit_after2.Checked || loss_after1.Checked || loss_after2.Checked || clear_sell_profit_after1.Checked || clear_sell_profit_after2.Checked || clear_sell_loss_after1.Checked || clear_sell_loss_after2.Checked && String.IsNullOrEmpty(sell_set1_after.Text))
+            {
+                MessageBox.Show("시간외 설정을 위해 매매방식(시간외) 설정 필요");
+                return true;
+            }
+
+            return false;
+        }
+
         //-----------------------------------조건식 동작----------------------------------------
 
         private void Fomula_list_buy_DropDown(object sender, EventArgs e)
@@ -918,130 +944,123 @@ namespace WindowsFormsApp1
             SaveFileDialog saveFileDialog = new SaveFileDialog();
             saveFileDialog.Title = "파일 저장 경로 지정하세요";
             saveFileDialog.Filter = "텍스트 파일 (*.txt)|*.txt";
+
+            //최종점검
+            if (check()) return;
+
+            //저장
+            List<String> tmp = new List<String>();
+
+            tmp.Add("아이디/" + real_id_text.Text);
+            tmp.Add("비밀번호/" + real_password_text.Text);
+            tmp.Add("공인인증서/" + real_cert_password_text.Text);
+            tmp.Add("자동실행/" + Convert.ToString(auto_trade_allow.Checked));
+            tmp.Add("자동운영시간/" + market_start_time.Text + "/" + market_end_time.Text);
+            tmp.Add("계좌번호/" + account_list.Text);
+            tmp.Add("초기자산/" + initial_balance.Text);
+            tmp.Add("종목당매수금액/" + Convert.ToString(buy_per_price.Checked) + "/" + buy_per_price_text.Text);
+            tmp.Add("종목당매수수량/" + Convert.ToString(buy_per_amount.Checked) + "/" + buy_per_amount_text.Text);
+            tmp.Add("종목당매수비율/" + Convert.ToString(buy_per_percent.Checked) + "/" + buy_per_percent_text.Text);
+            tmp.Add("종목당최대매수금액/" + maxbuy.Text);
+            tmp.Add("최대매수종목수/" + maxbuy_acc.Text);
+            tmp.Add("종목최소매수가/" + min_price.Text);
+            tmp.Add("종목최대매수가/" + max_price.Text);
+            tmp.Add("최대보유종목수/" + Convert.ToString(max_hold.Checked) + "/" + max_hold_text.Text);
+            tmp.Add("당일중복매수금지/" + Convert.ToString(duplication_deny.Checked));
+            tmp.Add("매수시간전검출매수금지/" + Convert.ToString(before_time_deny.Checked));
+            tmp.Add("보유종목매수금지/" + Convert.ToString(hold_deny.Checked));
             //
-            if (String.IsNullOrEmpty(account_list.Text))
+            tmp.Add("매수조건;" + Convert.ToString(buy_condition.Checked) + ";" + buy_condition_start.Text + ";" + buy_condition_end.Text + ";" + Convert.ToString(buy_condition_index.Checked) + ";" + (Fomula_list_buy.Text.Equals("") ? "9999" : Fomula_list_buy.Text) + ";" + Convert.ToString(buy_mode_or.Checked) + ";" + Convert.ToString(buy_mode_and.Checked) + ";" + Convert.ToString(buy_mode_independent.Checked) + ";" + Convert.ToString(buy_mode_dual.Checked));
+            tmp.Add("매도조건;" + Convert.ToString(sell_condition.Checked) + ";" + sell_condition_start.Text + ";" + sell_condition_end.Text + ";" + Convert.ToString(Fomula_list_sell.SelectedIndex) + ";" + (Fomula_list_sell.Text == "" ? "9999" : Fomula_list_sell.Text));
+            tmp.Add("익절/" + Convert.ToString(profit_percent.Checked) + "/" + profit_percent_text.Text);
+            tmp.Add("익절원/" + Convert.ToString(profit_won.Checked) + "/" + profit_won_text.Text);
+            tmp.Add("익절TS/" + Convert.ToString(profit_ts.Checked) + "/" + profit_ts_text.Text);
+            tmp.Add("익절동시호가/" + Convert.ToString(profit_after1.Checked));//익정동시호가
+            tmp.Add("익절시간외단일가/" + Convert.ToString(profit_after2.Checked));//익절시간외단일가
+            tmp.Add("손절/" + Convert.ToString(loss_percent.Checked) + "/" + loss_percent_text.Text);
+            tmp.Add("손절원/" + Convert.ToString(loss_won.Checked) + "/" + loss_won_text.Text);
+            tmp.Add("손절동시호가/" + Convert.ToString(loss_after1.Checked));//익정동시호가
+            tmp.Add("손절시간외단일가/" + Convert.ToString(loss_after2.Checked));//익절시간외단일가
+                                                                         //
+            tmp.Add("전체청산/" + Convert.ToString(clear_sell.Checked) + "/" + clear_sell_start.Text + "/" + clear_sell_end.Text);
+            tmp.Add("개별청산/" + Convert.ToString(clear_sell_mode.Checked));//익절시간외단일가
+            tmp.Add("청산익절/" + Convert.ToString(clear_sell_profit.Checked) + "/" + clear_sell_profit_text.Text);
+            tmp.Add("청산익절동시호가/" + Convert.ToString(clear_sell_profit_after1.Checked));
+            tmp.Add("청산익절시간외단일가/" + Convert.ToString(clear_sell_profit_after2.Checked));
+            tmp.Add("청산손절/" + Convert.ToString(clear_sell_loss.Checked) + "/" + clear_sell_loss_text.Text);
+            tmp.Add("청산손절동시호가/" + Convert.ToString(clear_sell_loss_after1.Checked));
+            tmp.Add("청산손절시간외단일가/" + Convert.ToString(clear_sell_loss_after2.Checked));
+            tmp.Add("청산인덱스/" + Convert.ToString(clear_index.Checked));
+            //
+            tmp.Add("종목매수텀/" + Convert.ToString(term_for_buy.Checked) + "/" + term_for_buy_text.Text);
+            tmp.Add("종목매도텀/" + Convert.ToString(term_for_sell.Checked) + "/" + term_for_sell_text.Text);
+            tmp.Add("미체결매수취소/" + Convert.ToString(term_for_non_buy.Checked));
+            tmp.Add("미체결매수취소/" + Convert.ToString(term_for_non_sell.Checked));
+            //
+            tmp.Add("매수설정/" + Convert.ToString(buy_set1.SelectedIndex) + "/" + Convert.ToString(buy_set2.SelectedIndex));
+            tmp.Add("매도설정/" + Convert.ToString(sell_set1.SelectedIndex) + "/" + Convert.ToString(sell_set2.SelectedIndex));
+            tmp.Add("매도설정_시간외/" + Convert.ToString(sell_set1_after.SelectedIndex) + "/" + Convert.ToString(sell_set2_after.SelectedIndex));
+            //
+            tmp.Add("외국인선물/" + Convert.ToString(Foreign_commodity.Checked));
+            tmp.Add("코스피선물/" + Convert.ToString(kospi_commodity.Checked));
+            tmp.Add("코스닥선물/" + Convert.ToString(kosdak_commodity.Checked));
+            tmp.Add("DOW/" + Convert.ToString(dow_index.Checked));
+            tmp.Add("SP/" + Convert.ToString(sp_index.Checked));
+            tmp.Add("NASDAQ/" + Convert.ToString(nasdaq_index.Checked));
+            //
+            tmp.Add("type0/" + Convert.ToString(type0_selection.Checked) + "/" + type0_start.Text + "/" + type0_end.Text);
+            tmp.Add("type1/" + Convert.ToString(type1_selection.Checked) + "/" + type1_start.Text + "/" + type1_end.Text);
+            tmp.Add("type2/" + Convert.ToString(type2_selection.Checked) + "/" + type2_start.Text + "/" + type2_end.Text);
+            tmp.Add("type3/" + Convert.ToString(type3_selection.Checked) + "/" + type3_start.Text + "/" + type3_end.Text);
+            tmp.Add("type4/" + Convert.ToString(type4_selection.Checked) + "/" + type4_start.Text + "/" + type4_end.Text);
+            tmp.Add("type5/" + Convert.ToString(type5_selection.Checked) + "/" + type5_start.Text + "/" + type5_end.Text);
+            //
+            tmp.Add("type0_ALL/" + Convert.ToString(type0_selection_all.Checked) + "/" + type0_all_start.Text + "/" + type0_all_end.Text);
+            tmp.Add("type1_ALL/" + Convert.ToString(type1_selection_all.Checked) + "/" + type1_all_start.Text + "/" + type1_all_end.Text);
+            tmp.Add("type2_ALL/" + Convert.ToString(type2_selection_all.Checked) + "/" + type2_all_start.Text + "/" + type2_all_end.Text);
+            tmp.Add("type3_ALL/" + Convert.ToString(type3_selection_all.Checked) + "/" + type3_all_start.Text + "/" + type3_all_end.Text);
+            tmp.Add("type4_ALL/" + Convert.ToString(type4_selection_all.Checked) + "/" + type4_all_start.Text + "/" + type4_all_end.Text);
+            tmp.Add("type5_ALL/" + Convert.ToString(type5_selection_all.Checked) + "/" + type5_all_start.Text + "/" + type5_all_end.Text);
+            //
+            tmp.Add("Telegram_Allow/" + Convert.ToString(Telegram_Allow.Checked));
+            tmp.Add("텔레그램ID/" + telegram_user_id.Text);
+            tmp.Add("텔레그램token/" + telegram_token.Text);
+            //
+            tmp.Add("KIS_Allow/" + Convert.ToString(KIS_Allow.Checked));
+            tmp.Add("KIS_Independent/" + Convert.ToString(KIS_Independent.Checked));
+            tmp.Add("KIS_Account/" + KIS_Account.Text);
+            tmp.Add(appkey.Text);
+            tmp.Add(appsecret.Text);
+            tmp.Add("KIS_amount/" + kis_amount.Text);
+            //
+            tmp.Add("Dual_Time/" + Convert.ToString(Dual_Time.Checked));
+            tmp.Add("Dual_Time_Start/" + Dual_Time_Start.Text);
+            tmp.Add("Dual_Time_Stop/" + Dual_Time_Stop.Text);
+            tmp.Add("Dual_Index/" + Convert.ToString(dual_index.Checked));
+            //
+            tmp.Add("type0_Dual/" + Convert.ToString(type0_selection_isa.Checked) + "/" + type0_isa_start.Text + "/" + type0_isa_end.Text);
+            tmp.Add("type1_Dual/" + Convert.ToString(type1_selection_isa.Checked) + "/" + type1_isa_start.Text + "/" + type1_isa_end.Text);
+            tmp.Add("type2_Dual/" + Convert.ToString(type2_selection_isa.Checked) + "/" + type2_isa_start.Text + "/" + type2_isa_end.Text);
+            tmp.Add("type3_Dual/" + Convert.ToString(type3_selection_isa.Checked) + "/" + type3_isa_start.Text + "/" + type3_isa_end.Text);
+            tmp.Add("type4_Dual/" + Convert.ToString(type4_selection_isa.Checked) + "/" + type4_isa_start.Text + "/" + type4_isa_end.Text);
+            tmp.Add("type5_Dual/" + Convert.ToString(type5_selection_isa.Checked) + "/" + type5_isa_start.Text + "/" + type5_isa_end.Text);
+
+            // 저장할 파일 경로
+            string filePath = $@"C:\Auto_Trade_Creon\Log\setting.txt";
+
+            // StreamWriter를 사용하여 파일 저장
+            try
             {
-                MessageBox.Show("계좌번호를설정해주세요"); 
-            }
-            else if (buy_condition.Checked && String.IsNullOrEmpty(Fomula_list_buy.Text) || sell_condition.Checked && String.IsNullOrEmpty(Fomula_list_sell.Text))
-            {
-                MessageBox.Show("저장하기 위해 조건식 1개 혹은 2개 필요");
-            }
-            else if (profit_after1.Checked || profit_after2.Checked || loss_after1.Checked || loss_after2.Checked || clear_sell_profit_after1.Checked || clear_sell_profit_after2.Checked || clear_sell_loss_after1.Checked || clear_sell_loss_after2.Checked && String.IsNullOrEmpty(sell_set1_after.Text))
-            {
-                MessageBox.Show("시간외 설정을 위해 매매방식(시간외) 설정 필요");
-            }
-            else
-            {
-                if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                using (StreamWriter writer = new StreamWriter(filePath, true))
                 {
-                    //임시저장
-                    List<String> tmp = new List<String>();
-
-                    tmp.Add("아이디/" + real_id_text.Text);
-                    tmp.Add("비밀번호/" + real_password_text.Text);
-                    tmp.Add("공인인증서/" + real_cert_password_text.Text);
-                    tmp.Add("자동실행/" + Convert.ToString(auto_trade_allow.Checked));
-                    tmp.Add("자동운영시간/" + market_start_time.Text + "/" + market_end_time.Text);
-                    tmp.Add("계좌번호/" + account_list.Text);
-                    tmp.Add("초기자산/" + initial_balance.Text);
-                    tmp.Add("종목당매수금액/" + Convert.ToString(buy_per_price.Checked) + "/" + buy_per_price_text.Text);
-                    tmp.Add("종목당매수수량/" + Convert.ToString(buy_per_amount.Checked) + "/" + buy_per_amount_text.Text);
-                    tmp.Add("종목당매수비율/" + Convert.ToString(buy_per_percent.Checked) + "/" + buy_per_percent_text.Text);
-                    tmp.Add("종목당최대매수금액/" + maxbuy.Text);
-                    tmp.Add("최대매수종목수/" + maxbuy_acc.Text);
-                    tmp.Add("종목최소매수가/" + min_price.Text);
-                    tmp.Add("종목최대매수가/" + max_price.Text);
-                    tmp.Add("최대보유종목수/" + Convert.ToString(max_hold.Checked) + "/" + max_hold_text.Text);
-                    tmp.Add("당일중복매수금지/" + Convert.ToString(duplication_deny.Checked));
-                    tmp.Add("매수시간전검출매수금지/" + Convert.ToString(before_time_deny.Checked));
-                    tmp.Add("보유종목매수금지/" + Convert.ToString(hold_deny.Checked));
-                    //
-                    tmp.Add("매수조건;" + Convert.ToString(buy_condition.Checked) + ";" + buy_condition_start.Text + ";" + buy_condition_end.Text + ";" + Convert.ToString(buy_condition_index.Checked) + ";" + (Fomula_list_buy.Text.Equals("") ? "9999" : Fomula_list_buy.Text) + ";" + Convert.ToString(buy_mode_or.Checked) + ";" + Convert.ToString(buy_mode_and.Checked) + ";" + Convert.ToString(buy_mode_independent.Checked) + ";" + Convert.ToString(buy_mode_dual.Checked));
-                    tmp.Add("매도조건;" + Convert.ToString(sell_condition.Checked) + ";" + sell_condition_start.Text + ";" + sell_condition_end.Text + ";" + Convert.ToString(Fomula_list_sell.SelectedIndex) + ";" + (Fomula_list_sell.Text == "" ? "9999" : Fomula_list_sell.Text));
-                    tmp.Add("익절/" + Convert.ToString(profit_percent.Checked) + "/" + profit_percent_text.Text);
-                    tmp.Add("익절원/" + Convert.ToString(profit_won.Checked) + "/" + profit_won_text.Text);
-                    tmp.Add("익절TS/" + Convert.ToString(profit_ts.Checked) + "/" + profit_ts_text.Text);
-                    tmp.Add("익절동시호가/" + Convert.ToString(profit_after1.Checked));//익정동시호가
-                    tmp.Add("익절시간외단일가/" + Convert.ToString(profit_after2.Checked));//익절시간외단일가
-                    tmp.Add("손절/" + Convert.ToString(loss_percent.Checked) + "/" + loss_percent_text.Text);
-                    tmp.Add("손절원/" + Convert.ToString(loss_won.Checked) + "/" + loss_won_text.Text);
-                    tmp.Add("손절동시호가/" + Convert.ToString(loss_after1.Checked));//익정동시호가
-                    tmp.Add("손절시간외단일가/" + Convert.ToString(loss_after2.Checked));//익절시간외단일가
-                    //
-                    tmp.Add("전체청산/" + Convert.ToString(clear_sell.Checked) + "/" + clear_sell_start.Text + "/" + clear_sell_end.Text);
-                    tmp.Add("개별청산/" + Convert.ToString(clear_sell_mode.Checked));//익절시간외단일가
-                    tmp.Add("청산익절/" + Convert.ToString(clear_sell_profit.Checked) + "/" + clear_sell_profit_text.Text);
-                    tmp.Add("청산익절동시호가/" + Convert.ToString(clear_sell_profit_after1.Checked));
-                    tmp.Add("청산익절시간외단일가/" + Convert.ToString(clear_sell_profit_after2.Checked));
-                    tmp.Add("청산손절/" + Convert.ToString(clear_sell_loss.Checked) + "/" + clear_sell_loss_text.Text);
-                    tmp.Add("청산손절동시호가/" + Convert.ToString(clear_sell_loss_after1.Checked));
-                    tmp.Add("청산손절시간외단일가/" + Convert.ToString(clear_sell_loss_after2.Checked));
-                    tmp.Add("청산인덱스/" + Convert.ToString(clear_index.Checked));
-                    //
-                    tmp.Add("종목매수텀/" + Convert.ToString(term_for_buy.Checked) + "/" + term_for_buy_text.Text);
-                    tmp.Add("종목매도텀/" + Convert.ToString(term_for_sell.Checked) + "/" + term_for_sell_text.Text);
-                    tmp.Add("미체결매수취소/" + Convert.ToString(term_for_non_buy.Checked));
-                    tmp.Add("미체결매수취소/" + Convert.ToString(term_for_non_sell.Checked));
-                    //
-                    tmp.Add("매수설정/" + Convert.ToString(buy_set1.SelectedIndex) + "/" + Convert.ToString(buy_set2.SelectedIndex));
-                    tmp.Add("매도설정/" + Convert.ToString(sell_set1.SelectedIndex) + "/" + Convert.ToString(sell_set2.SelectedIndex));
-                    tmp.Add("매도설정_시간외/" + Convert.ToString(sell_set1_after.SelectedIndex) + "/" + Convert.ToString(sell_set2_after.SelectedIndex));
-                    //
-                    tmp.Add("외국인선물/" + Convert.ToString(Foreign_commodity.Checked));
-                    tmp.Add("코스피선물/" + Convert.ToString(kospi_commodity.Checked));
-                    tmp.Add("코스닥선물/" + Convert.ToString(kosdak_commodity.Checked));
-                    tmp.Add("DOW/" + Convert.ToString(dow_index.Checked));
-                    tmp.Add("SP/" + Convert.ToString(sp_index.Checked));
-                    tmp.Add("NASDAQ/" + Convert.ToString(nasdaq_index.Checked));
-                    //
-                    tmp.Add("type0/" + Convert.ToString(type0_selection.Checked) + "/" + type0_start.Text + "/" + type0_end.Text);
-                    tmp.Add("type1/" + Convert.ToString(type1_selection.Checked) + "/" + type1_start.Text + "/" + type1_end.Text);
-                    tmp.Add("type2/" + Convert.ToString(type2_selection.Checked) + "/" + type2_start.Text + "/" + type2_end.Text);
-                    tmp.Add("type3/" + Convert.ToString(type3_selection.Checked) + "/" + type3_start.Text + "/" + type3_end.Text);
-                    tmp.Add("type4/" + Convert.ToString(type4_selection.Checked) + "/" + type4_start.Text + "/" + type4_end.Text);
-                    tmp.Add("type5/" + Convert.ToString(type5_selection.Checked) + "/" + type5_start.Text + "/" + type5_end.Text);
-                    //
-                    tmp.Add("type0_ALL/" + Convert.ToString(type0_selection_all.Checked) + "/" + type0_all_start.Text + "/" + type0_all_end.Text);
-                    tmp.Add("type1_ALL/" + Convert.ToString(type1_selection_all.Checked) + "/" + type1_all_start.Text + "/" + type1_all_end.Text);
-                    tmp.Add("type2_ALL/" + Convert.ToString(type2_selection_all.Checked) + "/" + type2_all_start.Text + "/" + type2_all_end.Text);
-                    tmp.Add("type3_ALL/" + Convert.ToString(type3_selection_all.Checked) + "/" + type3_all_start.Text + "/" + type3_all_end.Text);
-                    tmp.Add("type4_ALL/" + Convert.ToString(type4_selection_all.Checked) + "/" + type4_all_start.Text + "/" + type4_all_end.Text);
-                    tmp.Add("type5_ALL/" + Convert.ToString(type5_selection_all.Checked) + "/" + type5_all_start.Text + "/" + type5_all_end.Text);
-                    //
-                    tmp.Add("Telegram_Allow/" + Convert.ToString(Telegram_Allow.Checked));
-                    tmp.Add("텔레그램ID/" + telegram_user_id.Text);
-                    tmp.Add("텔레그램token/" + telegram_token.Text);
-                    //
-                    tmp.Add("KIS_Allow/" + Convert.ToString(KIS_Allow.Checked));
-                    tmp.Add("KIS_Independent/" + Convert.ToString(KIS_Independent.Checked));
-                    tmp.Add("KIS_Account/" + KIS_Account.Text);
-                    tmp.Add(appkey.Text);
-                    tmp.Add(appsecret.Text);
-                    tmp.Add("KIS_amount/" + kis_amount.Text);
-                    //
-                    tmp.Add("Dual_Time/" + Convert.ToString(Dual_Time.Checked));
-                    tmp.Add("Dual_Time_Start/" + Dual_Time_Start.Text);
-                    tmp.Add("Dual_Time_Stop/" + Dual_Time_Stop.Text);
-                    tmp.Add("Dual_Index/" + Convert.ToString(dual_index.Checked));
-                    //
-                    tmp.Add("type0_Dual/" + Convert.ToString(type0_selection_isa.Checked) + "/" + type0_isa_start.Text + "/" + type0_isa_end.Text);
-                    tmp.Add("type1_Dual/" + Convert.ToString(type1_selection_isa.Checked) + "/" + type1_isa_start.Text + "/" + type1_isa_end.Text);
-                    tmp.Add("type2_Dual/" + Convert.ToString(type2_selection_isa.Checked) + "/" + type2_isa_start.Text + "/" + type2_isa_end.Text);
-                    tmp.Add("type3_Dual/" + Convert.ToString(type3_selection_isa.Checked) + "/" + type3_isa_start.Text + "/" + type3_isa_end.Text);
-                    tmp.Add("type4_Dual/" + Convert.ToString(type4_selection_isa.Checked) + "/" + type4_isa_start.Text + "/" + type4_isa_end.Text);
-                    tmp.Add("type5_Dual/" + Convert.ToString(type5_selection_isa.Checked) + "/" + type5_isa_start.Text + "/" + type5_isa_end.Text);
-
-                    //텍스트 합치기
-                    string textToSave = string.Join("\r\n", tmp);
-
-                    // 사용자가 선택한 파일 경로
-                    string filePath = saveFileDialog.FileName;
-
-                    //파일에 텍스트 저장
-                    System.IO.File.WriteAllText(filePath, textToSave);
+                    writer.Write(String.Join("", tmp));
+                    writer.Close();
                     MessageBox.Show("파일이 저장되었습니다: " + filePath);
                 }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("파일 저장 중 오류 발생: " + ex.Message);
             }
         }
 
@@ -1522,8 +1541,5 @@ namespace WindowsFormsApp1
         {
 
         }
-
-        //Telegram 오류 처리
-
     }
 }
