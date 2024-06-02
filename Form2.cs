@@ -794,23 +794,79 @@ namespace WindowsFormsApp1
         private bool check()
         {
             //로그인 및 자동실행
+            if(real_id_text.Text == "")
+            {
+                MessageBox.Show("ID를 입력하세요.");
+                return true;
+            }
+
+            if (real_password_text.Text == "")
+            {
+                MessageBox.Show("비밀전호를 입력하세요.");
+                return true;
+            }
+
+            if (real_cert_password_text.Text == "")
+            {
+                MessageBox.Show("공인인증서 비밀전호를 입력하세요.");
+                return true;
+            }
+
+            if (auto_trade_allow.Checked)
+            {
+                if(market_start_time.Text == "" || market_end_time.Text == "")
+                {
+                    MessageBox.Show("운영시간 범위를 모두 입력하세요.");
+                    return true;
+                }
+
+                DateTime result;
+
+                if (!DateTime.TryParse(market_start_time.Text, out result))
+                {
+                    MessageBox.Show("시작 시각을 형식(HH:mm:ss)으로 입력하세요.");
+                    return true;
+                }
+
+                DateTime result2;
+
+                if (!DateTime.TryParse(market_end_time.Text, out result2))
+                {
+                    MessageBox.Show("종료 시각을 형식(HH:mm:ss)으로 입력하세요.");
+                    return true;
+                }
+
+                if(result.TimeOfDay > result2.TimeOfDay)
+                {
+                    MessageBox.Show("시작 시각을 종료 시각보다 작게 입력하세요.");
+                    return true;
+                }
+
+            }
+
 
             //기본설정 및 추가 옵션 설정
             if (String.IsNullOrEmpty(account_list.Text))
             {
-                MessageBox.Show("계좌번호를설정해주세요");
+                MessageBox.Show("계좌번호를 설정하세요.");
                 return true;
             }
 
 
             //매매방식 및 매매방식(시간외)
-            if (buy_set1.Text == "" || buy_set2.Text == "" || sell_set1.Text == "" || sell_set2.Text == "" || sell_set1_after.Text == "" || sell_set2_after.Text == "")
+            if (buy_set1.Text == "" || buy_set2.Text == "" || sell_set1.Text == "" || sell_set2.Text == "")
             {
                 MessageBox.Show("모든 매매 방식을 설정해주세요.");
                 return true;
             }
 
-            if(buy_set1.Text == "지정가" && buy_set2.Text == "시장가")
+            if (sell_set1_after.Text == "" || sell_set2_after.Text == "")
+            {
+                MessageBox.Show("모든 매매 방식(시간외)을 설정해주세요.");
+                return true;
+            }
+
+            if (buy_set1.Text == "지정가" && buy_set2.Text == "시장가")
             {
                 MessageBox.Show("지정가로 선택시 호가를 선택하세요.");
                 return true;
