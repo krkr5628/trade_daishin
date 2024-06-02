@@ -1384,7 +1384,7 @@ namespace WindowsFormsApp1
             this.profit_ts.Name = "profit_ts";
             this.profit_ts.Size = new System.Drawing.Size(93, 20);
             this.profit_ts.TabIndex = 11;
-            this.profit_ts.Text = "익절TS";
+            this.profit_ts.Text = "익절TS(%)";
             this.profit_ts.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.profit_ts.UseVisualStyleBackColor = false;
             // 

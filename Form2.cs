@@ -310,12 +310,7 @@ namespace WindowsFormsApp1
             string input = textBox.Text;
 
             //입력된 값이 없을시
-            if (string.IsNullOrWhiteSpace(input))
-            {
-                textBox.Text = defaultValue;
-                MessageBox.Show("입력된 값이 없습니다.", "잘못된 입력", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
+            if (string.IsNullOrWhiteSpace(input)) return;
 
             //숫자 혹은 소수점인지 확인
             bool hasDecimalPoint = false;
@@ -347,6 +342,18 @@ namespace WindowsFormsApp1
                 MessageBox.Show("점을 한번만 입력하세요.", "잘못된 입력", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
+
+            //범위 확인
+            double intput_range = Convert.ToDouble(textBox.Text);
+            double max = 1000000;
+            double min = 0;
+            if(intput_range < min || intput_range > max)
+            {
+                textBox.Text = defaultValue;
+                MessageBox.Show("범위 : 0 이상  1,000,000 이하", "잘못된 입력", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
         }
 
         //-----------------------------------숫자 입력 오류 확인----------------------------------------
