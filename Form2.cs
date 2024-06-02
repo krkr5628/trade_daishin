@@ -39,12 +39,12 @@ namespace WindowsFormsApp1
             Fomula_list_buy_Checked_box.ItemCheck += Fomula_list_buy_Checked_box_ItemCheck;
 
             //매매방식 자동 동작
-            buy_set1.Leave += Buy_set_Leave;
-            buy_set2.Leave += Buy_set_Leave;
-            sell_set1.Leave += Sell_set_Leave;
-            sell_set2.Leave += Sell_set_Leave;
-            sell_set1_after.Leave += Sell_set_after_Leave;
-            sell_set2_after.Leave += Sell_set_after_Leave;
+            buy_set1.Leave += Buy_set1_Leave;
+            buy_set2.Leave += Buy_set2_Leave;
+            sell_set1.Leave += Sell_set1_Leave;
+            sell_set2.Leave += Sell_set2_Leave;
+            sell_set1_after.Leave += Sell_set_after1_Leave;
+            sell_set2_after.Leave += Sell_set_after2_Leave;
 
             //TELEGRAM TEST
             telegram_test_button.Click += telegram_test;
@@ -153,24 +153,33 @@ namespace WindowsFormsApp1
 
         //----------------------------매매방식 확인----------------------------------------
 
-        private void Buy_set_Leave(object sender, EventArgs e)
+        private void Buy_set1_Leave(object sender, EventArgs e)
         {
-            ValidateOrderType(sender, e, buy_set1, buy_set2);
+            ValidateOrderType1(sender, e, buy_set1, buy_set2);
         }
 
-
-        private void Sell_set_Leave(object sender, EventArgs e)
+        private void Sell_set1_Leave(object sender, EventArgs e)
         {
-            ValidateOrderType(sender, e, sell_set1, sell_set2);
+            ValidateOrderType1(sender, e, sell_set1, sell_set2);
         }
 
-        private void ValidateOrderType(object sender, EventArgs e, ComboBox orderType, ComboBox orderPrice)
+        private void Buy_set2_Leave(object sender, EventArgs e)
         {
-            if (orderType.Text.Equals(""))
+            ValidateOrderType2(sender, e, buy_set1, buy_set2);
+        }
+
+        private void Sell_set2_Leave(object sender, EventArgs e)
+        {
+            ValidateOrderType2(sender, e, sell_set1, sell_set2);
+        }
+
+        private void ValidateOrderType1(object sender, EventArgs e, ComboBox orderType, ComboBox orderPrice)
+        {
+            if (orderType.Text.Equals("") && orderPrice.Text.Equals(""))
             {
                 orderType.SelectedIndex = 1;
                 orderPrice.SelectedIndex = 6;
-                MessageBox.Show("선택된 매매방식이 없습니다.", "잘못된 입력", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("선택된 매매방식이 없습니다.", "기본값 입력", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -180,29 +189,92 @@ namespace WindowsFormsApp1
                 return;
             }
 
-            if (orderType.Text.Equals("지정가") && orderPrice.SelectedIndex == 6)
+            if (orderType.Text.Equals("지정가") && orderPrice.Text.Equals("시장가"))
             {
                 orderPrice.SelectedIndex = 5;
-                MessageBox.Show("지정가는 시장가를 선택할 수 없습니다.", "잘못된 입력", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+        }
+
+        private void ValidateOrderType2(object sender, EventArgs e, ComboBox orderType, ComboBox orderPrice)
+        {
+            if (orderPrice.Text.Equals(""))
+            {
+                if (orderType.Text.Equals(""))
+                {
+                    orderType.SelectedIndex = 1;
+                    orderPrice.SelectedIndex = 6;
+                    MessageBox.Show("선택된 매매방식이 없습니다.", "기본값 입력", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                if (orderType.Text.Equals("시장가"))
+                {
+                    orderPrice.SelectedIndex = 6;
+                    return;
+                }
+
+                if (orderType.Text.Equals("지정가"))
+                {
+                    orderPrice.SelectedIndex = 5;
+                    return;
+                }
+            }
+
+            if (orderPrice.Text.Equals("시장가") && !orderType.Text.Equals("시장가"))
+            {
+                orderType.SelectedIndex = 1;
+                return;
+            }
+
+            if (!orderPrice.Text.Equals("시장가") && !orderType.Text.Equals("지정가"))
+            {
+                orderType.SelectedIndex = 0;
+                return;
             }
         }
 
 
-        private void Sell_set_after_Leave(object sender, EventArgs e)
+        private void Sell_set_after1_Leave(object sender, EventArgs e)
         {
             if (sell_set1_after.Text.Equals(""))
             {
-                sell_set1_after.SelectedIndex = 1;
-                sell_set2_after.SelectedIndex = 5;
-                MessageBox.Show("선택된 매매방식이 없습니다.", "잘못된 입력", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
+                if (sell_set2_after.Text.Equals(""))
+                {
+                    sell_set1_after.SelectedIndex = 0;
+                    sell_set2_after.SelectedIndex = 5;
+                    MessageBox.Show("선택된 매매방식이 없습니다.", "기본값 입력", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+                else
+                {
+                    sell_set1_after.SelectedIndex = 0;
+                    return;
+                }
+            }
+        }
+
+        private void Sell_set_after2_Leave(object sender, EventArgs e)
+        {
+            if (sell_set2_after.Text.Equals("") && sell_set1_after.Text.Equals(""))
+            {
+                if (sell_set1_after.Text.Equals(""))
+                {
+                    sell_set1_after.SelectedIndex = 0;
+                    sell_set2_after.SelectedIndex = 5;
+                    MessageBox.Show("선택된 매매방식이 없습니다.", "기본값 입력", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+                else
+                {
+                    sell_set2_after.SelectedIndex = 5;
+                    return;
+                }
             }
 
-            if (!sell_set1_after.Text.Equals("") || sell_set2_after.Text.Equals(""))
+            if (!sell_set2_after.Text.Equals("") && sell_set1_after.Text.Equals(""))
             {
-                sell_set2_after.SelectedIndex = 5;
-                MessageBox.Show("선택된 호가가 없습니다.", "잘못된 입력", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
+                sell_set1_after.SelectedIndex = 0;
             }
         }
 
