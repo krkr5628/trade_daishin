@@ -455,27 +455,72 @@ namespace WindowsFormsApp1
         //-----------------------------------양 혹은 음의 정수-------------------------------------
         private void Type0_start_Leave(object sender, EventArgs e)
         {
-            ValidatedecimalInput(sender, e, type0_start, type0_end, "-5000");
+            ValidateNumericInput2(sender, e, type0_start, "-5000");
         }
         private void Type0_end_Leave(object sender, EventArgs e)
         {
-            ValidatedecimalInput2(sender, e, type0_start, type0_end, "5000");
+            ValidateNumericInput2(sender, e, type0_end, "5000");
         }
         private void Type0_all_start_Leave(object sender, EventArgs e)
         {
-            ValidatedecimalInput(sender, e, type0_all_start, type0_all_end, "-5000");
+            ValidateNumericInput2(sender, e, type0_all_start, "-5000");
         }
         private void Type0_all_end_Leave(object sender, EventArgs e)
         {
-            ValidatedecimalInput2(sender, e, type0_all_start, type0_all_end, "5000");
+            ValidateNumericInput2(sender, e, type0_all_end, "5000");
         }
         private void Type0_isa_start_Leave(object sender, EventArgs e)
         {
-            ValidatedecimalInput(sender, e, type0_isa_start, type0_isa_end, "-5");
+            ValidateNumericInput2(sender, e, type0_isa_start, "-5000");
         }
         private void Type0_isa_end_Leave(object sender, EventArgs e)
         {
-            ValidatedecimalInput2(sender, e, type0_isa_start, type0_isa_end, "5");
+            ValidateNumericInput2(sender, e, type0_isa_end, "5000");
+        }
+
+        private void ValidateNumericInput2(object sender, EventArgs e, TextBox textBox, string defaultValue)
+        {
+            string input = textBox.Text;
+
+            int decimalMinus = 0;
+
+            foreach (char c in input)
+            {
+                if (char.IsDigit(c))
+                {
+                    continue;
+                }
+                else if (c == '-')
+                {
+                    decimalMinus++;
+                }
+                else
+                {
+                    textBox.Text = defaultValue;
+                    MessageBox.Show("마이너스와 숫자가 아닌 값이 아닌것이 있습니다.", "잘못된 입력", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+            }
+
+            //마이너스 개수
+            if (decimalMinus > 1)
+            {
+                textBox.Text = defaultValue;
+                MessageBox.Show("마이너스을 한번만 입력하세요.", "잘못된 입력", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            //범위 확인
+            int intput_range = Convert.ToInt32(textBox.Text);
+            int max = 1000000;
+            int min = -1000000;
+            if (intput_range < min || intput_range > max)
+            {
+                textBox.Text = defaultValue;
+                MessageBox.Show("범위 :  -1,000,000 이상  1,000,000 이하", "잘못된 입력", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
         }
 
         //-----------------------------------양 혹은 음 소수점 확인-------------------------------------
