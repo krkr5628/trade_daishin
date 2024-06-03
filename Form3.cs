@@ -171,17 +171,17 @@ namespace WindowsFormsApp1
 
                                     if (findRows.Any())
                                     {
-                                        Int64 tmp_cnt = findRows[0]["총매도(개)"].ToString() == "" ? 0 : Convert.ToInt64(findRows[0]["총매도(개)"]);
-                                        Int64 tmp_won = findRows[0]["총매도(원)"].ToString() == "" ? 0 : Convert.ToInt64(findRows[0]["총매도(원)"]);
-                                        Int64 tmp_sell_won = findRows[0]["총매수(원)"].ToString() == "" ? 0 : Convert.ToInt64(findRows[0]["총매수(원)"]);
+                                        int tmp_cnt = findRows[0]["총매도(개)"].ToString() == "" ? 0 : Convert.ToInt32(findRows[0]["총매도(개)"]);
+                                        int tmp_won = findRows[0]["총매도(원)"].ToString() == "" ? 0 : Convert.ToInt32(findRows[0]["총매도(원)"]);
+                                        int tmp_buy_won = findRows[0]["총매수(원)"].ToString() == "" ? 0 : Convert.ToInt32(findRows[0]["총매수(원)"]);
 
-                                        Int64 tmp = tmp_won + Convert.ToInt64(match.Groups[7].Value) * Convert.ToInt64(match.Groups[8].Value.Replace(",", ""));
-                                        Int64 tmp2 = tmp_sell_won - tmp;
+                                        int tmp = tmp_won + Convert.ToInt32(match.Groups[7].Value) * Convert.ToInt32(match.Groups[8].Value.Replace(",", ""));
+                                        int tmp2 = tmp - tmp_buy_won;
 
                                         findRows[0]["총매도(개)"] = Convert.ToString(tmp_cnt + Convert.ToInt64(match.Groups[7].Value));
                                         findRows[0]["총매도(원)"] = Convert.ToString(tmp);
                                         findRows[0]["총수익(원)"] = Convert.ToString(tmp2);
-                                        findRows[0]["총수익(%)"] = Convert.ToString(Math.Round((double)tmp2 / tmp * 100, 3));
+                                        findRows[0]["총수익(%)"] = tmp_buy_won == 0 ? "0" : Convert.ToString(Math.Round((double)tmp2 / tmp_buy_won * 100, 3));
 
                                         Trade_History2.AcceptChanges();
                                         dataGridView2.DataSource = Trade_History2;
