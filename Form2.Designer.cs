@@ -1971,7 +1971,7 @@ namespace WindowsFormsApp1
             // 
             this.Fomula_list_buy_Checked_box.Font = new System.Drawing.Font("굴림", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.Fomula_list_buy_Checked_box.FormattingEnabled = true;
-            this.Fomula_list_buy_Checked_box.Location = new System.Drawing.Point(4, 78);
+            this.Fomula_list_buy_Checked_box.Location = new System.Drawing.Point(4, 73);
             this.Fomula_list_buy_Checked_box.Margin = new System.Windows.Forms.Padding(2);
             this.Fomula_list_buy_Checked_box.Name = "Fomula_list_buy_Checked_box";
             this.Fomula_list_buy_Checked_box.Size = new System.Drawing.Size(468, 79);
