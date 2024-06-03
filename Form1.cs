@@ -3726,12 +3726,6 @@ namespace WindowsFormsApp1
                         int trade_status_already_update = Convert.ToInt32(trade_status_update[0]);
                         int trade_status_limit_update = Convert.ToInt32(trade_status_update[1]);
                         maxbuy_acc.Text = trade_status_already_update + 1 + "/" + trade_status_limit_update;
-
-                        //매매 수량이 최대치에 도달했을 경우(실시간조건식검색중단/실시간 시세는 유지)
-                        if (trade_status_already_update + 1 == trade_status_limit_update)
-                        {
-                            real_time_stop(false);
-                        }
                     }
 
                     return "매수중/" + real_gubun + "/" + order_number + "/" + order_acc_market;
@@ -3863,11 +3857,6 @@ namespace WindowsFormsApp1
                         int trade_status_limit_update = Convert.ToInt32(trade_status_update[1]);
                         maxbuy_acc.Text = trade_status_already_update + 1 + "/" + trade_status_limit_update;
 
-                        //매매 수량이 최대치에 도달했을 경우(실시간조건식검색중단/실시간 시세는 유지)
-                        if (trade_status_already_update + 1 == trade_status_limit_update)
-                        {
-                            real_time_stop(false);
-                        }
                     }
 
                     return "매수중/" + real_gubun + "/" + order_number + "/" + order_acc;
