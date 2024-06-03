@@ -848,7 +848,19 @@ namespace WindowsFormsApp1
             //기본설정 및 추가 옵션 설정
             if (String.IsNullOrEmpty(account_list.Text))
             {
-                MessageBox.Show("계좌번호를 설정하세요.");
+                MessageBox.Show("계좌번호를 선택하세요.");
+                return true;
+            }
+
+            if (String.IsNullOrEmpty(initial_balance.Text))
+            {
+                MessageBox.Show("초기자산을 입력하세요.");
+                return true;
+            }
+
+            if(!int.TryParse(initial_balance.Text, out int result))
+            {
+                MessageBox.Show("초기자산을 숫자로 입력하세요.");
                 return true;
             }
 

@@ -3567,8 +3567,6 @@ namespace WindowsFormsApp1
             this.tableLayoutPanel23.Controls.Add(this.type5_isa_start, 4, 2);
             this.tableLayoutPanel23.Controls.Add(this.type2_selection_isa, 0, 1);
             this.tableLayoutPanel23.Controls.Add(this.type4_selection_isa, 0, 2);
-            this.tableLayoutPanel23.Controls.Add(this.type4_isa_start, 2, 2);
-            this.tableLayoutPanel23.Controls.Add(this.type4_isa_end, 1, 2);
             this.tableLayoutPanel23.Controls.Add(this.type5_selection_isa, 3, 2);
             this.tableLayoutPanel23.Controls.Add(this.type1_isa_end, 5, 0);
             this.tableLayoutPanel23.Controls.Add(this.type1_isa_start, 4, 0);
@@ -3576,6 +3574,8 @@ namespace WindowsFormsApp1
             this.tableLayoutPanel23.Controls.Add(this.type0_selection_isa, 0, 0);
             this.tableLayoutPanel23.Controls.Add(this.type0_isa_start, 1, 0);
             this.tableLayoutPanel23.Controls.Add(this.type0_isa_end, 2, 0);
+            this.tableLayoutPanel23.Controls.Add(this.type4_isa_end, 2, 2);
+            this.tableLayoutPanel23.Controls.Add(this.type4_isa_start, 1, 2);
             this.tableLayoutPanel23.Location = new System.Drawing.Point(3, 31);
             this.tableLayoutPanel23.Name = "tableLayoutPanel23";
             this.tableLayoutPanel23.RowCount = 3;
@@ -3699,9 +3699,9 @@ namespace WindowsFormsApp1
             this.type4_isa_start.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.type4_isa_start.Location = new System.Drawing.Point(163, 47);
+            this.type4_isa_start.Location = new System.Drawing.Point(88, 47);
             this.type4_isa_start.Name = "type4_isa_start";
-            this.type4_isa_start.Size = new System.Drawing.Size(66, 21);
+            this.type4_isa_start.Size = new System.Drawing.Size(69, 21);
             this.type4_isa_start.TabIndex = 5;
             // 
             // type4_isa_end
@@ -3709,9 +3709,9 @@ namespace WindowsFormsApp1
             this.type4_isa_end.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.type4_isa_end.Location = new System.Drawing.Point(88, 47);
+            this.type4_isa_end.Location = new System.Drawing.Point(163, 47);
             this.type4_isa_end.Name = "type4_isa_end";
-            this.type4_isa_end.Size = new System.Drawing.Size(69, 21);
+            this.type4_isa_end.Size = new System.Drawing.Size(66, 21);
             this.type4_isa_end.TabIndex = 6;
             // 
             // type5_selection_isa
