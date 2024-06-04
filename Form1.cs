@@ -912,44 +912,44 @@ namespace WindowsFormsApp1
             //계좌 번호
             Account();
 
-            System.Threading.Thread.Sleep(200);
+            System.Threading.Thread.Sleep(250);
 
             //D+2 예수금 + 계좌 보유 종목
             GetCashInfo_Seperate();
 
-            System.Threading.Thread.Sleep(200);
+            System.Threading.Thread.Sleep(250);
 
             //기존종목 업데이트
             Hold_Update();
             hold_update_initial = false;
 
-            System.Threading.Thread.Sleep(200);
+            System.Threading.Thread.Sleep(250);
 
             //매도실현손익(제세금, 수수료 포함)
             today_profit_tax_load_seperate();
 
-            System.Threading.Thread.Sleep(200);
+            System.Threading.Thread.Sleep(250);
 
             //매매내역
             Transaction_Detail_seperate("", "");
 
-            System.Threading.Thread.Sleep(200);
+            System.Threading.Thread.Sleep(250);
 
             //지수
             Index_load();
 
-            System.Threading.Thread.Sleep(200);
+            System.Threading.Thread.Sleep(250);
 
             //
             Condition_load(); //조건식 로드
 
-            System.Threading.Thread.Sleep(200);
+            System.Threading.Thread.Sleep(250);
 
             //
             CssAlert.Subscribe(); //실시간 편출입 받기
             CpConclusion.Subscribe(); //실시간 체결 등록
 
-            System.Threading.Thread.Sleep(200);
+            System.Threading.Thread.Sleep(250);
 
             timer2.Start();
         }
@@ -2574,9 +2574,9 @@ namespace WindowsFormsApp1
                 Condition_Profile.Add(CssWatchStgControl);
 
                 //초기종목받기
-                stock_initial(condition[0], condition[1]);
+                if (stock_initial(condition[0], condition[1])) return;
 
-                System.Threading.Thread.Sleep(200);
+                System.Threading.Thread.Sleep(250);
 
                 //일련번호
                 int condition_serial = condition_sub_code(condition[0]);
@@ -2657,7 +2657,7 @@ namespace WindowsFormsApp1
 
         //초기 종목 검색
         //https://money2.daishin.com/e5/mboard/ptype_basic/HTS_Plus_Helper/DW_Basic_Read.aspx?boardseq=284&seq=238&page=1&searchString=CssStgFind&p=&v=&m=
-        private void stock_initial(string condition_code, string condition_name)
+        private bool stock_initial(string condition_code, string condition_name)
         {
             CssStgFind.SetInputValue(0, condition_code); //전략ID
             CssStgFind.SetInputValue(1, 'N'); //전략ID
@@ -2687,7 +2687,7 @@ namespace WindowsFormsApp1
             {
                 WriteLog_System("[초기 종목 검색/수신실패] : 재부팅 요망\n");
                 telegram_message("[초기 종목 검색/수신실패] : 재부팅 요망\n");
-                return;
+                return true;
             }
             //
             int result = CssStgFind.BlockRequest();
@@ -2700,11 +2700,19 @@ namespace WindowsFormsApp1
                 {
                     WriteLog_Stock("[실시간조건식/시작/" + condition_name + "] : 초기 검색 종목 없음\n");
                     telegram_message("[실시간조건식/시작/" + condition_name + "] : 초기 검색 종목 없음\n");
-                    return;
+                    return false;
                 }
                 //
                 WriteLog_Stock("[실시간조건식/시작/" + condition_name + "] : 초기 검색 종목 존재\n");
                 telegram_message("[실시간조건식/시작/" + condition_name + "] : 초기 검색 종목 존재\n");
+                //
+                if(initial_num > 50)
+                {
+                    //
+                    WriteLog_Stock("[실시간조건식/중단/" + condition_name + "] : 초기 검색 종목 50개 초과 제한\n");
+                    telegram_message("[실시간조건식/시작/" + condition_name + "] : 초기 검색 종목 50개 초과 제한\n");
+                    return true;
+                }
                 //
                 for (int i = 0; i < initial_num; i++)
                 {
@@ -2712,6 +2720,7 @@ namespace WindowsFormsApp1
                     Stock_info(condition_name, code, "0", code, "");
                 }
             }
+            return false;
         }
 
         //------------------------------------종목 정보 받기 및 시세 등록---------------------------------
@@ -3071,9 +3080,9 @@ namespace WindowsFormsApp1
                     //기존에 포함됬던 종목
                     if(!findRows1.Any())
                     {
-                        if (dtCondStock.Rows.Count >= 30)
+                        if (dtCondStock.Rows.Count > 100)
                         {
-                            WriteLog_Stock($"[신규편입불가/{Condition_Name}/{Stock_Code}] : 최대 감시 종목(30개) 초과 \n");
+                            WriteLog_Stock($"[신규편입불가/{Condition_Name}/{Stock_Code}] : 최대 감시 종목(100개) 초과 \n");
                             return;
                         }
 

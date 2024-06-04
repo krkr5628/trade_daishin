@@ -2003,7 +2003,7 @@ namespace WindowsFormsApp1
             this.groupBox6.Size = new System.Drawing.Size(476, 118);
             this.groupBox6.TabIndex = 19;
             this.groupBox6.TabStop = false;
-            this.groupBox6.Text = "청산 설정";
+            this.groupBox6.Text = "청산 설정(09:00:00~18:00:00)";
             // 
             // groupBox7
             // 

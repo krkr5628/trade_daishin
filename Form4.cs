@@ -37,7 +37,7 @@ namespace WindowsFormsApp1
             // 파일명 출력
             foreach (string file in files)
             {
-                listBox1.Items.Add(Path.GetFileName(file).Replace("_trade.txt", ""));
+                listBox1.Items.Add(Path.GetFileName(file).Replace("_full.txt", ""));
             }
 
             //
@@ -52,7 +52,7 @@ namespace WindowsFormsApp1
             try
             {
                 // 파일 열기
-                using (StreamReader reader = new StreamReader(folderPath + listBox1.SelectedItem.ToString() + "_trade.txt"))
+                using (StreamReader reader = new StreamReader(folderPath + listBox1.SelectedItem.ToString() + "_full.txt"))
                 {
                     // 파일 내용 읽기
                     string content = reader.ReadToEnd();

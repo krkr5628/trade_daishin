@@ -69,7 +69,7 @@ namespace WindowsFormsApp1
             // 파일명 출력
             foreach (string file in files)
             {
-                listBox1.Items.Add(Path.GetFileName(file).Replace("_full.txt",""));
+                listBox1.Items.Add(Path.GetFileName(file).Replace("_trade.txt",""));
             }
 
             //
@@ -84,7 +84,7 @@ namespace WindowsFormsApp1
             try
             {
                 // 파일 열기
-                using (StreamReader reader = new StreamReader(folderPath + listBox1.SelectedItem.ToString() + "_full.txt"))
+                using (StreamReader reader = new StreamReader(folderPath + listBox1.SelectedItem.ToString() + "_trade.txt"))
                 {
                     Trade_History.Clear();
                     Trade_History2.Clear();
