@@ -2819,7 +2819,7 @@ namespace WindowsFormsApp1
                         {
                             if (!buy_runningCodes.ContainsKey(Code) && !utility.buy_AND)
                             {
-                                Status = buy_check(Code, Code_name, string.Format("{0:#,##0}", Current_Price), time, high, false, condition_name);
+                                Status = buy_check(Code, Code_name, string.Format("{0:#,##0}", Current_Price), time, high, false, condition_name, gubun);
                             }
                         }
                     }
@@ -2831,7 +2831,7 @@ namespace WindowsFormsApp1
                             {
                                 if (!buy_runningCodes.ContainsKey(Code) && !utility.buy_AND)
                                 {
-                                    buy_check(Code, Code_name, string.Format("{0:#,##0}", Current_Price), time, high, true, condition_name);
+                                    buy_check(Code, Code_name, string.Format("{0:#,##0}", Current_Price), time, high, true, condition_name, gubun);
                                     return;
                                 }
                             }
@@ -2847,9 +2847,8 @@ namespace WindowsFormsApp1
                 {
                     string[] tmp = Status.Split('/');
                     Status = tmp[0];
-                    gubun = tmp[1];
-                    order_number = tmp[2];
-                    now_hold = tmp[3];
+                    order_number = tmp[1];
+                    now_hold = tmp[2];
                 }
                 //
                 dtCondStock.Rows.Add(
@@ -2939,7 +2938,7 @@ namespace WindowsFormsApp1
 
                             if (!buy_runningCodes.ContainsKey(code))
                             {
-                                string buyCheckResult = buy_check(code, code_name, current_price, time1, high1, false, condition);
+                                string buyCheckResult = buy_check(code, code_name, current_price, time1, high1, false, condition, "01");
                                 if (buyCheckResult == "매수중")
                                 {
                                     dtCondStock.Rows[i][statusColumnIndex] = "매수중";
@@ -3058,6 +3057,12 @@ namespace WindowsFormsApp1
             string Stock_Code = CssAlert.GetHeaderValue(2); // 종목코드
             string gubun = CssAlert.GetHeaderValue(3).ToString();
 
+            //계좌 구분 코드
+            string gubun_acc = Master_code;
+            if (utility.buy_DUAL && Condition_Name.Equals(ISA_Condition))
+            {
+                gubun_acc = ISA_code;
+            }
             //
             switch (gubun)
             {
@@ -3084,8 +3089,8 @@ namespace WindowsFormsApp1
                             WriteLog_Stock($"[신규편입불가/{Condition_Name}/{Stock_Code}] : 최대 감시 종목(100개) 초과 \n");
                             return;
                         }
-
-                        Stock_info(Condition_Name, Stock_Code, "0", Stock_Code, "");
+                        //
+                        Stock_info(Condition_Name, Stock_Code, "0", Stock_Code, gubun_acc);
                         //
                         System.Threading.Thread.Sleep(250);
                     }
@@ -3153,7 +3158,7 @@ namespace WindowsFormsApp1
                                 return;
                             }
 
-                            Stock_info(Condition_Name, Stock_Code, "0", Stock_Code, "");
+                            Stock_info(Condition_Name, Stock_Code, "0", Stock_Code, gubun_acc);
 
                             System.Threading.Thread.Sleep(250);
                         }
@@ -3213,7 +3218,7 @@ namespace WindowsFormsApp1
 
                             if (!buy_runningCodes.ContainsKey(code))
                             {
-                                string buyCheckResult = buy_check(code, code_name, current_price, time1, high1, false, Condition_Name);
+                                string buyCheckResult = buy_check(code, code_name, current_price, time1, high1, false, Condition_Name, gubun_acc);
                                 if (buyCheckResult == "매수중")
                                 {
                                     findRows1[0]["상태"] = "매수중";
@@ -3252,7 +3257,7 @@ namespace WindowsFormsApp1
 
                                 if (!buy_runningCodes.ContainsKey(code))
                                 {
-                                    string buyCheckResult = buy_check(code, code_name, current_price, time1, high1, false, Condition_Name);
+                                    string buyCheckResult = buy_check(code, code_name, current_price, time1, high1, false, Condition_Name, gubun_acc);
                                     if (buyCheckResult == "매수중")
                                     {
                                         findRows1[0]["상태"] = "매수중";
@@ -3413,7 +3418,7 @@ namespace WindowsFormsApp1
                         if (!buy_runningCodes.ContainsKey(code))
                         {
                             buy_runningCodes[code] = true;
-                            buy_check(code, row.Field<string>("종목명"), row.Field<string>("현재가").Replace(",", ""), time, row.Field<string>("상한가"), true, row.Field<string>("조건식"));
+                            buy_check(code, row.Field<string>("종목명"), row.Field<string>("현재가").Replace(",", ""), time, row.Field<string>("상한가"), true, row.Field<string>("조건식"), row.Field<string>("구분코드"));
                             buy_runningCodes.Remove(code);
                         }
                     }
@@ -3507,13 +3512,6 @@ namespace WindowsFormsApp1
         //https://money2.daishin.com/e5/mboard/ptype_basic/HTS_Plus_Helper/DW_Basic_Read.aspx?boardseq=291&seq=159&page=3&searchString=&p=&v=&m=
         private string buy_check(string code, string code_name, string price, string time, string high, bool check, string condition_name, string gubun)
         {
-            //계좌 구분 코드
-            string gubun = Master_code;
-            if (utility.buy_DUAL && condition_name.Equals(ISA_Condition))
-            {
-                gubun = ISA_code;
-            }
-
             //지수 확인
             if (index_buy && gubun == Master_code)
             {
@@ -3730,7 +3728,6 @@ namespace WindowsFormsApp1
                     {
                         DataRow[] findRows = dtCondStock.AsEnumerable().Where(row2 => row2.Field<string>("종목코드") == code && row2.Field<string>("조건식") == condition_name).ToArray();
 
-                        findRows[0]["구분코드"] = real_gubun;
                         findRows[0]["상태"] = "매수중";
                         findRows[0]["주문번호"] = order_number;
                         findRows[0]["보유수량"] = 0 + "/" + order_acc_market;
@@ -3762,7 +3759,7 @@ namespace WindowsFormsApp1
                         maxbuy_acc.Text = trade_status_already_update + 1 + "/" + trade_status_limit_update;
                     }
 
-                    return "매수중/" + real_gubun + "/" + order_number + "/" + order_acc_market;
+                    return "매수중/" + order_number + "/" + order_acc_market;
 
                 }
                 else
@@ -3862,7 +3859,6 @@ namespace WindowsFormsApp1
                     {
                         DataRow[] findRows = dtCondStock.AsEnumerable().Where(row2 => row2.Field<string>("종목코드") == code && row2.Field<string>("조건식") == condition_name).ToArray();
 
-                        findRows[0]["구분코드"] = real_gubun;
                         findRows[0]["상태"] = "매수중";
                         findRows[0]["주문번호"] = order_number;
                         findRows[0]["보유수량"] = 0 + "/" + order_acc;
@@ -3895,7 +3891,7 @@ namespace WindowsFormsApp1
 
                     }
 
-                    return "매수중/" + real_gubun + "/" + order_number + "/" + order_acc;
+                    return "매수중/" + order_number + "/" + order_acc;
 
                 }
                 else
