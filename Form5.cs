@@ -23,6 +23,16 @@ namespace WindowsFormsApp1
 
         }
 
+        public static bool Authentication_Check = false;
+
+        private void Authentication()
+        {
+            //인증코드확인
+
+            //인증성공
+            //Authentication_Check = true;
+        }
+
         private void read()
         {
             // 파일이 있는 폴더 경로

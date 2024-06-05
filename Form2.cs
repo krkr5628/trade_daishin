@@ -68,6 +68,10 @@ namespace WindowsFormsApp1
             setting_account_number.Leave += Setting_Positive_numver;
             initial_balance.Leave += Initial_balance_Leave;
 
+            buy_per_price_text.Leave += Buy_per_price_text_Leave;
+            buy_per_amount_text.Leave += Buy_per_amount_text_Leave;
+            buy_per_percent_text.Leave += Buy_per_percent_text_Leave;
+
             maxbuy.Leave += Maxbuy_Leave;
             maxbuy_acc.Leave += Maxbuy_acc_Leave;
             min_price.Leave += Min_price_Leave;
@@ -372,6 +376,21 @@ namespace WindowsFormsApp1
             ValidateNumericInput(sender, e, initial_balance, "1000000");
         }
 
+        private void Buy_per_price_text_Leave(object sender, EventArgs e)
+        {
+            ValidateNumericInput(sender, e, buy_per_price_text, "100000", minValue:0);
+        }
+
+        private void Buy_per_amount_text_Leave(object sender, EventArgs e)
+        {
+            ValidateNumericInput(sender, e, buy_per_amount_text, "100", minValue: 0);
+        }
+
+        private void Buy_per_percent_text_Leave(object sender, EventArgs e)
+        {
+            ValidateNumericInput(sender, e, buy_per_percent_text, "50", minValue: 0, maxValue:100);
+        }
+
         private void Maxbuy_Leave(object sender, EventArgs e)
         {
             ValidateNumericInput(sender, e, maxbuy, "100000");
@@ -379,7 +398,7 @@ namespace WindowsFormsApp1
 
         private void Maxbuy_acc_Leave(object sender, EventArgs e)
         {
-            ValidateNumericInput(sender, e, maxbuy_acc, "1");
+            ValidateNumericInput(sender, e, maxbuy_acc, "1", minValue: 0, maxValue: 400);
         }
 
         private void Min_price_Leave(object sender, EventArgs e)
@@ -389,12 +408,12 @@ namespace WindowsFormsApp1
 
         private void Max_price_Leave(object sender, EventArgs e)
         {
-            ValidateNumericInput(sender, e, max_price, "10000", minValue: Convert.ToInt32(min_price.Text) + 1);
+            ValidateNumericInput(sender, e, max_price, "10000", minValue: 0);
         }
 
         private void Max_hold_text_Leave(object sender, EventArgs e)
         {
-            ValidateNumericInput(sender, e, max_hold_text, "0", maxValue: 50);
+            ValidateNumericInput(sender, e, max_hold_text, "1", minValue:1, maxValue: 100);
         }
 
         private void Profit_won_text_Leave(object sender, EventArgs e)
@@ -425,7 +444,7 @@ namespace WindowsFormsApp1
                 if (!char.IsDigit(c))
                 {
                     textBox.Text = defaultValue;
-                    MessageBox.Show("정수가 아닌 값이 있습니다.", "잘못된 입력", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("양의 정수가 아닌 값이 있습니다.", "잘못된 입력", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
             }
@@ -703,12 +722,12 @@ namespace WindowsFormsApp1
 
             //범위 확인
             int intput_range = Convert.ToInt32(textBox.Text);
-            int max = 1000;
-            int min = -1000;
+            int max = 100;
+            int min = -100;
             if (intput_range < min || intput_range > max)
             {
                 textBox.Text = defaultValue;
-                MessageBox.Show("범위 :  -1,000 이상  1,000 이하", "잘못된 입력", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("범위 :  -100 이상  100이하", "잘못된 입력", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -896,9 +915,9 @@ namespace WindowsFormsApp1
 
             if (buy_per_percent.Checked && !int.TryParse(buy_per_percent_text.Text, out int result6))
             {
-                if (result6 < 0)
+                if (result6 < 0 || result6 > 100)
                 {
-                    MessageBox.Show("종목당 매수 비율을 0보다 큰 정수로 입력하세요.");
+                    MessageBox.Show("종목당 매수 비율을 (0 ~ 100) 로 입력하세요.");
                     return true;
                 }
 
@@ -930,7 +949,9 @@ namespace WindowsFormsApp1
                 return true;
             }
 
-            if (!int.TryParse(min_price.Text, out int result9))
+            int result9;
+
+            if (!int.TryParse(min_price.Text, out result9))
             {
                 if (result9 < 0)
                 {
@@ -942,7 +963,9 @@ namespace WindowsFormsApp1
                 return true;
             }
 
-            if (!int.TryParse(max_price.Text, out int result10))
+            int result10;
+
+            if (!int.TryParse(max_price.Text, out result10))
             {
                 if (result10 < 0)
                 {
@@ -951,6 +974,12 @@ namespace WindowsFormsApp1
                 }
 
                 MessageBox.Show("최대 종목 매수가를 양의 정수로 입력하세요.");
+                return true;
+            }
+
+            if(result9 > result10)
+            {
+                MessageBox.Show("최소 종목 매수가를 최대 종목 매수가보다 작게 하세요.");
                 return true;
             }
 
@@ -1576,20 +1605,17 @@ namespace WindowsFormsApp1
 
         private async Task setting_allow_after()
         {
-            await Task.Run(() =>
-            {
-                utility.system_route = setting_name.Text;
-            });
-            await utility.setting_load_auto();
-            await Task.Run(() =>
+            utility.system_route = setting_name.Text;
+            //
+            utility.setting_load_auto();
+            //
+            this.Invoke((MethodInvoker)delegate
             {
                 _trade_Auto_Daishin.initial_allow();
-                //
+
                 _trade_Auto_Daishin.real_time_stop(true);
-                //
-                _trade_Auto_Daishin.auto_allow();
-                //
-                MessageBox.Show("반영이 완료되었습니다.");
+
+                _trade_Auto_Daishin.initial_process(true);
             });
         }
 
@@ -1703,14 +1729,14 @@ namespace WindowsFormsApp1
             tmp.Add("type5_Dual/" + Convert.ToString(type5_selection_isa.Checked) + "/" + type5_isa_start.Text + "/" + type5_isa_end.Text);
 
             // 저장할 파일 경로
-            string filePath = $@"C:\Auto_Trade_Creon\Log\setting.txt";
+            string filePath = $@"C:\Auto_Trade_Creon\setting_daishin.txt";
 
             // StreamWriter를 사용하여 파일 저장
             try
             {
-                using (StreamWriter writer = new StreamWriter(filePath, true))
+                using (StreamWriter writer = new StreamWriter(filePath, false))
                 {
-                    writer.Write(String.Join("", tmp));
+                    writer.Write(String.Join("\n", tmp), true);
                     writer.Close();
                     MessageBox.Show("파일이 저장되었습니다: " + filePath);
                 }

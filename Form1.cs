@@ -88,6 +88,11 @@ namespace WindowsFormsApp1
                 MessageBox.Show("초기 세팅 반영중");
                 return;
             }
+            if (login_check != 0)
+            {
+                MessageBox.Show("로그인 중입니다.");
+                return;
+            }
             if (arrCondition.Length == 0)
             {
                 MessageBox.Show("조건식 로딩중");
@@ -103,6 +108,11 @@ namespace WindowsFormsApp1
             if (!utility.load_check)
             {
                 MessageBox.Show("초기 세팅 반영중");
+                return;
+            }
+            if (login_check != 0)
+            {
+                MessageBox.Show("로그인 중입니다.");
                 return;
             }
             if (arrCondition.Length == 0)
@@ -122,6 +132,11 @@ namespace WindowsFormsApp1
                 MessageBox.Show("초기 세팅 반영중");
                 return;
             }
+            if (login_check != 0)
+            {
+                MessageBox.Show("로그인 중입니다.");
+                return;
+            }
             if (arrCondition.Length == 0)
             {
                 MessageBox.Show("조건식 로딩중");
@@ -139,11 +154,17 @@ namespace WindowsFormsApp1
                 MessageBox.Show("초기 세팅 반영중");
                 return;
             }
+            if(login_check != 0)
+            {
+                MessageBox.Show("로그인 중입니다.");
+                return;
+            }
             if (arrCondition.Length == 0)
             {
                 MessageBox.Show("조건식 로딩중");
                 return;
             }
+            //
             Update newform2 = new Update();
             newform2.ShowDialog(); //form2 닫기 전까지 form1 UI 제어 불가능
         }
@@ -151,17 +172,27 @@ namespace WindowsFormsApp1
         //종목 조회 실행
         private void stock_search_btn(object sender, EventArgs e)
         {
+            if (!utility.load_check)
+            {
+                MessageBox.Show("초기 세팅 반영중");
+                return;
+            }
             if (login_check != 0)
             {
                 MessageBox.Show("로그인 중입니다.");
                 return;
             }
-
+            if (arrCondition.Length == 0)
+            {
+                MessageBox.Show("조건식 로딩중");
+                return;
+            }
             if (string.IsNullOrEmpty(Stock_code.Text.Trim()))
             {
                 WriteLog_System($"[종목검색] : 종목코드를 입력해주세요\n");
                 return;
             }
+
             //종목코드, 시간, 현재가, 거래량, 종목명, 상한가
             int[] items = { 0, 1, 4, 10, 17, 33 };
             MarketEye.SetInputValue(0, items);
@@ -182,21 +213,84 @@ namespace WindowsFormsApp1
         //조건식 실시간 시작 버튼
         private void real_time_search_btn(object sender, EventArgs e)
         {
+            if (!utility.load_check)
+            {
+                MessageBox.Show("초기 세팅 반영중");
+                return;
+            }
+            if (login_check != 0)
+            {
+                MessageBox.Show("로그인 중입니다.");
+                return;
+            }
+            if (arrCondition.Length == 0)
+            {
+                MessageBox.Show("조건식 로딩중");
+                return;
+            }
+            //
+            dtCondStock.Clear();
+            dtCondStock_hold.Clear();
+            dtCondStock_Transaction.Clear();
+
+            //D+2 예수금 + 계좌 보유 종목
+            GetCashInfo_Seperate();
+
+            System.Threading.Thread.Sleep(250);
+
+            //기존종목 업데이트
+            Hold_Update();
+
+            System.Threading.Thread.Sleep(250);
+
+            //매도실현손익(제세금, 수수료 포함)
+            today_profit_tax_load_seperate();
+
+            System.Threading.Thread.Sleep(250);
+
+            //매매내역
+            Transaction_Detail_seperate("", "");
+
             auto_allow();
         }
 
         //조건식 실시간 중단 버튼
         private void real_time_stop_btn(object sender, EventArgs e)
         {
+            if (!utility.load_check)
+            {
+                MessageBox.Show("초기 세팅 반영중");
+                return;
+            }
+            if (login_check != 0)
+            {
+                MessageBox.Show("로그인 중입니다.");
+                return;
+            }
+            if (arrCondition.Length == 0)
+            {
+                MessageBox.Show("조건식 로딩중");
+                return;
+            }
             real_time_stop(true);
         }
 
         //전체 청산 버튼
         private void All_clear_btn_Click(object sender, EventArgs e)
         {
+            if (!utility.load_check)
+            {
+                MessageBox.Show("초기 세팅 반영중");
+                return;
+            }
             if (login_check != 0)
             {
                 MessageBox.Show("로그인 중입니다.");
+                return;
+            }
+            if (arrCondition.Length == 0)
+            {
+                MessageBox.Show("조건식 로딩중");
                 return;
             }
 
@@ -219,9 +313,19 @@ namespace WindowsFormsApp1
         //수익 종목 청산 버튼
         private void Profit_clear_btn_Click(object sender, EventArgs e)
         {
+            if(!utility.load_check)
+            {
+                MessageBox.Show("초기 세팅 반영중");
+                return;
+            }
             if (login_check != 0)
             {
                 MessageBox.Show("로그인 중입니다.");
+                return;
+            }
+            if (arrCondition.Length == 0)
+            {
+                MessageBox.Show("조건식 로딩중");
                 return;
             }
 
@@ -245,9 +349,19 @@ namespace WindowsFormsApp1
         //손실 종목 청산 버튼
         private void Loss_clear_btn_Click(object sender, EventArgs e)
         {
+            if (!utility.load_check)
+            {
+                MessageBox.Show("초기 세팅 반영중");
+                return;
+            }
             if (login_check != 0)
             {
                 MessageBox.Show("로그인 중입니다.");
+                return;
+            }
+            if (arrCondition.Length == 0)
+            {
+                MessageBox.Show("조건식 로딩중");
                 return;
             }
 
@@ -266,6 +380,33 @@ namespace WindowsFormsApp1
             {
                 WriteLog_Order("손실청산 종목 없음\n");
             }
+        }
+
+        private void Refresh_Click(object sender, EventArgs e)
+        {
+            dtCondStock_hold.Clear();
+            dtCondStock_Transaction.Clear();
+
+            //D+2 예수금 + 계좌 보유 종목
+            GetCashInfo_Seperate();
+
+            System.Threading.Thread.Sleep(250);
+
+            //매도실현손익(제세금, 수수료 포함)
+            today_profit_tax_load_seperate();
+
+            System.Threading.Thread.Sleep(250);
+
+            //매도실현손익(제세금, 수수료 포함)
+            today_profit_tax_load_seperate();
+
+            System.Threading.Thread.Sleep(250);
+
+            //매매내역
+            Transaction_Detail_seperate("", "");
+
+            //기존종목 업데이트
+            Hold_Update();
         }
 
         //-----------------------------------------------Main------------------------------------------------
@@ -300,6 +441,8 @@ namespace WindowsFormsApp1
             All_clear_btn.Click += All_clear_btn_Click;
             profit_clear_btn.Click += Profit_clear_btn_Click;
             loss_clear_btn.Click += Loss_clear_btn_Click;
+
+            Refresh.Click += Refresh_Click;
         }
 
         //-----------------------------------storage----------------------------------------
@@ -354,6 +497,7 @@ namespace WindowsFormsApp1
         //telegram_chat
         private void telegram_message(string message)
         {
+            if (!utility.Telegram_Allow) return;
             string time = DateTime.Now.ToString("HH:mm:ss:fff");
             string message_edtied = "[" + time + "] " + message;
             telegram_send(message_edtied);
@@ -627,8 +771,7 @@ namespace WindowsFormsApp1
 
                     //Telegram_Receive();
 
-                    timer2.Start(); //계좌 탐색 - 200ms
-                    timer3.Start(); //체결 내역 업데이트 - 200ms
+                    timer2.Start(); //계좌 탐색 - 200ms 
                 }
                 else if (isRunned2 && t_now > t_end)
                 {
@@ -940,7 +1083,7 @@ namespace WindowsFormsApp1
                 WriteLog_System("[연결/정상] 연결\n");
                 telegram_message("[연결/정상] 연결\n");
                 //
-                initial_process();
+                initial_process(false);
             }
         }
 
@@ -949,10 +1092,23 @@ namespace WindowsFormsApp1
         private bool hold_update_initial = true;   
 
         //함수간 간격 200ms
-        private void initial_process()
+        public void initial_process(bool check)
         {
+            if (check)
+            {
+                dtCondStock.Clear();
+                dtCondStock_hold.Clear();
+                dtCondStock_Transaction.Clear();
+            }
+
             //계좌 번호
             Account();
+
+            System.Threading.Thread.Sleep(250);
+
+            timer3.Start(); //체결 내역 업데이트 - 200ms
+            CssAlert.Subscribe(); //실시간 편출입 받기
+            CpConclusion.Subscribe(); //실시간 체결 등록
 
             System.Threading.Thread.Sleep(250);
 
@@ -984,12 +1140,6 @@ namespace WindowsFormsApp1
 
             //
             Condition_load(); //조건식 로드
-
-            System.Threading.Thread.Sleep(250);
-
-            //
-            CssAlert.Subscribe(); //실시간 편출입 받기
-            CpConclusion.Subscribe(); //실시간 체결 등록
 
             System.Threading.Thread.Sleep(250);
 
@@ -4622,7 +4772,7 @@ namespace WindowsFormsApp1
         //--------------------------------------조건식중단-------------------------------------------------------------
 
         public void real_time_stop(bool real_price_all_stop)
-        {
+        {           
             //실시간 중단이 선언되면 '실시간시작'이 가능해진다.
             Real_time_stop_btn.Enabled = false;
             Real_time_search_btn.Enabled = true;
@@ -4813,7 +4963,6 @@ namespace WindowsFormsApp1
                 CpConclusion.Unsubscribe(); //실시간 체결 해지
                 //
                 timer2.Stop();//계좌탐색중단
-                timer3.Stop();//체결내역업데이트 중단
                 //
                 if (minuteTimer != null)
                 {

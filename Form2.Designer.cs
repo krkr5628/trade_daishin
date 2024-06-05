@@ -269,8 +269,6 @@ namespace WindowsFormsApp1
             this.type5_isa_start = new System.Windows.Forms.TextBox();
             this.type2_selection_isa = new System.Windows.Forms.CheckBox();
             this.type4_selection_isa = new System.Windows.Forms.CheckBox();
-            this.type4_isa_start = new System.Windows.Forms.TextBox();
-            this.type4_isa_end = new System.Windows.Forms.TextBox();
             this.type5_selection_isa = new System.Windows.Forms.CheckBox();
             this.type1_isa_end = new System.Windows.Forms.TextBox();
             this.type1_isa_start = new System.Windows.Forms.TextBox();
@@ -278,6 +276,8 @@ namespace WindowsFormsApp1
             this.type0_selection_isa = new System.Windows.Forms.CheckBox();
             this.type0_isa_start = new System.Windows.Forms.TextBox();
             this.type0_isa_end = new System.Windows.Forms.TextBox();
+            this.type4_isa_end = new System.Windows.Forms.TextBox();
+            this.type4_isa_start = new System.Windows.Forms.TextBox();
             this.groupBox14 = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel25 = new System.Windows.Forms.TableLayoutPanel();
             this.label38 = new System.Windows.Forms.Label();
@@ -3694,26 +3694,6 @@ namespace WindowsFormsApp1
             this.type4_selection_isa.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.type4_selection_isa.UseVisualStyleBackColor = false;
             // 
-            // type4_isa_start
-            // 
-            this.type4_isa_start.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.type4_isa_start.Location = new System.Drawing.Point(88, 47);
-            this.type4_isa_start.Name = "type4_isa_start";
-            this.type4_isa_start.Size = new System.Drawing.Size(69, 21);
-            this.type4_isa_start.TabIndex = 5;
-            // 
-            // type4_isa_end
-            // 
-            this.type4_isa_end.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.type4_isa_end.Location = new System.Drawing.Point(163, 47);
-            this.type4_isa_end.Name = "type4_isa_end";
-            this.type4_isa_end.Size = new System.Drawing.Size(66, 21);
-            this.type4_isa_end.TabIndex = 6;
-            // 
             // type5_selection_isa
             // 
             this.type5_selection_isa.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -3795,6 +3775,26 @@ namespace WindowsFormsApp1
             this.type0_isa_end.Name = "type0_isa_end";
             this.type0_isa_end.Size = new System.Drawing.Size(66, 21);
             this.type0_isa_end.TabIndex = 9;
+            // 
+            // type4_isa_end
+            // 
+            this.type4_isa_end.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.type4_isa_end.Location = new System.Drawing.Point(163, 47);
+            this.type4_isa_end.Name = "type4_isa_end";
+            this.type4_isa_end.Size = new System.Drawing.Size(66, 21);
+            this.type4_isa_end.TabIndex = 6;
+            // 
+            // type4_isa_start
+            // 
+            this.type4_isa_start.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.type4_isa_start.Location = new System.Drawing.Point(88, 47);
+            this.type4_isa_start.Name = "type4_isa_start";
+            this.type4_isa_start.Size = new System.Drawing.Size(69, 21);
+            this.type4_isa_start.TabIndex = 5;
             // 
             // groupBox14
             // 

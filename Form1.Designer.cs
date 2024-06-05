@@ -166,6 +166,7 @@ namespace WindowsFormsApp1
             this.kospi_index = new System.Windows.Forms.Label();
             this.외국인선물누적 = new System.Windows.Forms.Label();
             this.timer2 = new System.Windows.Forms.Timer(this.components);
+            this.Refresh = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -1286,13 +1287,14 @@ namespace WindowsFormsApp1
             this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 11.11111F));
             this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 11.11111F));
             this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 11.11111F));
-            this.tableLayoutPanel7.Controls.Add(this.loss_clear_btn, 8, 0);
-            this.tableLayoutPanel7.Controls.Add(this.profit_clear_btn, 7, 0);
-            this.tableLayoutPanel7.Controls.Add(this.All_clear_btn, 6, 0);
             this.tableLayoutPanel7.Controls.Add(this.label44, 0, 0);
             this.tableLayoutPanel7.Controls.Add(this.max_hoid, 1, 0);
             this.tableLayoutPanel7.Controls.Add(this.label46, 2, 0);
             this.tableLayoutPanel7.Controls.Add(this.maxbuy_acc, 3, 0);
+            this.tableLayoutPanel7.Controls.Add(this.All_clear_btn, 4, 0);
+            this.tableLayoutPanel7.Controls.Add(this.profit_clear_btn, 5, 0);
+            this.tableLayoutPanel7.Controls.Add(this.loss_clear_btn, 6, 0);
+            this.tableLayoutPanel7.Controls.Add(this.Refresh, 8, 0);
             this.tableLayoutPanel7.Location = new System.Drawing.Point(5, 18);
             this.tableLayoutPanel7.Margin = new System.Windows.Forms.Padding(2);
             this.tableLayoutPanel7.Name = "tableLayoutPanel7";
@@ -1304,10 +1306,10 @@ namespace WindowsFormsApp1
             // loss_clear_btn
             // 
             this.loss_clear_btn.BackColor = System.Drawing.Color.Crimson;
-            this.loss_clear_btn.Location = new System.Drawing.Point(738, 2);
+            this.loss_clear_btn.Location = new System.Drawing.Point(554, 2);
             this.loss_clear_btn.Margin = new System.Windows.Forms.Padding(2);
             this.loss_clear_btn.Name = "loss_clear_btn";
-            this.loss_clear_btn.Size = new System.Drawing.Size(92, 24);
+            this.loss_clear_btn.Size = new System.Drawing.Size(88, 24);
             this.loss_clear_btn.TabIndex = 16;
             this.loss_clear_btn.Text = "손절청산";
             this.loss_clear_btn.UseVisualStyleBackColor = false;
@@ -1318,7 +1320,7 @@ namespace WindowsFormsApp1
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.profit_clear_btn.BackColor = System.Drawing.Color.RoyalBlue;
-            this.profit_clear_btn.Location = new System.Drawing.Point(646, 2);
+            this.profit_clear_btn.Location = new System.Drawing.Point(462, 2);
             this.profit_clear_btn.Margin = new System.Windows.Forms.Padding(2);
             this.profit_clear_btn.Name = "profit_clear_btn";
             this.profit_clear_btn.Size = new System.Drawing.Size(88, 24);
@@ -1332,7 +1334,7 @@ namespace WindowsFormsApp1
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.All_clear_btn.BackColor = System.Drawing.SystemColors.ScrollBar;
-            this.All_clear_btn.Location = new System.Drawing.Point(554, 2);
+            this.All_clear_btn.Location = new System.Drawing.Point(370, 2);
             this.All_clear_btn.Margin = new System.Windows.Forms.Padding(2);
             this.All_clear_btn.Name = "All_clear_btn";
             this.All_clear_btn.Size = new System.Drawing.Size(88, 24);
@@ -2151,6 +2153,20 @@ namespace WindowsFormsApp1
             this.timer2.Interval = 200;
             this.timer2.Tick += new System.EventHandler(this.Transfer_Timer);
             // 
+            // Refresh
+            // 
+            this.Refresh.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.Refresh.BackColor = System.Drawing.Color.MediumPurple;
+            this.Refresh.Location = new System.Drawing.Point(738, 2);
+            this.Refresh.Margin = new System.Windows.Forms.Padding(2);
+            this.Refresh.Name = "Refresh";
+            this.Refresh.Size = new System.Drawing.Size(92, 24);
+            this.Refresh.TabIndex = 21;
+            this.Refresh.Text = "Refresh";
+            this.Refresh.UseVisualStyleBackColor = false;
+            // 
             // Trade_Auto_Daishin
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -2331,6 +2347,7 @@ namespace WindowsFormsApp1
         private System.Windows.Forms.Label User_id;
         private System.Windows.Forms.Label Foreign;
         private System.Windows.Forms.Label 외국인선물누적;
+        private System.Windows.Forms.Button Refresh;
     }
 }
 
