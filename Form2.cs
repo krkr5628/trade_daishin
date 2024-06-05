@@ -409,11 +409,11 @@ namespace WindowsFormsApp1
 
         private void Term_for_buy_text_Leave(object sender, EventArgs e)
         {
-            ValidateNumericInput(sender, e, term_for_buy_text, "10000");
+            ValidateNumericInput(sender, e, term_for_buy_text, "750", minValue: 750);
         }
         private void Term_for_sell_text_Leave(object sender, EventArgs e)
         {
-            ValidateNumericInput(sender, e, term_for_sell_text, "10000");
+            ValidateNumericInput(sender, e, term_for_sell_text, "750", minValue: 750);
         }
 
         private void ValidateNumericInput(object sender, EventArgs e, TextBox textBox, string defaultValue, int? maxLength = null, int? minValue = null, int? maxValue = null)

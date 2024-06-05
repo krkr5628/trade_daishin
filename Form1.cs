@@ -3723,6 +3723,7 @@ namespace WindowsFormsApp1
                     {
                         DataRow[] findRows = dtCondStock.AsEnumerable().Where(row2 => row2.Field<string>("종목코드") == code && row2.Field<string>("조건식") == condition_name).ToArray();
 
+                        findRows[0]["구분코드"] = real_gubun;
                         findRows[0]["상태"] = "매수중";
                         findRows[0]["주문번호"] = order_number;
                         findRows[0]["보유수량"] = 0 + "/" + order_acc_market;
@@ -3854,6 +3855,7 @@ namespace WindowsFormsApp1
                     {
                         DataRow[] findRows = dtCondStock.AsEnumerable().Where(row2 => row2.Field<string>("종목코드") == code && row2.Field<string>("조건식") == condition_name).ToArray();
 
+                        findRows[0]["구분코드"] = real_gubun;
                         findRows[0]["상태"] = "매수중";
                         findRows[0]["주문번호"] = order_number;
                         findRows[0]["보유수량"] = 0 + "/" + order_acc;
@@ -4625,6 +4627,7 @@ namespace WindowsFormsApp1
                 }
                 else
                 {
+                    Trade_check_save.Dequeue();
                     WriteLog_System($"[체결내역] 주문번호 없음 - {tmp[3]}\n");
                 }
             }
