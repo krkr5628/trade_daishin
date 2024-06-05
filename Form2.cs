@@ -85,6 +85,8 @@ namespace WindowsFormsApp1
 
             term_for_buy_text.Leave += Term_for_buy_text_Leave;
             term_for_sell_text.Leave += Term_for_sell_text_Leave;
+            term_for_non_buy_text.Leave += Term_for_non_buy_text_Leave;
+            term_for_non_sell_text.Leave += Term_for_non_sell_text_Leave;
 
             type0_start.Leave += Type0_start_Leave;
             type0_end.Leave += Type0_end_Leave;
@@ -433,6 +435,14 @@ namespace WindowsFormsApp1
         private void Term_for_sell_text_Leave(object sender, EventArgs e)
         {
             ValidateNumericInput(sender, e, term_for_sell_text, "750", minValue: 750);
+        }
+        private void Term_for_non_buy_text_Leave(object sender, EventArgs e)
+        {
+            ValidateNumericInput(sender, e, term_for_non_buy_text, "500", minValue: 0);
+        }
+        private void Term_for_non_sell_text_Leave(object sender, EventArgs e)
+        {
+            ValidateNumericInput(sender, e, term_for_non_sell_text, "500", minValue: 0);
         }
 
         private void ValidateNumericInput(object sender, EventArgs e, TextBox textBox, string defaultValue, int? maxLength = null, int? minValue = null, int? maxValue = null)
@@ -813,7 +823,7 @@ namespace WindowsFormsApp1
         private bool check()
         {
             //로그인 및 자동실행
-            if(real_id_text.Text == "")
+            if (real_id_text.Text == "")
             {
                 MessageBox.Show("ID를 입력하세요.");
                 return true;
@@ -833,7 +843,7 @@ namespace WindowsFormsApp1
 
             if (auto_trade_allow.Checked)
             {
-                if(market_start_time.Text == "" || market_end_time.Text == "")
+                if (market_start_time.Text == "" || market_end_time.Text == "")
                 {
                     MessageBox.Show("운영시간 범위를 모두 입력하세요.");
                     return true;
@@ -855,7 +865,7 @@ namespace WindowsFormsApp1
                     return true;
                 }
 
-                if(result.TimeOfDay > result2.TimeOfDay)
+                if (result.TimeOfDay > result2.TimeOfDay)
                 {
                     MessageBox.Show("시작 시각을 종료 시각보다 작게 입력하세요.");
                     return true;
@@ -877,122 +887,152 @@ namespace WindowsFormsApp1
                 return true;
             }
 
-            if(!int.TryParse(initial_balance.Text, out int result3))
+            if (int.TryParse(initial_balance.Text, out int result3))
             {
-                if(result3 < 0)
+                if (result3 < 0)
                 {
                     MessageBox.Show("초기자산을 0보다 큰 정수로 입력하세요.");
                     return true;
                 }
-
+            }
+            else
+            {
                 MessageBox.Show("초기자산을 양의 정수로 입력하세요.");
                 return true;
             }
 
-            if (buy_per_price.Checked && !int.TryParse(buy_per_price_text.Text, out int result4))
+            if (buy_per_price.Checked)
             {
-                if (result4 < 0)
+                if(int.TryParse(buy_per_price_text.Text, out int result4))
                 {
-                    MessageBox.Show("종목당 매수 금액을 0보다 큰 정수로 입력하세요.");
+                    if (result4 < 0)
+                    {
+                        MessageBox.Show("종목당 매수 금액을 0보다 큰 정수로 입력하세요.");
+                        return true;
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("종목당 매수 금액을 양의 정수로 입력하세요.");
                     return true;
                 }
-
-                MessageBox.Show("종목당 매수 금액을 양의 정수로 입력하세요.");
-                return true;
             }
 
-            if (buy_per_amount.Checked && !int.TryParse(buy_per_amount_text.Text, out int result5))
+            if (buy_per_amount.Checked)
             {
-                if (result5 < 0)
+                if(int.TryParse(buy_per_amount_text.Text, out int result5))
                 {
-                    MessageBox.Show("종목당 매수 수량을 0보다 큰 정수로 입력하세요.");
+                    if (result5 < 0)
+                    {
+                        MessageBox.Show("종목당 매수 수량을 0보다 큰 정수로 입력하세요.");
+                        return true;
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("종목당 매수 수량을 양의 정수로 입력하세요.");
                     return true;
                 }
-
-                MessageBox.Show("종목당 매수 수량을 양의 정수로 입력하세요.");
-                return true;
             }
 
-            if (buy_per_percent.Checked && !int.TryParse(buy_per_percent_text.Text, out int result6))
+            if (buy_per_percent.Checked)
             {
-                if (result6 < 0 || result6 > 100)
+                if(int.TryParse(buy_per_percent_text.Text, out int result6))
                 {
-                    MessageBox.Show("종목당 매수 비율을 (0 ~ 100) 로 입력하세요.");
+                    if (result6 < 0 || result6 > 100)
+                    {
+                        MessageBox.Show("종목당 매수 비율을 (0 ~ 100) 로 입력하세요.");
+                        return true;
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("종목당 매수 비율(0 ~ 100)을 양의 정수로 입력하세요.");
                     return true;
                 }
-
-                MessageBox.Show("종목당 매수 비율(0 ~ 100)을 양의 정수로 입력하세요.");
-                return true;
             }
 
-            if (!int.TryParse(maxbuy.Text, out int result7))
+            if (int.TryParse(maxbuy.Text, out int result7))
             {
                 if (result7 < 0)
                 {
                     MessageBox.Show("종목당 최대 매수 금액을 0보다 큰 정수로 입력하세요.");
                     return true;
-                }
-
+                }        
+            }
+            else
+            {
                 MessageBox.Show("종목당 최대 매수 금액을 야의 정수로 입력하세요.");
                 return true;
             }
 
-            if (!int.TryParse(maxbuy_acc.Text, out int result8))
+            if (int.TryParse(maxbuy_acc.Text, out int result8))
             {
                 if (result8 < 0)
                 {
                     MessageBox.Show("최대 매수 종목 수를 0보다 큰 정수로 입력하세요.");
                     return true;
                 }
-
+            }
+            else
+            {
                 MessageBox.Show("최대 매수 종목 수를 양의 정수로 입력하세요.");
                 return true;
             }
 
             int result9;
 
-            if (!int.TryParse(min_price.Text, out result9))
+            if (int.TryParse(min_price.Text, out result9))
             {
                 if (result9 < 0)
                 {
                     MessageBox.Show("최소 종목 매수가를 0보다 큰 정수로 입력하세요.");
                     return true;
                 }
-
+            }
+            else
+            {
                 MessageBox.Show("최소 종목 매수가를 양의 정수로 입력하세요.");
                 return true;
             }
 
             int result10;
 
-            if (!int.TryParse(max_price.Text, out result10))
+            if (int.TryParse(max_price.Text, out result10))
             {
                 if (result10 < 0)
                 {
                     MessageBox.Show("최대 종목 매수가를 0보다 큰 정수로 입력하세요.");
                     return true;
                 }
-
+            }
+            else
+            {
                 MessageBox.Show("최대 종목 매수가를 양의 정수로 입력하세요.");
                 return true;
             }
 
-            if(result9 > result10)
+            if (result9 > result10)
             {
                 MessageBox.Show("최소 종목 매수가를 최대 종목 매수가보다 작게 하세요.");
                 return true;
             }
 
-            if (max_hold.Checked && !int.TryParse(max_hold_text.Text, out int result11))
+            if (max_hold.Checked)
             {
-                if (result3 < 0)
+                if(int.TryParse(max_hold_text.Text, out int result11))
                 {
-                    MessageBox.Show("최대 보유 종목 수를 0보다 큰 정수로 입력하세요.");
+                    if (result3 < 0)
+                    {
+                        MessageBox.Show("최대 보유 종목 수를 0보다 큰 정수로 입력하세요.");
+                        return true;
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("최대 보유 종목 수를 양의 정수로 입력하세요.");
                     return true;
                 }
-
-                MessageBox.Show("최대 보유 종목 수를 양의 정수로 입력하세요.");
-                return true;
             }
 
 
@@ -1055,14 +1095,14 @@ namespace WindowsFormsApp1
                     return true;
                 }
 
-                if(!buy_mode_or.Checked && Fomula_list_buy.Text.Split(',').Length != 2)
+                if (!buy_mode_or.Checked && Fomula_list_buy.Text.Split(',').Length != 2)
                 {
                     MessageBox.Show("매수 조건식을 2개 선택하세요.");
                     return true;
                 }
             }
 
-            if(sell_condition.Checked)
+            if (sell_condition.Checked)
             {
                 if (!DateTime.TryParse(sell_condition_start.Text, out DateTime result))
                 {
@@ -1090,64 +1130,92 @@ namespace WindowsFormsApp1
 
 
             //매매설정
-            if(profit_percent.Checked && !double.TryParse(profit_percent_text.Text, out double resu))
+            if (profit_percent.Checked)
             {
-                if (resu < 0)
+                if(double.TryParse(profit_percent_text.Text, out double resu))
                 {
-                    MessageBox.Show("익절(%)를 0보다 크게 입력하세요.");
+                    if (resu < 0)
+                    {
+                        MessageBox.Show("익절(%)(double)를 0보다 크게 입력하세요.");
+                        return true;
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("익절(%)(double)를 숫자로 입력하세요.");
                     return true;
                 }
-
-                MessageBox.Show("익절(%)를 숫자로 입력하세요.");
-                return true;
             }
 
-            if(profit_won.Checked && !int.TryParse(profit_won_text.Text, out int result12))
+            if (profit_won.Checked)
             {
-                if (result12 < 0)
+                if(int.TryParse(profit_won_text.Text, out int result12))
                 {
-                    MessageBox.Show("익절(원)을 0보다 크게 입력하세요.");
+                    if (result12 < 0)
+                    {
+                        MessageBox.Show("익절(원)을 0보다 크게 입력하세요.");
+                        return true;
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("익절(원)을 양의 정수로 입력하세요.");
                     return true;
                 }
-
-                MessageBox.Show("익절(원)을 양의 정수로 입력하세요.");
-                return true;
             }
 
-            if (profit_ts.Checked && !double.TryParse(profit_ts_text.Text, out double resu2))
+            if (profit_ts.Checked)
             {
-                if (resu2 < 0)
+                if(double.TryParse(profit_ts_text.Text, out double resu2))
                 {
-                    MessageBox.Show("익절TS(%)를 0보다 크게 입력하세요.");
+                    if (resu2 < 0)
+                    {
+                        MessageBox.Show("익절TS(double)를 0보다 크게 입력하세요.");
+
+                    }
                     return true;
                 }
-
-                MessageBox.Show("익절TS(%)를 숫자로 입력하세요.");
-                return true;
+                else
+                {
+                    MessageBox.Show("익절TS(duble)를 숫자로 입력하세요.");
+                    return true;
+                }
             }
 
-            if (loss_percent.Checked && !double.TryParse(loss_percent_text.Text, out double resu3))
+            if (loss_percent.Checked)
             {
-                if (resu3 < 0)
+                if(double.TryParse(loss_percent_text.Text, out double resu3))
                 {
-                    MessageBox.Show("손절(%)를 0보다 크게 입력하세요.");
-                    return true;
+                    if (resu3 < 0)
+                    {
+                        MessageBox.Show("손절(double)을 0보다 크게 입력하세요.");
+                        return true;
+                    }
                 }
+                else
+                {
+                    MessageBox.Show("손절(double)을 숫자로 입력하세요.");
+                    return true;
 
-                MessageBox.Show("손절(%)를 숫자로 입력하세요.");
-                return true;
+                }
             }
 
-            if (loss_won.Checked && !int.TryParse(loss_won_text.Text, out int result13))
+            if (loss_won.Checked)
             {
-                if (result13 < 0)
+                if (int.TryParse(loss_won_text.Text, out int result13))
                 {
-                    MessageBox.Show("손절(원)을 0보다 크게 입력하세요.");
+                    if (result13 < 0)
+                    {
+                        MessageBox.Show("손절(원)을 0보다 크게 입력하세요.");
+                        return true;
+                    }
+
+                }
+                else
+                {
+                    MessageBox.Show("손절(원)을 양의 정수로 입력하세요.");
                     return true;
                 }
-
-                MessageBox.Show("손절(원)을 양의 정수로 입력하세요.");
-                return true;
             }
 
 
@@ -1167,7 +1235,7 @@ namespace WindowsFormsApp1
                 }
             }
 
-            if(clear_sell.Checked && clear_sell_mode.Checked)
+            if (clear_sell.Checked && clear_sell_mode.Checked)
             {
                 MessageBox.Show("청산 일반과 개별청산 동시 선택시 청산일반을 실행합니다.");
             }
@@ -1183,53 +1251,107 @@ namespace WindowsFormsApp1
                 return true;
             }
 
-            if(clear_sell_profit.Checked && !double.TryParse(clear_sell_profit_text.Text, out double resu4))
+            if (clear_sell_profit.Checked)
             {
-                if (resu4 < 0)
+                if (double.TryParse(clear_sell_profit_text.Text, out double resu4))
                 {
-                    MessageBox.Show("청산익절(%)를 0보다 크게 입력하세요.");
+                    if (resu4 < 0)
+                    {
+                        MessageBox.Show("청산익절(double)을 0보다 크게 입력하세요.");
+                        return true;
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("청산익절(double)을 숫자로 입력하세요.");
                     return true;
                 }
-
-                MessageBox.Show("청산익절(%)를 숫자로 입력하세요.");
-                return true;
             }
 
-            if (clear_sell_loss.Checked && !double.TryParse(clear_sell_loss_text.Text, out double resu5))
+            if (clear_sell_loss.Checked)
             {
-                if (resu5 < 0)
+                if (double.TryParse(clear_sell_loss_text.Text, out double resu5))
                 {
-                    MessageBox.Show("청산손절(%)를 0보다 크게 입력하세요.");
+                    if (resu5 < 0)
+                    {
+                        MessageBox.Show("청산손절(double)을 0보다 크게 입력하세요.");
+                        return true;
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("청산손절(double)을 숫자로 입력하세요.");
                     return true;
                 }
-
-                MessageBox.Show("청산손절(%)를 숫자로 입력하세요.");
-                return true;
             }
 
             //지연설정
-            if (term_for_buy.Checked && !int.TryParse(term_for_buy_text.Text, out int result15))
+            if (term_for_buy.Checked)
             {
-                if (result15 < 0)
+                if (int.TryParse(term_for_buy_text.Text, out int result15))
                 {
-                    MessageBox.Show("종목매수텀을 0보다 크게 입력하세요.");
+                    if (result15 < 0)
+                    {
+                        MessageBox.Show("종목매수텀을 0보다 크게 입력하세요.");
+                        return true;
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("종목매수텀을 양의 정수(ms)로 입력하세요.");
                     return true;
                 }
-
-                MessageBox.Show("종목매수텀을 양의 정수(ms)로 입력하세요.");
-                return true;
             }
 
-            if (term_for_sell.Checked && !int.TryParse(term_for_sell_text.Text, out int result16))
+            if (term_for_sell.Checked)
             {
-                if (result16 < 0)
+                if (int.TryParse(term_for_sell_text.Text, out int result16))
                 {
-                    MessageBox.Show("종목매도텀을 0보다 크게 입력하세요.");
+                    if (result16 < 0)
+                    {
+                        MessageBox.Show("종목매도텀을 0보다 크게 입력하세요.");
+                        return true;
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("종목매도텀을 양의 정수(ms)로 입력하세요.");
+                    return true;
+
+                }
+            }
+
+            if (term_for_non_buy.Checked)
+            {
+                if (int.TryParse(term_for_non_buy_text.Text, out int result17))
+                {
+                    if (result17 < 0)
+                    {
+                        MessageBox.Show("미체결취소(매수)텀을 0보다 크게 입력하세요.");
+
+                    }
+                    else
+                    {
+                        MessageBox.Show("종목매수텀을 양의 정수(ms)로 입력하세요.");
+                        return true;
+                    }
+                }
+            }
+            if (term_for_non_sell.Checked)
+            {
+                if (int.TryParse(term_for_non_sell_text.Text, out int result18))
+                {
+                    if (result18 < 0)
+                    {
+                        MessageBox.Show("미체결취소(매도)텀을 0보다 크게 입력하세요.");
+                        return true;
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("미체결취소(매도)텀을 양의 정수(ms)로 입력하세요.");
                     return true;
                 }
-
-                MessageBox.Show("종목매도텀을 양의 정수(ms)로 입력하세요.");
-                return true;
             }
 
             //DUAL
@@ -1419,7 +1541,7 @@ namespace WindowsFormsApp1
 
             if (KIS_Allow.Checked)
             {
-                if(KIS_Account.Text == "" || appkey.Text == "" || appsecret.Text == "" || kis_amount.Text == "")
+                if (KIS_Account.Text == "" || appkey.Text == "" || appsecret.Text == "" || kis_amount.Text == "")
                 {
                     MessageBox.Show("KIS 계좌번호, appkey, appsecret, amount를 모두 입력하세요.");
                     return true;
@@ -1427,7 +1549,7 @@ namespace WindowsFormsApp1
 
                 if (int.TryParse(kis_amount.Text, out int result))
                 {
-                    if(result < 0)
+                    if (result < 0)
                     {
                         MessageBox.Show("amount를 0보다 크게 입력하세요.");
                         return true;
@@ -1441,6 +1563,7 @@ namespace WindowsFormsApp1
             }
 
             return false;
+
         }
 
         private bool ValidateIntegerInput(TextBox startTextBox, TextBox endTextBox, string messagePrefix, string messagePostfix)
@@ -1531,7 +1654,7 @@ namespace WindowsFormsApp1
 
             //그 외 항목 중에서 체크 항목의 포함
             for (int i = 0; i < Fomula_list_buy_Checked_box.Items.Count; i++)
-            {   
+            {
                 if (Fomula_list_buy_Checked_box.GetItemChecked(i) && i != e.Index)
                 {
                     SelectedIndexText_join_tmp.Add(Fomula_list_buy_Checked_box.Items[i].ToString());
@@ -1677,8 +1800,8 @@ namespace WindowsFormsApp1
             //
             tmp.Add("종목매수텀/" + Convert.ToString(term_for_buy.Checked) + "/" + term_for_buy_text.Text);
             tmp.Add("종목매도텀/" + Convert.ToString(term_for_sell.Checked) + "/" + term_for_sell_text.Text);
-            tmp.Add("미체결매수취소/" + Convert.ToString(term_for_non_buy.Checked));
-            tmp.Add("미체결매수취소/" + Convert.ToString(term_for_non_sell.Checked));
+            tmp.Add("미체결매수취소/" + Convert.ToString(term_for_non_buy.Checked) + "/" + term_for_non_buy.Text);
+            tmp.Add("미체결매수취소/" + Convert.ToString(term_for_non_sell.Checked) + "/" + term_for_non_sell.Text);
             //
             tmp.Add("매수설정/" + Convert.ToString(buy_set1.SelectedIndex) + "/" + Convert.ToString(buy_set2.SelectedIndex));
             tmp.Add("매도설정/" + Convert.ToString(sell_set1.SelectedIndex) + "/" + Convert.ToString(sell_set2.SelectedIndex));
@@ -1953,23 +2076,25 @@ namespace WindowsFormsApp1
             String[] clear_index_tmp = reader.ReadLine().Split('/');
             clear_index.Checked = Convert.ToBoolean(clear_index_tmp[1]);
 
-            //종목매수텀(대기)
+            //종목매수텀
             String[] term_for_buy_tmp = reader.ReadLine().Split('/');
             term_for_buy.Checked = Convert.ToBoolean(term_for_buy_tmp[1]);
             term_for_buy_text.Text = term_for_buy_tmp[2];
 
-            //종목매도텀(대기)
+            //종목매도텀
             String[] term_for_sell_tmp = reader.ReadLine().Split('/');
             term_for_sell.Checked = Convert.ToBoolean(term_for_sell_tmp[1]);
             term_for_sell_text.Text = term_for_sell_tmp[2];
 
-            //미체결매수취소(대기)
+            //미체결매수취소
             String[] term_for_non_buy_tmp = reader.ReadLine().Split('/');
             term_for_non_buy.Checked = Convert.ToBoolean(term_for_non_buy_tmp[1]);
+            term_for_non_buy_text.Text = term_for_non_buy_tmp[2];
 
-            //미체결매도취소(대기)
+            //미체결매도취소
             String[] term_for_non_sell_tmp = reader.ReadLine().Split('/');
             term_for_non_sell.Checked = Convert.ToBoolean(term_for_non_sell_tmp[1]);
+            term_for_non_sell_text.Text = term_for_non_sell_tmp[2];
 
             //매수설정
             String[] buy_set_tmp = reader.ReadLine().Split('/');

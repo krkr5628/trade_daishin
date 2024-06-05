@@ -94,7 +94,9 @@ namespace WindowsFormsApp1
         public static bool term_for_sell;
         public static string term_for_sell_text;//종목매도텀
         public static bool term_for_non_buy; //미체결매수취소
+        public static string term_for_non_buy_text; //미체결매수취소
         public static bool term_for_non_sell;//미체결매도취소
+        public static string term_for_non_sell_text;//미체결매도취소
 
         public static int buy_set1; //매수설정
         public static int buy_set2;
@@ -375,23 +377,25 @@ namespace WindowsFormsApp1
             String[] clear_index_tmp = reader.ReadLine().Split('/');
             clear_index = Convert.ToBoolean(clear_index_tmp[1]);
 
-            //종목매수텀(대기)
+            //종목매수텀
             String[] term_for_buy_tmp = reader.ReadLine().Split('/');
             term_for_buy = Convert.ToBoolean(term_for_buy_tmp[1]);
             term_for_buy_text = term_for_buy_tmp[2];
 
-            //종목매도텀(대기)
+            //종목매도텀
             String[] term_for_sell_tmp = reader.ReadLine().Split('/');
             term_for_sell = Convert.ToBoolean(term_for_sell_tmp[1]);
             term_for_sell_text = term_for_sell_tmp[2];
 
-            //미체결매수취소(대기)
+            //미체결매수취소
             String[] term_for_non_buy_tmp = reader.ReadLine().Split('/');
             term_for_non_buy = Convert.ToBoolean(term_for_non_buy_tmp[1]);
+            term_for_non_buy_text = term_for_non_buy_tmp[2];
 
-            //미체결매도취소(대기)
+            //미체결매도취소
             String[] term_for_non_sell_tmp = reader.ReadLine().Split('/');
             term_for_non_sell = Convert.ToBoolean(term_for_non_sell_tmp[1]);
+            term_for_non_sell_text = Convert.ToBoolean(term_for_non_sell_tmp[1]);
 
             //매수설정
             String[] buy_set_tmp = reader.ReadLine().Split('/');

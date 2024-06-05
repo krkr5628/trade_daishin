@@ -283,6 +283,8 @@ namespace WindowsFormsApp1
             this.label38 = new System.Windows.Forms.Label();
             this.sell_set1_after = new System.Windows.Forms.ComboBox();
             this.sell_set2_after = new System.Windows.Forms.ComboBox();
+            this.term_for_non_sell_text = new System.Windows.Forms.TextBox();
+            this.term_for_non_buy_text = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
@@ -1707,12 +1709,14 @@ namespace WindowsFormsApp1
             this.tableLayoutPanel11.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanel11.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanel11.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel11.Controls.Add(this.term_for_non_buy_text, 0, 1);
             this.tableLayoutPanel11.Controls.Add(this.term_for_buy, 0, 0);
             this.tableLayoutPanel11.Controls.Add(this.term_for_buy_text, 1, 0);
             this.tableLayoutPanel11.Controls.Add(this.term_for_non_sell, 2, 1);
             this.tableLayoutPanel11.Controls.Add(this.term_for_sell, 2, 0);
             this.tableLayoutPanel11.Controls.Add(this.term_for_non_buy, 0, 1);
             this.tableLayoutPanel11.Controls.Add(this.term_for_sell_text, 3, 0);
+            this.tableLayoutPanel11.Controls.Add(this.term_for_non_sell_text, 3, 1);
             this.tableLayoutPanel11.Font = new System.Drawing.Font("굴림", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.tableLayoutPanel11.Location = new System.Drawing.Point(2, 19);
             this.tableLayoutPanel11.Margin = new System.Windows.Forms.Padding(2);
@@ -3862,6 +3866,22 @@ namespace WindowsFormsApp1
             this.sell_set2_after.Size = new System.Drawing.Size(83, 21);
             this.sell_set2_after.TabIndex = 24;
             // 
+            // term_for_non_sell_text
+            // 
+            this.term_for_non_sell_text.Location = new System.Drawing.Point(353, 28);
+            this.term_for_non_sell_text.Margin = new System.Windows.Forms.Padding(2);
+            this.term_for_non_sell_text.Name = "term_for_non_sell_text";
+            this.term_for_non_sell_text.Size = new System.Drawing.Size(113, 20);
+            this.term_for_non_sell_text.TabIndex = 25;
+            // 
+            // term_for_non_buy_text
+            // 
+            this.term_for_non_buy_text.Location = new System.Drawing.Point(119, 28);
+            this.term_for_non_buy_text.Margin = new System.Windows.Forms.Padding(2);
+            this.term_for_non_buy_text.Name = "term_for_non_buy_text";
+            this.term_for_non_buy_text.Size = new System.Drawing.Size(113, 20);
+            this.term_for_non_buy_text.TabIndex = 26;
+            // 
             // Setting
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -4208,5 +4228,7 @@ namespace WindowsFormsApp1
         private System.Windows.Forms.CheckBox type0_selection_isa;
         private System.Windows.Forms.TextBox type0_isa_start;
         private System.Windows.Forms.TextBox type0_isa_end;
+        private System.Windows.Forms.TextBox term_for_non_buy_text;
+        private System.Windows.Forms.TextBox term_for_non_sell_text;
     }
 }
