@@ -2365,7 +2365,7 @@ namespace WindowsFormsApp1
                 telegram_message("자동 조건식 매수 미설정\n");
             }
 
-            System.Threading.Thread.Sleep(200);
+            System.Threading.Thread.Sleep(250);
 
             //자동 매도 조건식 설정 여부
             if (utility.sell_condition)
@@ -2705,10 +2705,17 @@ namespace WindowsFormsApp1
                     return true;
                 }
                 //
+                //계좌 구분 코드
+                string gubun = Master_code;
+                if (utility.buy_DUAL && condition_name.Equals(ISA_Condition))
+                {
+                    gubun = ISA_code;
+                }
+                //
                 for (int i = 0; i < initial_num; i++)
                 {
                     string code = Convert.ToString(CssStgFind.GetDataValue(0, i));
-                    Stock_info(condition_name, code, "0", code, "");
+                    Stock_info(condition_name, code, "0", code, gubun);
                     System.Threading.Thread.Sleep(250);
                 }
             }
@@ -3498,7 +3505,7 @@ namespace WindowsFormsApp1
 
         //매수 가능한 상태인지 확인
         //https://money2.daishin.com/e5/mboard/ptype_basic/HTS_Plus_Helper/DW_Basic_Read.aspx?boardseq=291&seq=159&page=3&searchString=&p=&v=&m=
-        private string buy_check(string code, string code_name, string price, string time, string high, bool check, string condition_name)
+        private string buy_check(string code, string code_name, string price, string time, string high, bool check, string condition_name, string gubun)
         {
             //계좌 구분 코드
             string gubun = Master_code;
