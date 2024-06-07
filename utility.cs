@@ -395,7 +395,7 @@ namespace WindowsFormsApp1
             //미체결매도취소
             String[] term_for_non_sell_tmp = reader.ReadLine().Split('/');
             term_for_non_sell = Convert.ToBoolean(term_for_non_sell_tmp[1]);
-            term_for_non_sell_text = Convert.ToBoolean(term_for_non_sell_tmp[1]);
+            term_for_non_sell_text = term_for_non_sell_tmp[2];
 
             //매수설정
             String[] buy_set_tmp = reader.ReadLine().Split('/');
