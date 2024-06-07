@@ -128,12 +128,14 @@ namespace WindowsFormsApp1
             this.Fomula_list_buy = new System.Windows.Forms.ComboBox();
             this.Fomula_list_sell = new System.Windows.Forms.ComboBox();
             this.tableLayoutPanel11 = new System.Windows.Forms.TableLayoutPanel();
+            this.term_for_non_buy_text = new System.Windows.Forms.TextBox();
             this.term_for_buy = new System.Windows.Forms.CheckBox();
             this.term_for_buy_text = new System.Windows.Forms.TextBox();
             this.term_for_non_sell = new System.Windows.Forms.CheckBox();
             this.term_for_sell = new System.Windows.Forms.CheckBox();
             this.term_for_non_buy = new System.Windows.Forms.CheckBox();
             this.term_for_sell_text = new System.Windows.Forms.TextBox();
+            this.term_for_non_sell_text = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
@@ -283,8 +285,6 @@ namespace WindowsFormsApp1
             this.label38 = new System.Windows.Forms.Label();
             this.sell_set1_after = new System.Windows.Forms.ComboBox();
             this.sell_set2_after = new System.Windows.Forms.ComboBox();
-            this.term_for_non_sell_text = new System.Windows.Forms.TextBox();
-            this.term_for_non_buy_text = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
@@ -1728,6 +1728,14 @@ namespace WindowsFormsApp1
             this.tableLayoutPanel11.Size = new System.Drawing.Size(468, 52);
             this.tableLayoutPanel11.TabIndex = 11;
             // 
+            // term_for_non_buy_text
+            // 
+            this.term_for_non_buy_text.Location = new System.Drawing.Point(119, 28);
+            this.term_for_non_buy_text.Margin = new System.Windows.Forms.Padding(2);
+            this.term_for_non_buy_text.Name = "term_for_non_buy_text";
+            this.term_for_non_buy_text.Size = new System.Drawing.Size(113, 20);
+            this.term_for_non_buy_text.TabIndex = 26;
+            // 
             // term_for_buy
             // 
             this.term_for_buy.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -1811,6 +1819,14 @@ namespace WindowsFormsApp1
             this.term_for_sell_text.Name = "term_for_sell_text";
             this.term_for_sell_text.Size = new System.Drawing.Size(113, 20);
             this.term_for_sell_text.TabIndex = 24;
+            // 
+            // term_for_non_sell_text
+            // 
+            this.term_for_non_sell_text.Location = new System.Drawing.Point(353, 28);
+            this.term_for_non_sell_text.Margin = new System.Windows.Forms.Padding(2);
+            this.term_for_non_sell_text.Name = "term_for_non_sell_text";
+            this.term_for_non_sell_text.Size = new System.Drawing.Size(113, 20);
+            this.term_for_non_sell_text.TabIndex = 25;
             // 
             // groupBox1
             // 
@@ -2020,7 +2036,7 @@ namespace WindowsFormsApp1
             this.groupBox7.Size = new System.Drawing.Size(476, 75);
             this.groupBox7.TabIndex = 20;
             this.groupBox7.TabStop = false;
-            this.groupBox7.Text = "지연 설정(미체결불가)";
+            this.groupBox7.Text = "지연 설정";
             // 
             // groupBox8
             // 
@@ -3153,7 +3169,7 @@ namespace WindowsFormsApp1
             this.groupBox10.Size = new System.Drawing.Size(267, 136);
             this.groupBox10.TabIndex = 23;
             this.groupBox10.TabStop = false;
-            this.groupBox10.Text = "KIS";
+            this.groupBox10.Text = "KIS(개발중)";
             // 
             // KIS_Independent
             // 
@@ -3323,7 +3339,7 @@ namespace WindowsFormsApp1
             this.groupBox11.Size = new System.Drawing.Size(476, 120);
             this.groupBox11.TabIndex = 24;
             this.groupBox11.TabStop = false;
-            this.groupBox11.Text = "매매설정(TS 불가)";
+            this.groupBox11.Text = "매매설정(TS 개발중)";
             // 
             // groupBox12
             // 
@@ -3865,22 +3881,6 @@ namespace WindowsFormsApp1
             this.sell_set2_after.Name = "sell_set2_after";
             this.sell_set2_after.Size = new System.Drawing.Size(83, 21);
             this.sell_set2_after.TabIndex = 24;
-            // 
-            // term_for_non_sell_text
-            // 
-            this.term_for_non_sell_text.Location = new System.Drawing.Point(353, 28);
-            this.term_for_non_sell_text.Margin = new System.Windows.Forms.Padding(2);
-            this.term_for_non_sell_text.Name = "term_for_non_sell_text";
-            this.term_for_non_sell_text.Size = new System.Drawing.Size(113, 20);
-            this.term_for_non_sell_text.TabIndex = 25;
-            // 
-            // term_for_non_buy_text
-            // 
-            this.term_for_non_buy_text.Location = new System.Drawing.Point(119, 28);
-            this.term_for_non_buy_text.Margin = new System.Windows.Forms.Padding(2);
-            this.term_for_non_buy_text.Name = "term_for_non_buy_text";
-            this.term_for_non_buy_text.Size = new System.Drawing.Size(113, 20);
-            this.term_for_non_buy_text.TabIndex = 26;
             // 
             // Setting
             // 
