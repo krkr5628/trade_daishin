@@ -4897,7 +4897,7 @@ namespace WindowsFormsApp1
                             System.Threading.Thread.Sleep(250);
                         }
                     }
-                    else
+                    else if(cancel == "3" && gugu == "2") //최소주문 && 확인
                     {
                         if (order_sum == hold_sum)
                         {
@@ -5028,15 +5028,18 @@ namespace WindowsFormsApp1
                     //
                     if (trade_type.Equals("매수"))
                     {
+                        dtCondStock_Transaction.Clear();
+                        Transaction_Detail_seperate(order_number, "매수");
+                        //
                         row["상태"] = "매수완료";
                         row["주문번호"] = CpTd0326.GetHeaderValue(6).ToString();
                         //row["보유수량"] = Convert.ToString(Convert.ToInt32(order_acc) - cancel_acc) + "/" + Convert.ToString(Convert.ToInt32(order_acc) - cancel_acc);
-                        //
-                        dtCondStock_Transaction.Clear();
-                        Transaction_Detail_seperate(order_number, "매수");
                     }
                     else
                     {
+                        dtCondStock_Transaction.Clear();
+                        Transaction_Detail_seperate(order_number, "매도");
+                        //
                         row["상태"] = "매수완료";
                         row["주문번호"] = CpTd0326.GetHeaderValue(6).ToString();
                         //row["보유수량"] = Convert.ToString(Convert.ToInt32(order_acc) - cancel_acc) + "/" + order_acc;
@@ -5045,9 +5048,7 @@ namespace WindowsFormsApp1
                     bindingSource.ResetBindings(false);
 
                     WriteLog_Order($"[{trade_type}/주문취소/시간외종가/취소성공/{gubun}] : {code_name}({code}) {order_acc}개\n");
-                    WriteLog_Order($"[{trade_type}/주문취소/시간외종가/주문상세/{gubun}] : 주문수량 {order_acc}개, 취소수량 {cancel_acc.ToString()}개\n");
-                    telegram_message($"[{trade_type}/주문취소/시간외종가//취소성공/{gubun}] : {code_name}({code}) {order_acc}개\n");
-                    telegram_message($"[{trade_type}/주문취소/시간외종가/주문상세/{gubun}] : 주문수량 {order_acc}개, 취소수량 {cancel_acc.ToString()}개\n");
+                    telegram_message($"[{trade_type}/주문취소/시간외종가//취소성공/{gubun}] : {code_name}({code}) {order_acc}개\n");                   
                 }
                 else
                 {
@@ -5112,26 +5113,27 @@ namespace WindowsFormsApp1
                     //
                     if (trade_type.Equals("매수"))
                     {
+                        dtCondStock_Transaction.Clear();
+                        Transaction_Detail_seperate(order_number, "매수");
+                        //
                         row["상태"] = "매수완료";
                         row["주문번호"] = CpTd0387.GetHeaderValue(6).ToString();
                         //row["보유수량"] = Convert.ToString(Convert.ToInt32(order_acc) - cancel_acc) + "/" + Convert.ToString(Convert.ToInt32(order_acc) - cancel_acc);
-                        //
-                        dtCondStock_Transaction.Clear();
-                        Transaction_Detail_seperate(order_number, "매수");
                     }
                     else
                     {
+                        dtCondStock_Transaction.Clear();
+                        Transaction_Detail_seperate(order_number, "매도");
+                        //
                         row["상태"] = "매수완료";
                         row["주문번호"] = CpTd0387.GetHeaderValue(6).ToString();
                         //row["보유수량"] = Convert.ToString(Convert.ToInt32(order_acc) - cancel_acc) + "/" + order_acc;
                     }
                     //
                     bindingSource.ResetBindings(false);
-
+                    //
                     WriteLog_Order($"[{trade_type}/주문취소/시간외단일가/취소성공/{gubun}] : {code_name}({code}) {order_acc}개\n");
-                    WriteLog_Order($"[{trade_type}/주문취소/시간외단일가/주문상세/{gubun}] : 주문수량 {order_acc}개, 취소수량 {cancel_acc.ToString()}개\n");
-                    telegram_message($"[{trade_type}/주문취소/시간외단일가//취소성공/{gubun}] : {code_name}({code}) {order_acc}개\n");
-                    telegram_message($"[{trade_type}/주문취소/시간외단일가/주문상세/{gubun}] : 주문수량 {order_acc}개, 취소수량 {cancel_acc.ToString()}개\n");
+                    telegram_message($"[{trade_type}/주문취소/시간외단일가//취소성공/{gubun}] : {code_name}({code}) {order_acc}개\n");            
                 }
                 else
                 {
@@ -5197,12 +5199,19 @@ namespace WindowsFormsApp1
                     //
                     if (trade_type.Equals("매수"))
                     {
+                        dtCondStock_Transaction.Clear();
+                        Transaction_Detail_seperate(order_number, "매수");
+                        //
                         row["상태"] = "매수완료";
                         row["주문번호"] = CpTd0314.GetHeaderValue(6).ToString();
                         //row["보유수량"] = Convert.ToString(Convert.ToInt32(order_acc) - cancel_acc) + "/" + Convert.ToString(Convert.ToInt32(order_acc) - cancel_acc);
+                        //체결내역업데이트(주문번호)
                     }
                     else
                     {
+                        dtCondStock_Transaction.Clear();
+                        Transaction_Detail_seperate(order_number, "매도");
+                        //
                         row["상태"] = "매수완료";
                         row["주문번호"] = CpTd0314.GetHeaderValue(6).ToString();
                         //row["보유수량"] = Convert.ToString(Convert.ToInt32(order_acc) - cancel_acc) + "/" + order_acc;
@@ -5210,10 +5219,8 @@ namespace WindowsFormsApp1
                     //
                     bindingSource.ResetBindings(false);
 
-                    WriteLog_Order($"[{trade_type}/주문취소/정규장/취소성공/{gubun}] : {code_name}({code}) {order_acc}개\n");
-                    WriteLog_Order($"[{trade_type}/주문취소/정규장/주문상세/{gubun}] : 주문수량 {order_acc}개, 취소수량 {cancel_acc.ToString()}개\n");
+                    WriteLog_Order($"[{trade_type}/주문취소/정규장/취소성공/{gubun}] : {code_name}({code}) {order_acc}개\n");                  
                     telegram_message($"[{trade_type}/주문취소/정규장//취소성공/{gubun}] : {code_name}({code}) {order_acc}개\n");
-                    telegram_message($"[{trade_type}/주문취소/정규장/주문상세/{gubun}] : 주문수량 {order_acc}개, 취소수량 {cancel_acc.ToString()}개\n");
                 }
                 else
                 {
