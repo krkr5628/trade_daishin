@@ -111,6 +111,8 @@ namespace WindowsFormsApp1
         public static bool dow_index;
         public static bool sp_index;
         public static bool nasdaq_index;
+        public static bool Foreign_Stop;
+        public static bool Foreign_Skip;
 
         public static bool type0_selection;
         public static string type0_start;
@@ -184,6 +186,7 @@ namespace WindowsFormsApp1
         public static bool type5_selection_isa;
         public static string type5_start_isa;
         public static string type5_end_isa;
+        public static int Telegram_last_chat_update_id;
 
         //utility 목록
         public static async Task setting_load_auto()
@@ -436,6 +439,14 @@ namespace WindowsFormsApp1
             String[] nasdaq_index_tmp = reader.ReadLine().Split('/');
             nasdaq_index = Convert.ToBoolean(nasdaq_index_tmp[1]);
 
+            //Foreign_Stop
+            String[] Foreign_Stop_tmp = reader.ReadLine().Split('/');
+            Foreign_Stop = Convert.ToBoolean(Foreign_Stop_tmp[1]);
+
+            //Foreign_Skip
+            String[] Foreign_Skip_tmp = reader.ReadLine().Split('/');
+            Foreign_Skip = Convert.ToBoolean(Foreign_Skip_tmp[1]);
+
             //#0
             String[] type0_selection_tmp = reader.ReadLine().Split('/');
             type0_selection = Convert.ToBoolean(type0_selection_tmp[1]);
@@ -595,6 +606,10 @@ namespace WindowsFormsApp1
             type5_selection_isa = Convert.ToBoolean(type5_selection_isa_tmp[1]);
             type5_start_isa = Convert.ToString(type5_selection_isa_tmp[2]);
             type5_end_isa = Convert.ToString(type5_selection_isa_tmp[3]);
+
+            //Telegram_Chat_Number
+            String[] Telegram_last_chat_update_id_tmp = reader.ReadLine().Split('/');
+            Telegram_last_chat_update_id = Convert.ToInt32(Telegram_last_chat_update_id_tmp[1]);
 
             reader.Close();
 

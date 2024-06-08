@@ -1814,6 +1814,9 @@ namespace WindowsFormsApp1
             tmp.Add("SP/" + Convert.ToString(sp_index.Checked));
             tmp.Add("NASDAQ/" + Convert.ToString(nasdaq_index.Checked));
             //
+            tmp.Add("Foreign_Stop/" + Convert.ToString(Foreign_Stop.Checked));
+            tmp.Add("Foreign_Skip/" + Convert.ToString(Foreign_Skip.Checked));
+            //
             tmp.Add("type0/" + Convert.ToString(type0_selection.Checked) + "/" + type0_start.Text + "/" + type0_end.Text);
             tmp.Add("type1/" + Convert.ToString(type1_selection.Checked) + "/" + type1_start.Text + "/" + type1_end.Text);
             tmp.Add("type2/" + Convert.ToString(type2_selection.Checked) + "/" + type2_start.Text + "/" + type2_end.Text);
@@ -1850,6 +1853,8 @@ namespace WindowsFormsApp1
             tmp.Add("type3_Dual/" + Convert.ToString(type3_selection_isa.Checked) + "/" + type3_isa_start.Text + "/" + type3_isa_end.Text);
             tmp.Add("type4_Dual/" + Convert.ToString(type4_selection_isa.Checked) + "/" + type4_isa_start.Text + "/" + type4_isa_end.Text);
             tmp.Add("type5_Dual/" + Convert.ToString(type5_selection_isa.Checked) + "/" + type5_isa_start.Text + "/" + type5_isa_end.Text);
+            //
+            tmp.Add("Telegram_Last_Chat_update_id/" + Convert.ToString(Trade_Auto_Daishin.update_id));
 
             // 저장할 파일 경로
             string filePath = $@"C:\Auto_Trade_Creon\setting_daishin.txt";
@@ -2134,6 +2139,14 @@ namespace WindowsFormsApp1
             //NASDAQ100
             String[] nasdaq_index_tmp = reader.ReadLine().Split('/');
             nasdaq_index.Checked = Convert.ToBoolean(nasdaq_index_tmp[1]);
+
+            //Foreign_Stop
+            String[] Foreign_Stop_tmp = reader.ReadLine().Split('/');
+            Foreign_Stop.Checked = Convert.ToBoolean(Foreign_Stop_tmp[1]);
+
+            //Foreign_Skip
+            String[] Foreign_Skip_tmp = reader.ReadLine().Split('/');
+            Foreign_Skip.Checked = Convert.ToBoolean(Foreign_Skip_tmp[1]);
 
             //#0
             String[] type0_selection_tmp = reader.ReadLine().Split('/');

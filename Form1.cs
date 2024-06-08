@@ -578,39 +578,89 @@ namespace WindowsFormsApp1
             }
         }
 
+        public static int update_id = 0;
+        private DateTime time_start = DateTime.Now;
+
         //Telegram 메시지 수신
         private async Task Telegram_Receive()
-        {
-            string apiUrl = $"https://api.telegram.org/bot{utility.telegram_token}/getUpdates";
-            
+        {         
+            //string apiUrl = $"https://api.telegram.org/bot{utility.telegram_token}/getUpdates";  
+
             while (true)
             {
                 try
                 {
-                    WebRequest request = WebRequest.Create(apiUrl);
+                    string requestUrl = $"https://api.telegram.org/bot{utility.telegram_token}/getUpdates" + (update_id == 0 ? "" : $"?offset={update_id + 1}");
+                    WebRequest request = WebRequest.Create(requestUrl);
                     using (WebResponse response = await request.GetResponseAsync())
                     using (Stream stream = response.GetResponseStream())
                     using (StreamReader reader = new StreamReader(stream))
                     {
                         string response_message = await reader.ReadToEndAsync();
                         JObject jsonData = JObject.Parse(response_message);
-
-                        string message = Convert.ToString(jsonData["result"][0]["message"]["text"]);
-                        WriteLog_System($"[TELEGRAM] : {message}\n"); // 수신된 메시지 확인
+                        JArray resultArray = (JArray)jsonData["result"];
+                        //
+                        if (resultArray.Count > 0)
+                        {
+                            foreach (var result in resultArray)
+                            {
+                                string message = Convert.ToString(result["message"]["text"]);
+                                int current_message_number = Convert.ToInt32(result["update_id"]);
+                                //
+                                long unixTimestamp = Convert.ToInt64(result["message"]["date"]);
+                                DateTime dateTime = DateTimeOffset.FromUnixTimeSeconds(unixTimestamp).DateTime;
+                                DateTime localDateTime = dateTime.ToLocalTime();
+                                //
+                                if (current_message_number > update_id && localDateTime >= time_start)
+                                {
+                                    //로그인 진행중
+                                    if (!login_complete)
+                                    {
+                                        WriteLog_System($"[TELEGRAM] : 로그인 진행중\n");
+                                    }
+                                    //초기값 로드 진행중
+                                    if (!initial_process_complete)
+                                    {
+                                        WriteLog_System($"[TELEGRAM] : 초기값 로드 진행중\n");
+                                    }
+                                    //
+                                    WriteLog_System($"[TELEGRAM] : {message} / {current_message_number}\n"); // 수신된 메시지 확인
+                                    telegram_function(message);
+                                    update_id = current_message_number;
+                                }
+                            }
+                        }
                     }
                 }
-                catch (Exception ex)
+                catch (WebException ex)
                 {
-                    WriteLog_System($"[TELEGRAM/ERROR] : {ex.Message}\n");
+                    if (ex.Response is HttpWebResponse httpResponse && httpResponse.StatusCode == HttpStatusCode.Conflict)
+                    {
+                        // 409 충돌 오류 처리
+                        WriteLog_Order($"[TELEGRAM/ERROR] 409 Conflict: {ex.Message}\n");
+                    }
+                    else
+                    {
+                        WriteLog_Order($"[TELEGRAM/ERROR] : {ex.Message}\n");
+                    }
                 }
 
                 // 일정한 간격으로 API를 호출하여 새로운 메시지 확인
                 await Task.Delay(1000); // 1초마다 확인
             }
             /*           
-            {"ok":true,"result":[{"update_id":000000000,"message":{"message_id":22222,"from":{"id":34566778,"is_bot":false,"first_name":"Sy","last_name":"CH","username":"k456","language_code":"ko"},"chat":{"id":69sdfg,"first_name":"Ssdfg","last_name":"CsdfgI","username":"ksdfg28","type":"private"},"date":1717078874,"text":"Hello"}}]}
-
-             */
+            {"ok":true,"result":
+                [{"update_id":000000000,
+                  "message":
+                    {"message_id":22222,
+                    "from":{"id":34566778,"is_bot":false,"first_name":"Sy","last_name":"CH","username":"k456","language_code":"ko"}
+                    ,"chat":{"id":69sdfg,"first_name":"Ssdfg","last_name":"CsdfgI","username":"ksdfg28","type":"private"}
+                    ,"date":1717078874,
+                    "text":"Hello"
+                    }
+                }]
+            }
+            */
         }
 
         //매매로그 맟 전체로그 저장
@@ -627,6 +677,7 @@ namespace WindowsFormsApp1
             // 저장할 파일 경로
             string filePath = $@"C:\Auto_Trade_Creon\Log\{formattedDate}_full.txt";
             string filePath2 = $@"C:\Auto_Trade_Creon\Log_Trade\{formattedDate}_trade.txt";
+            string filePath3 = "C:\\Auto_Trade_Creon\\setting_daishin.txt";
 
             // StreamWriter를 사용하여 파일 저장
             try
@@ -655,6 +706,36 @@ namespace WindowsFormsApp1
             {
                 MessageBox.Show("파일 저장 중 오류 발생: " + ex.Message);
             }
+
+            //Telegram Message Last Number
+            try
+            {
+                if (!File.Exists(filePath3))
+                {
+                    MessageBox.Show("세이브 파일이 존재하지 않습니다.");
+                    return;
+                }
+
+                // 파일의 모든 줄을 읽어오기
+                var lines = File.ReadAllLines(filePath3).ToList();
+
+                // 파일이 비어 있지 않은지 확인
+                if (lines.Any())
+                {
+                    lines[lines.Count - 1] = "Telegram_Last_Chat_Number/" + Convert.ToString(update_id);
+
+                    File.WriteAllLines(filePath3, lines);
+                }
+                else
+                {
+                    MessageBox.Show("파일 형식 오류 : 새로운 세이브 파일 다운로드 요망");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("파일 저장 중 오류 발생: " + ex.Message);
+            }
+
         }
 
         //------------------------------------------공용기능-------------------------------------------
@@ -783,11 +864,17 @@ namespace WindowsFormsApp1
                 //초기 설정 반영
                 await initial_allow(false);
 
+                if (utility.Telegram_Allow)
+                {
+                    Telegram_Receive();
+                }
+
                 //로그인
                 this.Invoke((MethodInvoker)delegate
                 {
                     Initial_Daishin();
                 });
+
             }
 
             //운영시간 확인
@@ -1060,11 +1147,16 @@ namespace WindowsFormsApp1
             KIS_Profit.Text = "0";
 
             //
+            update_id = utility.Telegram_last_chat_update_id;
+
+            //
             WriteLog_System("세팅 반영 완료\n");
             telegram_message("세팅 반영 완료\n");
-        }        
+        }
 
         //------------------------------------Login---------------------------------
+
+        private bool login_complete = false;
 
         //관리자 권한 실행 및 프로그램 설치 확인
         private void Initial_Daishin()
@@ -1162,6 +1254,8 @@ namespace WindowsFormsApp1
                 login_check = 0;
                 WriteLog_System("[연결/정상] 연결\n");
                 telegram_message("[연결/정상] 연결\n");
+                //
+                login_complete = true;
                 //
                 initial_process(false);
             }
@@ -4786,7 +4880,7 @@ namespace WindowsFormsApp1
 
             string[] tmp = { gugu, code, code_name, order_number, trade_Gubun, hold_sum, time, gubun, cancel };
 
-            WriteLog_System($"[체결수신] : {gugu}/{code}/{code_name}/{order_number}/{trade_Gubun}/{hold_sum}/{gubun}/{cancel}\n");
+            //WriteLog_System($"[체결수신] : {gugu}/{code}/{code_name}/{order_number}/{trade_Gubun}/{hold_sum}/{gubun}/{cancel}\n");
 
             Trade_check_save.Enqueue(tmp);
         }
@@ -5453,6 +5547,13 @@ namespace WindowsFormsApp1
                 WriteLog_System("[실시간시세/중단]\n");
                 telegram_message("[실시간시세/중단]\n");
             }
+        }
+
+        //--------------------------------------Telegram Function-------------------------------------------------------------
+
+        private void telegram_function(string mesage)
+        {
+
         }
     }
 }

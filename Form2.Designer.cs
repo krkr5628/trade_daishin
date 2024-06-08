@@ -222,6 +222,9 @@ namespace WindowsFormsApp1
             this.label17 = new System.Windows.Forms.Label();
             this.label37 = new System.Windows.Forms.Label();
             this.type0_end = new System.Windows.Forms.TextBox();
+            this.tableLayoutPanel26 = new System.Windows.Forms.TableLayoutPanel();
+            this.Foreign_Skip = new System.Windows.Forms.CheckBox();
+            this.Foreign_Stop = new System.Windows.Forms.CheckBox();
             this.groupBox9 = new System.Windows.Forms.GroupBox();
             this.Telegram_Allow = new System.Windows.Forms.CheckBox();
             this.tableLayoutPanel13 = new System.Windows.Forms.TableLayoutPanel();
@@ -311,6 +314,7 @@ namespace WindowsFormsApp1
             this.tableLayoutPanel18.SuspendLayout();
             this.tableLayoutPanel19.SuspendLayout();
             this.tableLayoutPanel12.SuspendLayout();
+            this.tableLayoutPanel26.SuspendLayout();
             this.groupBox9.SuspendLayout();
             this.tableLayoutPanel13.SuspendLayout();
             this.groupBox10.SuspendLayout();
@@ -804,8 +808,8 @@ namespace WindowsFormsApp1
             this.tableLayoutPanel5.ColumnCount = 5;
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 19.15747F));
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.44092F));
-            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.04938F));
-            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.53069F));
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15.74074F));
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.62963F));
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 91F));
             this.tableLayoutPanel5.Controls.Add(this.setting_allowed, 4, 0);
             this.tableLayoutPanel5.Controls.Add(this.setting_open, 3, 0);
@@ -827,38 +831,44 @@ namespace WindowsFormsApp1
             this.setting_allowed.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.setting_allowed.Font = new System.Drawing.Font("굴림", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.setting_allowed.ForeColor = System.Drawing.Color.SpringGreen;
-            this.setting_allowed.Location = new System.Drawing.Point(541, 2);
+            this.setting_allowed.Location = new System.Drawing.Point(542, 2);
             this.setting_allowed.Margin = new System.Windows.Forms.Padding(2);
             this.setting_allowed.Name = "setting_allowed";
-            this.setting_allowed.Size = new System.Drawing.Size(90, 24);
+            this.setting_allowed.Size = new System.Drawing.Size(89, 24);
             this.setting_allowed.TabIndex = 8;
-            this.setting_allowed.Text = "즉시반영";
+            this.setting_allowed.Text = "반영";
             this.setting_allowed.UseVisualStyleBackColor = false;
             // 
             // setting_open
             // 
+            this.setting_open.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.setting_open.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.setting_open.Font = new System.Drawing.Font("굴림", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.setting_open.ForeColor = System.Drawing.Color.SpringGreen;
             this.setting_open.Location = new System.Drawing.Point(463, 2);
             this.setting_open.Margin = new System.Windows.Forms.Padding(2);
             this.setting_open.Name = "setting_open";
-            this.setting_open.Size = new System.Drawing.Size(74, 24);
+            this.setting_open.Size = new System.Drawing.Size(75, 24);
             this.setting_open.TabIndex = 7;
-            this.setting_open.Text = "전량열기";
+            this.setting_open.Text = "열기";
             this.setting_open.UseVisualStyleBackColor = false;
             // 
             // save_button
             // 
+            this.save_button.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.save_button.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.save_button.Font = new System.Drawing.Font("굴림", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.save_button.ForeColor = System.Drawing.Color.SpringGreen;
-            this.save_button.Location = new System.Drawing.Point(377, 2);
+            this.save_button.Location = new System.Drawing.Point(378, 2);
             this.save_button.Margin = new System.Windows.Forms.Padding(2);
             this.save_button.Name = "save_button";
-            this.save_button.Size = new System.Drawing.Size(82, 24);
+            this.save_button.Size = new System.Drawing.Size(81, 24);
             this.save_button.TabIndex = 6;
-            this.save_button.Text = "전량저장";
+            this.save_button.Text = "저장";
             this.save_button.UseVisualStyleBackColor = false;
             // 
             // setting_name
@@ -870,7 +880,7 @@ namespace WindowsFormsApp1
             this.setting_name.Margin = new System.Windows.Forms.Padding(2);
             this.setting_name.Name = "setting_name";
             this.setting_name.ReadOnly = true;
-            this.setting_name.Size = new System.Drawing.Size(268, 21);
+            this.setting_name.Size = new System.Drawing.Size(269, 21);
             this.setting_name.TabIndex = 1;
             // 
             // label5
@@ -2046,7 +2056,7 @@ namespace WindowsFormsApp1
             this.groupBox8.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox8.Name = "groupBox8";
             this.groupBox8.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox8.Size = new System.Drawing.Size(267, 314);
+            this.groupBox8.Size = new System.Drawing.Size(267, 337);
             this.groupBox8.TabIndex = 21;
             this.groupBox8.TabStop = false;
             this.groupBox8.Text = "지수 선물 연동";
@@ -2055,19 +2065,21 @@ namespace WindowsFormsApp1
             // 
             this.tableLayoutPanel17.ColumnCount = 1;
             this.tableLayoutPanel17.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel17.Controls.Add(this.tableLayoutPanel22, 0, 3);
             this.tableLayoutPanel17.Controls.Add(this.tableLayoutPanel18, 0, 1);
             this.tableLayoutPanel17.Controls.Add(this.tableLayoutPanel19, 0, 0);
-            this.tableLayoutPanel17.Controls.Add(this.tableLayoutPanel12, 0, 2);
+            this.tableLayoutPanel17.Controls.Add(this.tableLayoutPanel22, 0, 4);
+            this.tableLayoutPanel17.Controls.Add(this.tableLayoutPanel12, 0, 3);
+            this.tableLayoutPanel17.Controls.Add(this.tableLayoutPanel26, 0, 2);
             this.tableLayoutPanel17.Location = new System.Drawing.Point(4, 13);
             this.tableLayoutPanel17.Margin = new System.Windows.Forms.Padding(2);
             this.tableLayoutPanel17.Name = "tableLayoutPanel17";
-            this.tableLayoutPanel17.RowCount = 4;
-            this.tableLayoutPanel17.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 13.09524F));
-            this.tableLayoutPanel17.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 13.69048F));
-            this.tableLayoutPanel17.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 73.21429F));
-            this.tableLayoutPanel17.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 125F));
-            this.tableLayoutPanel17.Size = new System.Drawing.Size(259, 294);
+            this.tableLayoutPanel17.RowCount = 5;
+            this.tableLayoutPanel17.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 30.98592F));
+            this.tableLayoutPanel17.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 29.57747F));
+            this.tableLayoutPanel17.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 39.43662F));
+            this.tableLayoutPanel17.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 121F));
+            this.tableLayoutPanel17.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 123F));
+            this.tableLayoutPanel17.Size = new System.Drawing.Size(259, 317);
             this.tableLayoutPanel17.TabIndex = 0;
             // 
             // tableLayoutPanel22
@@ -2080,7 +2092,6 @@ namespace WindowsFormsApp1
             this.tableLayoutPanel22.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 26.27451F));
             this.tableLayoutPanel22.Controls.Add(this.type0_all_end, 4, 0);
             this.tableLayoutPanel22.Controls.Add(this.label41, 3, 0);
-            this.tableLayoutPanel22.Controls.Add(this.type0_all_start, 2, 0);
             this.tableLayoutPanel22.Controls.Add(this.type0_selection_all, 1, 0);
             this.tableLayoutPanel22.Controls.Add(this.label39, 0, 0);
             this.tableLayoutPanel22.Controls.Add(this.label31, 3, 1);
@@ -2096,7 +2107,6 @@ namespace WindowsFormsApp1
             this.tableLayoutPanel22.Controls.Add(this.type4_all_start, 2, 4);
             this.tableLayoutPanel22.Controls.Add(this.type3_all_start, 2, 3);
             this.tableLayoutPanel22.Controls.Add(this.type2_all_start, 2, 2);
-            this.tableLayoutPanel22.Controls.Add(this.type1_all_start, 2, 1);
             this.tableLayoutPanel22.Controls.Add(this.type5_all_end, 4, 5);
             this.tableLayoutPanel22.Controls.Add(this.type4_all_end, 4, 4);
             this.tableLayoutPanel22.Controls.Add(this.type3_all_end, 4, 3);
@@ -2108,7 +2118,9 @@ namespace WindowsFormsApp1
             this.tableLayoutPanel22.Controls.Add(this.label34, 0, 3);
             this.tableLayoutPanel22.Controls.Add(this.label28, 0, 2);
             this.tableLayoutPanel22.Controls.Add(this.label29, 0, 1);
-            this.tableLayoutPanel22.Location = new System.Drawing.Point(2, 170);
+            this.tableLayoutPanel22.Controls.Add(this.type0_all_start, 2, 0);
+            this.tableLayoutPanel22.Controls.Add(this.type1_all_start, 2, 1);
+            this.tableLayoutPanel22.Location = new System.Drawing.Point(2, 194);
             this.tableLayoutPanel22.Margin = new System.Windows.Forms.Padding(2);
             this.tableLayoutPanel22.Name = "tableLayoutPanel22";
             this.tableLayoutPanel22.RowCount = 6;
@@ -2118,7 +2130,7 @@ namespace WindowsFormsApp1
             this.tableLayoutPanel22.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
             this.tableLayoutPanel22.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
             this.tableLayoutPanel22.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
-            this.tableLayoutPanel22.Size = new System.Drawing.Size(255, 122);
+            this.tableLayoutPanel22.Size = new System.Drawing.Size(255, 121);
             this.tableLayoutPanel22.TabIndex = 39;
             // 
             // type0_all_end
@@ -2250,7 +2262,7 @@ namespace WindowsFormsApp1
             this.type5_selection_all.AutoSize = true;
             this.type5_selection_all.Location = new System.Drawing.Point(32, 103);
             this.type5_selection_all.Name = "type5_selection_all";
-            this.type5_selection_all.Size = new System.Drawing.Size(65, 16);
+            this.type5_selection_all.Size = new System.Drawing.Size(65, 15);
             this.type5_selection_all.TabIndex = 43;
             this.type5_selection_all.Text = "checkBox1";
             this.type5_selection_all.UseVisualStyleBackColor = true;
@@ -2412,7 +2424,7 @@ namespace WindowsFormsApp1
             this.label30.Location = new System.Drawing.Point(166, 100);
             this.label30.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label30.Name = "label30";
-            this.label30.Size = new System.Drawing.Size(18, 22);
+            this.label30.Size = new System.Drawing.Size(18, 21);
             this.label30.TabIndex = 19;
             this.label30.Text = "~";
             this.label30.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -2427,7 +2439,7 @@ namespace WindowsFormsApp1
             this.label27.Location = new System.Drawing.Point(2, 100);
             this.label27.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label27.Name = "label27";
-            this.label27.Size = new System.Drawing.Size(25, 22);
+            this.label27.Size = new System.Drawing.Size(25, 21);
             this.label27.TabIndex = 34;
             this.label27.Text = "#5";
             this.label27.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -2506,7 +2518,7 @@ namespace WindowsFormsApp1
             this.tableLayoutPanel18.Name = "tableLayoutPanel18";
             this.tableLayoutPanel18.RowCount = 1;
             this.tableLayoutPanel18.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel18.Size = new System.Drawing.Size(255, 19);
+            this.tableLayoutPanel18.Size = new System.Drawing.Size(255, 17);
             this.tableLayoutPanel18.TabIndex = 1;
             // 
             // sp_index
@@ -2520,7 +2532,7 @@ namespace WindowsFormsApp1
             this.sp_index.Location = new System.Drawing.Point(87, 2);
             this.sp_index.Margin = new System.Windows.Forms.Padding(2);
             this.sp_index.Name = "sp_index";
-            this.sp_index.Size = new System.Drawing.Size(81, 15);
+            this.sp_index.Size = new System.Drawing.Size(81, 13);
             this.sp_index.TabIndex = 2;
             this.sp_index.Text = "SP500";
             this.sp_index.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -2537,7 +2549,7 @@ namespace WindowsFormsApp1
             this.nasdaq_index.Location = new System.Drawing.Point(172, 2);
             this.nasdaq_index.Margin = new System.Windows.Forms.Padding(2);
             this.nasdaq_index.Name = "nasdaq_index";
-            this.nasdaq_index.Size = new System.Drawing.Size(81, 15);
+            this.nasdaq_index.Size = new System.Drawing.Size(81, 13);
             this.nasdaq_index.TabIndex = 1;
             this.nasdaq_index.Text = "NASDAQ100";
             this.nasdaq_index.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -2554,7 +2566,7 @@ namespace WindowsFormsApp1
             this.dow_index.Location = new System.Drawing.Point(2, 2);
             this.dow_index.Margin = new System.Windows.Forms.Padding(2);
             this.dow_index.Name = "dow_index";
-            this.dow_index.Size = new System.Drawing.Size(81, 15);
+            this.dow_index.Size = new System.Drawing.Size(81, 13);
             this.dow_index.TabIndex = 0;
             this.dow_index.Text = "DOW30";
             this.dow_index.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -2637,7 +2649,6 @@ namespace WindowsFormsApp1
             this.tableLayoutPanel12.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 9.411765F));
             this.tableLayoutPanel12.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 26.27451F));
             this.tableLayoutPanel12.Controls.Add(this.label40, 3, 0);
-            this.tableLayoutPanel12.Controls.Add(this.type0_start, 2, 0);
             this.tableLayoutPanel12.Controls.Add(this.type0_selection, 1, 0);
             this.tableLayoutPanel12.Controls.Add(this.label14, 3, 1);
             this.tableLayoutPanel12.Controls.Add(this.label16, 3, 2);
@@ -2666,7 +2677,8 @@ namespace WindowsFormsApp1
             this.tableLayoutPanel12.Controls.Add(this.label17, 0, 1);
             this.tableLayoutPanel12.Controls.Add(this.label37, 0, 0);
             this.tableLayoutPanel12.Controls.Add(this.type0_end, 4, 0);
-            this.tableLayoutPanel12.Location = new System.Drawing.Point(2, 47);
+            this.tableLayoutPanel12.Controls.Add(this.type0_start, 2, 0);
+            this.tableLayoutPanel12.Location = new System.Drawing.Point(2, 73);
             this.tableLayoutPanel12.Margin = new System.Windows.Forms.Padding(2);
             this.tableLayoutPanel12.Name = "tableLayoutPanel12";
             this.tableLayoutPanel12.RowCount = 6;
@@ -2677,7 +2689,7 @@ namespace WindowsFormsApp1
             this.tableLayoutPanel12.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
             this.tableLayoutPanel12.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
             this.tableLayoutPanel12.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel12.Size = new System.Drawing.Size(255, 119);
+            this.tableLayoutPanel12.Size = new System.Drawing.Size(255, 116);
             this.tableLayoutPanel12.TabIndex = 0;
             // 
             // label40
@@ -2772,7 +2784,7 @@ namespace WindowsFormsApp1
             this.type5_selection.AutoSize = true;
             this.type5_selection.Location = new System.Drawing.Point(32, 98);
             this.type5_selection.Name = "type5_selection";
-            this.type5_selection.Size = new System.Drawing.Size(65, 18);
+            this.type5_selection.Size = new System.Drawing.Size(65, 15);
             this.type5_selection.TabIndex = 43;
             this.type5_selection.Text = "checkBox1";
             this.type5_selection.UseVisualStyleBackColor = true;
@@ -2899,7 +2911,7 @@ namespace WindowsFormsApp1
             this.label26.Location = new System.Drawing.Point(164, 95);
             this.label26.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label26.Name = "label26";
-            this.label26.Size = new System.Drawing.Size(20, 24);
+            this.label26.Size = new System.Drawing.Size(20, 21);
             this.label26.TabIndex = 37;
             this.label26.Text = "~";
             this.label26.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -2964,7 +2976,7 @@ namespace WindowsFormsApp1
             this.label25.Location = new System.Drawing.Point(2, 95);
             this.label25.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(25, 24);
+            this.label25.Size = new System.Drawing.Size(25, 21);
             this.label25.TabIndex = 34;
             this.label25.Text = "#5";
             this.label25.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -3051,13 +3063,62 @@ namespace WindowsFormsApp1
             this.type0_end.Size = new System.Drawing.Size(63, 20);
             this.type0_end.TabIndex = 47;
             // 
+            // tableLayoutPanel26
+            // 
+            this.tableLayoutPanel26.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tableLayoutPanel26.ColumnCount = 2;
+            this.tableLayoutPanel26.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel26.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel26.Controls.Add(this.Foreign_Skip, 1, 0);
+            this.tableLayoutPanel26.Controls.Add(this.Foreign_Stop, 0, 0);
+            this.tableLayoutPanel26.Location = new System.Drawing.Point(3, 46);
+            this.tableLayoutPanel26.Name = "tableLayoutPanel26";
+            this.tableLayoutPanel26.RowCount = 1;
+            this.tableLayoutPanel26.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel26.Size = new System.Drawing.Size(253, 22);
+            this.tableLayoutPanel26.TabIndex = 40;
+            // 
+            // Foreign_Skip
+            // 
+            this.Foreign_Skip.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.Foreign_Skip.AutoSize = true;
+            this.Foreign_Skip.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.Foreign_Skip.Font = new System.Drawing.Font("굴림", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.Foreign_Skip.Location = new System.Drawing.Point(129, 3);
+            this.Foreign_Skip.Name = "Foreign_Skip";
+            this.Foreign_Skip.Size = new System.Drawing.Size(121, 16);
+            this.Foreign_Skip.TabIndex = 1;
+            this.Foreign_Skip.Text = "외국휴무스킵";
+            this.Foreign_Skip.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.Foreign_Skip.UseVisualStyleBackColor = false;
+            // 
+            // Foreign_Stop
+            // 
+            this.Foreign_Stop.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.Foreign_Stop.AutoSize = true;
+            this.Foreign_Stop.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.Foreign_Stop.Font = new System.Drawing.Font("굴림", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.Foreign_Stop.Location = new System.Drawing.Point(3, 3);
+            this.Foreign_Stop.Name = "Foreign_Stop";
+            this.Foreign_Stop.Size = new System.Drawing.Size(120, 16);
+            this.Foreign_Stop.TabIndex = 0;
+            this.Foreign_Stop.Text = "외국휴무중단";
+            this.Foreign_Stop.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.Foreign_Stop.UseVisualStyleBackColor = false;
+            // 
             // groupBox9
             // 
             this.groupBox9.Controls.Add(this.Telegram_Allow);
             this.groupBox9.Controls.Add(this.tableLayoutPanel13);
             this.groupBox9.Controls.Add(this.telegram_test_button);
             this.groupBox9.Font = new System.Drawing.Font("굴림", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.groupBox9.Location = new System.Drawing.Point(790, 429);
+            this.groupBox9.Location = new System.Drawing.Point(790, 458);
             this.groupBox9.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox9.Name = "groupBox9";
             this.groupBox9.Padding = new System.Windows.Forms.Padding(2);
@@ -3162,7 +3223,7 @@ namespace WindowsFormsApp1
             this.groupBox10.Controls.Add(this.KIS_Allow);
             this.groupBox10.Controls.Add(this.tableLayoutPanel14);
             this.groupBox10.Font = new System.Drawing.Font("굴림", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.groupBox10.Location = new System.Drawing.Point(790, 521);
+            this.groupBox10.Location = new System.Drawing.Point(790, 546);
             this.groupBox10.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox10.Name = "groupBox10";
             this.groupBox10.Padding = new System.Windows.Forms.Padding(2);
@@ -3820,7 +3881,7 @@ namespace WindowsFormsApp1
             // 
             this.groupBox14.Controls.Add(this.tableLayoutPanel25);
             this.groupBox14.Font = new System.Drawing.Font("굴림", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.groupBox14.Location = new System.Drawing.Point(790, 374);
+            this.groupBox14.Location = new System.Drawing.Point(790, 403);
             this.groupBox14.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox14.Name = "groupBox14";
             this.groupBox14.Padding = new System.Windows.Forms.Padding(2);
@@ -3948,6 +4009,8 @@ namespace WindowsFormsApp1
             this.tableLayoutPanel19.PerformLayout();
             this.tableLayoutPanel12.ResumeLayout(false);
             this.tableLayoutPanel12.PerformLayout();
+            this.tableLayoutPanel26.ResumeLayout(false);
+            this.tableLayoutPanel26.PerformLayout();
             this.groupBox9.ResumeLayout(false);
             this.groupBox9.PerformLayout();
             this.tableLayoutPanel13.ResumeLayout(false);
@@ -4230,5 +4293,8 @@ namespace WindowsFormsApp1
         private System.Windows.Forms.TextBox type0_isa_end;
         private System.Windows.Forms.TextBox term_for_non_buy_text;
         private System.Windows.Forms.TextBox term_for_non_sell_text;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel26;
+        private System.Windows.Forms.CheckBox Foreign_Skip;
+        private System.Windows.Forms.CheckBox Foreign_Stop;
     }
 }
