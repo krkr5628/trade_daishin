@@ -5627,7 +5627,43 @@ namespace WindowsFormsApp1
 
         private void telegram_function(string mesage)
         {
+            switch (mesage)
+            {
+                case "/F" :
+                    telegram_message("[명령어 리스트]\n/F : 명령어 리스트\n/REBOOT : 프로그램 재실행\n" +
+                        "/START : 조건식 시작\n/STOP : 조건식 중단\n/CLEAR : 전체 청산\n/CLEAR_PLUS : 수익 청산\n/CLEAR_MINUS : 손실 청산\n" +
+                        "/S : 시스템 로그\n/O : 주문 로그\n/I : 편출입로그\n" +
+                        "/t1 : 편출입 차트\n/t2 : 보유 차트\n/t3 : 매매내역 차트\n");
+                    break;
+                case "/REBOOT":
+                    telegram_message("프로그램 재실행\n");
+                    Application.Restart();
+                    break;
+                case "/START":
+                    telegram_message("조건식 실시간 검색 시작\n");
+                    real_time_search_btn(this, EventArgs.Empty);
+                    break;
+                case "/STOP":
+                    telegram_message("조건식 실시간 검색 중단\n");
+                    real_time_stop_btn(this, EventArgs.Empty);
+                    break;
+                case "/CLEAR":
+                    telegram_message("전체 청산 실행\n");
+                    All_clear_btn_Click(this, EventArgs.Empty);
+                    break;
+                case "/CLEAR_PLUS":
+                    telegram_message("수익 청산 실행\n");
+                    Profit_clear_btn_Click(this, EventArgs.Empty);
+                    break;
+                case "/CLEAR_MINUS":
+                    telegram_message("손실 청산 실행\n");
+                    Loss_clear_btn_Click(this, EventArgs.Empty);
+                    break;
+                default:
+                    telegram_message("명령어 없음 : 명령어 리스트(/F) 요청\n");
+                    break;
 
+            }
         }
     }
 }
