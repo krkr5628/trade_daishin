@@ -121,6 +121,7 @@ namespace WindowsFormsApp1
             this.Refresh = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
+            this.select_cancel = new System.Windows.Forms.Button();
             this.sell_condtion_method = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
             this.sell_condtion = new System.Windows.Forms.Label();
@@ -167,7 +168,6 @@ namespace WindowsFormsApp1
             this.kospi_index = new System.Windows.Forms.Label();
             this.외국인선물누적 = new System.Windows.Forms.Label();
             this.timer2 = new System.Windows.Forms.Timer(this.components);
-            this.select_cancel = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -706,8 +706,8 @@ namespace WindowsFormsApp1
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33334F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33334F));
             this.tableLayoutPanel2.Controls.Add(this.Real_time_stop_btn, 2, 1);
-            this.tableLayoutPanel2.Controls.Add(this.Real_time_search_btn, 1, 1);
             this.tableLayoutPanel2.Controls.Add(this.Stock_search_btn, 2, 0);
+            this.tableLayoutPanel2.Controls.Add(this.Real_time_search_btn, 1, 1);
             this.tableLayoutPanel2.Controls.Add(this.Stock_code, 1, 0);
             this.tableLayoutPanel2.Location = new System.Drawing.Point(5, 64);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
@@ -1461,6 +1461,20 @@ namespace WindowsFormsApp1
             this.tableLayoutPanel6.Size = new System.Drawing.Size(1529, 30);
             this.tableLayoutPanel6.TabIndex = 11;
             // 
+            // select_cancel
+            // 
+            this.select_cancel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.select_cancel.BackColor = System.Drawing.Color.SkyBlue;
+            this.select_cancel.Location = new System.Drawing.Point(1382, 2);
+            this.select_cancel.Margin = new System.Windows.Forms.Padding(2);
+            this.select_cancel.Name = "select_cancel";
+            this.select_cancel.Size = new System.Drawing.Size(145, 26);
+            this.select_cancel.TabIndex = 22;
+            this.select_cancel.Text = "주문취소";
+            this.select_cancel.UseVisualStyleBackColor = false;
+            // 
             // sell_condtion_method
             // 
             this.sell_condtion_method.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -2170,20 +2184,6 @@ namespace WindowsFormsApp1
             // 
             this.timer2.Interval = 200;
             this.timer2.Tick += new System.EventHandler(this.Transfer_Timer);
-            // 
-            // select_cancel
-            // 
-            this.select_cancel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.select_cancel.BackColor = System.Drawing.Color.SkyBlue;
-            this.select_cancel.Location = new System.Drawing.Point(1382, 2);
-            this.select_cancel.Margin = new System.Windows.Forms.Padding(2);
-            this.select_cancel.Name = "select_cancel";
-            this.select_cancel.Size = new System.Drawing.Size(145, 26);
-            this.select_cancel.TabIndex = 22;
-            this.select_cancel.Text = "주문취소";
-            this.select_cancel.UseVisualStyleBackColor = false;
             // 
             // Trade_Auto_Daishin
             // 

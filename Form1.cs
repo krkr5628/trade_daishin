@@ -17,6 +17,7 @@ using System.Windows.Forms;
 using System.IO;
 using System.Collections;
 using System.Timers;
+using System.Threading;
 //
 using Microsoft.Win32;
 using System.Diagnostics;
@@ -1709,6 +1710,11 @@ namespace WindowsFormsApp1
         private bool index_clear = false;
         private bool index_dual = false;
 
+        private bool index_run = false;
+
+        private bool index_stop = false;
+        private bool index_skip = false;
+
         //https://money2.creontrade.com/e5/mboard/ptype_basic/HTS_Plus_Helper/DW_Basic_Read_Page.aspx?boardseq=284&seq=12&page=1&searchString=CpUtil&p=8841&v=8643&m=9505
         //https://money2.creontrade.com/e5/mboard/ptype_basic/HTS_Plus_Helper/DW_Basic_Read_Page.aspx?boardseq=284&seq=91&page=2&searchString=%ec%a7%80%ec%88%98&p=8841&v=8643&m=9505
         private void US_INDEX()
@@ -1764,12 +1770,16 @@ namespace WindowsFormsApp1
                     //string tmp3 = CpFore8312.GetHeaderValue(3);//심볼명 => string
                     //float tmp4 = CpFore8312.GetHeaderValue(4);//현재가 => long
                     float tmp5 = CpFore8312.GetHeaderValue(6);//등락률 => float
-                    //int tmp6 = CpFore8312.GetHeaderValue(13);//거래일자 => long
+                    string tmp6 = Convert.ToString(CpFore8312.GetHeaderValue(13));//거래일자 => long //20240607
                     //WriteLog_System($"{tmp}/{tmp3}/{tmp4.ToString()}/{tmp5.ToString()}/{tmp6.ToString()}\n");
 
                     dow_index.Text = tmp5.ToString();
+                    //
+                    if (!index_run) index_stop_skip(tmp6);
+                    //
+                    if (index_skip) WriteLog_System("[DOW30/SKIP] : 미국 전영업일 휴무\n");
 
-                    if (utility.buy_condition_index)
+                    if (!index_skip && utility.buy_condition_index)
                     {
                         if (utility.type3_selection)
                         {
@@ -1786,7 +1796,7 @@ namespace WindowsFormsApp1
                         }
                     }
 
-                    if (utility.clear_index)
+                    if(!index_skip && utility.clear_index)
                     {
                         if (utility.type3_selection_all)
                         {
@@ -1803,7 +1813,7 @@ namespace WindowsFormsApp1
                         }
                     }
 
-                    if (utility.Dual_Index)
+                    if (!index_skip && utility.Dual_Index)
                     {
                         if (utility.type3_selection_isa)
                         {
@@ -1867,12 +1877,16 @@ namespace WindowsFormsApp1
                     //string tmp3 = CpFore8312.GetHeaderValue(3);//심볼명 => string
                     //float tmp4 = CpFore8312.GetHeaderValue(4);//현재가 => long
                     float tmp5 = CpFore8312.GetHeaderValue(6);//등락률 => float
-                    //int tmp6 = CpFore8312.GetHeaderValue(13);//거래일자 => long
+                    string tmp6 = Convert.ToString(CpFore8312.GetHeaderValue(13));//거래일자 => long //20240607
                     //WriteLog_System($"{tmp}/{tmp3}/{tmp4.ToString()}/{tmp5.ToString()}/{tmp6.ToString()}\n");
 
                     sp_index.Text = tmp5.ToString();
+                    //
+                    if (!index_run) index_stop_skip(tmp6);
+                    //
+                    if (index_skip) WriteLog_System("[S&P500/SKIP] : 미국 전영업일 휴무\n");
 
-                    if (utility.buy_condition_index)
+                    if (!index_skip && utility.buy_condition_index)
                     {
                         if (utility.type4_selection)
                         {
@@ -1889,7 +1903,7 @@ namespace WindowsFormsApp1
                         }
                     }
 
-                    if (utility.clear_index)
+                    if (!index_skip && utility.clear_index)
                     {
                         if (utility.type4_selection_all)
                         {
@@ -1906,7 +1920,7 @@ namespace WindowsFormsApp1
                         }
                     }
 
-                    if (utility.Dual_Index)
+                    if (!index_skip && utility.Dual_Index)
                     {
                         if (utility.type4_selection_isa)
                         {
@@ -1970,12 +1984,16 @@ namespace WindowsFormsApp1
                     //string tmp3 = CpFore8312.GetHeaderValue(3);//심볼명 => string
                     //float tmp4 = CpFore8312.GetHeaderValue(4);//현재가 => long
                     float tmp5 = CpFore8312.GetHeaderValue(6);//등락률 => float
-                    //int tmp6 = CpFore8312.GetHeaderValue(13);//거래일자 => long
+                    string tmp6 = Convert.ToString(CpFore8312.GetHeaderValue(13));//거래일자 => long //20240607
                     //WriteLog_System($"{tmp}/{tmp3}/{tmp4.ToString()}/{tmp5.ToString()}/{tmp6.ToString()}\n");
 
                     nasdaq_index.Text = tmp5.ToString();
+                    //
+                    if (!index_run) index_stop_skip(tmp6);
+                    //
+                    if (index_skip) WriteLog_System("[NASDAQ100/SKIP] : 미국 전영업일 휴무\n");
 
-                    if (utility.buy_condition_index)
+                    if (!index_skip && utility.buy_condition_index)
                     {
                         if (utility.type5_selection)
                         {
@@ -1992,7 +2010,7 @@ namespace WindowsFormsApp1
                         }
                     }
 
-                    if (utility.clear_index)
+                    if (!index_skip && utility.clear_index)
                     {
                         if (utility.type5_selection_all)
                         {
@@ -2009,7 +2027,7 @@ namespace WindowsFormsApp1
                         }
                     }
 
-                    if (utility.Dual_Index)
+                    if (!index_skip && utility.Dual_Index)
                     {
                         if (utility.type5_selection_isa)
                         {
@@ -2025,6 +2043,52 @@ namespace WindowsFormsApp1
                             }
                         }
                     }
+                }
+            }
+        }
+
+        private void index_stop_skip(string date)
+        {
+            if (utility.Foreign_Stop || utility.Foreign_Skip)
+            {
+                if (!Thread.CurrentThread.CurrentCulture.Name.Equals("ko-KR"))
+                {
+                    WriteLog_System("시스템 언어 한국어 변경 요망\n");
+                    return;
+                }
+                //
+                if (DateTime.TryParseExact(date, "yyyyMMdd", null, System.Globalization.DateTimeStyles.None, out DateTime givenDate))
+                {
+                    index_run = true;
+
+                    //날짜 추출
+                    string today_week = DateTime.Now.ToString("ddd");
+
+                    //현재날짜(시간 부분 제외)
+                    DateTime currentDate = DateTime.Now.Date;
+
+                    //날짜 차이 계산
+                    TimeSpan difference = currentDate - givenDate;
+
+                    //월요일
+                    if (today_week.Equals("월") && Math.Abs(difference.Days) > 3)
+                    {
+                        if (utility.Foreign_Stop) index_stop = true;
+                        if (utility.Foreign_Skip) index_skip = true;
+                        WriteLog_System("미국장 전영업일 휴무\n");
+                        telegram_message("미국장 전영업일 휴무\n");
+                    }
+                    else if (!today_week.Equals("월") && Math.Abs(difference.Days) > 1)
+                    {
+                        if (utility.Foreign_Stop) index_stop = true;
+                        if (utility.Foreign_Skip) index_skip = true;
+                        WriteLog_System("미국장 전영업일 휴무\n");
+                        telegram_message("미국장 전영업일 휴무\n");
+                    }
+                }
+                else
+                {
+                    WriteLog_System("날짜 형식 변경 : 개발자 문의 요망\n");
                 }
             }
         }
@@ -2648,6 +2712,16 @@ namespace WindowsFormsApp1
             {
                 WriteLog_System("DUAL 모드 조건식 2개 필요\n");
                 telegram_message("DUAL 모드 조건식 2개 필요\n");
+                WriteLog_System("자동 매매 정지\n");
+                telegram_message("자동 매매 정지\n");
+                return;
+            }
+
+            //
+            if (index_stop)
+            {
+                WriteLog_System("미국 전영업일 휴무 : 중단\n");
+                telegram_message("미국 전영업일 휴무 : 중단\n");
                 WriteLog_System("자동 매매 정지\n");
                 telegram_message("자동 매매 정지\n");
                 return;
