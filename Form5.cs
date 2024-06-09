@@ -47,6 +47,22 @@ namespace WindowsFormsApp1
                 Console.WriteLine("DENY");
             }
         }
+        /*
+         * 
+         * 
+         * 
+         * 
+         * 
+         * 
+         * 
+         * IP 노출 우려로 PUSH 금지
+         * 
+         * 
+         * 
+         * 
+         * 
+         *  
+        */
         private static async Task<string> SendAuthCodeAsync(string authCode)
         {
             HttpClient client = new HttpClient{Timeout = TimeSpan.FromSeconds(30)};
