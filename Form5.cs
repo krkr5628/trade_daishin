@@ -8,6 +8,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
+//
+using System.Net.Http;
+using System.Windows.Forms;
 
 namespace WindowsFormsApp1
 {
@@ -19,18 +22,43 @@ namespace WindowsFormsApp1
             //
             read();
 
-            //인증 기능 추가
-
+            //인증 기능 
+            button1.Click += Authentication;
         }
 
         public static bool Authentication_Check = false;
 
-        private void Authentication()
+        private async void Authentication(object sender, EventArgs e)
         {
-            //인증코드확인
+            if(textBox1.Text == "")
+            {
+                MessageBox.Show("인증코드를 입력하세요.");
+                return;
+            }
+            //
+            var response = await SendAuthCodeAsync(textBox1.Text);
 
-            //인증성공
-            //Authentication_Check = true;
+            if (response == "ALLOW")
+            {
+                Console.WriteLine("OK");
+            }
+            else
+            {
+                Console.WriteLine("DENY");
+            }
+        }
+        private static async Task<string> SendAuthCodeAsync(string authCode)
+        {
+            HttpClient client = new HttpClient{Timeout = TimeSpan.FromSeconds(30)};
+            var content = new StringContent($"{{ \"authCode\": \"{authCode}\" }}", Encoding.UTF8, "application/json");
+            var response = await client.PostAsync("http://your-server-url/auth", content);
+
+            if (response.IsSuccessStatusCode)
+            {
+                return await response.Content.ReadAsStringAsync();
+            }
+
+            return "DENY";
         }
 
         private void read()

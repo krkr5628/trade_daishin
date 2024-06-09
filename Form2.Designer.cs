@@ -2020,7 +2020,6 @@ namespace WindowsFormsApp1
             this.groupBox5.TabIndex = 18;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "매매방식";
-            this.groupBox5.Enter += new System.EventHandler(this.groupBox5_Enter);
             // 
             // groupBox6
             // 

@@ -2357,10 +2357,5 @@ namespace WindowsFormsApp1
                 MessageBox.Show($"오류: {ex.Message}");
             }
         }
-
-        private void groupBox5_Enter(object sender, EventArgs e)
-        {
-
-        }
     }
 }

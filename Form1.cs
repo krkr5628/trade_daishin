@@ -31,6 +31,10 @@ namespace WindowsFormsApp1
 {
     public partial class Trade_Auto_Daishin : Form
     {
+        //-----------------------------------변경 신호----------------------------------------
+
+        private int sample_balance = 500000; //500,000원(미인증 매매 금액 제한)
+
         //-----------------------------------공용 신호----------------------------------------
 
         public static string[] arrCondition = { };
@@ -68,7 +72,7 @@ namespace WindowsFormsApp1
         private CPTRADELib.CpTd0387 CpTd0387; //시간외단일가 취소주문
         private CPTRADELib.CpTd0314 CpTd0314; //정규장 취소주문
 
-        //-----------------------------------전용 신호j----------------------------------------
+        //-----------------------------------전용 신호----------------------------------------
 
         private string Master_code = "01";
         //private string Master_code = "10"; //TEST용
@@ -1149,6 +1153,16 @@ namespace WindowsFormsApp1
 
             //
             update_id = utility.Telegram_last_chat_update_id;
+
+            //
+            if (WindowsFormsApp1.Update.Authentication_Check)
+            {
+                Authentic.Text = "인증";
+            }
+            else
+            {
+                Authentic.Text = "미인증";
+            }
 
             //
             WriteLog_System("세팅 반영 완료\n");
@@ -4355,13 +4369,46 @@ namespace WindowsFormsApp1
         private int buy_order_cal(int price, string gubun)
         {
             int current_balance = 0;
+
             if (gubun == "01")
             {
-                current_balance = Convert.ToInt32(User_money.Text.Replace(",", ""));
+                int current_balance_tmp = Convert.ToInt32(User_money.Text.Replace(",", ""));
+                //
+                if (WindowsFormsApp1.Update.Authentication_Check)
+                {
+                    if(current_balance_tmp > sample_balance)
+                    {
+                        current_balance = sample_balance;
+                    }
+                    else
+                    {
+                        current_balance = current_balance_tmp;
+                    }
+                }
+                else
+                {
+                    current_balance = current_balance_tmp;
+                }
             }
             else
             {
-                current_balance = Convert.ToInt32(User_money_isa.Text.Replace(",", ""));
+                int current_balance_tmp = Convert.ToInt32(User_money_isa.Text.Replace(",", ""));
+                //
+                if (WindowsFormsApp1.Update.Authentication_Check)
+                {
+                    if (current_balance_tmp > sample_balance)
+                    {
+                        current_balance = sample_balance;
+                    }
+                    else
+                    {
+                        current_balance = current_balance_tmp;
+                    }
+                }
+                else
+                {
+                    current_balance = current_balance_tmp;
+                }
             }
 
             int max_buy = Convert.ToInt32(utility.maxbuy);
@@ -5720,5 +5767,8 @@ namespace WindowsFormsApp1
 
             }
         }
+
+        //--------------------------------------WEBHOK-------------------------------------------------------------
+
     }
 }

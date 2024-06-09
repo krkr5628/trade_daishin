@@ -168,6 +168,8 @@ namespace WindowsFormsApp1
             this.kospi_index = new System.Windows.Forms.Label();
             this.외국인선물누적 = new System.Windows.Forms.Label();
             this.timer2 = new System.Windows.Forms.Timer(this.components);
+            this.label2 = new System.Windows.Forms.Label();
+            this.Authentic = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -705,10 +707,12 @@ namespace WindowsFormsApp1
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33334F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33334F));
+            this.tableLayoutPanel2.Controls.Add(this.Authentic, 0, 1);
             this.tableLayoutPanel2.Controls.Add(this.Real_time_stop_btn, 2, 1);
             this.tableLayoutPanel2.Controls.Add(this.Stock_search_btn, 2, 0);
             this.tableLayoutPanel2.Controls.Add(this.Real_time_search_btn, 1, 1);
             this.tableLayoutPanel2.Controls.Add(this.Stock_code, 1, 0);
+            this.tableLayoutPanel2.Controls.Add(this.label2, 0, 0);
             this.tableLayoutPanel2.Location = new System.Drawing.Point(5, 64);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 2;
@@ -2185,6 +2189,33 @@ namespace WindowsFormsApp1
             this.timer2.Interval = 200;
             this.timer2.Tick += new System.EventHandler(this.Transfer_Timer);
             // 
+            // label2
+            // 
+            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label2.AutoSize = true;
+            this.label2.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.label2.Location = new System.Drawing.Point(3, 0);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(100, 32);
+            this.label2.TabIndex = 14;
+            this.label2.Text = "PREVIEW";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // Authentic
+            // 
+            this.Authentic.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.Authentic.AutoSize = true;
+            this.Authentic.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.Authentic.Location = new System.Drawing.Point(3, 32);
+            this.Authentic.Name = "Authentic";
+            this.Authentic.Size = new System.Drawing.Size(100, 33);
+            this.Authentic.TabIndex = 15;
+            this.Authentic.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // Trade_Auto_Daishin
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -2367,6 +2398,8 @@ namespace WindowsFormsApp1
         private System.Windows.Forms.Label 외국인선물누적;
         private System.Windows.Forms.Button Refresh;
         private System.Windows.Forms.Button select_cancel;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label Authentic;
     }
 }
 
