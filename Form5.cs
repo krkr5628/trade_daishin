@@ -21,62 +21,9 @@ namespace WindowsFormsApp1
             InitializeComponent();
             //
             read();
-
             //인증 기능 
             button1.Click += Authentication;
         }
-
-        public static bool Authentication_Check = false;
-
-        private async void Authentication(object sender, EventArgs e)
-        {
-            if(textBox1.Text == "")
-            {
-                MessageBox.Show("인증코드를 입력하세요.");
-                return;
-            }
-            //
-            var response = await SendAuthCodeAsync(textBox1.Text);
-
-            if (response == "ALLOW")
-            {
-                Console.WriteLine("OK");
-            }
-            else
-            {
-                Console.WriteLine("DENY");
-            }
-        }
-        /*
-         * 
-         * 
-         * 
-         * 
-         * 
-         * 
-         * 
-         * IP 노출 우려로 PUSH 금지
-         * 
-         * 
-         * 
-         * 
-         * 
-         *  
-        */
-        private static async Task<string> SendAuthCodeAsync(string authCode)
-        {
-            HttpClient client = new HttpClient{Timeout = TimeSpan.FromSeconds(30)};
-            var content = new StringContent($"{{ \"authCode\": \"{authCode}\" }}", Encoding.UTF8, "application/json");
-            var response = await client.PostAsync("http://your-server-url/auth", content);
-
-            if (response.IsSuccessStatusCode)
-            {
-                return await response.Content.ReadAsStringAsync();
-            }
-
-            return "DENY";
-        }
-
         private void read()
         {
             // 파일이 있는 폴더 경로
@@ -118,6 +65,60 @@ namespace WindowsFormsApp1
             {
                 MessageBox.Show("파일 읽기 중 오류 발생: " + ex.Message);
             }
+        }
+
+        /*
+         * 
+         * 
+         * 
+         * 
+         * 
+         * 
+         * 
+         * IP 노출 우려로 PUSH 금지
+         * 
+         * 
+         * 
+         * 
+         * 
+         *  
+        */
+
+        private async void Authentication(object sender, EventArgs e)
+        {
+            if(textBox1.Text == "")
+            {
+                MessageBox.Show("인증코드를 입력하세요.");
+                return;
+            }
+            //
+            var response = await SendAuthCodeAsync(textBox1.Text);
+
+            if (response.StartsWith("ALLOW"))
+            {
+                label4.Text = "인증";
+                label5.Text = response.Split(',')[1];
+                Trade_Auto_Daishin.Authentication_Check = true;
+            }
+            else
+            {
+                label4.Text = "미인증";
+                Console.WriteLine("DENY");
+            }
+        }
+
+        public static async Task<string> SendAuthCodeAsync(string authCode)
+        {
+            HttpClient client = new HttpClient{Timeout = TimeSpan.FromSeconds(10)};
+            var content = new StringContent($"{{ \"authCode\": \"{authCode}\" }}", Encoding.UTF8, "application/json");
+            var response = await client.PostAsync("http://your-server-url/auth", content);
+
+            if (response.IsSuccessStatusCode)
+            {
+                return await response.Content.ReadAsStringAsync();
+            }
+
+            return "DENY";
         }
     }
 }

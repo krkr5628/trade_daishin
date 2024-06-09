@@ -31,8 +31,9 @@ namespace WindowsFormsApp1
 {
     public partial class Trade_Auto_Daishin : Form
     {
-        //-----------------------------------변경 신호----------------------------------------
+        //-----------------------------------인증 관련 신호----------------------------------------
 
+        public static bool Authentication_Check = false; //미인증 / 인증
         private int sample_balance = 500000; //500,000원(미인증 매매 금액 제한)
 
         //-----------------------------------공용 신호----------------------------------------
@@ -838,8 +839,9 @@ namespace WindowsFormsApp1
         }
 
         //--------------------------------------------------------------Main_Timer1---------------------------------------------------------------
-        private bool isRunned = false;
+        private bool isRunned = true;
         private bool isRunned2 = false;
+        private bool isRunned3 = false;
 
         private bool initial_process_complete = false;
 
@@ -856,7 +858,25 @@ namespace WindowsFormsApp1
             //시간표시
             timetimer.Text = DateTime.Now.ToString("yy MM-dd (ddd) HH:mm:ss");
 
-            if (utility.load_check && !isRunned)
+            if (utility.load_check && !isRunned3)
+            {
+                isRunned3 = true;
+                var response = WindowsFormsApp1.Update.SendAuthCodeAsync("");
+                if (response.ToString().StartsWith("ALLOW")) 
+                {
+                    Trade_Auto_Daishin.Authentication_Check = true;
+                    WriteLog_System($"인증 : 유효기간({response.ToString().Split(',')[1]})\n");
+                    telegram_message($"인증 : 유효기간({response.ToString().Split(',')[1]})\n");
+                }
+                else
+                {
+                    WriteLog_System("미인증 : 50만원 제한\n");
+                    telegram_message("미인증 : 50만원 제한\n");
+                }
+                isRunned = false;
+            }
+
+            if (!isRunned)
             {
                 isRunned = true;
 
@@ -1155,7 +1175,7 @@ namespace WindowsFormsApp1
             update_id = utility.Telegram_last_chat_update_id;
 
             //
-            if (WindowsFormsApp1.Update.Authentication_Check)
+            if (Authentication_Check)
             {
                 Authentic.Text = "인증";
             }
@@ -4374,7 +4394,7 @@ namespace WindowsFormsApp1
             {
                 int current_balance_tmp = Convert.ToInt32(User_money.Text.Replace(",", ""));
                 //
-                if (WindowsFormsApp1.Update.Authentication_Check)
+                if (Authentication_Check)
                 {
                     if(current_balance_tmp > sample_balance)
                     {
@@ -4394,7 +4414,7 @@ namespace WindowsFormsApp1
             {
                 int current_balance_tmp = Convert.ToInt32(User_money_isa.Text.Replace(",", ""));
                 //
-                if (WindowsFormsApp1.Update.Authentication_Check)
+                if (Authentication_Check)
                 {
                     if (current_balance_tmp > sample_balance)
                     {

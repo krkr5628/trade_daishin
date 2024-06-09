@@ -1855,6 +1855,8 @@ namespace WindowsFormsApp1
             tmp.Add("type5_Dual/" + Convert.ToString(type5_selection_isa.Checked) + "/" + type5_isa_start.Text + "/" + type5_isa_end.Text);
             //
             tmp.Add("Telegram_Last_Chat_update_id/" + Convert.ToString(Trade_Auto_Daishin.update_id));
+            //
+
 
             // 저장할 파일 경로
             string filePath = $@"C:\Auto_Trade_Creon\setting_daishin.txt";
