@@ -617,12 +617,12 @@ namespace WindowsFormsApp1
                                     //로그인 진행중
                                     if (!login_complete)
                                     {
-                                        WriteLog_System($"[TELEGRAM] : 로그인 진행중\n");
+                                        telegram_message($"[TELEGRAM] : 로그인 진행중\n");
                                     }
                                     //초기값 로드 진행중
                                     if (!initial_process_complete)
                                     {
-                                        WriteLog_System($"[TELEGRAM] : 초기값 로드 진행중\n");
+                                        telegram_message($"[TELEGRAM] : 초기값 로드 진행중\n");
                                     }
                                     //
                                     WriteLog_System($"[TELEGRAM] : {message} / {current_message_number}\n"); // 수신된 메시지 확인
@@ -5625,19 +5625,23 @@ namespace WindowsFormsApp1
 
         //--------------------------------------Telegram Function-------------------------------------------------------------
 
-        private void telegram_function(string mesage)
+        private void telegram_function(string message)
         {
-            switch (mesage)
+            switch (message)
             {
-                case "/F" :
-                    telegram_message("[명령어 리스트]\n/F : 명령어 리스트\n/REBOOT : 프로그램 재실행\n" +
+                case "/HELP":
+                    telegram_message("[명령어 리스트]\n/HELP : 명령어 리스트\n/REBOOT : 프로그램 재실행\n/SHUTDOWN : 프로그램 종료\n" +
                         "/START : 조건식 시작\n/STOP : 조건식 중단\n/CLEAR : 전체 청산\n/CLEAR_PLUS : 수익 청산\n/CLEAR_MINUS : 손실 청산\n" +
-                        "/S : 시스템 로그\n/O : 주문 로그\n/I : 편출입로그\n" +
-                        "/t1 : 편출입 차트\n/t2 : 보유 차트\n/t3 : 매매내역 차트\n");
+                        "/L1 : 시스템 로그\n/L2 : 주문 로그\n/L3 : 편출입 로그\n" +
+                        "/T1 : 편출입 차트\n/T2 : 보유 차트\n/T3 : 매매내역 차트\n");
                     break;
                 case "/REBOOT":
                     telegram_message("프로그램 재실행\n");
                     Application.Restart();
+                    break;
+                case "/SHUTDOWN":
+                    telegram_message("프로그램 종료\n");
+                    Application.Exit();
                     break;
                 case "/START":
                     telegram_message("조건식 실시간 검색 시작\n");
@@ -5658,6 +5662,57 @@ namespace WindowsFormsApp1
                 case "/CLEAR_MINUS":
                     telegram_message("손실 청산 실행\n");
                     Loss_clear_btn_Click(this, EventArgs.Empty);
+                    break;
+                case "/L1":
+                    telegram_message("시스템 로그 수신\n");
+                    telegram_message($"\n{log_window.Text}\n");
+                    break;
+                case "/L2":
+                    telegram_message("주문 로그 수신\n");
+                    telegram_message($"\n{log_window3.Text}\n");
+                    break;
+                case "/L3":
+                    telegram_message("편출입 로그 수신\n");
+                    telegram_message($"\n{log_window2.Text}\n");
+                    break;
+                case "/T1":
+                    telegram_message("편출입 차트 수신\n");
+                    //
+                    string send_meesage = string.Join("/", dtCondStock.Columns.Cast<DataColumn>().Select(column => column.ColumnName)) + "\n";
+                    foreach (DataRow row in dtCondStock.Rows)
+                    {
+                        send_meesage += "---------------------\n";
+                        send_meesage += string.Join("/", row.ItemArray.Select(item => item.ToString())) +"\n";
+                    }
+                    send_meesage += "---------------------\n";
+                    //
+                    telegram_message($"\n{send_meesage}\n");
+                    break;
+                case "/T2":
+                    telegram_message("보유 차트 수신\n");
+                    //
+                    string send_meesage2 = string.Join("/", dtCondStock_hold.Columns.Cast<DataColumn>().Select(column => column.ColumnName)) + "\n";
+                    foreach (DataRow row in dtCondStock_hold.Rows)
+                    {
+                        send_meesage2+= "---------------------\n";
+                        send_meesage2 += string.Join("/", row.ItemArray.Select(item => item.ToString())) + "\n";
+                    }
+                    send_meesage2 += "---------------------\n";
+                    //
+                    telegram_message($"\n{send_meesage2}\n");
+                    break;
+                case "/T3":
+                    telegram_message("매매내역 차트 수신\n");
+                    //
+                    string send_meesage3 = string.Join("/", dtCondStock_Transaction.Columns.Cast<DataColumn>().Select(column => column.ColumnName)) + "\n";
+                    foreach (DataRow row in dtCondStock_Transaction.Rows)
+                    {
+                        send_meesage3 += "---------------------\n";
+                        send_meesage3 += string.Join("/", row.ItemArray.Select(item => item.ToString())) + "\n";
+                    }
+                    send_meesage3 += "---------------------\n";
+                    //
+                    telegram_message($"\n{send_meesage3}\n");
                     break;
                 default:
                     telegram_message("명령어 없음 : 명령어 리스트(/F) 요청\n");

@@ -75,8 +75,8 @@ namespace WindowsFormsApp1
             this.Current_User_money = new System.Windows.Forms.Label();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.Real_time_stop_btn = new System.Windows.Forms.Button();
-            this.Real_time_search_btn = new System.Windows.Forms.Button();
             this.Stock_search_btn = new System.Windows.Forms.Button();
+            this.Real_time_search_btn = new System.Windows.Forms.Button();
             this.Stock_code = new System.Windows.Forms.TextBox();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.menu = new System.Windows.Forms.MenuStrip();
@@ -734,22 +734,6 @@ namespace WindowsFormsApp1
             this.Real_time_stop_btn.Text = "실시간 중단";
             this.Real_time_stop_btn.UseVisualStyleBackColor = false;
             // 
-            // Real_time_search_btn
-            // 
-            this.Real_time_search_btn.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.Real_time_search_btn.BackColor = System.Drawing.Color.SteelBlue;
-            this.Real_time_search_btn.Font = new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.Real_time_search_btn.ForeColor = System.Drawing.Color.Transparent;
-            this.Real_time_search_btn.Location = new System.Drawing.Point(106, 32);
-            this.Real_time_search_btn.Margin = new System.Windows.Forms.Padding(0);
-            this.Real_time_search_btn.Name = "Real_time_search_btn";
-            this.Real_time_search_btn.Size = new System.Drawing.Size(106, 33);
-            this.Real_time_search_btn.TabIndex = 7;
-            this.Real_time_search_btn.Text = "실시간 시작";
-            this.Real_time_search_btn.UseVisualStyleBackColor = false;
-            // 
             // Stock_search_btn
             // 
             this.Stock_search_btn.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -766,6 +750,22 @@ namespace WindowsFormsApp1
             this.Stock_search_btn.TabIndex = 7;
             this.Stock_search_btn.Text = "종목 조회";
             this.Stock_search_btn.UseVisualStyleBackColor = false;
+            // 
+            // Real_time_search_btn
+            // 
+            this.Real_time_search_btn.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.Real_time_search_btn.BackColor = System.Drawing.Color.SteelBlue;
+            this.Real_time_search_btn.Font = new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.Real_time_search_btn.ForeColor = System.Drawing.Color.Transparent;
+            this.Real_time_search_btn.Location = new System.Drawing.Point(106, 32);
+            this.Real_time_search_btn.Margin = new System.Windows.Forms.Padding(0);
+            this.Real_time_search_btn.Name = "Real_time_search_btn";
+            this.Real_time_search_btn.Size = new System.Drawing.Size(106, 33);
+            this.Real_time_search_btn.TabIndex = 7;
+            this.Real_time_search_btn.Text = "실시간 시작";
+            this.Real_time_search_btn.UseVisualStyleBackColor = false;
             // 
             // Stock_code
             // 
