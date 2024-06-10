@@ -33,7 +33,7 @@ namespace WindowsFormsApp1
     {
         //-----------------------------------인증 관련 신호----------------------------------------
 
-        public static bool Authentication_Check = false; //미인증 / 인증
+        public static bool Authentication_Check = true; //미인증(false) / 인증(true)
         private int sample_balance = 500000; //500,000원(미인증 매매 금액 제한)
 
         //-----------------------------------공용 신호----------------------------------------
@@ -174,7 +174,7 @@ namespace WindowsFormsApp1
                 return;
             }
             //
-            Update newform2 = new Update();
+            Update newform2 = new Update(this);
             newform2.ShowDialog(); //form2 닫기 전까지 form1 UI 제어 불가능
         }
 
@@ -861,10 +861,11 @@ namespace WindowsFormsApp1
             if (utility.load_check && !isRunned3)
             {
                 isRunned3 = true;
+                /*
                 var response = WindowsFormsApp1.Update.SendAuthCodeAsync("");
                 if (response.ToString().StartsWith("ALLOW")) 
                 {
-                    Trade_Auto_Daishin.Authentication_Check = true;
+                    Authentication_Check = true;
                     WriteLog_System($"인증 : 유효기간({response.ToString().Split(',')[1]})\n");
                     telegram_message($"인증 : 유효기간({response.ToString().Split(',')[1]})\n");
                 }
@@ -873,6 +874,7 @@ namespace WindowsFormsApp1
                     WriteLog_System("미인증 : 50만원 제한\n");
                     telegram_message("미인증 : 50만원 제한\n");
                 }
+                */
                 isRunned = false;
             }
 

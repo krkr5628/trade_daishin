@@ -16,9 +16,14 @@ namespace WindowsFormsApp1
 {
     public partial class Update : Form
     {
-        public Update()
+        private Trade_Auto_Daishin _trade_Auto_Daishin;
+
+        public Update(Trade_Auto_Daishin trade_Auto_Daishin)
         {
             InitializeComponent();
+            //
+            //FORM1 불러오기
+            _trade_Auto_Daishin = trade_Auto_Daishin;
             //
             read();
             //인증 기능 
@@ -99,6 +104,10 @@ namespace WindowsFormsApp1
                 label4.Text = "인증";
                 label5.Text = response.Split(',')[1];
                 Trade_Auto_Daishin.Authentication_Check = true;
+                this.Invoke((MethodInvoker)delegate
+                {
+                    _trade_Auto_Daishin.Authentic.Text = "인증";
+                });
             }
             else
             {

@@ -1800,8 +1800,8 @@ namespace WindowsFormsApp1
             //
             tmp.Add("종목매수텀/" + Convert.ToString(term_for_buy.Checked) + "/" + term_for_buy_text.Text);
             tmp.Add("종목매도텀/" + Convert.ToString(term_for_sell.Checked) + "/" + term_for_sell_text.Text);
-            tmp.Add("미체결매수취소/" + Convert.ToString(term_for_non_buy.Checked) + "/" + term_for_non_buy.Text);
-            tmp.Add("미체결매도취소/" + Convert.ToString(term_for_non_sell.Checked) + "/" + term_for_non_sell.Text);
+            tmp.Add("미체결매수취소/" + Convert.ToString(term_for_non_buy.Checked) + "/" + term_for_non_buy_text.Text);
+            tmp.Add("미체결매도취소/" + Convert.ToString(term_for_non_sell.Checked) + "/" + term_for_non_sell_text.Text);
             //
             tmp.Add("매수설정/" + Convert.ToString(buy_set1.SelectedIndex) + "/" + Convert.ToString(buy_set2.SelectedIndex));
             tmp.Add("매도설정/" + Convert.ToString(sell_set1.SelectedIndex) + "/" + Convert.ToString(sell_set2.SelectedIndex));
