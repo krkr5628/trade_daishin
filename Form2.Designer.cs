@@ -30,6 +30,7 @@ namespace WindowsFormsApp1
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Setting));
             this.buy_per_price = new System.Windows.Forms.RadioButton();
             this.buy_per_amount = new System.Windows.Forms.RadioButton();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
@@ -293,17 +294,17 @@ namespace WindowsFormsApp1
             this.helpProvider1 = new System.Windows.Forms.HelpProvider();
             this.label42 = new System.Windows.Forms.Label();
             this.profit_ts_text2 = new System.Windows.Forms.TextBox();
-            this.TradingView_Webhook = new System.Windows.Forms.GroupBox();
+            this.gru = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel29 = new System.Windows.Forms.TableLayoutPanel();
             this.주의사항 = new System.Windows.Forms.GroupBox();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.tableLayoutPanel30 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel31 = new System.Windows.Forms.TableLayoutPanel();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.checkBox2 = new System.Windows.Forms.CheckBox();
+            this.TradingView_Webhook = new System.Windows.Forms.CheckBox();
+            this.TradingView_Webhook_Index = new System.Windows.Forms.CheckBox();
             this.label43 = new System.Windows.Forms.Label();
-            this.textBox8 = new System.Windows.Forms.TextBox();
-            this.textBox9 = new System.Windows.Forms.TextBox();
+            this.TradingView_Webhook_Start = new System.Windows.Forms.TextBox();
+            this.TradingView_Webhook_Stop = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
@@ -346,7 +347,7 @@ namespace WindowsFormsApp1
             this.tableLayoutPanel28.SuspendLayout();
             this.groupBox14.SuspendLayout();
             this.tableLayoutPanel25.SuspendLayout();
-            this.TradingView_Webhook.SuspendLayout();
+            this.gru.SuspendLayout();
             this.tableLayoutPanel29.SuspendLayout();
             this.주의사항.SuspendLayout();
             this.tableLayoutPanel30.SuspendLayout();
@@ -4015,16 +4016,16 @@ namespace WindowsFormsApp1
             this.profit_ts_text2.Size = new System.Drawing.Size(118, 20);
             this.profit_ts_text2.TabIndex = 45;
             // 
-            // TradingView_Webhook
+            // gru
             // 
-            this.TradingView_Webhook.Controls.Add(this.tableLayoutPanel29);
-            this.TradingView_Webhook.Font = new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.TradingView_Webhook.Location = new System.Drawing.Point(1068, 295);
-            this.TradingView_Webhook.Name = "TradingView_Webhook";
-            this.TradingView_Webhook.Size = new System.Drawing.Size(267, 82);
-            this.TradingView_Webhook.TabIndex = 28;
-            this.TradingView_Webhook.TabStop = false;
-            this.TradingView_Webhook.Text = "TradingView_Webhook";
+            this.gru.Controls.Add(this.tableLayoutPanel29);
+            this.gru.Font = new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.gru.Location = new System.Drawing.Point(1068, 295);
+            this.gru.Name = "gru";
+            this.gru.Size = new System.Drawing.Size(267, 82);
+            this.gru.TabIndex = 28;
+            this.gru.TabStop = false;
+            this.gru.Text = "TradingView_Webhook(고정IP 필수)";
             // 
             // tableLayoutPanel29
             // 
@@ -4065,8 +4066,8 @@ namespace WindowsFormsApp1
             this.tableLayoutPanel30.ColumnCount = 2;
             this.tableLayoutPanel30.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel30.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel30.Controls.Add(this.checkBox2, 1, 0);
-            this.tableLayoutPanel30.Controls.Add(this.checkBox1, 0, 0);
+            this.tableLayoutPanel30.Controls.Add(this.TradingView_Webhook_Index, 1, 0);
+            this.tableLayoutPanel30.Controls.Add(this.TradingView_Webhook, 0, 0);
             this.tableLayoutPanel30.Location = new System.Drawing.Point(3, 3);
             this.tableLayoutPanel30.Name = "tableLayoutPanel30";
             this.tableLayoutPanel30.RowCount = 1;
@@ -4080,9 +4081,9 @@ namespace WindowsFormsApp1
             this.tableLayoutPanel31.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 31.34921F));
             this.tableLayoutPanel31.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 34.52381F));
             this.tableLayoutPanel31.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 34.12698F));
-            this.tableLayoutPanel31.Controls.Add(this.textBox9, 2, 0);
+            this.tableLayoutPanel31.Controls.Add(this.TradingView_Webhook_Stop, 2, 0);
             this.tableLayoutPanel31.Controls.Add(this.label43, 0, 0);
-            this.tableLayoutPanel31.Controls.Add(this.textBox8, 1, 0);
+            this.tableLayoutPanel31.Controls.Add(this.TradingView_Webhook_Start, 1, 0);
             this.tableLayoutPanel31.Location = new System.Drawing.Point(3, 32);
             this.tableLayoutPanel31.Name = "tableLayoutPanel31";
             this.tableLayoutPanel31.RowCount = 1;
@@ -4090,37 +4091,37 @@ namespace WindowsFormsApp1
             this.tableLayoutPanel31.Size = new System.Drawing.Size(252, 24);
             this.tableLayoutPanel31.TabIndex = 1;
             // 
-            // checkBox1
+            // TradingView_Webhook
             // 
-            this.checkBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.TradingView_Webhook.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.checkBox1.Font = new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.checkBox1.Location = new System.Drawing.Point(3, 3);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(120, 17);
-            this.checkBox1.TabIndex = 0;
-            this.checkBox1.Text = "사용여부";
-            this.checkBox1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.checkBox1.UseVisualStyleBackColor = false;
+            this.TradingView_Webhook.AutoSize = true;
+            this.TradingView_Webhook.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.TradingView_Webhook.Font = new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.TradingView_Webhook.Location = new System.Drawing.Point(3, 3);
+            this.TradingView_Webhook.Name = "TradingView_Webhook";
+            this.TradingView_Webhook.Size = new System.Drawing.Size(120, 17);
+            this.TradingView_Webhook.TabIndex = 0;
+            this.TradingView_Webhook.Text = "사용여부";
+            this.TradingView_Webhook.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.TradingView_Webhook.UseVisualStyleBackColor = false;
             // 
-            // checkBox2
+            // TradingView_Webhook_Index
             // 
-            this.checkBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.TradingView_Webhook_Index.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.checkBox2.AutoSize = true;
-            this.checkBox2.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.checkBox2.Font = new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.checkBox2.Location = new System.Drawing.Point(129, 3);
-            this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(120, 17);
-            this.checkBox2.TabIndex = 1;
-            this.checkBox2.Text = "지수연동";
-            this.checkBox2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.checkBox2.UseVisualStyleBackColor = false;
+            this.TradingView_Webhook_Index.AutoSize = true;
+            this.TradingView_Webhook_Index.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.TradingView_Webhook_Index.Font = new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.TradingView_Webhook_Index.Location = new System.Drawing.Point(129, 3);
+            this.TradingView_Webhook_Index.Name = "TradingView_Webhook_Index";
+            this.TradingView_Webhook_Index.Size = new System.Drawing.Size(120, 17);
+            this.TradingView_Webhook_Index.TabIndex = 1;
+            this.TradingView_Webhook_Index.Text = "지수연동";
+            this.TradingView_Webhook_Index.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.TradingView_Webhook_Index.UseVisualStyleBackColor = false;
             // 
             // label43
             // 
@@ -4137,19 +4138,19 @@ namespace WindowsFormsApp1
             this.label43.Text = "작동시간";
             this.label43.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // textBox8
+            // TradingView_Webhook_Start
             // 
-            this.textBox8.Location = new System.Drawing.Point(82, 3);
-            this.textBox8.Name = "textBox8";
-            this.textBox8.Size = new System.Drawing.Size(81, 21);
-            this.textBox8.TabIndex = 1;
+            this.TradingView_Webhook_Start.Location = new System.Drawing.Point(82, 3);
+            this.TradingView_Webhook_Start.Name = "TradingView_Webhook_Start";
+            this.TradingView_Webhook_Start.Size = new System.Drawing.Size(81, 21);
+            this.TradingView_Webhook_Start.TabIndex = 1;
             // 
-            // textBox9
+            // TradingView_Webhook_Stop
             // 
-            this.textBox9.Location = new System.Drawing.Point(169, 3);
-            this.textBox9.Name = "textBox9";
-            this.textBox9.Size = new System.Drawing.Size(80, 21);
-            this.textBox9.TabIndex = 2;
+            this.TradingView_Webhook_Stop.Location = new System.Drawing.Point(169, 3);
+            this.TradingView_Webhook_Stop.Name = "TradingView_Webhook_Stop";
+            this.TradingView_Webhook_Stop.Size = new System.Drawing.Size(80, 21);
+            this.TradingView_Webhook_Stop.TabIndex = 2;
             // 
             // Setting
             // 
@@ -4157,7 +4158,7 @@ namespace WindowsFormsApp1
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(1347, 631);
             this.Controls.Add(this.주의사항);
-            this.Controls.Add(this.TradingView_Webhook);
+            this.Controls.Add(this.gru);
             this.Controls.Add(this.groupBox14);
             this.Controls.Add(this.groupBox13);
             this.Controls.Add(this.groupBox12);
@@ -4174,6 +4175,7 @@ namespace WindowsFormsApp1
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.tableLayoutPanel5);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Setting";
             this.Text = "Setting";
@@ -4246,7 +4248,7 @@ namespace WindowsFormsApp1
             this.groupBox14.ResumeLayout(false);
             this.tableLayoutPanel25.ResumeLayout(false);
             this.tableLayoutPanel25.PerformLayout();
-            this.TradingView_Webhook.ResumeLayout(false);
+            this.gru.ResumeLayout(false);
             this.tableLayoutPanel29.ResumeLayout(false);
             this.주의사항.ResumeLayout(false);
             this.tableLayoutPanel30.ResumeLayout(false);
@@ -4522,15 +4524,15 @@ namespace WindowsFormsApp1
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel28;
         private System.Windows.Forms.Label label42;
         private System.Windows.Forms.TextBox profit_ts_text2;
-        private System.Windows.Forms.GroupBox TradingView_Webhook;
+        private System.Windows.Forms.GroupBox gru;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel29;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel30;
-        private System.Windows.Forms.CheckBox checkBox2;
-        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.CheckBox TradingView_Webhook_Index;
+        private System.Windows.Forms.CheckBox TradingView_Webhook;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel31;
-        private System.Windows.Forms.TextBox textBox9;
+        private System.Windows.Forms.TextBox TradingView_Webhook_Stop;
         private System.Windows.Forms.Label label43;
-        private System.Windows.Forms.TextBox textBox8;
+        private System.Windows.Forms.TextBox TradingView_Webhook_Start;
         private System.Windows.Forms.GroupBox 주의사항;
         private System.Windows.Forms.RichTextBox richTextBox1;
     }

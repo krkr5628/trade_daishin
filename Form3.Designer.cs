@@ -31,6 +31,7 @@ namespace WindowsFormsApp1
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Transaction));
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
@@ -113,7 +114,7 @@ namespace WindowsFormsApp1
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(918, 37);
             this.label1.TabIndex = 0;
-            this.label1.Text = "*누락된 내용이 있을 수 있으므로 정확한 내용은 HTS 및 MTS로 확인하시길 바랍니다.";
+            this.label1.Text = "*수수료 차이 혹은 누락된 내용이 있을 수 있으므로 정확한 내용은 HTS 및 MTS로 확인하시길 바랍니다.";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // Transaction
@@ -124,6 +125,7 @@ namespace WindowsFormsApp1
             this.Controls.Add(this.dataGridView2);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.listBox1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Transaction";
             this.Text = "Transaction";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();

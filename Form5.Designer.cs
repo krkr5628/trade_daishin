@@ -29,6 +29,7 @@ namespace WindowsFormsApp1
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Update));
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.richTextBox2 = new System.Windows.Forms.RichTextBox();
@@ -127,7 +128,7 @@ namespace WindowsFormsApp1
             this.button1.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.button1.Location = new System.Drawing.Point(327, 3);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(92, 19);
+            this.button1.Size = new System.Drawing.Size(92, 20);
             this.button1.TabIndex = 2;
             this.button1.Text = "인증하기";
             this.button1.UseVisualStyleBackColor = false;
@@ -145,7 +146,7 @@ namespace WindowsFormsApp1
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 1;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(422, 25);
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(422, 26);
             this.tableLayoutPanel3.TabIndex = 2;
             // 
             // label2
@@ -158,7 +159,7 @@ namespace WindowsFormsApp1
             this.label2.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.label2.Location = new System.Drawing.Point(3, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(64, 25);
+            this.label2.Size = new System.Drawing.Size(64, 26);
             this.label2.TabIndex = 4;
             this.label2.Text = "인증코드";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -179,12 +180,12 @@ namespace WindowsFormsApp1
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel2.Controls.Add(this.tableLayoutPanel3, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.tableLayoutPanel4, 0, 1);
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(12, 388);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(12, 385);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 2;
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(428, 62);
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.76923F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 49.23077F));
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(428, 65);
             this.tableLayoutPanel2.TabIndex = 3;
             // 
             // tableLayoutPanel4
@@ -201,11 +202,11 @@ namespace WindowsFormsApp1
             this.tableLayoutPanel4.Controls.Add(this.label1, 0, 0);
             this.tableLayoutPanel4.Controls.Add(this.label3, 2, 0);
             this.tableLayoutPanel4.Controls.Add(this.label4, 1, 0);
-            this.tableLayoutPanel4.Location = new System.Drawing.Point(3, 34);
+            this.tableLayoutPanel4.Location = new System.Drawing.Point(3, 35);
             this.tableLayoutPanel4.Name = "tableLayoutPanel4";
             this.tableLayoutPanel4.RowCount = 1;
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel4.Size = new System.Drawing.Size(422, 25);
+            this.tableLayoutPanel4.Size = new System.Drawing.Size(422, 27);
             this.tableLayoutPanel4.TabIndex = 3;
             // 
             // label5
@@ -217,7 +218,7 @@ namespace WindowsFormsApp1
             this.label5.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.label5.Location = new System.Drawing.Point(243, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(176, 25);
+            this.label5.Size = new System.Drawing.Size(176, 27);
             this.label5.TabIndex = 9;
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -231,7 +232,7 @@ namespace WindowsFormsApp1
             this.label1.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.label1.Location = new System.Drawing.Point(3, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(63, 25);
+            this.label1.Size = new System.Drawing.Size(63, 27);
             this.label1.TabIndex = 6;
             this.label1.Text = "인증상태";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -246,7 +247,7 @@ namespace WindowsFormsApp1
             this.label3.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.label3.Location = new System.Drawing.Point(176, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(61, 25);
+            this.label3.Size = new System.Drawing.Size(61, 27);
             this.label3.TabIndex = 7;
             this.label3.Text = "인증기간";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -260,7 +261,7 @@ namespace WindowsFormsApp1
             this.label4.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.label4.Location = new System.Drawing.Point(72, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(98, 25);
+            this.label4.Size = new System.Drawing.Size(98, 27);
             this.label4.TabIndex = 8;
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -282,12 +283,14 @@ namespace WindowsFormsApp1
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label6.AutoSize = true;
-            this.label6.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.label6.ForeColor = System.Drawing.Color.Crimson;
+            this.label6.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.label6.Font = new System.Drawing.Font("굴림", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.label6.ForeColor = System.Drawing.Color.Red;
             this.label6.Location = new System.Drawing.Point(3, 0);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(407, 62);
-            this.label6.TabIndex = 0;
+            this.label6.TabIndex = 1;
+            this.label6.Text = "*본 사항에 동의하신다면 사용하시길 바랍니다.                     *인증 시간 : 08:45 ~ 18:15";
             // 
             // Update
             // 
@@ -296,6 +299,7 @@ namespace WindowsFormsApp1
             this.Controls.Add(this.tableLayoutPanel5);
             this.Controls.Add(this.tableLayoutPanel2);
             this.Controls.Add(this.tableLayoutPanel1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Update";
             this.Text = "Update";
             this.tableLayoutPanel1.ResumeLayout(false);

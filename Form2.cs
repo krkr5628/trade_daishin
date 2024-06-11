@@ -1780,7 +1780,7 @@ namespace WindowsFormsApp1
             tmp.Add("매도조건;" + Convert.ToString(sell_condition.Checked) + ";" + sell_condition_start.Text + ";" + sell_condition_end.Text + ";" + Convert.ToString(Fomula_list_sell.SelectedIndex) + ";" + (Fomula_list_sell.Text == "" ? "9999" : Fomula_list_sell.Text));
             tmp.Add("익절/" + Convert.ToString(profit_percent.Checked) + "/" + profit_percent_text.Text);
             tmp.Add("익절원/" + Convert.ToString(profit_won.Checked) + "/" + profit_won_text.Text);
-            tmp.Add("익절TS/" + Convert.ToString(profit_ts.Checked) + "/" + profit_ts_text.Text);
+            tmp.Add("익절TS/" + Convert.ToString(profit_ts.Checked) + "/" + profit_ts_text.Text + "/" + profit_ts_text2.Text);
             tmp.Add("익절동시호가/" + Convert.ToString(profit_after1.Checked));//익정동시호가
             tmp.Add("익절시간외단일가/" + Convert.ToString(profit_after2.Checked));//익절시간외단일가
             tmp.Add("손절/" + Convert.ToString(loss_percent.Checked) + "/" + loss_percent_text.Text);
@@ -1841,6 +1841,11 @@ namespace WindowsFormsApp1
             tmp.Add(appkey.Text);
             tmp.Add(appsecret.Text);
             tmp.Add("KIS_amount/" + kis_amount.Text);
+            //
+            tmp.Add("TradingView_Webhook/" + Convert.ToString(TradingView_Webhook.Checked));
+            tmp.Add("TradingView_Webhook_Index/" + Convert.ToString(TradingView_Webhook_Index.Checked));
+            tmp.Add("TradingView_Webhook_Start/" + TradingView_Webhook_Start.Text);
+            tmp.Add("TradingView_Webhook_Stop/" + TradingView_Webhook_Stop.Text);
             //
             tmp.Add("Dual_Time/" + Convert.ToString(Dual_Time.Checked));
             tmp.Add("Dual_Time_Start/" + Dual_Time_Start.Text);
@@ -2012,10 +2017,11 @@ namespace WindowsFormsApp1
             profit_won.Checked = Convert.ToBoolean(profit_won_tmp[1]);
             profit_won_text.Text = profit_won_tmp[2];
 
-            //익절TS(대기)
+            //익절TS
             String[] profit_ts_tmp = reader.ReadLine().Split('/');
             profit_ts.Checked = Convert.ToBoolean(profit_ts_tmp[1]);
             profit_ts_text.Text = profit_ts_tmp[2];
+            profit_ts_text2.Text = profit_ts_tmp[3];
 
             //익정동시호가
             String[] profit_after1_tmp = reader.ReadLine().Split('/');
@@ -2257,6 +2263,22 @@ namespace WindowsFormsApp1
             //한국투자증권N등분
             String[] KIS_amount_tmp = reader.ReadLine().Split('/');
             kis_amount.Text = KIS_amount_tmp[1];
+
+            //TradingView_Webhook
+            String[] TradingView_Webhook_tmp = reader.ReadLine().Split('/');
+            TradingView_Webhook.Checked = Convert.ToBoolean(TradingView_Webhook_tmp[1]);
+
+            //TradingView_Webhook_Index
+            String[] TradingView_Webhook_Index_tmp = reader.ReadLine().Split('/');
+            TradingView_Webhook_Index.Checked = Convert.ToBoolean(TradingView_Webhook_Index_tmp[1]);
+
+            //TradingView_Webhook_Start
+            String[] TradingView_Webhook_Start_tmp = reader.ReadLine().Split('/');
+            TradingView_Webhook_Start.Text = TradingView_Webhook_Start_tmp[1];
+
+            //TradingView_Webhook_Stop
+            String[] TradingView_Webhook_Stop_tmp = reader.ReadLine().Split('/');
+            TradingView_Webhook_Stop.Text = TradingView_Webhook_Stop_tmp[1];
 
             //Dual_Time
             String[] Dual_Time_tmp = reader.ReadLine().Split('/');

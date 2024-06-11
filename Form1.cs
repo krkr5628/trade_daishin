@@ -728,7 +728,7 @@ namespace WindowsFormsApp1
                 // 파일이 비어 있지 않은지 확인
                 if (lines.Any())
                 {
-                    lines[lines.Count - 1] = "Telegram_Last_Chat_Number/" + Convert.ToString(update_id);
+                    lines[lines.Count - 2] = "Telegram_Last_Chat_Number/" + Convert.ToString(update_id);
 
                     File.WriteAllLines(filePath3, lines);
                 }

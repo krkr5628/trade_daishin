@@ -65,6 +65,7 @@ namespace WindowsFormsApp1
         public static string profit_won_text; //익절원
         public static bool profit_ts;
         public static string profit_ts_text; //익절TS
+        public static string profit_ts_text2;
         public static bool profit_after1; //익정동시호가
         public static bool profit_after2; //익절시간외단일가
 
@@ -163,11 +164,16 @@ namespace WindowsFormsApp1
         public static string KIS_appsecret;
         public static string KIS_amount;
 
+        public static bool TradingView_Webhook;
+        public static bool TradingView_Webhook_Index;
+        public static string TradingView_Webhook_Start;
+        public static string TradingView_Webhook_Stop;
+
         public static bool Dual_Time;
         public static string Dual_Time_Start;
         public static string Dual_Time_Stop;
-
         public static bool Dual_Index;
+
         public static bool type0_selection_isa;
         public static string type0_start_isa;
         public static string type0_end_isa;
@@ -313,6 +319,7 @@ namespace WindowsFormsApp1
             String[] profit_ts_tmp = reader.ReadLine().Split('/');
             profit_ts = Convert.ToBoolean(profit_ts_tmp[1]);
             profit_ts_text = profit_ts_tmp[2];
+            profit_ts_text2 = profit_ts_tmp[3];
 
             //익정동시호가
             String[] profit_after1_tmp = reader.ReadLine().Split('/');
@@ -554,6 +561,22 @@ namespace WindowsFormsApp1
             //한국투자증권KIS_amount
             String[] KIS_amount_tmp = reader.ReadLine().Split('/');
             KIS_amount = KIS_amount_tmp[1];
+
+            //TradingView_Webhook
+            String[] TradingView_Webhook_tmp = reader.ReadLine().Split('/');
+            TradingView_Webhook = Convert.ToBoolean(TradingView_Webhook_tmp[1]);
+
+            //TradingView_Webhook_Index
+            String[] TradingView_Webhook_Index_tmp = reader.ReadLine().Split('/');
+            TradingView_Webhook_Index = Convert.ToBoolean(TradingView_Webhook_Index_tmp[1]);
+
+            //TradingView_Webhook_Start
+            String[] TradingView_Webhook_Start_tmp = reader.ReadLine().Split('/');
+            TradingView_Webhook_Start = TradingView_Webhook_Start_tmp[1];
+
+            //TradingView_Webhook_Stop
+            String[] TradingView_Webhook_Stop_tmp = reader.ReadLine().Split('/');
+            TradingView_Webhook_Stop = TradingView_Webhook_Stop_tmp[1];
 
             //Dual_Time
             String[] Dual_Time_tmp = reader.ReadLine().Split('/');
