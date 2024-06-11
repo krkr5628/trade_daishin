@@ -2359,5 +2359,10 @@ namespace WindowsFormsApp1
                 MessageBox.Show($"오류: {ex.Message}");
             }
         }
+
+        private void Setting_Load_1(object sender, EventArgs e)
+        {
+
+        }
     }
 }
