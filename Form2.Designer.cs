@@ -108,6 +108,8 @@ namespace WindowsFormsApp1
             this.profit_ts = new System.Windows.Forms.CheckBox();
             this.profit_won_text = new System.Windows.Forms.TextBox();
             this.textBox7 = new System.Windows.Forms.TextBox();
+            this.label42 = new System.Windows.Forms.Label();
+            this.profit_ts_text2 = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel10 = new System.Windows.Forms.TableLayoutPanel();
             this.clear_sell = new System.Windows.Forms.CheckBox();
             this.clear_sell_profit_text = new System.Windows.Forms.TextBox();
@@ -292,19 +294,17 @@ namespace WindowsFormsApp1
             this.sell_set1_after = new System.Windows.Forms.ComboBox();
             this.sell_set2_after = new System.Windows.Forms.ComboBox();
             this.helpProvider1 = new System.Windows.Forms.HelpProvider();
-            this.label42 = new System.Windows.Forms.Label();
-            this.profit_ts_text2 = new System.Windows.Forms.TextBox();
             this.gru = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel29 = new System.Windows.Forms.TableLayoutPanel();
-            this.주의사항 = new System.Windows.Forms.GroupBox();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.tableLayoutPanel30 = new System.Windows.Forms.TableLayoutPanel();
-            this.tableLayoutPanel31 = new System.Windows.Forms.TableLayoutPanel();
-            this.TradingView_Webhook = new System.Windows.Forms.CheckBox();
             this.TradingView_Webhook_Index = new System.Windows.Forms.CheckBox();
+            this.TradingView_Webhook = new System.Windows.Forms.CheckBox();
+            this.tableLayoutPanel31 = new System.Windows.Forms.TableLayoutPanel();
+            this.TradingView_Webhook_Stop = new System.Windows.Forms.TextBox();
             this.label43 = new System.Windows.Forms.Label();
             this.TradingView_Webhook_Start = new System.Windows.Forms.TextBox();
-            this.TradingView_Webhook_Stop = new System.Windows.Forms.TextBox();
+            this.주의사항 = new System.Windows.Forms.GroupBox();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
@@ -349,9 +349,9 @@ namespace WindowsFormsApp1
             this.tableLayoutPanel25.SuspendLayout();
             this.gru.SuspendLayout();
             this.tableLayoutPanel29.SuspendLayout();
-            this.주의사항.SuspendLayout();
             this.tableLayoutPanel30.SuspendLayout();
             this.tableLayoutPanel31.SuspendLayout();
+            this.주의사항.SuspendLayout();
             this.SuspendLayout();
             // 
             // buy_per_price
@@ -1446,6 +1446,28 @@ namespace WindowsFormsApp1
             this.textBox7.Size = new System.Drawing.Size(22, 20);
             this.textBox7.TabIndex = 43;
             this.textBox7.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // label42
+            // 
+            this.label42.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label42.AutoSize = true;
+            this.label42.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.label42.ForeColor = System.Drawing.Color.BlueViolet;
+            this.label42.Location = new System.Drawing.Point(249, 48);
+            this.label42.Name = "label42";
+            this.label42.Size = new System.Drawing.Size(92, 24);
+            this.label42.TabIndex = 44;
+            this.label42.Text = "보존TS(%)";
+            this.label42.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // profit_ts_text2
+            // 
+            this.profit_ts_text2.Location = new System.Drawing.Point(347, 51);
+            this.profit_ts_text2.Name = "profit_ts_text2";
+            this.profit_ts_text2.Size = new System.Drawing.Size(118, 20);
+            this.profit_ts_text2.TabIndex = 45;
             // 
             // tableLayoutPanel10
             // 
@@ -3994,28 +4016,6 @@ namespace WindowsFormsApp1
             this.sell_set2_after.Size = new System.Drawing.Size(71, 21);
             this.sell_set2_after.TabIndex = 24;
             // 
-            // label42
-            // 
-            this.label42.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label42.AutoSize = true;
-            this.label42.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.label42.ForeColor = System.Drawing.Color.BlueViolet;
-            this.label42.Location = new System.Drawing.Point(249, 48);
-            this.label42.Name = "label42";
-            this.label42.Size = new System.Drawing.Size(92, 24);
-            this.label42.TabIndex = 44;
-            this.label42.Text = "보존TS(%)";
-            this.label42.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // profit_ts_text2
-            // 
-            this.profit_ts_text2.Location = new System.Drawing.Point(347, 51);
-            this.profit_ts_text2.Name = "profit_ts_text2";
-            this.profit_ts_text2.Size = new System.Drawing.Size(118, 20);
-            this.profit_ts_text2.TabIndex = 45;
-            // 
             // gru
             // 
             this.gru.Controls.Add(this.tableLayoutPanel29);
@@ -4041,26 +4041,6 @@ namespace WindowsFormsApp1
             this.tableLayoutPanel29.Size = new System.Drawing.Size(258, 59);
             this.tableLayoutPanel29.TabIndex = 0;
             // 
-            // 주의사항
-            // 
-            this.주의사항.Controls.Add(this.richTextBox1);
-            this.주의사항.Font = new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.주의사항.Location = new System.Drawing.Point(1068, 398);
-            this.주의사항.Name = "주의사항";
-            this.주의사항.Size = new System.Drawing.Size(267, 227);
-            this.주의사항.TabIndex = 29;
-            this.주의사항.TabStop = false;
-            this.주의사항.Text = "주의사항";
-            // 
-            // richTextBox1
-            // 
-            this.richTextBox1.Location = new System.Drawing.Point(7, 16);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.ReadOnly = true;
-            this.richTextBox1.Size = new System.Drawing.Size(256, 202);
-            this.richTextBox1.TabIndex = 0;
-            this.richTextBox1.Text = "";
-            // 
             // tableLayoutPanel30
             // 
             this.tableLayoutPanel30.ColumnCount = 2;
@@ -4075,21 +4055,21 @@ namespace WindowsFormsApp1
             this.tableLayoutPanel30.Size = new System.Drawing.Size(252, 23);
             this.tableLayoutPanel30.TabIndex = 0;
             // 
-            // tableLayoutPanel31
+            // TradingView_Webhook_Index
             // 
-            this.tableLayoutPanel31.ColumnCount = 3;
-            this.tableLayoutPanel31.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 31.34921F));
-            this.tableLayoutPanel31.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 34.52381F));
-            this.tableLayoutPanel31.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 34.12698F));
-            this.tableLayoutPanel31.Controls.Add(this.TradingView_Webhook_Stop, 2, 0);
-            this.tableLayoutPanel31.Controls.Add(this.label43, 0, 0);
-            this.tableLayoutPanel31.Controls.Add(this.TradingView_Webhook_Start, 1, 0);
-            this.tableLayoutPanel31.Location = new System.Drawing.Point(3, 32);
-            this.tableLayoutPanel31.Name = "tableLayoutPanel31";
-            this.tableLayoutPanel31.RowCount = 1;
-            this.tableLayoutPanel31.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel31.Size = new System.Drawing.Size(252, 24);
-            this.tableLayoutPanel31.TabIndex = 1;
+            this.TradingView_Webhook_Index.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.TradingView_Webhook_Index.AutoSize = true;
+            this.TradingView_Webhook_Index.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.TradingView_Webhook_Index.Font = new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.TradingView_Webhook_Index.Location = new System.Drawing.Point(129, 3);
+            this.TradingView_Webhook_Index.Name = "TradingView_Webhook_Index";
+            this.TradingView_Webhook_Index.Size = new System.Drawing.Size(120, 17);
+            this.TradingView_Webhook_Index.TabIndex = 1;
+            this.TradingView_Webhook_Index.Text = "지수연동";
+            this.TradingView_Webhook_Index.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.TradingView_Webhook_Index.UseVisualStyleBackColor = false;
             // 
             // TradingView_Webhook
             // 
@@ -4107,21 +4087,28 @@ namespace WindowsFormsApp1
             this.TradingView_Webhook.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.TradingView_Webhook.UseVisualStyleBackColor = false;
             // 
-            // TradingView_Webhook_Index
+            // tableLayoutPanel31
             // 
-            this.TradingView_Webhook_Index.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.TradingView_Webhook_Index.AutoSize = true;
-            this.TradingView_Webhook_Index.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.TradingView_Webhook_Index.Font = new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.TradingView_Webhook_Index.Location = new System.Drawing.Point(129, 3);
-            this.TradingView_Webhook_Index.Name = "TradingView_Webhook_Index";
-            this.TradingView_Webhook_Index.Size = new System.Drawing.Size(120, 17);
-            this.TradingView_Webhook_Index.TabIndex = 1;
-            this.TradingView_Webhook_Index.Text = "지수연동";
-            this.TradingView_Webhook_Index.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.TradingView_Webhook_Index.UseVisualStyleBackColor = false;
+            this.tableLayoutPanel31.ColumnCount = 3;
+            this.tableLayoutPanel31.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 31.34921F));
+            this.tableLayoutPanel31.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 34.52381F));
+            this.tableLayoutPanel31.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 34.12698F));
+            this.tableLayoutPanel31.Controls.Add(this.TradingView_Webhook_Stop, 2, 0);
+            this.tableLayoutPanel31.Controls.Add(this.label43, 0, 0);
+            this.tableLayoutPanel31.Controls.Add(this.TradingView_Webhook_Start, 1, 0);
+            this.tableLayoutPanel31.Location = new System.Drawing.Point(3, 32);
+            this.tableLayoutPanel31.Name = "tableLayoutPanel31";
+            this.tableLayoutPanel31.RowCount = 1;
+            this.tableLayoutPanel31.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel31.Size = new System.Drawing.Size(252, 24);
+            this.tableLayoutPanel31.TabIndex = 1;
+            // 
+            // TradingView_Webhook_Stop
+            // 
+            this.TradingView_Webhook_Stop.Location = new System.Drawing.Point(169, 3);
+            this.TradingView_Webhook_Stop.Name = "TradingView_Webhook_Stop";
+            this.TradingView_Webhook_Stop.Size = new System.Drawing.Size(80, 21);
+            this.TradingView_Webhook_Stop.TabIndex = 2;
             // 
             // label43
             // 
@@ -4145,12 +4132,25 @@ namespace WindowsFormsApp1
             this.TradingView_Webhook_Start.Size = new System.Drawing.Size(81, 21);
             this.TradingView_Webhook_Start.TabIndex = 1;
             // 
-            // TradingView_Webhook_Stop
+            // 주의사항
             // 
-            this.TradingView_Webhook_Stop.Location = new System.Drawing.Point(169, 3);
-            this.TradingView_Webhook_Stop.Name = "TradingView_Webhook_Stop";
-            this.TradingView_Webhook_Stop.Size = new System.Drawing.Size(80, 21);
-            this.TradingView_Webhook_Stop.TabIndex = 2;
+            this.주의사항.Controls.Add(this.richTextBox1);
+            this.주의사항.Font = new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.주의사항.Location = new System.Drawing.Point(1068, 398);
+            this.주의사항.Name = "주의사항";
+            this.주의사항.Size = new System.Drawing.Size(267, 227);
+            this.주의사항.TabIndex = 29;
+            this.주의사항.TabStop = false;
+            this.주의사항.Text = "주의사항";
+            // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(7, 16);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.ReadOnly = true;
+            this.richTextBox1.Size = new System.Drawing.Size(256, 202);
+            this.richTextBox1.TabIndex = 0;
+            this.richTextBox1.Text = "";
             // 
             // Setting
             // 
@@ -4250,11 +4250,11 @@ namespace WindowsFormsApp1
             this.tableLayoutPanel25.PerformLayout();
             this.gru.ResumeLayout(false);
             this.tableLayoutPanel29.ResumeLayout(false);
-            this.주의사항.ResumeLayout(false);
             this.tableLayoutPanel30.ResumeLayout(false);
             this.tableLayoutPanel30.PerformLayout();
             this.tableLayoutPanel31.ResumeLayout(false);
             this.tableLayoutPanel31.PerformLayout();
+            this.주의사항.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
