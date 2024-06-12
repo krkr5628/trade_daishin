@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using System.IO;
 using System.Net;
 using System.Windows.Forms;
+//
+using System.Globalization;
 
 namespace WindowsFormsApp1
 {
@@ -38,7 +40,15 @@ namespace WindowsFormsApp1
             Fomula_list_buy_Checked_box.MouseLeave += Fomula_list_buy_Checked_box_MouseLeave;
             Fomula_list_buy_Checked_box.ItemCheck += Fomula_list_buy_Checked_box_ItemCheck;
 
-            //매매방식 자동 동작
+            //TELEGRAM TEST
+            telegram_test_button.Click += telegram_test;
+
+            //미사용 항목 경고창
+
+
+            //--------------------------------------------
+
+            //매매방식 점검
             buy_set1.Leave += Buy_set1_Leave;
             buy_set2.Leave += Buy_set2_Leave;
             sell_set1.Leave += Sell_set1_Leave;
@@ -46,26 +56,17 @@ namespace WindowsFormsApp1
             sell_set1_after.Leave += Sell_set_after1_Leave;
             sell_set2_after.Leave += Sell_set_after2_Leave;
 
-            //TELEGRAM TEST
-            telegram_test_button.Click += telegram_test;
-
-            //미사용 항목 경고창(19개)
-            profit_ts.CheckedChanged += HandleCheckedChanged;
-            term_for_non_buy.CheckedChanged += HandleCheckedChanged;
-            term_for_non_sell.CheckedChanged += HandleCheckedChanged;
-
-            //--------------------------------------------
-
-            //소수점 범위 확인
+            //소수점 범위 확인(double 범위)
             profit_percent_text.Leave += Profit_percent_text_Leave;
             loss_percent_text.Leave += Loss_percent_text_Leave;
+
             profit_ts_text.Leave += Profit_ts_text_Leave;
+            profit_ts_text2.Leave += Profit_ts_text2_Leave; 
 
             clear_sell_profit_text.Leave += Clear_sell_profit_text_Leave;
             clear_sell_loss_text.Leave += Clear_sell_loss_text_Leave;
 
-            //정수값인지확인
-            setting_account_number.Leave += Setting_Positive_numver;
+            //정수값인지확인(int32)
             initial_balance.Leave += Initial_balance_Leave;
 
             buy_per_price_text.Leave += Buy_per_price_text_Leave;
@@ -88,6 +89,7 @@ namespace WindowsFormsApp1
             term_for_non_buy_text.Leave += Term_for_non_buy_text_Leave;
             term_for_non_sell_text.Leave += Term_for_non_sell_text_Leave;
 
+            //정수값인지확인(int32)
             type0_start.Leave += Type0_start_Leave;
             type0_end.Leave += Type0_end_Leave;
 
@@ -113,7 +115,10 @@ namespace WindowsFormsApp1
             Dual_Time_Start.Leave += Dual_Time_Start_Leave;
             Dual_Time_Stop.Leave += Dual_Time_Stop_Leave;
 
-            //소수점이거나 정수인지 확인
+            TradingView_Webhook_Start.Leave += TradingView_Webhook_Start_Leave;
+            TradingView_Webhook_Stop.Leave += TradingView_Webhook_Stop_Leave;
+
+            //소수점이거나 정수인지 확인(double)
             type1_start.Leave += Type1_start_Leave;
             type1_end.Leave += Type1_end_Leave;
             type2_start.Leave += Type2_start_Leave;
@@ -147,7 +152,6 @@ namespace WindowsFormsApp1
             type5_isa_start.Leave += Type5_isa_start_Leave;
             type5_isa_end.Leave += Type5_isa_end_Leave;
         }
-
         //----------------------------미사용 항목 경고창----------------------------------------
 
         private void HandleCheckedChanged(object sender, EventArgs e)
@@ -185,13 +189,6 @@ namespace WindowsFormsApp1
 
         private void ValidateOrderType1(object sender, EventArgs e, ComboBox orderType, ComboBox orderPrice)
         {
-            if (orderType.Text.Equals("") && orderPrice.Text.Equals(""))
-            {
-                orderType.SelectedIndex = 1;
-                orderPrice.SelectedIndex = 6;
-                MessageBox.Show("선택된 매매방식이 없습니다.", "기본값 입력", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
 
             if (orderType.Text.Equals("시장가"))
             {
@@ -210,13 +207,6 @@ namespace WindowsFormsApp1
         {
             if (orderPrice.Text.Equals(""))
             {
-                if (orderType.Text.Equals(""))
-                {
-                    orderType.SelectedIndex = 1;
-                    orderPrice.SelectedIndex = 6;
-                    MessageBox.Show("선택된 매매방식이 없습니다.", "기본값 입력", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
 
                 if (orderType.Text.Equals("시장가"))
                 {
@@ -244,19 +234,11 @@ namespace WindowsFormsApp1
             }
         }
 
-
         private void Sell_set_after1_Leave(object sender, EventArgs e)
         {
             if (sell_set1_after.Text.Equals(""))
             {
-                if (sell_set2_after.Text.Equals(""))
-                {
-                    sell_set1_after.SelectedIndex = 0;
-                    sell_set2_after.SelectedIndex = 5;
-                    MessageBox.Show("선택된 매매방식이 없습니다.", "기본값 입력", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
-                else
+                if (!sell_set2_after.Text.Equals(""))
                 {
                     sell_set1_after.SelectedIndex = 0;
                     return;
@@ -266,16 +248,9 @@ namespace WindowsFormsApp1
 
         private void Sell_set_after2_Leave(object sender, EventArgs e)
         {
-            if (sell_set2_after.Text.Equals("") && sell_set1_after.Text.Equals(""))
+            if (sell_set2_after.Text.Equals(""))
             {
-                if (sell_set1_after.Text.Equals(""))
-                {
-                    sell_set1_after.SelectedIndex = 0;
-                    sell_set2_after.SelectedIndex = 5;
-                    MessageBox.Show("선택된 매매방식이 없습니다.", "기본값 입력", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
-                else
+                if (!sell_set1_after.Text.Equals(""))
                 {
                     sell_set2_after.SelectedIndex = 5;
                     return;
@@ -292,86 +267,57 @@ namespace WindowsFormsApp1
 
         private void Profit_percent_text_Leave(object sender, EventArgs e)
         {
-            ValidateTextBoxInput(sender, e, profit_percent_text, "2.7");
+            ValidateTextBoxInput(sender, e, profit_percent_text, "2.5");
         }
 
         private void Loss_percent_text_Leave(object sender, EventArgs e)
         {
-            ValidateTextBoxInput(sender, e, loss_percent_text, "4");
+            ValidateTextBoxInput(sender, e, loss_percent_text, "2.5");
         }
 
         private void Profit_ts_text_Leave(object sender, EventArgs e)
         {
-            ValidateTextBoxInput(sender, e, profit_ts_text, "5");
+            ValidateTextBoxInput(sender, e, profit_ts_text, "3.5");
+        }
+
+        private void Profit_ts_text2_Leave(object sender, EventArgs e)
+        {
+            ValidateTextBoxInput(sender, e, profit_ts_text2, "1.5");
         }
 
         private void Clear_sell_profit_text_Leave(object sender, EventArgs e)
         {
-            ValidateTextBoxInput(sender, e, clear_sell_profit_text, "2");
+            ValidateTextBoxInput(sender, e, clear_sell_profit_text, "2.5");
         }
 
         private void Clear_sell_loss_text_Leave(object sender, EventArgs e)
         {
-            ValidateTextBoxInput(sender, e, clear_sell_loss_text, "2");
+            ValidateTextBoxInput(sender, e, clear_sell_loss_text, "2.5");
         }
 
         private void ValidateTextBoxInput(object sender, EventArgs e, TextBox textBox, string defaultValue)
         {
-            string input = textBox.Text;
+            double max = 1000000; //1,000,000
+            double min = 0;
 
-            //입력된 값이 없을시
-            if (string.IsNullOrWhiteSpace(input)) return;
-
-            //숫자 혹은 소수점인지 확인
-            bool hasDecimalPoint = false;
-            int decimalPointCount = 0;
-
-            foreach (char c in input)
+            if (double.TryParse(textBox.Text, out double result))
             {
-                if (char.IsDigit(c))
-                {
-                    continue;
-                }
-                else if (c == '.' && !hasDecimalPoint)
-                {
-                    hasDecimalPoint = true;
-                    decimalPointCount++;
-                }
-                else
+                if (result < min || result > max)
                 {
                     textBox.Text = defaultValue;
-                    MessageBox.Show("양수 혹은 점이 아닌 값이 있습니다.", "잘못된 입력", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("범위 : 0 이상  1,000,000 이하", "잘못된 입력", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
             }
-
-            //소수점 형식 이탈 확인
-            if (decimalPointCount > 1)
+            else
             {
                 textBox.Text = defaultValue;
-                MessageBox.Show("점을 한번만 입력하세요.", "잘못된 입력", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("0이상 1,000,000이하의 double 범위 양의 실수 입력", "잘못된 입력", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-
-            //범위 확인
-            double intput_range = Convert.ToDouble(textBox.Text);
-            double max = 1000000;
-            double min = 0;
-            if(intput_range < min || intput_range > max)
-            {
-                textBox.Text = defaultValue;
-                MessageBox.Show("범위 : 0 이상  1,000,000 이하", "잘못된 입력", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
         }
 
         //-----------------------------------양 정수 확인----------------------------------------
-
-        private void Setting_Positive_numver(object sender, EventArgs e)
-        {
-            ValidateNumericInput(sender, e, setting_account_number, "0000000000", maxLength: 8);
-        }
 
         private void Initial_balance_Leave(object sender, EventArgs e)
         {
@@ -395,12 +341,12 @@ namespace WindowsFormsApp1
 
         private void Maxbuy_Leave(object sender, EventArgs e)
         {
-            ValidateNumericInput(sender, e, maxbuy, "100000");
+            ValidateNumericInput(sender, e, maxbuy, "1000000");
         }
 
         private void Maxbuy_acc_Leave(object sender, EventArgs e)
         {
-            ValidateNumericInput(sender, e, maxbuy_acc, "1", minValue: 0, maxValue: 400);
+            ValidateNumericInput(sender, e, maxbuy_acc, "1", minValue: 0, maxValue: 100);
         }
 
         private void Min_price_Leave(object sender, EventArgs e)
@@ -415,17 +361,17 @@ namespace WindowsFormsApp1
 
         private void Max_hold_text_Leave(object sender, EventArgs e)
         {
-            ValidateNumericInput(sender, e, max_hold_text, "1", minValue:1, maxValue: 100);
+            ValidateNumericInput(sender, e, max_hold_text, "1", minValue:1, maxValue: 50);
         }
 
         private void Profit_won_text_Leave(object sender, EventArgs e)
         {
-            ValidateNumericInput(sender, e, profit_won_text, "0");
+            ValidateNumericInput(sender, e, profit_won_text, "10000");
         }
 
         private void Loss_won_text_Leave(object sender, EventArgs e)
         {
-            ValidateNumericInput(sender, e, loss_won_text, "0");
+            ValidateNumericInput(sender, e, loss_won_text, "10000");
         }
 
         private void Term_for_buy_text_Leave(object sender, EventArgs e)
@@ -449,20 +395,26 @@ namespace WindowsFormsApp1
         {
             string input = textBox.Text;
 
-            foreach (char c in input)
+            if (int.TryParse(textBox.Text, out int result))
             {
-                if (!char.IsDigit(c))
+                if (result < 0)
                 {
                     textBox.Text = defaultValue;
-                    MessageBox.Show("양의 정수가 아닌 값이 있습니다.", "잘못된 입력", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("0 이상인 양의 정수를 입력하세요.", "잘못된 입력", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
+            }
+            else
+            {
+                textBox.Text = defaultValue;
+                MessageBox.Show("int32 범위의 양의 정수로 입력하세요.", "잘못된 입력", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
             }
 
             if (maxLength.HasValue && input.Length != maxLength.Value)
             {
                 textBox.Text = defaultValue;
-                MessageBox.Show($"입력값은 {maxLength.Value}자리 숫자여야 합니다.", "잘못된 입력", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show($"계좌는 {maxLength.Value}자리 숫자여야 합니다.", "잘못된 입력", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -509,238 +461,170 @@ namespace WindowsFormsApp1
 
         private void ValidateNumericInput2(object sender, EventArgs e, TextBox textBox, string defaultValue)
         {
-            string input = textBox.Text;
+            int max = 1000000;
+            int min = -1000000;
 
-            int decimalMinus = 0;
-
-            foreach (char c in input)
+            if (int.TryParse(textBox.Text, out int result))
             {
-                if (char.IsDigit(c))
-                {
-                    continue;
-                }
-                else if (c == '-')
-                {
-                    decimalMinus++;
-                }
-                else
+                if (result < min || result > max)
                 {
                     textBox.Text = defaultValue;
-                    MessageBox.Show("마이너스와 숫자가 아닌 값이 아닌것이 있습니다.", "잘못된 입력", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("범위 : -1,000,000 이상 1,000,000이하", "잘못된 입력", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
             }
-
-            //마이너스 개수
-            if (decimalMinus > 1)
+            else
             {
                 textBox.Text = defaultValue;
-                MessageBox.Show("마이너스을 한번만 입력하세요.", "잘못된 입력", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("-1,000,000 이상 1,000,000이하의 int32범위 정수 입력", "잘못된 입력", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-
-            //범위 확인
-            int intput_range = Convert.ToInt32(textBox.Text);
-            int max = 1000000;
-            int min = -1000000;
-            if (intput_range < min || intput_range > max)
-            {
-                textBox.Text = defaultValue;
-                MessageBox.Show("범위 :  -1,000,000 이상  1,000,000 이하", "잘못된 입력", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
         }
 
         //-----------------------------------양 혹은 음 소수점 확인-------------------------------------
         private void Type1_start_Leave(object sender, EventArgs e)
         {
-            ValidatedecimalInput(sender, e, type1_start, "-5");
+            ValidatedecimalInput(sender, e, type1_start, "-2.5");
         }
         private void Type1_end_Leave(object sender, EventArgs e)
         {
-            ValidatedecimalInput(sender, e, type1_end, "5");
+            ValidatedecimalInput(sender, e, type1_end, "2.5");
         }
         private void Type2_start_Leave(object sender, EventArgs e)
         {
-            ValidatedecimalInput(sender, e, type2_start, "-5");
+            ValidatedecimalInput(sender, e, type2_start, "-2.5");
         }
         private void Type2_end_Leave(object sender, EventArgs e)
         {
-            ValidatedecimalInput(sender, e,  type2_end, "5");
+            ValidatedecimalInput(sender, e,  type2_end, "2.5");
         }
         private void Type3_start_Leave(object sender, EventArgs e)
         {
-            ValidatedecimalInput(sender, e, type3_start, "-5");
+            ValidatedecimalInput(sender, e, type3_start, "-2.5");
         }
         private void Type3_end_Leave(object sender, EventArgs e)
         {
-            ValidatedecimalInput(sender, e, type3_end, "5");
+            ValidatedecimalInput(sender, e, type3_end, "2.5");
         }
         private void Type4_start_Leave(object sender, EventArgs e)
         {
-            ValidatedecimalInput(sender, e, type4_start, "-5");
+            ValidatedecimalInput(sender, e, type4_start, "-2.5");
         }
         private void Type4_end_Leave(object sender, EventArgs e)
         {
-            ValidatedecimalInput(sender, e, type4_end, "5");
+            ValidatedecimalInput(sender, e, type4_end, "2.5");
         }
         private void Type5_start_Leave(object sender, EventArgs e)
         {
-            ValidatedecimalInput(sender, e, type5_start, "-5");
+            ValidatedecimalInput(sender, e, type5_start, "-2.5");
         }
         private void Type5_end_Leave(object sender, EventArgs e)
         {
-            ValidatedecimalInput(sender, e, type5_end, "5");
+            ValidatedecimalInput(sender, e, type5_end, "2.5");
         }
 
         private void Type1_all_start_Leave(object sender, EventArgs e)
         {
-            ValidatedecimalInput(sender, e, type1_all_start, "-5");
+            ValidatedecimalInput(sender, e, type1_all_start, "-2.5");
         }
         private void Type1_all_end_Leave(object sender, EventArgs e)
         {
-            ValidatedecimalInput(sender, e, type1_all_end, "5");
+            ValidatedecimalInput(sender, e, type1_all_end, "2.5");
         }
         private void Type2_all_start_Leave(object sender, EventArgs e)
         {
-            ValidatedecimalInput(sender, e, type2_all_start, "-5");
+            ValidatedecimalInput(sender, e, type2_all_start, "-2.5");
         }
         private void Type2_all_end_Leave(object sender, EventArgs e)
         {
-            ValidatedecimalInput(sender, e, type2_all_end, "5");
+            ValidatedecimalInput(sender, e, type2_all_end, "2.5");
         }
         private void Type3_all_start_Leave(object sender, EventArgs e)
         {
-            ValidatedecimalInput(sender, e, type3_all_start, "-5");
+            ValidatedecimalInput(sender, e, type3_all_start, "-2.5");
         }
         private void Type3_all_end_Leave(object sender, EventArgs e)
         {
-            ValidatedecimalInput(sender, e, type3_all_end, "5");
+            ValidatedecimalInput(sender, e, type3_all_end, "2.5");
         }
         private void Type4_all_start_Leave(object sender, EventArgs e)
         {
-            ValidatedecimalInput(sender, e, type4_all_start, "-5");
+            ValidatedecimalInput(sender, e, type4_all_start, "-2.5");
         }
         private void Type4_all_end_Leave(object sender, EventArgs e)
         {
-            ValidatedecimalInput(sender, e, type4_all_end, "5");
+            ValidatedecimalInput(sender, e, type4_all_end, "2.5");
         }
         private void Type5_all_start_Leave(object sender, EventArgs e)
         {
-            ValidatedecimalInput(sender, e, type5_all_start, "-5");
+            ValidatedecimalInput(sender, e, type5_all_start, "-2.5");
         }
         private void Type5_all_end_Leave(object sender, EventArgs e)
         {
-            ValidatedecimalInput(sender, e, type5_all_end, "5");
+            ValidatedecimalInput(sender, e, type5_all_end, "2.5");
         }
         
         private void Type1_isa_start_Leave(object sender, EventArgs e)
         {
-            ValidatedecimalInput(sender, e, type1_isa_start, "-5");
+            ValidatedecimalInput(sender, e, type1_isa_start, "-2.5");
         }
         private void Type1_isa_end_Leave(object sender, EventArgs e)
         {
-            ValidatedecimalInput(sender, e, type1_isa_end, "5");
+            ValidatedecimalInput(sender, e, type1_isa_end, "2.5");
         }
         private void Type2_isa_start_Leave(object sender, EventArgs e)
         {
-            ValidatedecimalInput(sender, e, type2_isa_start, "-5");
+            ValidatedecimalInput(sender, e, type2_isa_start, "-2.5");
         }
         private void Type2_isa_end_Leave(object sender, EventArgs e)
         {
-            ValidatedecimalInput(sender, e, type2_isa_end, "5");
+            ValidatedecimalInput(sender, e, type2_isa_end, "2.5");
         }
         private void Type3_isa_start_Leave(object sender, EventArgs e)
         {
-            ValidatedecimalInput(sender, e, type3_isa_start, "-5");
+            ValidatedecimalInput(sender, e, type3_isa_start, "-2.5");
         }
         private void Type3_isa_end_Leave(object sender, EventArgs e)
         {
-            ValidatedecimalInput(sender, e, type3_isa_end, "5");
+            ValidatedecimalInput(sender, e, type3_isa_end, "2.5");
         }
         private void Type4_isa_start_Leave(object sender, EventArgs e)
         {
-            ValidatedecimalInput(sender, e, type4_isa_start, "-5");
+            ValidatedecimalInput(sender, e, type4_isa_start, "-2.5");
         }
         private void Type4_isa_end_Leave(object sender, EventArgs e)
         {
-            ValidatedecimalInput(sender, e, type4_isa_end, "5");
+            ValidatedecimalInput(sender, e, type4_isa_end, "2.5");
         }
         private void Type5_isa_start_Leave(object sender, EventArgs e)
         {
-            ValidatedecimalInput(sender, e, type5_isa_start, "-5");
+            ValidatedecimalInput(sender, e, type5_isa_start, "-2.5");
         }
         private void Type5_isa_end_Leave(object sender, EventArgs e)
         {
-            ValidatedecimalInput(sender, e, type5_isa_end, "5");
+            ValidatedecimalInput(sender, e, type5_isa_end, "2.5");
         }
 
         private void ValidatedecimalInput(object sender, EventArgs e, TextBox textBox, string defaultValue)
         {
-            string input = textBox.Text;
+            double max = -100;
+            double min = 100;
 
-            //입력된 값이 없을시
-            if (string.IsNullOrWhiteSpace(input))
+            if (double.TryParse(textBox.Text, out double result))
             {
-                textBox.Text = defaultValue;
-                MessageBox.Show("입력된 값이 없습니다.", "잘못된 입력", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            //숫자 혹은 소수점인지 확인
-            int decimalPointCount = 0;
-            int decimalMinusCount = 0;
-
-            foreach (char c in input)
-            {
-                if (char.IsDigit(c))
-                {
-                    continue;
-                }
-                else if (c == '.')
-                {
-                    decimalPointCount++;
-                }
-                else if (c == '-')
-                {
-                    decimalMinusCount++;
-                }
-                else
+                if (result < min || result > max)
                 {
                     textBox.Text = defaultValue;
-                    MessageBox.Show("정수 혹은 점이 아닌 값이 있습니다.", "잘못된 입력", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("범위 : -100 이상  100이하", "잘못된 입력", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
             }
-
-            //소수점 형식 이탈 확인
-            if (decimalPointCount > 1)
+            else
             {
                 textBox.Text = defaultValue;
-                MessageBox.Show("점을 한번만 입력하세요.", "잘못된 입력", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("-100 이상  100 이하의 double 범위 양의 실수 입력", "잘못된 입력", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-
-            //마이너스 형식 이탈 확인
-            if (decimalMinusCount > 1)
-            {
-                textBox.Text = defaultValue;
-                MessageBox.Show("마이너스을 한번만 입력하세요.", "잘못된 입력", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            //범위 확인
-            double intput_range = Convert.ToInt32(textBox.Text);
-            double max = 100;
-            double min = -100;
-            if (intput_range < min || intput_range > max)
-            {
-                textBox.Text = defaultValue;
-                MessageBox.Show("범위 :  -100 이상  100이하", "잘못된 입력", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
         }      
 
         //-----------------------------------시간 입력 오류 확인----------------------------------------
@@ -787,13 +671,24 @@ namespace WindowsFormsApp1
 
         private void Dual_Time_Start_Leave(object sender, EventArgs e)
         {
-            ValidateTimeInput(sender, e, Dual_Time_Start, "09:00:00", new TimeSpan(9, 0, 0), new TimeSpan(18, 0, 0));
+            ValidateTimeInput(sender, e, Dual_Time_Start, "09:00:00", new TimeSpan(9, 0, 0), new TimeSpan(15, 30, 0));
         }
 
         private void Dual_Time_Stop_Leave(object sender, EventArgs e)
         {
-            ValidateTimeInput(sender, e, Dual_Time_Start, "18:00:00", new TimeSpan(9, 0, 0), new TimeSpan(18, 0, 0));
+            ValidateTimeInput(sender, e, Dual_Time_Start, "15:30:00", new TimeSpan(9, 0, 0), new TimeSpan(15, 30, 0));
         }
+
+        private void TradingView_Webhook_Start_Leave(object sender, EventArgs e)
+        {
+            ValidateTimeInput(sender, e, TradingView_Webhook_Start, "09:00:00", new TimeSpan(9, 0, 0), new TimeSpan(15, 30, 00));
+        }
+
+        private void TradingView_Webhook_Stop_Leave(object sender, EventArgs e)
+        {
+            ValidateTimeInput(sender, e, TradingView_Webhook_Stop, "15:30:00", new TimeSpan(9, 0, 0), new TimeSpan(15, 30, 00));
+        }
+
 
         private void ValidateTimeInput(object sender, EventArgs e, TextBox textBox, string defaultValue, TimeSpan minTime, TimeSpan maxTime)
         {
@@ -801,7 +696,7 @@ namespace WindowsFormsApp1
 
             DateTime inputTime;
 
-            if (!DateTime.TryParse(input, out inputTime))
+            if (!DateTime.TryParse(input, CultureInfo.InvariantCulture, DateTimeStyles.None, out inputTime))
             {
                 textBox.Text = defaultValue;
                 MessageBox.Show("올바른 시간 형식(HH:mm:ss)으로 입력해주세요.", "잘못된 입력", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -851,28 +746,27 @@ namespace WindowsFormsApp1
 
                 DateTime result;
 
-                if (!DateTime.TryParse(market_start_time.Text, out result))
+                if (!DateTime.TryParse(market_start_time.Text, CultureInfo.InvariantCulture, DateTimeStyles.None, out result))
                 {
-                    MessageBox.Show("시작 시각을 형식(HH:mm:ss)으로 입력하세요.");
+                    MessageBox.Show("자동 실행 운영 시작 시각을 형식(HH:mm:ss)으로 입력하세요.");
                     return true;
                 }
 
                 DateTime result2;
 
-                if (!DateTime.TryParse(market_end_time.Text, out result2))
+                if (!DateTime.TryParse(market_end_time.Text, CultureInfo.InvariantCulture, DateTimeStyles.None, out result2))
                 {
-                    MessageBox.Show("종료 시각을 형식(HH:mm:ss)으로 입력하세요.");
+                    MessageBox.Show("자동 실행 운영 종료 시각을 형식(HH:mm:ss)으로 입력하세요.");
                     return true;
                 }
 
-                if (result.TimeOfDay > result2.TimeOfDay)
+                if (result > result2)
                 {
-                    MessageBox.Show("시작 시각을 종료 시각보다 작게 입력하세요.");
+                    MessageBox.Show("자동 실행 운영 시작 시각을 종료 시각보다 작게 입력하세요.");
                     return true;
                 }
 
             }
-
 
             //기본설정 및 추가 옵션 설정
             if (String.IsNullOrEmpty(account_list.Text))
@@ -897,7 +791,7 @@ namespace WindowsFormsApp1
             }
             else
             {
-                MessageBox.Show("초기자산을 양의 정수로 입력하세요.");
+                MessageBox.Show("초기자산을 int32 범위의 양의 정수로 입력하세요.");
                 return true;
             }
 
@@ -913,7 +807,7 @@ namespace WindowsFormsApp1
                 }
                 else
                 {
-                    MessageBox.Show("종목당 매수 금액을 양의 정수로 입력하세요.");
+                    MessageBox.Show("종목당 매수 금액을 int32 범위의 양의 정수로 입력하세요.");
                     return true;
                 }
             }
@@ -930,7 +824,7 @@ namespace WindowsFormsApp1
                 }
                 else
                 {
-                    MessageBox.Show("종목당 매수 수량을 양의 정수로 입력하세요.");
+                    MessageBox.Show("종목당 매수 수량을 int32 범위의 양의 정수로 입력하세요.");
                     return true;
                 }
             }
@@ -962,7 +856,7 @@ namespace WindowsFormsApp1
             }
             else
             {
-                MessageBox.Show("종목당 최대 매수 금액을 야의 정수로 입력하세요.");
+                MessageBox.Show("종목당 최대 매수 금액을 int32 범위의 양의 정수로 입력하세요.");
                 return true;
             }
 
@@ -976,7 +870,7 @@ namespace WindowsFormsApp1
             }
             else
             {
-                MessageBox.Show("최대 매수 종목 수를 양의 정수로 입력하세요.");
+                MessageBox.Show("최대 매수 종목 수를 int32 범위의 양의 정수로 입력하세요.");
                 return true;
             }
 
@@ -992,7 +886,7 @@ namespace WindowsFormsApp1
             }
             else
             {
-                MessageBox.Show("최소 종목 매수가를 양의 정수로 입력하세요.");
+                MessageBox.Show("최소 종목 매수가를 int32 범위의 양의 정수로 입력하세요.");
                 return true;
             }
 
@@ -1008,7 +902,7 @@ namespace WindowsFormsApp1
             }
             else
             {
-                MessageBox.Show("최대 종목 매수가를 양의 정수로 입력하세요.");
+                MessageBox.Show("최대 종목 매수가를 int32 범위의 양의 정수로 입력하세요.");
                 return true;
             }
 
@@ -1030,7 +924,7 @@ namespace WindowsFormsApp1
                 }
                 else
                 {
-                    MessageBox.Show("최대 보유 종목 수를 양의 정수로 입력하세요.");
+                    MessageBox.Show("최대 보유 종목 수를 int32 범위의 양의 정수로 입력하세요.");
                     return true;
                 }
             }
@@ -1045,7 +939,7 @@ namespace WindowsFormsApp1
 
             if (sell_set1_after.Text == "" || sell_set2_after.Text == "")
             {
-                MessageBox.Show("모든 매매 방식(시간외)을 설정해주세요.");
+                MessageBox.Show("시간외 매매 방식을 모두 설정해주세요.");
                 return true;
             }
 
@@ -1077,15 +971,21 @@ namespace WindowsFormsApp1
             //조건설정
             if (buy_condition.Checked)
             {
-                if (!DateTime.TryParse(buy_condition_start.Text, out DateTime result))
+                if (!DateTime.TryParse(buy_condition_start.Text, CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime result))
                 {
                     MessageBox.Show("매수 시작 시각을 형식(HH:mm:ss)으로 입력하세요.");
                     return true;
                 }
 
-                if (!DateTime.TryParse(buy_condition_start.Text, out DateTime result2))
+                if (!DateTime.TryParse(buy_condition_start.Text, CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime result2))
                 {
                     MessageBox.Show("매수 중단 시각을 형식(HH:mm:ss)으로 입력하세요.");
+                    return true;
+                }
+
+                if (result > result2)
+                {
+                    MessageBox.Show("매수 시작 시각을 매수 중단 시각보다 작게 입력하세요.");
                     return true;
                 }
 
@@ -1104,15 +1004,21 @@ namespace WindowsFormsApp1
 
             if (sell_condition.Checked)
             {
-                if (!DateTime.TryParse(sell_condition_start.Text, out DateTime result))
+                if (!DateTime.TryParse(sell_condition_start.Text, CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime result))
                 {
                     MessageBox.Show("매도 시작 시각을 형식(HH:mm:ss)으로 입력하세요.");
                     return true;
                 }
 
-                if (!DateTime.TryParse(sell_condition_start.Text, out DateTime result2))
+                if (!DateTime.TryParse(sell_condition_start.Text, CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime result2))
                 {
                     MessageBox.Show("매도 중단 시각을 형식(HH:mm:ss)으로 입력하세요.");
+                    return true;
+                }
+
+                if (result > result2)
+                {
+                    MessageBox.Show("매도 시작 시각을 매도 중단 시각보다 작게 입력하세요.");
                     return true;
                 }
 
@@ -1159,7 +1065,7 @@ namespace WindowsFormsApp1
                 }
                 else
                 {
-                    MessageBox.Show("익절(원)을 양의 정수로 입력하세요.");
+                    MessageBox.Show("익절(원)을 int32 범위의 양의 정수로 입력하세요.");
                     return true;
                 }
             }
@@ -1171,9 +1077,23 @@ namespace WindowsFormsApp1
                     if (resu2 < 0)
                     {
                         MessageBox.Show("익절TS(double)를 0보다 크게 입력하세요.");
+                        return true;
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("익절TS(duble)를 숫자로 입력하세요.");
+                    return true;
+                }
+
+                if (double.TryParse(profit_ts_text2.Text, out double resu21))
+                {
+                    if (resu21 < 0)
+                    {
+                        MessageBox.Show("익절TS(double)를 0보다 크게 입력하세요.");
+                        return true;
 
                     }
-                    return true;
                 }
                 else
                 {
@@ -1181,6 +1101,7 @@ namespace WindowsFormsApp1
                     return true;
                 }
             }
+
 
             if (loss_percent.Checked)
             {
@@ -1213,7 +1134,7 @@ namespace WindowsFormsApp1
                 }
                 else
                 {
-                    MessageBox.Show("손절(원)을 양의 정수로 입력하세요.");
+                    MessageBox.Show("손절(원)을 int32 범위의 양의 정수로 입력하세요.");
                     return true;
                 }
             }
@@ -1222,13 +1143,13 @@ namespace WindowsFormsApp1
             //청산설정
             if (clear_sell.Checked)
             {
-                if (!DateTime.TryParse(clear_sell_start.Text, out DateTime result))
+                if (!DateTime.TryParse(clear_sell_start.Text, CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime result))
                 {
                     MessageBox.Show("청산 시작 시각을 형식(HH:mm:ss)으로 입력하세요.");
                     return true;
                 }
 
-                if (!DateTime.TryParse(clear_sell_end.Text, out DateTime result2))
+                if (!DateTime.TryParse(clear_sell_end.Text, CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime result2))
                 {
                     MessageBox.Show("청산 중단 시각을 형식(HH:mm:ss)으로 입력하세요.");
                     return true;
@@ -1237,12 +1158,13 @@ namespace WindowsFormsApp1
 
             if (clear_sell.Checked && clear_sell_mode.Checked)
             {
-                MessageBox.Show("청산 일반과 개별청산 동시 선택시 청산일반을 실행합니다.");
+                MessageBox.Show("청산 일반과 개별청산 동시 선택시 청산일반을 우선 실행합니다.");
             }
 
             if (!clear_sell_mode.Checked && clear_sell_profit.Checked || clear_sell_loss.Checked)
             {
                 MessageBox.Show("청산익절 및 청산손절을 사용하기 위해서 개별청산을 선택하세요.");
+                return true;
             }
 
             if (clear_sell_mode.Checked && !clear_sell_profit.Checked && !clear_sell_loss.Checked)
@@ -1290,15 +1212,15 @@ namespace WindowsFormsApp1
             {
                 if (int.TryParse(term_for_buy_text.Text, out int result15))
                 {
-                    if (result15 < 0)
+                    if (result15 < 750)
                     {
-                        MessageBox.Show("종목매수텀을 0보다 크게 입력하세요.");
+                        MessageBox.Show("종목매수텀을 750보다 크게 입력하세요.");
                         return true;
                     }
                 }
                 else
                 {
-                    MessageBox.Show("종목매수텀을 양의 정수(ms)로 입력하세요.");
+                    MessageBox.Show("종목매수텀을 int32 범위의 양의 정수(ms)로 입력하세요.");
                     return true;
                 }
             }
@@ -1307,15 +1229,15 @@ namespace WindowsFormsApp1
             {
                 if (int.TryParse(term_for_sell_text.Text, out int result16))
                 {
-                    if (result16 < 0)
+                    if (result16 < 750)
                     {
-                        MessageBox.Show("종목매도텀을 0보다 크게 입력하세요.");
+                        MessageBox.Show("종목매도텀을 750보다 크게 입력하세요.");
                         return true;
                     }
                 }
                 else
                 {
-                    MessageBox.Show("종목매도텀을 양의 정수(ms)로 입력하세요.");
+                    MessageBox.Show("종목매도텀을 int32 범위의 양의 정수(ms)로 입력하세요.");
                     return true;
 
                 }
@@ -1328,15 +1250,17 @@ namespace WindowsFormsApp1
                     if (result17 < 0)
                     {
                         MessageBox.Show("미체결취소(매수)텀을 0보다 크게 입력하세요.");
+                        return true;
 
                     }
-                    else
-                    {
-                        MessageBox.Show("종목매수텀을 양의 정수(ms)로 입력하세요.");
-                        return true;
-                    }
+                }
+                else
+                {
+                    MessageBox.Show("미체결취소(매수)텀을 int32 범위의 양의 정수(ms)로 입력하세요.");
+                    return true;
                 }
             }
+
             if (term_for_non_sell.Checked)
             {
                 if (int.TryParse(term_for_non_sell_text.Text, out int result18))
@@ -1349,7 +1273,7 @@ namespace WindowsFormsApp1
                 }
                 else
                 {
-                    MessageBox.Show("미체결취소(매도)텀을 양의 정수(ms)로 입력하세요.");
+                    MessageBox.Show("미체결취소(매도)텀을 int32 범위의 양의 정수(ms)로 입력하세요.");
                     return true;
                 }
             }
@@ -1357,13 +1281,13 @@ namespace WindowsFormsApp1
             //DUAL
             if (Dual_Time.Checked)
             {
-                if (!DateTime.TryParse(Dual_Time_Start.Text, out DateTime result))
+                if (!DateTime.TryParse(Dual_Time_Start.Text, CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime result))
                 {
                     MessageBox.Show("ISA 매수 시작 시각을 형식(HH:mm:ss)으로 입력하세요.");
                     return true;
                 }
 
-                if (!DateTime.TryParse(Dual_Time_Stop.Text, out DateTime result2))
+                if (!DateTime.TryParse(Dual_Time_Stop.Text, CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime result2))
                 {
                     MessageBox.Show("ISA 매수 중단 시각을 형식(HH:mm:ss)으로 입력하세요.");
                     return true;
@@ -1533,12 +1457,6 @@ namespace WindowsFormsApp1
 
 
             //KIS
-            if (KIS_Independent.Checked && !KIS_Allow.Checked)
-            {
-                MessageBox.Show("KIS_Allow 를 체크하세요.");
-                return true;
-            }
-
             if (KIS_Allow.Checked)
             {
                 if (KIS_Account.Text == "" || appkey.Text == "" || appsecret.Text == "" || kis_amount.Text == "")
@@ -1551,13 +1469,39 @@ namespace WindowsFormsApp1
                 {
                     if (result < 0)
                     {
-                        MessageBox.Show("amount를 0보다 크게 입력하세요.");
+                        MessageBox.Show("KIS amount를 0보다 크게 입력하세요.");
                         return true;
                     }
                 }
                 else
                 {
-                    MessageBox.Show("amount를 양의 정수로 입력하세요.");
+                    MessageBox.Show("KIS amount를 int32 범위의 양의 정수로 입력하세요.");
+                    return true;
+                }
+            }
+
+            //TradingVIew
+            if (TradingView_Webhook.Checked)
+            {
+                DateTime result;
+
+                if (!DateTime.TryParse(TradingView_Webhook_Start.Text, CultureInfo.InvariantCulture, DateTimeStyles.None, out result))
+                {
+                    MessageBox.Show("TradingView 매수 시작 시각을 형식(HH:mm:ss)으로 입력하세요.");
+                    return true;
+                }
+
+                DateTime result2;
+
+                if (!DateTime.TryParse(TradingView_Webhook_Stop.Text, CultureInfo.InvariantCulture, DateTimeStyles.None, out result2))
+                {
+                    MessageBox.Show("TradingView 매수 중단 시각을 형식(HH:mm:ss)으로 입력하세요.");
+                    return true;
+                }
+
+                if(result > result2)
+                {
+                    MessageBox.Show("TradingView 매수 시작 시각을 매수 중단 시각보다 작게 입력하세요.");
                     return true;
                 }
             }
@@ -1570,27 +1514,16 @@ namespace WindowsFormsApp1
         {
             if (!int.TryParse(startTextBox.Text, out int startValue))
             {
-                MessageBox.Show($"{messagePrefix} {messagePostfix} 값 범위 시작(왼쪽)을 양의 정수로 입력하세요.");
-                return true;
-            }
-
-            if (startValue < 0)
-            {
-                MessageBox.Show($"{messagePrefix} {messagePostfix} 값 범위 시작(왼쪽)을 0보다 크게 입력하세요.");
+                MessageBox.Show($"{messagePrefix} {messagePostfix} 값 범위 시작(왼쪽)을 int32 범위의 정수로 입력하세요.");
                 return true;
             }
 
             if (!int.TryParse(endTextBox.Text, out int endValue))
             {
-                MessageBox.Show($"{messagePrefix} {messagePostfix} 값 범위 종료(오른쪽)을 양의 정수로 입력하세요.");
+                MessageBox.Show($"{messagePrefix} {messagePostfix} 값 범위 종료(오른쪽)을 int32 범위의 정수로 입력하세요.");
                 return true;
             }
 
-            if (endValue < 0)
-            {
-                MessageBox.Show($"{messagePrefix} {messagePostfix} 값 범위 종료(오른쪽)을 0보다 크게 입력하세요.");
-                return true;
-            }
 
             if (startValue > endValue)
             {
@@ -1605,13 +1538,13 @@ namespace WindowsFormsApp1
         {
             if (!double.TryParse(startTextBox.Text, out double startValue))
             {
-                MessageBox.Show($"{messagePrefix} {messagePostfix} 값 범위 시작(왼쪽)을 숫자로 입력하세요.");
+                MessageBox.Show($"{messagePrefix} {messagePostfix} 값 범위 시작(왼쪽)을 double 범위의 숫자로 입력하세요.");
                 return true;
             }
 
             if (!double.TryParse(endTextBox.Text, out double endValue))
             {
-                MessageBox.Show($"{messagePrefix} {messagePostfix} 값 범위 종료(오른쪽)을 숫자로 입력하세요.");
+                MessageBox.Show($"{messagePrefix} {messagePostfix} 값 범위 종료(오른쪽)을 double 범위의 숫자로 입력하세요.");
                 return true;
             }
 
@@ -2389,9 +2322,5 @@ namespace WindowsFormsApp1
             }
         }
 
-        private void Setting_Load_1(object sender, EventArgs e)
-        {
-
-        }
     }
 }

@@ -114,7 +114,7 @@ namespace WindowsFormsApp1
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(918, 37);
             this.label1.TabIndex = 0;
-            this.label1.Text = "*수수료 차이 혹은 누락된 내용이 있을 수 있으므로 정확한 내용은 HTS 및 MTS로 확인하시길 바랍니다.";
+            this.label1.Text = "*수수료 혹은 누락된 내용이 있을 수 있으므로 정확한 내용은 HTS 및 MTS로 확인하시길 바랍니다.";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // Transaction

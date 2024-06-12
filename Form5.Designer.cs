@@ -215,7 +215,7 @@ namespace WindowsFormsApp1
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label5.AutoSize = true;
-            this.label5.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.label5.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.label5.Location = new System.Drawing.Point(243, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(176, 27);
@@ -258,7 +258,7 @@ namespace WindowsFormsApp1
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label4.AutoSize = true;
-            this.label4.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.label4.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.label4.Location = new System.Drawing.Point(72, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(98, 27);
@@ -291,6 +291,7 @@ namespace WindowsFormsApp1
             this.label6.Size = new System.Drawing.Size(407, 62);
             this.label6.TabIndex = 1;
             this.label6.Text = "*본 사항에 동의하신다면 사용하시길 바랍니다.                     *인증 시간 : 08:45 ~ 18:15";
+            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // Update
             // 

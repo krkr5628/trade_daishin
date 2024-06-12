@@ -698,7 +698,7 @@ namespace WindowsFormsApp1
             // 저장할 파일 경로
             string filePath = $@"C:\Auto_Trade_Creon\Log\{formattedDate}_full.txt";
             string filePath2 = $@"C:\Auto_Trade_Creon\Log_Trade\{formattedDate}_trade.txt";
-            string filePath3 = "C:\\Auto_Trade_Creon\\setting_daishin.txt";
+            string filePath3 = "C:\\Auto_Trade_Creon\\Setting\\setting_daishin.txt";
 
             // StreamWriter를 사용하여 파일 저장
             try

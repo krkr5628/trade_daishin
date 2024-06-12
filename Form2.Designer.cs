@@ -920,7 +920,7 @@ namespace WindowsFormsApp1
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(99, 28);
             this.label5.TabIndex = 9;
-            this.label5.Text = "전략명";
+            this.label5.Text = "Root";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // buy_condition
@@ -1833,7 +1833,7 @@ namespace WindowsFormsApp1
             this.term_for_non_sell.Name = "term_for_non_sell";
             this.term_for_non_sell.Size = new System.Drawing.Size(113, 22);
             this.term_for_non_sell.TabIndex = 21;
-            this.term_for_non_sell.Text = "미체결취소(ms)";
+            this.term_for_non_sell.Text = "미체결취소";
             this.term_for_non_sell.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.term_for_non_sell.UseVisualStyleBackColor = false;
             // 
@@ -1867,7 +1867,7 @@ namespace WindowsFormsApp1
             this.term_for_non_buy.Name = "term_for_non_buy";
             this.term_for_non_buy.Size = new System.Drawing.Size(113, 22);
             this.term_for_non_buy.TabIndex = 23;
-            this.term_for_non_buy.Text = "미체결취소(ms)";
+            this.term_for_non_buy.Text = "미체결취소";
             this.term_for_non_buy.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.term_for_non_buy.UseVisualStyleBackColor = false;
             // 
@@ -2094,7 +2094,7 @@ namespace WindowsFormsApp1
             this.groupBox7.Size = new System.Drawing.Size(476, 75);
             this.groupBox7.TabIndex = 20;
             this.groupBox7.TabStop = false;
-            this.groupBox7.Text = "지연 설정";
+            this.groupBox7.Text = "지연 설정(ms)";
             // 
             // groupBox8
             // 
@@ -4186,7 +4186,6 @@ namespace WindowsFormsApp1
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Setting";
             this.Text = "Setting";
-            this.Load += new System.EventHandler(this.Setting_Load_1);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.tableLayoutPanel2.ResumeLayout(false);
