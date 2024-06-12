@@ -997,7 +997,13 @@ namespace WindowsFormsApp1
 
                 if (!buy_mode_or.Checked && Fomula_list_buy.Text.Split(',').Length != 2)
                 {
-                    MessageBox.Show("매수 조건식을 2개 선택하세요.");
+                    MessageBox.Show("AND INDEPENDENT DUAL 모드에서 매수 조건식을 2개 선택하세요.");
+                    return true;
+                }
+
+                if (buy_mode_or.Checked && Fomula_list_buy.Text.Split(',').Length > 3)
+                {
+                    MessageBox.Show("OR 모드에서 매수 조건식을 3개 이하로 선택하세요.");
                     return true;
                 }
             }
@@ -1152,6 +1158,12 @@ namespace WindowsFormsApp1
                 if (!DateTime.TryParse(clear_sell_end.Text, CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime result2))
                 {
                     MessageBox.Show("청산 중단 시각을 형식(HH:mm:ss)으로 입력하세요.");
+                    return true;
+                }
+
+                if (result > result2)
+                {
+                    MessageBox.Show("청산 시작 시각을 청산 중단 시각보다 작게 입력하세요.");
                     return true;
                 }
             }
