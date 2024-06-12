@@ -900,6 +900,7 @@ namespace WindowsFormsApp1
             this.setting_name.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.setting_name.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.setting_name.Location = new System.Drawing.Point(105, 2);
             this.setting_name.Margin = new System.Windows.Forms.Padding(2);
             this.setting_name.Name = "setting_name";
@@ -3447,7 +3448,7 @@ namespace WindowsFormsApp1
             this.groupBox11.Size = new System.Drawing.Size(476, 120);
             this.groupBox11.TabIndex = 24;
             this.groupBox11.TabStop = false;
-            this.groupBox11.Text = "매매설정(TS 개발중)";
+            this.groupBox11.Text = "매매설정";
             // 
             // groupBox12
             // 
@@ -4145,6 +4146,12 @@ namespace WindowsFormsApp1
             // 
             // richTextBox1
             // 
+            this.richTextBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.richTextBox1.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.richTextBox1.Font = new System.Drawing.Font("굴림", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.richTextBox1.ForeColor = System.Drawing.Color.Crimson;
             this.richTextBox1.Location = new System.Drawing.Point(7, 16);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.ReadOnly = true;

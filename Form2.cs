@@ -1674,8 +1674,15 @@ namespace WindowsFormsApp1
             //매도매수 목록 배치
             mode_hoo();
 
+            //
+            richTextBox1.Text = warning_mention;
+
             match(utility.system_route);
         }
+
+        private string warning_mention = "1.모든 값 입력 권장\n2.값 범위 넘어서지 않도록 주의\n" +
+            "3.설명서에 명시된 작동 우선 순위 숙지\n4.설정 파일 임의 변경 금지\n5.충분한 테스트 이후 실전 사용\n" +
+            "6.충분한 사양을 갖춘 PC 사용\n7.강제종료 지양\n8.동시 50개 초과한 종목 검색하는 검색식 지양\n9.과도한 스캘핑 매매 지양";
 
         //계좌 및 조건식 리스트 받아오기
         public void onReceiveConditionVer(string[] user_account, string[] Condition)
