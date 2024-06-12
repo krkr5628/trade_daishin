@@ -1832,7 +1832,7 @@ namespace WindowsFormsApp1
             this.term_for_non_sell.Name = "term_for_non_sell";
             this.term_for_non_sell.Size = new System.Drawing.Size(113, 22);
             this.term_for_non_sell.TabIndex = 21;
-            this.term_for_non_sell.Text = "미체결취소";
+            this.term_for_non_sell.Text = "미체결취소(ms)";
             this.term_for_non_sell.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.term_for_non_sell.UseVisualStyleBackColor = false;
             // 
@@ -1866,7 +1866,7 @@ namespace WindowsFormsApp1
             this.term_for_non_buy.Name = "term_for_non_buy";
             this.term_for_non_buy.Size = new System.Drawing.Size(113, 22);
             this.term_for_non_buy.TabIndex = 23;
-            this.term_for_non_buy.Text = "미체결취소";
+            this.term_for_non_buy.Text = "미체결취소(ms)";
             this.term_for_non_buy.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.term_for_non_buy.UseVisualStyleBackColor = false;
             // 

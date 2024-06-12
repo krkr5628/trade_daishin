@@ -731,9 +731,9 @@ namespace WindowsFormsApp1
             }
 
             //범위 확인
-            int intput_range = Convert.ToInt32(textBox.Text);
-            int max = 100;
-            int min = -100;
+            double intput_range = Convert.ToInt32(textBox.Text);
+            double max = 100;
+            double min = -100;
             if (intput_range < min || intput_range > max)
             {
                 textBox.Text = defaultValue;
@@ -1123,9 +1123,9 @@ namespace WindowsFormsApp1
                 }
             }
 
-            if (buy_mode_independent.Checked)
+            if (buy_mode_dual.Checked)
             {
-                MessageBox.Show("Independent 모드에서 ISA계좌가 없을시 오류가 발생할 수 있습니다.");
+                MessageBox.Show("Dual 모드에서 ISA계좌가 없을시 오류가 발생할 수 있습니다.");
             }
 
 

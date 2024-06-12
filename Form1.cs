@@ -237,8 +237,22 @@ namespace WindowsFormsApp1
                 MessageBox.Show("조건식 로딩중");
                 return;
             }
+
             //
             dtCondStock.Clear();
+
+            if (dataGridView1.InvokeRequired)
+            {
+                dataGridView1.Invoke((MethodInvoker)delegate {
+                    bindingSource.ResetBindings(false);
+                });
+            }
+            else
+            {
+                bindingSource.ResetBindings(false);
+            }
+
+            //
             dtCondStock_hold.Clear();
             dtCondStock_Transaction.Clear();
 
@@ -506,7 +520,7 @@ namespace WindowsFormsApp1
         private object buy_lock = new object();
         private object sell_lock = new object();
 
-        private List<Tuple<string, string>> waiting_Codes;
+        private List<Tuple<string, string>> waiting_Codes = new List<Tuple<string, string>>();
         private Dictionary<string, bool> buy_runningCodes = new Dictionary<string, bool>();
         private Dictionary<string, bool> sell_runningCodes = new Dictionary<string, bool>();
 
@@ -918,11 +932,7 @@ namespace WindowsFormsApp1
                 {
                     isRunned2 = true;
 
-                    auto_allow_check();
-
-                    //Telegram_Receive();
-
-                    timer2.Start(); //계좌 탐색 - 200ms 
+                    auto_allow_check();                  
                 }
                 else if (isRunned2 && t_now > t_end)
                 {
@@ -1309,6 +1319,17 @@ namespace WindowsFormsApp1
             if (check)
             {
                 dtCondStock.Clear();
+                if (dataGridView1.InvokeRequired)
+                {
+                    dataGridView1.Invoke((MethodInvoker)delegate {
+                        bindingSource.ResetBindings(false);
+                    });
+                }
+                else
+                {
+                    bindingSource.ResetBindings(false);
+                }
+                //
                 dtCondStock_hold.Clear();
                 dtCondStock_Transaction.Clear();
             }
@@ -1471,10 +1492,25 @@ namespace WindowsFormsApp1
                             string.Format("{0:#,##0}", CpTd6033.GetDataValue(6, i)) //금일체결수량 => long
                         );
                     }
-
+                    
+                    /*
                     //보유계좌 테이블 반영
                     dtCondStock_hold.AcceptChanges();
                     dataGridView2.DataSource = dtCondStock_hold;
+                    */
+
+                    if (dataGridView2.InvokeRequired)
+                    {
+                        dataGridView2.Invoke((MethodInvoker)delegate {
+                            dataGridView2.DataSource = dtCondStock_hold;
+                            dataGridView2.Refresh();
+                        });
+                    }
+                    else
+                    {
+                        dataGridView2.DataSource = dtCondStock_hold;
+                        dataGridView2.Refresh();
+                    }
 
                     //1회성 업데이트 : 초기 보유 계좌 + 고정 예수금
                     if (hold_update_initial)
@@ -1735,8 +1771,23 @@ namespace WindowsFormsApp1
                         average_price
                     );
                 }
+                /*
                 dtCondStock_Transaction.AcceptChanges();
                 dataGridView3.DataSource = dtCondStock_Transaction;
+                */
+                if (dataGridView3.InvokeRequired)
+                {
+                    dataGridView3.Invoke((MethodInvoker)delegate {
+                        dataGridView3.DataSource = dtCondStock_Transaction;
+                        dataGridView3.Refresh();
+                    });
+                }
+                else
+                {
+                    dataGridView3.DataSource = dtCondStock_Transaction;
+                    dataGridView3.Refresh();
+                }
+
             }
         }
         //------------------------------------인덱스 목록 받기---------------------------------        
@@ -2788,6 +2839,9 @@ namespace WindowsFormsApp1
         //초기 매매 설정
         public void auto_allow()
         {
+            //계좌 탐색 - 200ms 
+            timer2.Start();
+
             //DUAL 모드에서 계좌별 조건식 설정
             if (utility.buy_DUAL)
             {
@@ -3493,8 +3547,22 @@ namespace WindowsFormsApp1
                 }
 
                 //적용
+                /*
                 dtCondStock_hold.AcceptChanges();
                 dataGridView2.DataSource = dtCondStock_hold;
+                */
+                if (dataGridView2.InvokeRequired)
+                {
+                    dataGridView2.Invoke((MethodInvoker)delegate {
+                        dataGridView2.DataSource = dtCondStock_hold;
+                        dataGridView2.Refresh();
+                    });
+                }
+                else
+                {
+                    dataGridView2.DataSource = dtCondStock_hold;
+                    dataGridView2.Refresh();
+                }
             }
         }
 
@@ -3504,6 +3572,13 @@ namespace WindowsFormsApp1
         //https://money2.daishin.com/e5/mboard/ptype_basic/HTS_Plus_Helper/DW_Basic_Read.aspx?boardseq=288&seq=241&page=1&searchString=CssAlert&p=&v=&m=      
         private void stock_in_out()
         {
+            if(conditionInfo.Count() == 0)
+            {
+                WriteLog_System("조건식 로딩후 재실행\n");
+                telegram_message("조건식 로딩후 재실행\n");
+                real_time_stop_btn(this, EventArgs.Empty);
+                return;
+            }
             string Condition_ID = CssAlert.GetHeaderValue(0); // 전략ID
             var condInfo = conditionInfo.Find(f => f.Index == Condition_ID);
             string Condition_Name = condInfo.Name;
@@ -3596,13 +3671,10 @@ namespace WindowsFormsApp1
                         {
                             WriteLog_Stock($"[기존종목/INDEPENDENT편입/{Condition_Name}] : {findRows1[0]["종목명"]}({Stock_Code})\n");
 
-                            dtCondStock.AcceptChanges();
-
                             //정렬
-                            var sorted_Rows = from row in dtCondStock.AsEnumerable()
-                                              orderby row.Field<string>("편입시각") ascending
-                                              select row;
-                            dtCondStock = sorted_Rows.CopyToDataTable();
+                            dtCondStock = dtCondStock.AsEnumerable().OrderBy(row => row.Field<string>("편입시각")).CopyToDataTable();
+                            bindingSource.DataSource = dtCondStock;
+
                             //
                             if (dataGridView1.InvokeRequired)
                             {
@@ -3632,7 +3704,7 @@ namespace WindowsFormsApp1
                                 WriteLog_Stock($"[신규편입불가/{Condition_Name}/{Stock_Code}] : 최대 감시 종목(100개) 초과 \n");
                                 return;
                             }
-
+                            //
                             if (!waiting_Codes.Contains(Tuple.Create(Stock_Code, Condition_Name)))
                             {
                                 waiting_Codes.Add(Tuple.Create(Stock_Code, Condition_Name));
@@ -3652,13 +3724,10 @@ namespace WindowsFormsApp1
                             findRows1[0]["편입시각"] = DateTime.Now.ToString("HH:mm:ss");
                             WriteLog_Stock($"[기존종목/재편입/{Condition_Name}] : {findRows1[0]["종목명"]}({Stock_Code})\n");
 
-                            dtCondStock.AcceptChanges();
-
                             //정렬
-                            var sorted_Rows = from row in dtCondStock.AsEnumerable()
-                                              orderby row.Field<string>("편입시각") ascending
-                                              select row;
-                            dtCondStock = sorted_Rows.CopyToDataTable();
+                            dtCondStock = dtCondStock.AsEnumerable().OrderBy(row => row.Field<string>("편입시각")).CopyToDataTable();
+                            bindingSource.DataSource = dtCondStock;
+
                             //
                             if (dataGridView1.InvokeRequired)
                             {
@@ -3683,13 +3752,10 @@ namespace WindowsFormsApp1
                             findRows1[0]["조건식"] = Condition_Name;
                             WriteLog_Stock($"[기존종목/재편입/{Condition_Name}] : {findRows1[0]["종목명"]}({Stock_Code})\n");
 
-                            dtCondStock.AcceptChanges();
-
                             //정렬
-                            var sorted_Rows = from row in dtCondStock.AsEnumerable()
-                                              orderby row.Field<string>("편입시각") ascending
-                                              select row;
-                            dtCondStock = sorted_Rows.CopyToDataTable();
+                            dtCondStock = dtCondStock.AsEnumerable().OrderBy(row => row.Field<string>("편입시각")).CopyToDataTable();
+                            bindingSource.DataSource = dtCondStock;
+
                             //
                             if (dataGridView1.InvokeRequired)
                             {
@@ -3728,13 +3794,10 @@ namespace WindowsFormsApp1
 
                             WriteLog_Stock($"[기존종목/재편입/{Condition_Name}] : {findRows1[0]["종목명"]}({Stock_Code})\n");
 
-                            dtCondStock.AcceptChanges();
-
                             //정렬
-                            var sorted_Rows = from row in dtCondStock.AsEnumerable()
-                                              orderby row.Field<string>("편입시각") ascending
-                                              select row;
-                            dtCondStock = sorted_Rows.CopyToDataTable();
+                            dtCondStock = dtCondStock.AsEnumerable().OrderBy(row => row.Field<string>("편입시각")).CopyToDataTable();
+                            bindingSource.DataSource = dtCondStock;
+
                             //
                             if (dataGridView1.InvokeRequired)
                             {
@@ -3772,13 +3835,10 @@ namespace WindowsFormsApp1
                                 }
                                 WriteLog_Stock($"[기존종목/AND편입/{Condition_Name}] : {findRows1[0]["종목명"]}({Stock_Code})\n");
 
-                                dtCondStock.AcceptChanges();
-
                                 //정렬
-                                var sorted_Rows = from row in dtCondStock.AsEnumerable()
-                                                  orderby row.Field<string>("편입시각") ascending
-                                                  select row;
-                                dtCondStock = sorted_Rows.CopyToDataTable();
+                                dtCondStock = dtCondStock.AsEnumerable().OrderBy(row => row.Field<string>("편입시각")).CopyToDataTable();
+                                bindingSource.DataSource = dtCondStock;
+
                                 //
                                 if (dataGridView1.InvokeRequired)
                                 {
