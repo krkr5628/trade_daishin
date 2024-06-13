@@ -152,6 +152,7 @@ namespace WindowsFormsApp1
             type5_isa_start.Leave += Type5_isa_start_Leave;
             type5_isa_end.Leave += Type5_isa_end_Leave;
         }
+
         //----------------------------미사용 항목 경고창----------------------------------------
 
         private void HandleCheckedChanged(object sender, EventArgs e)
@@ -1816,7 +1817,7 @@ namespace WindowsFormsApp1
 
 
             // 저장할 파일 경로
-            string filePath = $@"C:\Auto_Trade_Creon\setting_daishin.txt";
+            string filePath = $@"C:\Auto_Trade_Creon\Setting\setting_daishin.txt";
 
             // StreamWriter를 사용하여 파일 저장
             try

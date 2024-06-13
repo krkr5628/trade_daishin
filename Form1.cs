@@ -279,11 +279,8 @@ namespace WindowsFormsApp1
                 bindingSource.ResetBindings(false);
             }
 
-            //
-            dtCondStock_hold.Clear();
-            dtCondStock_Transaction.Clear();
-
             //D+2 예수금 + 계좌 보유 종목
+            dtCondStock_hold.Clear();
             GetCashInfo_Seperate();
 
             System.Threading.Thread.Sleep(250);
@@ -293,13 +290,14 @@ namespace WindowsFormsApp1
 
             System.Threading.Thread.Sleep(250);
 
-            //매도실현손익(제세금, 수수료 포함)
-            today_profit_tax_load_seperate();
+            //매매내역
+            dtCondStock_Transaction.Clear();
+            Transaction_Detail_seperate("", "");
 
             System.Threading.Thread.Sleep(250);
 
-            //매매내역
-            Transaction_Detail_seperate("", "");
+            //매도실현손익(제세금, 수수료 포함)
+            today_profit_tax_load_seperate();
 
             auto_allow();
         }
@@ -434,29 +432,21 @@ namespace WindowsFormsApp1
 
         private void Refresh_Click(object sender, EventArgs e)
         {
-            dtCondStock_hold.Clear();
-            dtCondStock_Transaction.Clear();
-
             //D+2 예수금 + 계좌 보유 종목
+            dtCondStock_hold.Clear();
             GetCashInfo_Seperate();
 
             System.Threading.Thread.Sleep(250);
 
-            //매도실현손익(제세금, 수수료 포함)
-            today_profit_tax_load_seperate();
-
-            System.Threading.Thread.Sleep(250);
-
-            //매도실현손익(제세금, 수수료 포함)
-            today_profit_tax_load_seperate();
-
-            System.Threading.Thread.Sleep(250);
-
             //매매내역
+            dtCondStock_Transaction.Clear();
             Transaction_Detail_seperate("", "");
 
-            //기존종목 업데이트
-            Hold_Update();
+            System.Threading.Thread.Sleep(250);
+
+            //매도실현손익(제세금, 수수료 포함)
+            today_profit_tax_load_seperate();
+
         }
 
         private void Select_cancel_Click(object sender, EventArgs e)
@@ -487,8 +477,6 @@ namespace WindowsFormsApp1
                     System.Threading.Thread.Sleep(750);
                 }
             }
-
-
         }
 
         //-----------------------------------------------Main------------------------------------------------
@@ -642,11 +630,13 @@ namespace WindowsFormsApp1
                                     if (!login_complete)
                                     {
                                         telegram_message($"[TELEGRAM] : 로그인 진행중\n");
+                                        continue;
                                     }
                                     //초기값 로드 진행중
                                     if (!initial_process_complete)
                                     {
                                         telegram_message($"[TELEGRAM] : 초기값 로드 진행중\n");
+                                        continue;
                                     }
                                     //
                                     WriteLog_System($"[TELEGRAM] : {message} / {current_message_number}\n"); // 수신된 메시지 확인
