@@ -477,44 +477,7 @@ namespace WindowsFormsApp1
                     System.Threading.Thread.Sleep(750);
                 }
             }
-        }
-
-        //-----------------------------------------------Main------------------------------------------------
-
-        public Trade_Auto_Daishin()
-        {
-            InitializeComponent();
-
-            //-------------------초기 동작-------------------
-
-            //기존 세팅 로드
-            utility.setting_load_auto();
-
-            //메인 시간 동작
-            timer1.Start(); //시간 표시 - 1000ms
-
-            //----------종료_동작---------
-            this.FormClosed += new FormClosedEventHandler(Form_FormClosed);
-
-            //-------------------버튼-------------------
-            Main_menu.Click += main_menu; //메인메뉴
-            Trade_setting.Click += trade_setting; //설정창
-            porfoilo_btn.Click += Porfoilo_btn_Click;//매매정보
-            Log_btn.Click += Log_btn_Click;//로그정보
-            update_agree_btn.Click += Update_agree_btn_Click;//업데이트 및 동의사항
-
-            Stock_search_btn.Click += stock_search_btn; //종목조회
-
-            Real_time_search_btn.Click += real_time_search_btn; //실시간 조건식 등록
-            Real_time_stop_btn.Click += real_time_stop_btn; //조건식 실시간 전체 중단
-
-            All_clear_btn.Click += All_clear_btn_Click;
-            profit_clear_btn.Click += Profit_clear_btn_Click;
-            loss_clear_btn.Click += Loss_clear_btn_Click;
-
-            Refresh.Click += Refresh_Click;
-            select_cancel.Click += Select_cancel_Click;
-        }       
+        }      
 
         //------------------------------------------로그-------------------------------------------
 
@@ -531,7 +494,7 @@ namespace WindowsFormsApp1
         {
             string time = DateTime.Now.ToString("HH:mm:ss:fff");
             log_window3.AppendText($@"{"[" + time + "] " + message}");
-            log_full.Add($"[[{time}][Order] : {message}");
+            log_full.Add($"[{time}][Order] : {message}");
             log_trade.Add($"[{time}][Order] : {message}");
         }
 
@@ -843,7 +806,44 @@ namespace WindowsFormsApp1
             return "기타에러(" + error.ToString() + ")";
         }
 
-        //--------------------------------------------------------------Main_Timer1---------------------------------------------------------------
+        //-----------------------------------------------Main------------------------------------------------
+
+        public Trade_Auto_Daishin()
+        {
+            InitializeComponent();
+
+            //-------------------초기 동작-------------------
+
+            //기존 세팅 로드
+            utility.setting_load_auto();
+
+            //메인 시간 동작
+            timer1.Start(); //시간 표시 - 1000ms
+
+            //----------종료_동작---------
+            this.FormClosed += new FormClosedEventHandler(Form_FormClosed);
+
+            //-------------------버튼-------------------
+            Main_menu.Click += main_menu; //메인메뉴
+            Trade_setting.Click += trade_setting; //설정창
+            porfoilo_btn.Click += Porfoilo_btn_Click;//매매정보
+            Log_btn.Click += Log_btn_Click;//로그정보
+            update_agree_btn.Click += Update_agree_btn_Click;//업데이트 및 동의사항
+
+            Stock_search_btn.Click += stock_search_btn; //종목조회
+
+            Real_time_search_btn.Click += real_time_search_btn; //실시간 조건식 등록
+            Real_time_stop_btn.Click += real_time_stop_btn; //조건식 실시간 전체 중단
+
+            All_clear_btn.Click += All_clear_btn_Click;
+            profit_clear_btn.Click += Profit_clear_btn_Click;
+            loss_clear_btn.Click += Loss_clear_btn_Click;
+
+            Refresh.Click += Refresh_Click;
+            select_cancel.Click += Select_cancel_Click;
+        }
+
+        //--------------------------------------------------------------Main_Timer---------------------------------------------------------------
         private bool isRunned = true;
         private bool isRunned2 = false;
         private bool isRunned3 = false;
@@ -3713,10 +3713,22 @@ namespace WindowsFormsApp1
                         {
                             if (Condition_Name.Equals(findRows1[0]["조건식"]))
                             {
-                                if(findRows1[0]["편입"].Equals("이탈") && findRows1[0]["상태"].Equals("대기"))
+                                if(findRows1[0]["편입"].Equals("이탈"))
                                 {
                                     findRows1[0]["편입"] = "편입";
                                     findRows1[0]["편입시각"] = DateTime.Now.ToString("HH:mm:ss");
+                                    //
+                                    if (dataGridView1.InvokeRequired)
+                                    {
+                                        dataGridView1.Invoke((MethodInvoker)delegate {
+                                            bindingSource.ResetBindings(false);
+                                        });
+                                    }
+                                    else
+                                    {
+                                        bindingSource.ResetBindings(false);
+                                    }
+                                    //
                                     isentry = true;
                                 }
                             }
