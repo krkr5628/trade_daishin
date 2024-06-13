@@ -294,7 +294,9 @@ namespace WindowsFormsApp1
             //매도실현손익(제세금, 수수료 포함)
             today_profit_tax_load_seperate();
 
-            auto_allow();
+            System.Threading.Thread.Sleep(250);
+
+            auto_allow_check(true);
         }
 
         //조건식 실시간 중단 버튼
@@ -917,7 +919,7 @@ namespace WindowsFormsApp1
                 {
                     isRunned2 = true;
 
-                    auto_allow_check();                  
+                    auto_allow_check(false);                  
                 }
                 else if (isRunned2 && t_now > t_end)
                 {
@@ -2811,8 +2813,8 @@ namespace WindowsFormsApp1
 
         //------------------------------실시간 실행 초기 시작 모음-------------------------------------
 
-        //
-        private void auto_allow_check()
+        //초기 매매 설정
+        private void auto_allow_check(bool skip)
         {
             //계좌 없으면 이탈
             if (!account.Contains(utility.setting_account_number))
@@ -2848,17 +2850,27 @@ namespace WindowsFormsApp1
                 return;
             }
 
-            //AND 모드에서는 조건식이 2개 이상이어야 한다.
-            if (utility.buy_AND && condition_length < 2)
+            //AND 모드에서는 조건식이 2개
+            if (utility.buy_AND && condition_length != 2)
             {
-                WriteLog_System("AND 모드 조건식 2개 이상 필요\n");
-                telegram_message("AND 모드 조건식 2개 이상 필요\n");
+                WriteLog_System("AND 모드 조건식 2개 필요\n");
+                telegram_message("AND 모드 조건식 2개 필요\n");
                 WriteLog_System("자동 매매 정지\n");
                 telegram_message("자동 매매 정지\n");
                 return;
             }
 
-            //Dual 모드에서는 조건식이 2개 이상이어야 한다.
+            //Independent 모드에서는 조건식이 2개
+            if (utility.buy_INDEPENDENT && condition_length != 2)
+            {
+                WriteLog_System("Independent 모드 조건식 2개 필요\n");
+                telegram_message("IndependentL 모드 조건식 2개 필요\n");
+                WriteLog_System("자동 매매 정지\n");
+                telegram_message("자동 매매 정지\n");
+                return;
+            }
+
+            //Dual 모드에서는 조건식이 2개
             if (utility.buy_DUAL && condition_length != 2)
             {
                 WriteLog_System("DUAL 모드 조건식 2개 필요\n");
@@ -2869,7 +2881,7 @@ namespace WindowsFormsApp1
             }
 
             //
-            if (index_stop)
+            if (index_stop && !skip)
             {
                 WriteLog_System("미국 전영업일 휴무 : 중단\n");
                 telegram_message("미국 전영업일 휴무 : 중단\n");
@@ -2879,20 +2891,13 @@ namespace WindowsFormsApp1
             }
 
             //자동 설정 여부
-            if (utility.auto_trade_allow)
-            {
-                auto_allow();
-            }
-            else
+            if (!utility.auto_trade_allow && !skip)
             {
                 WriteLog_System("자동 매매 실행 미설정\n");
                 telegram_message("자동 매매 실행 미설정\n");
+                return;
             }
-        }
 
-        //초기 매매 설정
-        public void auto_allow()
-        {
             //계좌 탐색 - 200ms 
             timer2.Start();
 
