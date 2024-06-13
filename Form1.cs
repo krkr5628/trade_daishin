@@ -1515,6 +1515,10 @@ namespace WindowsFormsApp1
                         }
                     }
                 }
+                else
+                {
+                    WriteLog_Order($"[예수금및계좌보유/수신실패] : {error_message(result)} / {CpTd6033.GetDibMsg1()}\n");
+                }
             }
         }
 
@@ -1647,7 +1651,10 @@ namespace WindowsFormsApp1
                         }
                     }
                 }
-
+                else
+                {
+                    WriteLog_Order($"[매도실현손익/수신실패] : {error_message(result)} / {CpTd6032.GetDibMsg1()}\n");
+                }
             }
         }
 
@@ -1705,9 +1712,16 @@ namespace WindowsFormsApp1
             //
             if (result == 0)
             {
+                int count = Convert.ToInt32(CpTd5341.GetHeaderValue(6));
+                if (count == 0 && trade.Equals("매수") || trade.Equals("매도"))
+                {
+                    WriteLog_System($"[체결내역업데이트/{gubun}] : 실매입 가격 업데이트 오류(체결내역없음)\n");
+                    return;
+                }
+
                 WriteLog_System($"[체결내역업데이트/{gubun}] : 성공\n");
                 //
-                for (int i = 0; i < Convert.ToInt32(CpTd5341.GetHeaderValue(6)); i++)
+                for (int i = 0; i < count; i++)
                 {
                     string transaction_number = Convert.ToString(CpTd5341.GetDataValue(1, i)).Trim(); //주문번호 => long
                     string average_price = string.Format("{0:#,##0}", Convert.ToDecimal(CpTd5341.GetDataValue(11, i))); // 체결단가 => long
@@ -1792,6 +1806,10 @@ namespace WindowsFormsApp1
                     dataGridView3.Refresh();
                 }
 
+            }
+            else
+            {
+                WriteLog_Order($"[체결내역/수신실패] : {error_message(result)} / {CpTd5341.GetDibMsg1()}\n");
             }
         }
         //------------------------------------인덱스 목록 받기---------------------------------        
@@ -1931,6 +1949,10 @@ namespace WindowsFormsApp1
                         }
                     }
                 }
+                else
+                {
+                    WriteLog_Order($"[DOW30/수신실패] : {error_message(result)} / {CpFore8312.GetDibMsg1()}\n");
+                }
             }
 
             System.Threading.Thread.Sleep(200);
@@ -2038,6 +2060,10 @@ namespace WindowsFormsApp1
                         }
                     }
                 }
+                else
+                {
+                    WriteLog_Order($"[S&P500/수신실패] : {error_message(result2)} / {CpFore8312.GetDibMsg1()}\n");
+                }
             }
 
             System.Threading.Thread.Sleep(200);
@@ -2144,6 +2170,10 @@ namespace WindowsFormsApp1
                             }
                         }
                     }
+                }
+                else
+                {
+                    WriteLog_Order($"[NASDAQ/수신실패] : {error_message(result3)} / {CpFore8312.GetDibMsg1()}\n");
                 }
             }
         }
@@ -2394,6 +2424,10 @@ namespace WindowsFormsApp1
                         }
                     }
                 }
+                else
+                {
+                    WriteLog_Order($"[외국인선물/수신실패] : {error_message(result)} / {CpSvrNew7224.GetDibMsg1()}\n");
+                }
             }
 
             System.Threading.Thread.Sleep(200);
@@ -2541,6 +2575,10 @@ namespace WindowsFormsApp1
                         }
                     }
                 }
+                else
+                {
+                    WriteLog_Order($"[코스피선물/수신실패] : {error_message(reuslt_kospi)} / {FutOptChart.GetDibMsg1()}\n");
+                }
             }
 
             System.Threading.Thread.Sleep(200);
@@ -2687,6 +2725,10 @@ namespace WindowsFormsApp1
                         }
                     }
                 }
+                else
+                {
+                    WriteLog_Order($"[코스닥선물/수신실패] : {error_message(reuslt_kosdask)} / {FutOptChart.GetDibMsg1()}\n");
+                }
             }
         }
 
@@ -2756,6 +2798,10 @@ namespace WindowsFormsApp1
                 //
                 WriteLog_System("조건식 조회 성공\n");
                 arrCondition = condi_tmp.ToArray();
+            }
+            else
+            {
+                WriteLog_Order($"[조건식로드/수신실패] : {error_message(result)} / {CssStgList.GetDibMsg1()}\n");
             }
         }
 
@@ -3006,6 +3052,7 @@ namespace WindowsFormsApp1
                 telegram_message("[실시간조건식/등록실패/" + utility.Fomula_list_sell_text + "] : 고유번호 및 이름 확인\n");
                 WriteLog_System($"[조건식/등록/{condition[1]}] : 메시지({CssWatchStgControl.GetDibMsg1()})\n");
             }
+
         }
 
         //조건식 감시 등록 목록
@@ -3218,6 +3265,10 @@ namespace WindowsFormsApp1
                     System.Threading.Thread.Sleep(250);
                 }
             }
+            else
+            {
+                WriteLog_Order($"[초기종목정보/수신실패] : {error_message(result)} / {CssStgFind.GetDibMsg1()}\n");
+            }
             return false;
         }
 
@@ -3397,6 +3448,10 @@ namespace WindowsFormsApp1
                 //실시간 시세 등록
                 StockCur.SetInputValue(0, Code);
                 StockCur.Subscribe();
+            }
+            else
+            {
+                WriteLog_Order($"[종목정보/수신실패] : {error_message(result)} / {MarketEye.GetDibMsg1()}\n");
             }
         }
 
@@ -4411,7 +4466,7 @@ namespace WindowsFormsApp1
                 }
                 else
                 {
-                    WriteLog_Order($"[매수주문/시장가/주문실패/{gubun}] : " + code_name + "(" + code + ") " + "에러코드(" + error_message(error) + ")\n");
+                    WriteLog_Order($"[매수주문/시장가/주문실패/{gubun}] : {code_name}({code}) 에러코드({error_message(error)}) {CpTd0311.GetDibMsg1()}\n");
                     telegram_message($"[매수주문/시장가/주문실패/{gubun}] : " + code_name + "(" + code + ") " + "에러코드(" + error_message(error) + ")\n");
 
                     if (check)
@@ -4564,8 +4619,8 @@ namespace WindowsFormsApp1
                 }
                 else
                 {
-                    WriteLog_Order($"[매수주문/지정가매수/주문실패/{gubun}] : " + code_name + "(" + code + ") " + "에러코드(" + error_message(error) + "\n");
-                    telegram_message($"[매수주문/지정가매수/주문실패/{gubun}] : " + code_name + "(" + code + ") " + "에러코드(" + error_message(error) + "\n");
+                    WriteLog_Order($"[매수주문/지정가매수/주문실패/{gubun}] : {code_name }({ code}) 에러코드({error_message(error)}) {CpTd0311.GetDibMsg1()}\n");
+                    telegram_message($"[매수주문/지정가매수/주문실패/{gubun}] : {code_name }({ code}) 에러코드({error_message(error)}) {CpTd0311.GetDibMsg1()}\n");
 
                     if (check)
                     {
@@ -6014,6 +6069,9 @@ namespace WindowsFormsApp1
                             }
                         }
                     }
+
+                    //기존 항목 비우기
+                    Condition_Profile.Clear();
                 }
             }
 
@@ -6104,6 +6162,9 @@ namespace WindowsFormsApp1
                             }
                         }
                     }
+
+                    //기존 항목 비우기
+                    Condition_Profile2.Clear();
                 }
             }
 
