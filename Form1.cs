@@ -279,14 +279,9 @@ namespace WindowsFormsApp1
                 bindingSource.ResetBindings(false);
             }
 
-            //D+2 예수금 + 계좌 보유 종목
+            //D+2 예수금 + 계좌 보유 종목 + 차트 반영
             dtCondStock_hold.Clear();
-            GetCashInfo_Seperate();
-
-            System.Threading.Thread.Sleep(250);
-
-            //기존종목 업데이트
-            Hold_Update();
+            GetCashInfo_Seperate(true);
 
             System.Threading.Thread.Sleep(250);
 
@@ -434,7 +429,7 @@ namespace WindowsFormsApp1
         {
             //D+2 예수금 + 계좌 보유 종목
             dtCondStock_hold.Clear();
-            GetCashInfo_Seperate();
+            GetCashInfo_Seperate(false);
 
             System.Threading.Thread.Sleep(250);
 
@@ -1336,12 +1331,9 @@ namespace WindowsFormsApp1
             System.Threading.Thread.Sleep(250);
 
             //D+2 예수금 + 계좌 보유 종목
-            GetCashInfo_Seperate();
+            GetCashInfo_Seperate(true);
 
-            System.Threading.Thread.Sleep(250);
-
-            //기존종목 업데이트
-            Hold_Update();
+            //장전 예수금 1회 업데이트
             hold_update_initial = false;
 
             System.Threading.Thread.Sleep(250);
@@ -1369,6 +1361,8 @@ namespace WindowsFormsApp1
             initial_process_complete = true;
         }
 
+        //------------------------------------Login이후 동작 함수 목록--------------------------------- 
+
         //계좌번호목록(마스터계좌)
         private void Account()
         {
@@ -1395,16 +1389,16 @@ namespace WindowsFormsApp1
 
         //예수금 정보(D+2) + 계좌보유수량
         //https://money2.daishin.com/e5/mboard/ptype_basic/HTS_Plus_Helper/DW_Basic_Read.aspx?boardseq=291&seq=176&page=2&searchString=&p=&v=&m=
-        private void GetCashInfo_Seperate()
+        private void GetCashInfo_Seperate(bool update)
         {
-            GetCashInfo(Master_code);
+            GetCashInfo(Master_code, update);
 
             System.Threading.Thread.Sleep(200);
 
-            if (utility.buy_DUAL) GetCashInfo(ISA_code);
+            if (utility.buy_DUAL) GetCashInfo(ISA_code, update);
         }
 
-        private void GetCashInfo(string acc_gubun)
+        private void GetCashInfo(string acc_gubun, bool update)
         {
             if (TradeInit())
             {
@@ -1447,6 +1441,21 @@ namespace WindowsFormsApp1
                 {
                     //예수금 받기
                     string day2money = string.Format("{0:#,##0}", Convert.ToDecimal(CpTd6033.GetHeaderValue(9).ToString().Trim()));
+
+                    //1회성 업데이트 : 초기 예수금
+                    if (hold_update_initial)
+                    {
+                        if (acc_gubun.Equals(Master_code))
+                        {
+                            User_money.Text = day2money;
+                        }
+                        else
+                        {
+                            User_money_isa.Text = day2money;
+                        }
+                    }
+
+                    //변동 예수금
                     if (acc_gubun.Equals(Master_code))
                     {
                         Current_User_money.Text = day2money;
@@ -1502,17 +1511,10 @@ namespace WindowsFormsApp1
                         dataGridView2.Refresh();
                     }
 
-                    //1회성 업데이트 : 초기 보유 계좌 + 고정 예수금
-                    if (hold_update_initial)
+                    //기존 보유 종목 차트 업데이트
+                    if (update)
                     {
-                        if (acc_gubun.Equals(Master_code))
-                        {
-                            User_money.Text = day2money;
-                        }
-                        else
-                        {
-                            User_money_isa.Text = day2money;
-                        }
+                        Hold_Update();
                     }
                 }
                 else
@@ -1812,7 +1814,9 @@ namespace WindowsFormsApp1
                 WriteLog_Order($"[체결내역/수신실패] : {error_message(result)} / {CpTd5341.GetDibMsg1()}\n");
             }
         }
-        //------------------------------------인덱스 목록 받기---------------------------------        
+
+        //------------------------------------인덱스 목록 받기---------------------------------     
+        
         private void Index_load()
         {         
             US_INDEX();
@@ -2732,7 +2736,7 @@ namespace WindowsFormsApp1
             }
         }
 
-        //------------------------------------조건식 등록 절차---------------------------------
+        //------------------------------------조건식 수신---------------------------------
 
         //조건식 조회(조건식이 있어야 initial 작동 / initial을 통해 계좌를 받아와야 GetCashInfo)
         class ConditionInfo
@@ -5440,7 +5444,7 @@ namespace WindowsFormsApp1
 
                             //D+2 예수금 + 계좌 보유 종목
                             dtCondStock_hold.Clear();
-                            GetCashInfo_Seperate();
+                            GetCashInfo_Seperate(false);
 
                             System.Threading.Thread.Sleep(250);
                         }
@@ -5508,7 +5512,7 @@ namespace WindowsFormsApp1
 
                             //D+2 예수금 + 계좌 보유 종목
                             dtCondStock_hold.Clear();
-                            GetCashInfo_Seperate();
+                            GetCashInfo_Seperate(false);
 
                             System.Threading.Thread.Sleep(250);
                         }
@@ -5589,7 +5593,7 @@ namespace WindowsFormsApp1
 
                         //D+2 예수금 + 계좌 보유 종목
                         dtCondStock_hold.Clear();
-                        GetCashInfo_Seperate();
+                        GetCashInfo_Seperate(false);
 
                         System.Threading.Thread.Sleep(250);
                     }
