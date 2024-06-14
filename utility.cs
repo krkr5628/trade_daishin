@@ -190,7 +190,9 @@ namespace WindowsFormsApp1
         public static bool type5_selection_isa;
         public static string type5_start_isa;
         public static string type5_end_isa;
+        //
         public static int Telegram_last_chat_update_id;
+        public static string Auth;
 
         //utility 목록
         public static async Task setting_load_auto()
@@ -631,6 +633,10 @@ namespace WindowsFormsApp1
             //Telegram_Chat_Number
             String[] Telegram_last_chat_update_id_tmp = reader.ReadLine().Split('/');
             Telegram_last_chat_update_id = Convert.ToInt32(Telegram_last_chat_update_id_tmp[1]);
+
+            //Auth
+            String[] Auth_tmp = reader.ReadLine().Split('/');
+            Auth = Convert.ToString(Auth_tmp[1]);
 
             reader.Close();
 

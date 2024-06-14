@@ -1814,7 +1814,8 @@ namespace WindowsFormsApp1
             //
             tmp.Add("Telegram_Last_Chat_update_id/" + Convert.ToString(Trade_Auto_Daishin.update_id));
             //
-
+            tmp.Add("Auth/" + Convert.ToString(Trade_Auto_Daishin.Authentication));
+            //
 
             // 저장할 파일 경로
             string filePath = $@"C:\Auto_Trade_Creon\Setting\setting_daishin.txt";

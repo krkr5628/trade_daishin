@@ -78,6 +78,7 @@ namespace WindowsFormsApp1
 
         //-----------------------------------인증 관련 신호----------------------------------------
 
+        public static string Authentication = "1ab2c3d4e5f6g7h8i9"; //미인증(false) / 인증(true)
         public static bool Authentication_Check = true; //미인증(false) / 인증(true)
         private int sample_balance = 500000; //500,000원(미인증 매매 금액 제한)
 
@@ -1189,6 +1190,9 @@ namespace WindowsFormsApp1
             update_id = utility.Telegram_last_chat_update_id;
 
             //
+            Authentication = utility.Auth;
+
+            //
             if (Authentication_Check)
             {
                 Authentic.Text = "인증";
@@ -1335,9 +1339,12 @@ namespace WindowsFormsApp1
                 dtCondStock_Transaction.Clear();
             };
 
-            timer3.Start(); //체결 내역 업데이트 - 200ms
-            
-            CpConclusion.Subscribe(); //실시간 체결 등록
+            //한번만 실행시켜주면 됨
+            if (!check)
+            {
+                timer3.Start(); //체결 내역 업데이트 - 200ms
+                CpConclusion.Subscribe(); //실시간 체결 등록
+            }
 
             System.Threading.Thread.Sleep(250);
 
