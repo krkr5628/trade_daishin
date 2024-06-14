@@ -973,8 +973,12 @@ namespace WindowsFormsApp1
             dataTable.Columns.Add("매도시각", typeof(string));
             dataTable.Columns.Add("주문번호", typeof(string));
             dataTable.Columns.Add("상한가", typeof(string)); //상한가 => 시장가 계산용
+            dataTable.Columns.Add("편입최고", typeof(string)); //당일최고
             dataTable.Columns.Add("매매진입", typeof(string)); //매매진입시각
             dtCondStock = dataTable;
+
+            dataGridView1.DefaultCellStyle.Font = new Font("굴림", 8F, FontStyle.Regular);
+            dataGridView1.ColumnHeadersDefaultCellStyle.Font = new Font("굴림", 8F, FontStyle.Bold);
 
             DataTable dataTable2 = new DataTable();
             dataTable2.Columns.Add("구분코드", typeof(string));
@@ -990,6 +994,9 @@ namespace WindowsFormsApp1
             dtCondStock_hold = dataTable2;
             dataGridView2.DataSource = dtCondStock_hold;
 
+            dataGridView2.DefaultCellStyle.Font = new Font("굴림", 8F, FontStyle.Regular);
+            dataGridView2.ColumnHeadersDefaultCellStyle.Font = new Font("굴림", 8F, FontStyle.Bold);
+
             DataTable dataTable3 = new DataTable();
             dataTable3.Columns.Add("구분코드", typeof(string));
             dataTable3.Columns.Add("종목번호", typeof(string));
@@ -1002,6 +1009,9 @@ namespace WindowsFormsApp1
             dataTable3.Columns.Add("체결단가", typeof(string));
             dtCondStock_Transaction = dataTable3;
             dataGridView3.DataSource = dtCondStock_Transaction;
+
+            dataGridView3.DefaultCellStyle.Font = new Font("굴림", 8F, FontStyle.Regular);
+            dataGridView3.ColumnHeadersDefaultCellStyle.Font = new Font("굴림", 8F, FontStyle.Bold);
 
             InitializeDataGridView();
             dataGridView1.CurrentCellDirtyStateChanged += DataGridView1_CurrentCellDirtyStateChanged;
@@ -1020,6 +1030,10 @@ namespace WindowsFormsApp1
 
             // Set the bool column to display as a checkbox
             dataGridView1.Columns["선택"].ReadOnly = false;
+            dataGridView1.Columns["선택"].Width = 50;
+            dataGridView1.Columns["구분코드"].Width = 60;
+            dataGridView1.Columns["편입"].Width = 50;
+            dataGridView1.Columns["상태"].Width = 50;
         }
 
         //현재 셀이 편집 중인지 확인하여 즉시 Grid에 반영
@@ -1319,16 +1333,16 @@ namespace WindowsFormsApp1
                 //
                 dtCondStock_hold.Clear();
                 dtCondStock_Transaction.Clear();
-            }
+            };
 
-            //계좌 번호
-            Account();
+            timer3.Start(); //체결 내역 업데이트 - 200ms
+            
+            CpConclusion.Subscribe(); //실시간 체결 등록
 
             System.Threading.Thread.Sleep(250);
 
-            timer3.Start(); //체결 내역 업데이트 - 200ms
-            CssAlert.Subscribe(); //실시간 편출입 받기
-            CpConclusion.Subscribe(); //실시간 체결 등록
+            //계좌 번호
+            Account();
 
             System.Threading.Thread.Sleep(250);
 
@@ -2811,7 +2825,7 @@ namespace WindowsFormsApp1
             }
         }
 
-        //------------------------------실시간 실행 초기 시작 모음-------------------------------------
+        //------------------------------실시간 실행 초기 점검-------------------------------------
 
         //초기 매매 설정
         private void auto_allow_check(bool skip)
@@ -2900,6 +2914,9 @@ namespace WindowsFormsApp1
 
             //계좌 탐색 - 200ms 
             timer2.Start();
+
+            //실시간 편출입 받기
+            CssAlert.Subscribe();
 
             //DUAL 모드에서 계좌별 조건식 설정
             if (utility.buy_DUAL)
@@ -3432,6 +3449,7 @@ namespace WindowsFormsApp1
                     "-",
                     order_number,
                     string.Format("{0:#,##0}", Convert.ToInt32(high)), //상한가 => long or float)
+                    Current_Price, //당일 최고 TS
                     "-"
                 );
 
@@ -6192,7 +6210,13 @@ namespace WindowsFormsApp1
             //완전 전체 중단
             if (real_price_all_stop)
             {
-                timer2.Stop();//계좌탐색중단
+
+                //계좌탐색중단
+                timer2.Stop();
+
+                //실시간 편출입 중단
+                CssAlert.Unsubscribe();
+
                 //
                 if (minuteTimer != null)
                 {
