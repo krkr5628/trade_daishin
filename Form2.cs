@@ -1055,7 +1055,7 @@ namespace WindowsFormsApp1
                 }
                 else
                 {
-                    MessageBox.Show("익절(%)(double)를 숫자로 입력하세요.");
+                    MessageBox.Show("익절(%)(double)를 0이상의 숫자로 입력하세요.");
                     return true;
                 }
             }
@@ -1089,7 +1089,7 @@ namespace WindowsFormsApp1
                 }
                 else
                 {
-                    MessageBox.Show("익절TS(duble)를 숫자로 입력하세요.");
+                    MessageBox.Show("익절TS(duble)를 0이상의 숫자로 입력하세요.");
                     return true;
                 }
 
@@ -1097,14 +1097,14 @@ namespace WindowsFormsApp1
                 {
                     if (resu21 < 0)
                     {
-                        MessageBox.Show("익절TS(double)를 0보다 크게 입력하세요.");
+                        MessageBox.Show("하락TS(double)를 0보다 크게 입력하세요.");
                         return true;
 
                     }
                 }
                 else
                 {
-                    MessageBox.Show("익절TS(duble)를 숫자로 입력하세요.");
+                    MessageBox.Show("하락TS(duble)를 0 이상의 숫자로 입력하세요.");
                     return true;
                 }
             }
@@ -1122,7 +1122,7 @@ namespace WindowsFormsApp1
                 }
                 else
                 {
-                    MessageBox.Show("손절(double)을 숫자로 입력하세요.");
+                    MessageBox.Show("손절(double)을 0이상의 숫자로 입력하세요.");
                     return true;
 
                 }

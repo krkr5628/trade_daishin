@@ -1460,7 +1460,7 @@ namespace WindowsFormsApp1
             this.label42.Name = "label42";
             this.label42.Size = new System.Drawing.Size(92, 24);
             this.label42.TabIndex = 44;
-            this.label42.Text = "보존TS(%)";
+            this.label42.Text = "하락TS(%)";
             this.label42.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // profit_ts_text2
