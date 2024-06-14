@@ -44,7 +44,7 @@ namespace WindowsFormsApp1
             telegram_test_button.Click += telegram_test;
 
             //미사용 항목 경고창
-
+            KIS_Allow.Click += HandleCheckedChanged;
 
             //--------------------------------------------
 
