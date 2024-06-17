@@ -613,6 +613,8 @@ namespace WindowsFormsApp1
                             }
                         }
                     }
+
+                    System.Threading.Thread.Sleep(1000);
                 }
                 catch (WebException ex)
                 {
@@ -5780,10 +5782,35 @@ namespace WindowsFormsApp1
 
         private void order_close(string trade_type, string order_number, string gubun, string code_name, string code, string order_acc)
         {
+            TimeSpan t_now = TimeSpan.Parse(DateTime.Now.ToString("HH:mm:ss"));
+
+            //주문간 간격
+            if (utility.term_for_sell)
+            {
+                TimeSpan t_last2 = TimeSpan.Parse(last_buy_time);
+
+                if (t_now - t_last2 < TimeSpan.FromMilliseconds(Convert.ToInt32(utility.term_for_sell_text)))
+                {
+                    //WriteLog_Order($"[매도간격] 설정({utility.term_for_sell_text}), 현재({(t_now - t_last2).ToString()})\n");
+                    return;
+                }
+                last_buy_time = t_now.ToString();
+            }
+            else
+            {
+                TimeSpan t_last2 = TimeSpan.Parse(last_buy_time);
+
+                if (t_now - t_last2 < TimeSpan.FromMilliseconds(800))
+                {
+                    //WriteLog_Order($"[매도간격] 설정({utility.term_for_sell_text}), 현재({(t_now - t_last2).ToString()})\n");
+                    return;
+                }
+                last_buy_time = t_now.ToString();
+            }
+
             //주문시간 확인(0정규장, 1시간외종가, 2시간외단일가
             int market_time = 0;
 
-            TimeSpan t_now = TimeSpan.Parse(DateTime.Now.ToString("HH:mm:ss"));
             TimeSpan t_time0 = TimeSpan.Parse("15:30:00");
             TimeSpan t_time1 = TimeSpan.Parse("15:40:00");
             TimeSpan t_time2 = TimeSpan.Parse("16:00:00");
