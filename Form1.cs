@@ -571,7 +571,7 @@ namespace WindowsFormsApp1
         {
             string urlString = $"https://api.telegram.org/bot{utility.telegram_token}/sendMessage?chat_id={utility.telegram_user_id}&text={message}";
 
-            bool success = false;
+            bool success = true;
 
             while (success)
             {
@@ -587,7 +587,7 @@ namespace WindowsFormsApp1
                     using (StreamReader reader = new StreamReader(stream))
                     {
                         string responseString = await reader.ReadToEndAsync();
-                        success = true;
+                        success = false;
                     }
                 }
                 catch (WebException ex)
@@ -601,7 +601,7 @@ namespace WindowsFormsApp1
                     {
                         WriteLog_System("Telegram 전송 오류 발생 : " + ex.Message);
                         telegram_stop = true;
-                        success = true;
+                        success = false;
                         WriteLog_System("Telegram 전송 중단\n");
                     }
                 }
@@ -1459,6 +1459,12 @@ namespace WindowsFormsApp1
             Condition_load(); //조건식 로드
 
             System.Threading.Thread.Sleep(300);
+
+            //
+            if (utility.TradingView_Webhook)
+            {
+                TradingVIew_Listener_Start();
+            }
 
             initial_process_complete = true;
         }
@@ -4611,7 +4617,7 @@ namespace WindowsFormsApp1
                 }
 
                 WriteLog_Order($"[매수주문/지정가매수/접수/{gubun}] : {code_name}({code}) {order_acc}개 현재가({price}) 주문가({edited_price_hoga})원 주문방식({order_method[1]})\n");
-                telegram_message($"[매수주문/지정가매수/접수/{gubun}] : {code_name}({code}) {order_acc}개 {edited_price_hoga}원\n");
+                telegram_message($"[매수주문/지정가매수/접수/{gubun}] : {code_name}({code}) {order_acc}개 현재가({price}) 주문가({edited_price_hoga})원 주문방식({order_method[1]})\n");
 
                 CpTd0311.SetInputValue(0, "2"); //매수
                 CpTd0311.SetInputValue(1, acc_text.Text); //계좌번호
@@ -4655,8 +4661,8 @@ namespace WindowsFormsApp1
                 if (error == 0)
                 {
                     //
-                    WriteLog_Order($"[매수주문/지정가매수/접수성공/{gubun}] : {code_name}({code}) {order_acc}개 {edited_price_hoga}원\n");
-                    telegram_message($"[매수주문/지정가매수/접수성공/{gubun}] : {code_name}({code}) {order_acc}개 {edited_price_hoga}원\n");
+                    WriteLog_Order($"[매수주문/지정가매수/접수성공/{gubun}] : {code_name}({code}) {order_acc}개 현재가({price}) 주문가({edited_price_hoga})원 주문방식({order_method[1]}\n");
+                    telegram_message($"[매수주문/지정가매수/접수성공/{gubun}] : {code_name}({code}) {order_acc}개 현재가({price}) 주문가({edited_price_hoga})원 주문방식({order_method[1]}\n");
 
                     //업데이트
                     string real_gubun = Convert.ToString(CpTd0311.GetHeaderValue(2)); // 구분 
@@ -5156,10 +5162,10 @@ namespace WindowsFormsApp1
                         // 데이터 변경 사항을 바인딩 소스에 알리기 (UI 스레드에서 수행)
                         gridView1_refresh();
 
-                        WriteLog_Order($"[{sell_message}/시간외단일가/주문성공/{gubun}] : {code_name}({code}) {order_acc}개\n");
-                        WriteLog_Order($"[{sell_message}/시간외단일가/주문상세/{gubun}] : 편입가 {start_price}원, 현재가 {price}원, 수익 {percent}\n");
+                        WriteLog_Order($"[{sell_message}/시간외단일가/주문성공/{gubun}] : {code_name}({code}) {order_acc}개 수익 {percent}\n");
+                        WriteLog_Order($"[{sell_message}/시간외단일가/주문상세/{gubun}] : 편입가 {start_price}원, 현재가({price}) 주문가({edited_price_hoga})원 주문방식({order_method[1]}\n");
                         telegram_message($"[{sell_message}/시간외단일가//주문성공/{gubun}] : {code_name}({code}) {order_acc}개 {percent}\n");
-                        telegram_message($"[{sell_message}/시간외단일가/주문상세/{gubun}] : 편입가 {start_price}원, 현재가 {price}원, 수익 {percent}\n");
+                        telegram_message($"[{sell_message}/시간외단일가/주문상세/{gubun}] : 편입가 {start_price}원,현재가({price}) 주문가({edited_price_hoga})원 주문방식({order_method[1]}\n");
                     }
                     else
                     {
