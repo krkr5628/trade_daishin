@@ -6251,5 +6251,84 @@ namespace WindowsFormsApp1
 
         //--------------------------------------WEBHOK-------------------------------------------------------------
 
+        /*
+         http://your-public-ip:5000/api/webhook/
+         향후 443 포트 제거
+         {
+            "Action": "매수",
+            "Code": "A12345"
+         } 
+        */
+
+        private HttpListener _listener = new HttpListener();
+        private readonly string _url = "https://+:443/api/webhook/";
+
+        public void TradingVIew_Listener_Start()
+        {
+            _listener.Start();
+            WriteLog_System("Listening for connections on....\n");
+            Task listenTask = HandleIncomingConnections();
+            listenTask.GetAwaiter().GetResult();
+            _listener.Close();
+        }
+
+        private async Task HandleIncomingConnections()
+        {
+            _listener.Prefixes.Add(_url);
+
+            bool runServer = true;
+
+            while (runServer)
+            {
+                HttpListenerContext context = await _listener.GetContextAsync();
+                HttpListenerRequest request = context.Request;
+                HttpListenerResponse response = context.Response;
+
+                if ((request.HttpMethod == "POST") && request.HasEntityBody)
+                {
+                    using (System.IO.Stream body = request.InputStream)
+                    {
+                        using (System.IO.StreamReader reader = new System.IO.StreamReader(body, request.ContentEncoding))
+                        {
+                            string json = reader.ReadToEnd();
+                            WriteLog_System($"Received JSON: {json}");
+
+                            // JSON을 파싱하고 특정 함수 호출
+                            ProcessWebhook(json);
+                        }
+                    }
+                }
+
+                string responseString = "Received";
+                byte[] buffer = System.Text.Encoding.UTF8.GetBytes(responseString);
+                response.ContentLength64 = buffer.Length;
+                System.IO.Stream output = response.OutputStream;
+                await output.WriteAsync(buffer, 0, buffer.Length);
+                output.Close();
+
+                System.Threading.Thread.Sleep(1000);
+            }
+        }
+
+        public class WebhookMessage
+        {
+            public string Action { get; set; }
+            public string Code { get; set; }
+        }
+
+        private void ProcessWebhook(string json)
+        {
+            // JSON을 파싱하고 특정 함수 호출 로직 구현
+            // 예시: JSON을 객체로 변환하고 처리
+            WebhookMessage message = Newtonsoft.Json.JsonConvert.DeserializeObject<WebhookMessage>(json);
+            ExecuteSpecificFunction(message);
+        }
+
+        private void ExecuteSpecificFunction(WebhookMessage message)
+        {
+            // 메시지에 따라 함수 실행 로직 구현
+            WriteLog_System($"매매: {message.Action}, 종목코드: {message.Code}\n");
+        }
+
     }
 }
