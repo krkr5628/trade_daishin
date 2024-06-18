@@ -79,7 +79,7 @@ namespace WindowsFormsApp1
         //-----------------------------------인증 관련 신호----------------------------------------
 
         public static string Authentication = "1ab2c3d4e5f6g7h8i9"; //인증코드에 백슬래시 및 쉼표 불가능
-        public static bool Authentication_Check = true; //미인증(false) / 인증(true)
+        public static bool Authentication_Check = false; //미인증(false) / 인증(true)
         private int sample_balance = 500000; //500,000원(미인증 매매 금액 제한)
 
         //-----------------------------------storage----------------------------------------
@@ -1040,9 +1040,10 @@ namespace WindowsFormsApp1
             // Set the bool column to display as a checkbox
             dataGridView1.Columns["선택"].ReadOnly = false;
             dataGridView1.Columns["선택"].Width = 50;
-            dataGridView1.Columns["구분코드"].Width = 60;
+            dataGridView1.Columns["구분코드"].Width = 50;
             dataGridView1.Columns["편입"].Width = 50;
-            dataGridView1.Columns["상태"].Width = 50;
+            dataGridView1.Columns["상태"].Width = 70;
+            dataGridView1.Columns["거래량"].Width = 80;
         }
 
         //셀 값이 변경될 때마다 이를 즉시 커밋하여 DataTable에 반영
@@ -3395,10 +3396,8 @@ namespace WindowsFormsApp1
                 if (MarketEye.GetDibStatus() == 1)
                 {
                     check++;
-                    WriteLog_System("[DibRq요청/수신대기/5초] : 종목 정보 받기\n");
                     WriteLog_Stock($"[{condition_name}/수신3] : ({Code})\n");
                     System.Threading.Thread.Sleep(5000);
-                    WriteLog_Stock($"[{condition_name}/수신4] : ({Code})\n");
                 }
                 else if (check == 5)
                 {
@@ -3483,7 +3482,7 @@ namespace WindowsFormsApp1
                             if (!buy_runningCodes.ContainsKey(Code))
                             {
                                 buy_runningCodes[Code] = true;
-                                Status = buy_check(Code, Code_name, string.Format("{0:#,##0}", Current_Price), time, high, false, condition_name, gubun);
+                                Status = buy_check(Code, Code_name, Current_Price, time, high, false, condition_name, gubun);
                                 buy_runningCodes.Remove(Code);
                             }
                         }
@@ -3495,7 +3494,7 @@ namespace WindowsFormsApp1
                             if (!buy_runningCodes.ContainsKey(Code) && !utility.buy_AND)
                             {
                                 buy_runningCodes[Code] = true;
-                                Status = buy_check(Code, Code_name, string.Format("{0:#,##0}", Current_Price), time, high, true, condition_name, gubun);
+                                Status = buy_check(Code, Code_name, Current_Price, time, high, true, condition_name, gubun);
                                 buy_runningCodes.Remove(Code);
                                 //
                                 return;
@@ -4687,7 +4686,7 @@ namespace WindowsFormsApp1
             else
             {
                 //지정가 계산
-                int edited_price_hoga = hoga_cal(Convert.ToInt32(price), order_method[1].Equals("현재가") ? 0 : Convert.ToInt32(order_method[1].Replace("호가", "")));
+                int edited_price_hoga = hoga_cal(Convert.ToInt32(price.Replace(",","")), order_method[1].Equals("현재가") ? 0 : Convert.ToInt32(order_method[1].Replace("호가", "")), Convert.ToInt32(high.Replace(",", "")));
 
                 //지정가에 대하여 주문 가능 개수 계산
                 int order_acc = buy_order_cal(edited_price_hoga, gubun);
@@ -4718,8 +4717,8 @@ namespace WindowsFormsApp1
                     return "부족";
                 }
 
-                WriteLog_Order($"[매수주문/지정가매수/접수/{gubun}] : {code_name}({code}) {order_acc}개 {price}원\n");
-                telegram_message($"[매수주문/지정가매수/접수/{gubun}] : {code_name}({code}) {order_acc}개 {price}원\n");
+                WriteLog_Order($"[매수주문/지정가매수/접수/{gubun}] : {code_name}({code}) {order_acc}개 현재가({price}) 주문가({edited_price_hoga})원 주문방식({order_method[1]})\n");
+                telegram_message($"[매수주문/지정가매수/접수/{gubun}] : {code_name}({code}) {order_acc}개 {edited_price_hoga}원\n");
 
                 CpTd0311.SetInputValue(0, "2"); //매수
                 CpTd0311.SetInputValue(1, acc_text.Text); //계좌번호
@@ -4763,8 +4762,8 @@ namespace WindowsFormsApp1
                 if (error == 0)
                 {
                     //
-                    WriteLog_Order($"[매수주문/지정가매수/접수성공/{gubun}] : {code_name}({code}) {order_acc}개 {price}원\n");
-                    telegram_message($"[매수주문/지정가매수/접수성공/{gubun}] : {code_name}({code}) {order_acc}개 {price}원\n");
+                    WriteLog_Order($"[매수주문/지정가매수/접수성공/{gubun}] : {code_name}({code}) {order_acc}개 {edited_price_hoga}원\n");
+                    telegram_message($"[매수주문/지정가매수/접수성공/{gubun}] : {code_name}({code}) {order_acc}개 {edited_price_hoga}원\n");
 
                     //업데이트
                     string real_gubun = Convert.ToString(CpTd0311.GetHeaderValue(2)); // 구분 
@@ -4866,7 +4865,7 @@ namespace WindowsFormsApp1
             {
                 int current_balance_tmp = Convert.ToInt32(User_money.Text.Replace(",", ""));
                 //
-                if (Authentication_Check)
+                if (!Authentication_Check)
                 {
                     if(current_balance_tmp > sample_balance)
                     {
@@ -4886,7 +4885,7 @@ namespace WindowsFormsApp1
             {
                 int current_balance_tmp = Convert.ToInt32(User_money_isa.Text.Replace(",", ""));
                 //
-                if (Authentication_Check)
+                if (!Authentication_Check)
                 {
                     if (current_balance_tmp > sample_balance)
                     {
@@ -5251,7 +5250,7 @@ namespace WindowsFormsApp1
 
                     order_method = sell_condtion_method_after.Split('/');
                     //
-                    int edited_price_hoga = hoga_cal(Convert.ToInt32(price), order_method[1].Equals("현재가") ? 0 : Convert.ToInt32(order_method[1].Replace("호가", "")));
+                    int edited_price_hoga = hoga_cal(Convert.ToInt32(price.Replace(",", "")), order_method[1].Equals("현재가") ? 0 : Convert.ToInt32(order_method[1].Replace("호가", "")), Convert.ToInt32(row["상한가"].ToString().Replace(",", "")));
 
                     //
                     CpTd0386.SetInputValue(0, "1"); //매도
@@ -5421,7 +5420,7 @@ namespace WindowsFormsApp1
                 //지정가 주문
                 else
                 {
-                    int edited_price_hoga = hoga_cal(Convert.ToInt32(price), order_method[1].Equals("현재가") ? 0 : Convert.ToInt32(order_method[1].Replace("호가", "")));
+                    int edited_price_hoga = hoga_cal(Convert.ToInt32(price.Replace(",", "")), order_method[1].Equals("현재가") ? 0 : Convert.ToInt32(order_method[1].Replace("호가", "")), Convert.ToInt32(row["상한가"].ToString().Replace(",", "")));
 
                     CpTd0311.SetInputValue(0, "1"); //매도
                     CpTd0311.SetInputValue(1, acc_text.Text); //계좌번호
@@ -5526,7 +5525,7 @@ namespace WindowsFormsApp1
         }
 
         //------------호가 계산---------------------
-        private int hoga_cal(int price, int hoga)
+        private int hoga_cal(int price, int hoga, int high)
         {
             int[] hogaUnits = { 1, 5, 10, 50, 100, 500, 1000 }; // 이미지에서 제공된 단위
             int[] hogaRanges = { 0, 2000, 5000, 10000, 50000, 200000 }; // 이미지에서 제공된 범위
@@ -5535,17 +5534,23 @@ namespace WindowsFormsApp1
 
             for (int i = hogaRanges.Length - 1; i >= 0; i--)
             {
-                if (price > hogaRanges[i])
+                if (price >= hogaRanges[i])
                 {
                     int increment = hoga * hogaUnits[i];
                     int nextPrice = price + increment;
 
                     // Check if the next price crosses the range boundary
-                    if (nextPrice > hogaRanges[i])
+                    if (i < hogaRanges.Length - 1 && nextPrice >= hogaRanges[i + 1])
                     {
-                        // Adjust the increment to match the new range
-                        int remainingIncrement = hogaRanges[i] - price;
-                        return price + remainingIncrement;
+                        // Calculate remaining increment in the new range
+                        int remainingIncrement = nextPrice - hogaRanges[i + 1];
+                        nextPrice = hoga_cal(hogaRanges[i + 1], remainingIncrement / hogaUnits[i + 1], high);
+                    }
+
+                    // Check if nextPrice exceeds the high value
+                    if (nextPrice > high)
+                    {
+                        return high;
                     }
 
                     return nextPrice;
