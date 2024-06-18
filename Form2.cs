@@ -1468,7 +1468,6 @@ namespace WindowsFormsApp1
                 }
             }
 
-
             //KIS
             if (KIS_Allow.Checked)
             {

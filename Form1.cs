@@ -79,7 +79,7 @@ namespace WindowsFormsApp1
         //-----------------------------------인증 관련 신호----------------------------------------
 
         public static string Authentication = "1ab2c3d4e5f6g7h8i9"; //인증코드에 백슬래시 및 쉼표 불가능
-        public static bool Authentication_Check = false; //미인증(false) / 인증(true)
+        public static bool Authentication_Check = true; //미인증(false) / 인증(true)
         private int sample_balance = 500000; //500,000원(미인증 매매 금액 제한)
 
         //-----------------------------------storage----------------------------------------
@@ -263,16 +263,7 @@ namespace WindowsFormsApp1
             //
             dtCondStock.Clear();
 
-            if (dataGridView1.InvokeRequired)
-            {
-                dataGridView1.Invoke((MethodInvoker)delegate {
-                    bindingSource.ResetBindings(false);
-                });
-            }
-            else
-            {
-                bindingSource.ResetBindings(false);
-            }
+            gridView1_refresh();
 
             //D+2 예수금 + 계좌 보유 종목 + 차트 반영
             dtCondStock_hold.Clear();
@@ -443,11 +434,12 @@ namespace WindowsFormsApp1
             System.Threading.Thread.Sleep(300);
 
             //매도실현손익(제세금, 수수료 포함)
-            today_profit_tax_load_seperate();
+            today_profit_tax_load_seperate();        
+        }
 
-            System.Threading.Thread.Sleep(300);
-
-            if(dtCondStock_hold.Rows.Count != 0)
+        private void Match_Click(object sender, EventArgs e)
+        {
+            if (dtCondStock_hold.Rows.Count != 0)
             {
                 DataRow[] findRows = dtCondStock.AsEnumerable().Where(row => row.Field<string>("상태") == "매수중" && row.Field<string>("보유수량").Split('/')[0] == row.Field<string>("보유수량").Split('/')[1]).ToArray();
                 if (findRows.Any())
@@ -501,7 +493,6 @@ namespace WindowsFormsApp1
                     bindingSource.ResetBindings(false);
                 }
             }
-
         }
 
         private void Select_cancel_Click(object sender, EventArgs e)
@@ -905,6 +896,7 @@ namespace WindowsFormsApp1
             loss_clear_btn.Click += Loss_clear_btn_Click;
 
             Refresh.Click += Refresh_Click;
+            Match_btn.Click += Match_Click;
             select_cancel.Click += Select_cancel_Click;
         }
 
@@ -953,13 +945,13 @@ namespace WindowsFormsApp1
                 isRunned = true;
 
                 //테이블 초기 세팅
-                await initial_Table();
+                initial_Table();
 
                 //초기 선언
-                await initial_load();
+                initial_load();
 
                 //초기 설정 반영
-                await initial_allow(false);
+                initial_allow(false);
 
                 if (utility.Telegram_Allow)
                 {
@@ -1018,7 +1010,7 @@ namespace WindowsFormsApp1
         //-----------------------------------------initial-------------------------------------
 
         //초기 Table 값 입력
-        private async Task initial_Table()
+        private void initial_Table()
         {
             DataTable dataTable = new DataTable();
             dataTable.Columns.Add("선택", typeof(bool));
@@ -1122,23 +1114,36 @@ namespace WindowsFormsApp1
                 bool isChecked = (bool)dataGridView1[e.ColumnIndex, e.RowIndex].Value;
                 dtCondStock.Rows[e.RowIndex]["선택"] = isChecked;
                 //
-                if (dataGridView1.InvokeRequired)
-                {
-                    dataGridView1.Invoke((MethodInvoker)delegate {
-                        dataGridView1.DataSource = dtCondStock;
-                        dataGridView1.Refresh();
-                    });
-                }
-                else
-                {
-                    dataGridView1.DataSource = dtCondStock;
-                    dataGridView1.Refresh();
-                }
+                gridView1_refresh();
+            }
+        }
+
+        private void gridView1_refresh()
+        {
+            // 현재 스크롤 위치 저장
+            int firstDisplayedRowIndex = dataGridView1.FirstDisplayedScrollingRowIndex;
+
+            //
+            if (dataGridView1.InvokeRequired)
+            {
+                dataGridView1.Invoke((MethodInvoker)delegate {
+                    bindingSource.ResetBindings(false);
+                });
+            }
+            else
+            {
+                bindingSource.ResetBindings(false);
+            }
+
+            // 스크롤 위치 복원
+            if (firstDisplayedRowIndex >= 0 && firstDisplayedRowIndex < dataGridView1.Rows.Count && firstDisplayedRowIndex != dataGridView1.FirstDisplayedScrollingRowIndex)
+            {
+                dataGridView1.FirstDisplayedScrollingRowIndex = firstDisplayedRowIndex;
             }
         }
 
         //초기선언
-        private async Task initial_load()
+        private void initial_load()
         {
             CpCybos = new CPUTILLib.CpCybos();
             CpTdUtil = new CPTRADELib.CpTdUtil();
@@ -1181,7 +1186,7 @@ namespace WindowsFormsApp1
         private string sell_condtion_method_after;
 
         //초기 설정 반영
-        public async Task initial_allow(bool check)
+        public void initial_allow(bool check)
         {
             string[] mode = { "지정가", "시장가" };
             string[] hoo = { "5호가", "4호가", "3호가", "2호가", "1호가", "현재가", "시장가", "-1호가", "-2호가", "-3호가", "-4호가", "-5호가" };
@@ -1405,16 +1410,7 @@ namespace WindowsFormsApp1
             if (check)
             {
                 dtCondStock.Clear();
-                if (dataGridView1.InvokeRequired)
-                {
-                    dataGridView1.Invoke((MethodInvoker)delegate {
-                        bindingSource.ResetBindings(false);
-                    });
-                }
-                else
-                {
-                    bindingSource.ResetBindings(false);
-                }
+                gridView1_refresh();
                 //
                 dtCondStock_hold.Clear();
                 dtCondStock_Transaction.Clear();
@@ -1873,16 +1869,7 @@ namespace WindowsFormsApp1
                                     row["상태"] = "매수완료";
                                 }
                                 //
-                                if (dataGridView1.InvokeRequired)
-                                {
-                                    dataGridView1.Invoke((MethodInvoker)delegate {
-                                        bindingSource.ResetBindings(false);
-                                    });
-                                }
-                                else
-                                {
-                                    bindingSource.ResetBindings(false);
-                                }
+                                gridView1_refresh();
                                 //
                                 WriteLog_Order($"[매수주문/정상완료/{gubun}] : {row["종목명"]}({row["종목코드"]}) {order_sum}개 {average_price}원\n");
                                 telegram_message($"[매수주문/정상완료/{gubun}] : {row["종목명"]}({row["종목코드"]}) {order_sum}개 {average_price}원\n");
@@ -1904,16 +1891,7 @@ namespace WindowsFormsApp1
                                 //
                                 row["매도가"] = average_price;
                                 //
-                                if (dataGridView1.InvokeRequired)
-                                {
-                                    dataGridView1.Invoke((MethodInvoker)delegate {
-                                        bindingSource.ResetBindings(false);
-                                    });
-                                }
-                                else
-                                {
-                                    bindingSource.ResetBindings(false);
-                                }
+                                gridView1_refresh();
                                 //
                                 WriteLog_Order($"[매도주문/정상완료/{gubun}] : {row["종목명"]}({row["종목코드"]}) {order_sum}개 {average_price}원\n");
                                 telegram_message($"[매도주문/정상완료/{gubun}] : {row["종목명"]}({row["종목코드"]}) {order_sum}개 {average_price}원\n");
@@ -3617,16 +3595,7 @@ namespace WindowsFormsApp1
                 }
                 */
 
-                if (dataGridView1.InvokeRequired)
-                {
-                    dataGridView1.Invoke((MethodInvoker)delegate {
-                        bindingSource.ResetBindings(false);
-                    });
-                }
-                else
-                {
-                    bindingSource.ResetBindings(false);
-                }
+                gridView1_refresh();
 
                 //실시간 시세 등록
                 StockCur.SetInputValue(0, Code);
@@ -3780,16 +3749,7 @@ namespace WindowsFormsApp1
                 }
 
                 //적용
-                if (dataGridView1.InvokeRequired)
-                {
-                    dataGridView1.Invoke((MethodInvoker)delegate {
-                        bindingSource.ResetBindings(false);
-                    });
-                }
-                else
-                {
-                    bindingSource.ResetBindings(false);
-                }
+                gridView1_refresh();
             }
 
             DataRow[] findRows2 = dtCondStock_hold.Select($"종목코드 = '{Stock_code}'");
@@ -3927,16 +3887,7 @@ namespace WindowsFormsApp1
                             }
 
                             //
-                            if (dataGridView1.InvokeRequired)
-                            {
-                                dataGridView1.Invoke((MethodInvoker)delegate {
-                                    bindingSource.ResetBindings(false);
-                                });
-                            }
-                            else
-                            {
-                                bindingSource.ResetBindings(false);
-                            }
+                            gridView1_refresh();
                         }
                         else if(findRows1.Length == 1)
                         {
@@ -3951,16 +3902,7 @@ namespace WindowsFormsApp1
                                     findRows1[0]["편입"] = "편입";
                                     findRows1[0]["편입시각"] = DateTime.Now.ToString("HH:mm:ss");
                                     //
-                                    if (dataGridView1.InvokeRequired)
-                                    {
-                                        dataGridView1.Invoke((MethodInvoker)delegate {
-                                            bindingSource.ResetBindings(false);
-                                        });
-                                    }
-                                    else
-                                    {
-                                        bindingSource.ResetBindings(false);
-                                    }
+                                    gridView1_refresh();
                                     //
                                     isentry = true;
                                 }
@@ -3980,16 +3922,7 @@ namespace WindowsFormsApp1
                             bindingSource.DataSource = dtCondStock;
 
                             //
-                            if (dataGridView1.InvokeRequired)
-                            {
-                                dataGridView1.Invoke((MethodInvoker)delegate {
-                                    bindingSource.ResetBindings(false);
-                                });
-                            }
-                            else
-                            {
-                                bindingSource.ResetBindings(false);
-                            }
+                            gridView1_refresh();
 
                             //
                             return;
@@ -4027,16 +3960,7 @@ namespace WindowsFormsApp1
                             bindingSource.DataSource = dtCondStock;
 
                             //
-                            if (dataGridView1.InvokeRequired)
-                            {
-                                dataGridView1.Invoke((MethodInvoker)delegate {
-                                    bindingSource.ResetBindings(false);
-                                });
-                            }
-                            else
-                            {
-                                bindingSource.ResetBindings(false);
-                            }
+                            gridView1_refresh();
 
                             //
                             return;
@@ -4056,16 +3980,7 @@ namespace WindowsFormsApp1
                             bindingSource.DataSource = dtCondStock;
 
                             //
-                            if (dataGridView1.InvokeRequired)
-                            {
-                                dataGridView1.Invoke((MethodInvoker)delegate {
-                                    bindingSource.ResetBindings(false);
-                                });
-                            }
-                            else
-                            {
-                                bindingSource.ResetBindings(false);
-                            }
+                            gridView1_refresh();
 
                             //
                             return;
@@ -4090,16 +4005,7 @@ namespace WindowsFormsApp1
                                 bindingSource.DataSource = dtCondStock;
 
                                 //
-                                if (dataGridView1.InvokeRequired)
-                                {
-                                    dataGridView1.Invoke((MethodInvoker)delegate {
-                                        bindingSource.ResetBindings(false);
-                                    });
-                                }
-                                else
-                                {
-                                    bindingSource.ResetBindings(false);
-                                }
+                                gridView1_refresh();
 
                                 WriteLog_Stock($"[기존종목/AND완전편입/{Condition_Name}] : {findRows1[0]["종목명"]}({Stock_Code})\n");
 
@@ -4147,16 +4053,7 @@ namespace WindowsFormsApp1
                             StockCur.Unsubscribe();
                         }
                         //
-                        if (dataGridView1.InvokeRequired)
-                        {
-                            dataGridView1.Invoke((MethodInvoker)delegate {
-                                bindingSource.ResetBindings(false);
-                            });
-                        }
-                        else
-                        {
-                            bindingSource.ResetBindings(false);
-                        }
+                        gridView1_refresh();
                     }
                     else if (utility.buy_AND)
                     {
@@ -4166,34 +4063,14 @@ namespace WindowsFormsApp1
                             findRows[0]["이탈시각"] = DateTime.Now.ToString("HH:mm:ss");
                             WriteLog_Stock($"[기존종목/AND이탈/{Condition_Name}] : {findRows[0]["종목명"]}({Stock_Code}) 완전이탈 \n");
                             //
-                            if (dataGridView1.InvokeRequired)
-                            {
-                                dataGridView1.Invoke((MethodInvoker)delegate
-                                {
-                                    bindingSource.ResetBindings(false);
-                                });
-                            }
-                            else
-                            {
-                                bindingSource.ResetBindings(false);
-                            }
+                            gridView1_refresh();
                         }
                         else if (findRows[0]["편입"].Equals("편입") && findRows[0]["상태"].Equals("대기"))
                         {
                             findRows[0]["상태"] = "호출";
                             WriteLog_Stock($"[기존종목/AND이탈/{Condition_Name}] : {findRows[0]["종목명"]}({Stock_Code}) 부분이탈\n");
                             //
-                            if (dataGridView1.InvokeRequired)
-                            {
-                                dataGridView1.Invoke((MethodInvoker)delegate
-                                {
-                                    bindingSource.ResetBindings(false);
-                                });
-                            }
-                            else
-                            {
-                                bindingSource.ResetBindings(false);
-                            }
+                            gridView1_refresh();
                         }
                     }
                     else if (utility.buy_INDEPENDENT || utility.buy_DUAL)
@@ -4212,16 +4089,7 @@ namespace WindowsFormsApp1
                                     StockCur.Unsubscribe();
                                 }
                                 //
-                                if (dataGridView1.InvokeRequired)
-                                {
-                                    dataGridView1.Invoke((MethodInvoker)delegate {
-                                        bindingSource.ResetBindings(false);
-                                    });
-                                }
-                                else
-                                {
-                                    bindingSource.ResetBindings(false);
-                                }
+                                gridView1_refresh();
 
                                 break;
                             }
@@ -4593,16 +4461,7 @@ namespace WindowsFormsApp1
 
                         findRows[0]["상태"] = "부족";
 
-                        if (dataGridView1.InvokeRequired)
-                        {
-                            dataGridView1.Invoke((MethodInvoker)delegate {
-                                bindingSource.ResetBindings(false);
-                            });
-                        }
-                        else
-                        {
-                            bindingSource.ResetBindings(false);
-                        }
+                        gridView1_refresh();
                     }
 
                     return "부족";
@@ -4678,16 +4537,7 @@ namespace WindowsFormsApp1
                         findRows[0]["매매진입"] = time2;
 
                         // 데이터 변경 사항을 바인딩 소스에 알리기 (UI 스레드에서 수행)
-                        if (dataGridView1.InvokeRequired)
-                        {
-                            dataGridView1.Invoke((MethodInvoker)delegate {
-                                bindingSource.ResetBindings(false);
-                            });
-                        }
-                        else
-                        {
-                            bindingSource.ResetBindings(false);
-                        }
+                        gridView1_refresh();
                     }
 
                     //매매 횟수업데이트
@@ -4728,16 +4578,7 @@ namespace WindowsFormsApp1
                         findRows[0]["상태"] = "대기";
 
                         // 데이터 변경 사항을 바인딩 소스에 알리기 (UI 스레드에서 수행)
-                        if (dataGridView1.InvokeRequired)
-                        {
-                            dataGridView1.Invoke((MethodInvoker)delegate {
-                                bindingSource.ResetBindings(false);
-                            });
-                        }
-                        else
-                        {
-                            bindingSource.ResetBindings(false);
-                        }
+                        gridView1_refresh();
                     }
 
                     return "대기";
@@ -4763,16 +4604,7 @@ namespace WindowsFormsApp1
 
                         findRows[0]["상태"] = "부족";
 
-                        if (dataGridView1.InvokeRequired)
-                        {
-                            dataGridView1.Invoke((MethodInvoker)delegate {
-                                bindingSource.ResetBindings(false);
-                            });
-                        }
-                        else
-                        {
-                            bindingSource.ResetBindings(false);
-                        }
+                        gridView1_refresh();
                     }
 
                     return "부족";
@@ -4849,16 +4681,7 @@ namespace WindowsFormsApp1
                         findRows[0]["매매진입"] = time2;
 
                         // 데이터 변경 사항을 바인딩 소스에 알리기 (UI 스레드에서 수행)
-                        if (dataGridView1.InvokeRequired)
-                        {
-                            dataGridView1.Invoke((MethodInvoker)delegate {
-                                bindingSource.ResetBindings(false);
-                            });
-                        }
-                        else
-                        {
-                            bindingSource.ResetBindings(false);
-                        }
+                        gridView1_refresh();
                     }
 
                     //매매 횟수업데이트(Independent Mode)
@@ -4900,16 +4723,7 @@ namespace WindowsFormsApp1
                         findRows[0]["상태"] = "대기";
 
                         // 데이터 변경 사항을 바인딩 소스에 알리기 (UI 스레드에서 수행)
-                        if (dataGridView1.InvokeRequired)
-                        {
-                            dataGridView1.Invoke((MethodInvoker)delegate {
-                                bindingSource.ResetBindings(false);
-                            });
-                        }
-                        else
-                        {
-                            bindingSource.ResetBindings(false);
-                        }
+                        gridView1_refresh();
                     }
 
                     return "대기";
@@ -5250,16 +5064,7 @@ namespace WindowsFormsApp1
                         row["매매진입"] = time2;
 
                         // 데이터 변경 사항을 바인딩 소스에 알리기 (UI 스레드에서 수행)
-                        if (dataGridView1.InvokeRequired)
-                        {
-                            dataGridView1.Invoke((MethodInvoker)delegate {
-                                bindingSource.ResetBindings(false);
-                            });
-                        }
-                        else
-                        {
-                            bindingSource.ResetBindings(false);
-                        }
+                        gridView1_refresh();
 
                         WriteLog_Order($"[{sell_message}/시간외종가/주문성공/{gubun}] : {code_name}({code}) {order_acc}개\n");
                         WriteLog_Order($"[{sell_message}/시간외종가/주문상세/{gubun}] : 편입가 {start_price}원, 현재가 {price}원, 수익 {percent}\n");
@@ -5272,16 +5077,7 @@ namespace WindowsFormsApp1
                         row["상태"] = "매수완료";
                         //
                         // 데이터 변경 사항을 바인딩 소스에 알리기 (UI 스레드에서 수행)
-                        if (dataGridView1.InvokeRequired)
-                        {
-                            dataGridView1.Invoke((MethodInvoker)delegate {
-                                bindingSource.ResetBindings(false);
-                            });
-                        }
-                        else
-                        {
-                            bindingSource.ResetBindings(false);
-                        }
+                        gridView1_refresh();
 
                         WriteLog_Order($"[{sell_message}/시간외종가//주문실패/{gubun}] : {code_name}({code}) {error_message(error)}\n");
                         telegram_message($"[{sell_message}/시간외종가//주문실패/{gubun}] : {code_name}({code}) {error_message(error)}\n");
@@ -5358,16 +5154,7 @@ namespace WindowsFormsApp1
                         row["매매진입"] = time2;
 
                         // 데이터 변경 사항을 바인딩 소스에 알리기 (UI 스레드에서 수행)
-                        if (dataGridView1.InvokeRequired)
-                        {
-                            dataGridView1.Invoke((MethodInvoker)delegate {
-                                bindingSource.ResetBindings(false);
-                            });
-                        }
-                        else
-                        {
-                            bindingSource.ResetBindings(false);
-                        }
+                        gridView1_refresh();
 
                         WriteLog_Order($"[{sell_message}/시간외단일가/주문성공/{gubun}] : {code_name}({code}) {order_acc}개\n");
                         WriteLog_Order($"[{sell_message}/시간외단일가/주문상세/{gubun}] : 편입가 {start_price}원, 현재가 {price}원, 수익 {percent}\n");
@@ -5379,16 +5166,7 @@ namespace WindowsFormsApp1
                         //편입 차트 상태 '매수완료' 변경
                         row["상태"] = "매수완료";
                         //
-                        if (dataGridView1.InvokeRequired)
-                        {
-                            dataGridView1.Invoke((MethodInvoker)delegate {
-                                bindingSource.ResetBindings(false);
-                            });
-                        }
-                        else
-                        {
-                            bindingSource.ResetBindings(false);
-                        }
+                        gridView1_refresh();
 
                         WriteLog_Order($"[{sell_message}/시간외종가//주문실패/{gubun}] : {code_name}({code}) {error_message(error)}\n");
                         telegram_message($"[{sell_message}/시간외종가//주문실패/{gubun}] : {code_name}({code}) {error_message(error)}\n");
@@ -5442,16 +5220,7 @@ namespace WindowsFormsApp1
                         row["주문번호"] = order_number;
                         row["매매진입"] = time2;
                         //
-                        if (dataGridView1.InvokeRequired)
-                        {
-                            dataGridView1.Invoke((MethodInvoker)delegate {
-                                bindingSource.ResetBindings(false);
-                            });
-                        }
-                        else
-                        {
-                            bindingSource.ResetBindings(false);
-                        }
+                        gridView1_refresh();
 
                         WriteLog_Order($"[{sell_message}/시장가/주문성공/{gubun}/{Convert.ToString(CpTd0311.GetHeaderValue(8))}] : {code_name}({code}) {order_acc}개\n");
                         WriteLog_Order($"[{sell_message}/시장가/주문상세/{gubun}] : 편입가 {start_price}원, 현재가 {price}원, 수익 {percent}\n");
@@ -5463,16 +5232,7 @@ namespace WindowsFormsApp1
                         //편입 차트 상태 '매수완료' 변경
                         row["상태"] = "매수완료";
                         //
-                        if (dataGridView1.InvokeRequired)
-                        {
-                            dataGridView1.Invoke((MethodInvoker)delegate {
-                                bindingSource.ResetBindings(false);
-                            });
-                        }
-                        else
-                        {
-                            bindingSource.ResetBindings(false);
-                        }
+                        gridView1_refresh();
 
                         WriteLog_Order($"[{sell_message}/시장가//주문실패/{gubun}] : {code_name}({code}) {error_message(error)}\n");
                         telegram_message($"[{sell_message}/시장가//주문실패/{gubun}] : {code_name}({code}) {error_message(error)}\n");
@@ -5527,16 +5287,7 @@ namespace WindowsFormsApp1
                         row["주문번호"] = Convert.ToString(CpTd0311.GetHeaderValue(8));
                         row["매매진입"] = time2;
 
-                        if (dataGridView1.InvokeRequired)
-                        {
-                            dataGridView1.Invoke((MethodInvoker)delegate {
-                                bindingSource.ResetBindings(false);
-                            });
-                        }
-                        else
-                        {
-                            bindingSource.ResetBindings(false);
-                        }
+                        gridView1_refresh();
 
                         WriteLog_Order($"[{sell_message}/지정가/주문성공/{gubun}] : {code_name}({code}) {order_acc}개 {edited_price_hoga}원\n");
                         WriteLog_Order($"[{sell_message}/지정가/주문상세/{gubun}] : 편입가 {start_price}원, 현재가 {price}원, 수익 {percent}\n");
@@ -5548,16 +5299,7 @@ namespace WindowsFormsApp1
                         //편입 차트 상태 '매수완료' 변경
                         row["상태"] = "매수완료";
                         //
-                        if (dataGridView1.InvokeRequired)
-                        {
-                            dataGridView1.Invoke((MethodInvoker)delegate {
-                                bindingSource.ResetBindings(false);
-                            });
-                        }
-                        else
-                        {
-                            bindingSource.ResetBindings(false);
-                        }
+                        gridView1_refresh();
 
                         WriteLog_Order($"[{sell_message}/지정가/주문실패/{gubun}] : {code_name}({code}) 초당 5회 이상 주문 불가\n");
                         telegram_message($"[{sell_message}/지정가/주문실패/{gubun}] : {code_name}({code}) 초당 5회 이상 주문 불가\n");
@@ -5567,16 +5309,7 @@ namespace WindowsFormsApp1
                         //편입 차트 상태 '매수완료' 변경
                         row["상태"] = "매수완료";
                         //
-                        if (dataGridView1.InvokeRequired)
-                        {
-                            dataGridView1.Invoke((MethodInvoker)delegate {
-                                bindingSource.ResetBindings(false);
-                            });
-                        }
-                        else
-                        {
-                            bindingSource.ResetBindings(false);
-                        }
+                        gridView1_refresh();
 
                         WriteLog_Order($"[{sell_message}/지정가/주문실패/{gubun}] : {code_name}({code}) {error_message(error)}\n");
                         telegram_message($"[{sell_message}/지정가/주문실패/{gubun}] : {code_name}({code}) {error_message(error)}\n");
@@ -5687,16 +5420,7 @@ namespace WindowsFormsApp1
                             findRows[0]["보유수량"] = $"{hold_sum}/{order_sum}";
                             findRows[0]["매수시각"] = time;
                             //
-                            if (dataGridView1.InvokeRequired)
-                            {
-                                dataGridView1.Invoke((MethodInvoker)delegate {
-                                    bindingSource.ResetBindings(false);
-                                });
-                            }
-                            else
-                            {
-                                bindingSource.ResetBindings(false);
-                            }
+                            gridView1_refresh();
 
                             //체결내역업데이트(주문번호)
                             dtCondStock_Transaction.Clear();
@@ -5721,16 +5445,7 @@ namespace WindowsFormsApp1
                             findRows[0]["보유수량"] = $"{hold_sum}/0";
                             findRows[0]["매도시각"] = time;
                             //
-                            if (dataGridView1.InvokeRequired)
-                            {
-                                dataGridView1.Invoke((MethodInvoker)delegate {
-                                    bindingSource.ResetBindings(false);
-                                });
-                            }
-                            else
-                            {
-                                bindingSource.ResetBindings(false);
-                            }
+                            gridView1_refresh();
 
                             //보유 수량 업데이트
                             string[] hold_status = max_hoid.Text.Split('/');
@@ -5814,16 +5529,7 @@ namespace WindowsFormsApp1
                         }
 
                         //반영
-                        if (dataGridView1.InvokeRequired)
-                        {
-                            dataGridView1.Invoke((MethodInvoker)delegate {
-                                bindingSource.ResetBindings(false);
-                            });
-                        }
-                        else
-                        {
-                            bindingSource.ResetBindings(false);
-                        }
+                        gridView1_refresh();
 
                         //매도실현손익(제세금, 수수료 포함)
                         today_profit_tax_load_seperate();
@@ -5989,16 +5695,7 @@ namespace WindowsFormsApp1
                         //row["보유수량"] = Convert.ToString(Convert.ToInt32(order_acc) - cancel_acc) + "/" + order_acc;
                     }
                     //
-                    if (dataGridView1.InvokeRequired)
-                    {
-                        dataGridView1.Invoke((MethodInvoker)delegate {
-                            bindingSource.ResetBindings(false);
-                        });
-                    }
-                    else
-                    {
-                        bindingSource.ResetBindings(false);
-                    }
+                    gridView1_refresh();
 
                     WriteLog_Order($"[{trade_type}/주문취소/시간외종가/취소성공/{gubun}] : {code_name}({code}) {order_acc}개\n");
                     telegram_message($"[{trade_type}/주문취소/시간외종가//취소성공/{gubun}] : {code_name}({code}) {order_acc}개\n");                   
@@ -6014,16 +5711,7 @@ namespace WindowsFormsApp1
                         row["상태"] = "매도중";
                     }
                     //
-                    if (dataGridView1.InvokeRequired)
-                    {
-                        dataGridView1.Invoke((MethodInvoker)delegate {
-                            bindingSource.ResetBindings(false);
-                        });
-                    }
-                    else
-                    {
-                        bindingSource.ResetBindings(false);
-                    }
+                    gridView1_refresh();
 
                     WriteLog_Order($"[{trade_type}/주문취소/시간외종가/취소실패/{gubun}] : {code_name}({code}) {error_message(error)}\n");
                     telegram_message($"[{trade_type}/주문취소/시간외종가/취소실패/{gubun}] : {code_name}({code}) {error_message(error)}\n");
@@ -6098,16 +5786,7 @@ namespace WindowsFormsApp1
                         //row["보유수량"] = Convert.ToString(Convert.ToInt32(order_acc) - cancel_acc) + "/" + order_acc;
                     }
                     //
-                    if (dataGridView1.InvokeRequired)
-                    {
-                        dataGridView1.Invoke((MethodInvoker)delegate {
-                            bindingSource.ResetBindings(false);
-                        });
-                    }
-                    else
-                    {
-                        bindingSource.ResetBindings(false);
-                    }
+                    gridView1_refresh();
                     //
                     WriteLog_Order($"[{trade_type}/주문취소/시간외단일가/취소성공/{gubun}] : {code_name}({code}) {order_acc}개\n");
                     telegram_message($"[{trade_type}/주문취소/시간외단일가//취소성공/{gubun}] : {code_name}({code}) {order_acc}개\n");            
@@ -6124,16 +5803,7 @@ namespace WindowsFormsApp1
                         row["상태"] = "매도중";
                     }
                     //
-                    if (dataGridView1.InvokeRequired)
-                    {
-                        dataGridView1.Invoke((MethodInvoker)delegate {
-                            bindingSource.ResetBindings(false);
-                        });
-                    }
-                    else
-                    {
-                        bindingSource.ResetBindings(false);
-                    }
+                    gridView1_refresh();
 
                     WriteLog_Order($"[{trade_type}/주문취소/시간외단일가/취소실패/{gubun}] : {code_name}({code}) {error_message(error)}\n");
                     telegram_message($"[{trade_type}/주문취소/시간외단일가/취소실패/{gubun}] : {code_name}({code}) {error_message(error)}\n");
@@ -6213,16 +5883,7 @@ namespace WindowsFormsApp1
                         //row["보유수량"] = Convert.ToString(Convert.ToInt32(order_acc) - cancel_acc) + "/" + order_acc;
                     }
                     //
-                    if (dataGridView1.InvokeRequired)
-                    {
-                        dataGridView1.Invoke((MethodInvoker)delegate {
-                            bindingSource.ResetBindings(false);
-                        });
-                    }
-                    else
-                    {
-                        bindingSource.ResetBindings(false);
-                    }
+                    gridView1_refresh();
 
                     WriteLog_Order($"[{trade_type}/주문취소/정규장/취소성공/{gubun}/{order_number_cancel}/{order_number_cancel2}] : {code_name}({code}) {order_acc}개\n");                  
                     telegram_message($"[{trade_type}/주문취소/정규장//취소성공/{gubun}/{order_number_cancel}] : {code_name}({code}) {order_acc}개\n");
@@ -6239,16 +5900,7 @@ namespace WindowsFormsApp1
                         row["상태"] = "매도중";
                     }
                     //
-                    if (dataGridView1.InvokeRequired)
-                    {
-                        dataGridView1.Invoke((MethodInvoker)delegate {
-                            bindingSource.ResetBindings(false);
-                        });
-                    }
-                    else
-                    {
-                        bindingSource.ResetBindings(false);
-                    }
+                    gridView1_refresh();
 
                     WriteLog_Order($"[{trade_type}/주문취소/정규장/취소실패/{gubun}] : {code_name}({code})");
                     WriteLog_Order($"{CpTd0314.GetDibMsg1()}\n");

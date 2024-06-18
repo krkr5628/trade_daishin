@@ -171,6 +171,7 @@ namespace WindowsFormsApp1
             this.kospi_index = new System.Windows.Forms.Label();
             this.외국인선물누적 = new System.Windows.Forms.Label();
             this.timer2 = new System.Windows.Forms.Timer(this.components);
+            this.Match_btn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -1485,6 +1486,7 @@ namespace WindowsFormsApp1
             this.tableLayoutPanel6.Controls.Add(this.buy_condition, 2, 0);
             this.tableLayoutPanel6.Controls.Add(this.label19, 1, 0);
             this.tableLayoutPanel6.Controls.Add(this.trading_mode, 0, 0);
+            this.tableLayoutPanel6.Controls.Add(this.Match_btn, 9, 0);
             this.tableLayoutPanel6.Location = new System.Drawing.Point(4, 19);
             this.tableLayoutPanel6.Margin = new System.Windows.Forms.Padding(2);
             this.tableLayoutPanel6.Name = "tableLayoutPanel6";
@@ -2217,6 +2219,20 @@ namespace WindowsFormsApp1
             this.timer2.Interval = 300;
             this.timer2.Tick += new System.EventHandler(this.Transfer_Timer);
             // 
+            // Match_btn
+            // 
+            this.Match_btn.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.Match_btn.BackColor = System.Drawing.Color.Salmon;
+            this.Match_btn.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.Match_btn.Location = new System.Drawing.Point(1371, 3);
+            this.Match_btn.Name = "Match_btn";
+            this.Match_btn.Size = new System.Drawing.Size(146, 24);
+            this.Match_btn.TabIndex = 25;
+            this.Match_btn.Text = "Match";
+            this.Match_btn.UseVisualStyleBackColor = false;
+            // 
             // Trade_Auto_Daishin
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -2402,6 +2418,7 @@ namespace WindowsFormsApp1
         private System.Windows.Forms.Button select_cancel;
         private System.Windows.Forms.Label label2;
         public System.Windows.Forms.Label Authentic;
+        private System.Windows.Forms.Button Match_btn;
     }
 }
 
