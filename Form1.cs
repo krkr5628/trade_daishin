@@ -5382,10 +5382,34 @@ namespace WindowsFormsApp1
 
             WriteLog_System($"[체결수신] : {gugu}/{code}/{code_name}/{order_number}/{trade_Gubun}/{hold_sum}/{gubun}/{cancel}\n");
 
-            Trade_check_save.Enqueue(tmp);
+            DataRow[] findRows = dtCondStock.AsEnumerable().Where(row => row.Field<string>("주문번호") == tmp[3]).ToArray();
+
+            if (findRows.Any())
+            {
+                string order_sum = findRows[0]["보유수량"].ToString().Split('/')[1];
+
+                WriteLog_Order($"[체결상세/{code_name}({code})/{trade_Gubun}/{gubun}] : {hold_sum}/{order_sum}\n");
+
+                if (cancel.Equals("1") && trade_Gubun.Equals("매수") && order_sum == hold_sum)
+                {
+                    Trade_check_save.Enqueue(tmp);
+                }
+                else if (cancel.Equals("1") && trade_Gubun.Equals("매도") && hold_sum.Equals("0"))
+                {
+                    Trade_check_save.Enqueue(tmp);
+                }
+                else if (cancel == "3" && gugu == "2")//최소주문 && 확인
+                {
+                    Trade_check_save.Enqueue(tmp);
+                }
+            }
+            else
+            {
+                WriteLog_System($"[체결내역] 주문번호 없음 - {tmp[3]}\n");
+            }
         }
 
-        //timer3 : 200ms 마다 값을 점검한다.
+        //timer3 : 300ms 마다 값을 점검한다.
         private void Trade_Check_Event(object sender, EventArgs e)
         {
             if(Trade_check_save.Count != 0)
@@ -5412,8 +5436,6 @@ namespace WindowsFormsApp1
 
                     if (cancel.Equals("1"))
                     {
-                        WriteLog_Order($"[체결상세/{code_name}({code})/{trade_Gubun}/{gubun}] : {hold_sum}/{order_sum}\n");
-
                         //매수확인
                         if (trade_Gubun.Equals("매수") && order_sum == hold_sum)
                         {
@@ -5542,10 +5564,6 @@ namespace WindowsFormsApp1
 
                         System.Threading.Thread.Sleep(300);
                     }
-                }
-                else
-                {
-                    WriteLog_System($"[체결내역] 주문번호 없음 - {tmp[3]}\n");
                 }
             }
         }
