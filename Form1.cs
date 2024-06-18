@@ -127,13 +127,7 @@ namespace WindowsFormsApp1
             }
             if (login_check != 0)
             {
-                MessageBox.Show("로그인 중입니다.");
-                return;
-            }
-            if (arrCondition.Length == 0)
-            {
-                MessageBox.Show("조건식 로딩중");
-                return;
+                MessageBox.Show("로그인 완료 후 조건식 로딩");
             }
             Setting newform2 = new Setting(this);
             newform2.ShowDialog(); //form2 닫기 전까지 form1 UI 제어 불가능
@@ -571,10 +565,15 @@ namespace WindowsFormsApp1
         private void telegram_message(string message)
         {
             if (!utility.Telegram_Allow) return;
+            if (telegram_stop) return;
+            //
             string time = DateTime.Now.ToString("HH:mm:ss:fff");
             string message_edtied = "[" + time + "] " + message;
             telegram_send(message_edtied);
         }
+
+
+        private bool telegram_stop = false;
 
         //telegram_send(초당 100개 제한)
         private async void telegram_send(string message)
@@ -583,7 +582,7 @@ namespace WindowsFormsApp1
 
             bool success = false;
 
-            while (!success)
+            while (success)
             {
                 try
                 {
@@ -604,12 +603,15 @@ namespace WindowsFormsApp1
                 {
                     if (ex.Response is HttpWebResponse response && response.StatusCode == (HttpStatusCode)429)
                     {
-                        WriteLog_System($"FLOOD_WAIT: Waiting for 30s...");
+                        WriteLog_System($"FLOOD_WAIT: Waiting for 30s...\n");
                         await Task.Delay(30000);
                     }
                     else
                     {
                         WriteLog_System("Telegram 전송 오류 발생 : " + ex.Message);
+                        telegram_stop = true;
+                        success = true;
+                        WriteLog_System("Telegram 전송 중단\n");
                     }
                 }
             }
@@ -1416,6 +1418,8 @@ namespace WindowsFormsApp1
                 //
                 dtCondStock_hold.Clear();
                 dtCondStock_Transaction.Clear();
+                //
+                telegram_stop = false;
             };
 
             //한번만 실행시켜주면 됨

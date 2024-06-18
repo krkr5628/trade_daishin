@@ -112,22 +112,44 @@ namespace WindowsFormsApp1
             else
             {
                 label4.Text = "미인증";
-                Console.WriteLine("DENY");
+                label5.Text = response.ToString();
             }
         }
 
         public static async Task<string> SendAuthCodeAsync(string authCode)
         {
-            HttpClient client = new HttpClient{Timeout = TimeSpan.FromSeconds(10)};
-            var content = new StringContent($"{{ \"authCode\": \"{authCode}\" }}", Encoding.UTF8, "application/json");
-            var response = await client.PostAsync("http://your-server-url/auth", content);
-
-            if (response.IsSuccessStatusCode)
+            try
             {
-                return await response.Content.ReadAsStringAsync();
-            }
+                using (HttpClient client = new HttpClient { Timeout = TimeSpan.FromSeconds(10) })
+                {
+                    var content = new StringContent($"{{ \"authCode\": \"{authCode}\" }}", Encoding.UTF8, "application/json");
+                    var response = await client.PostAsync("http://localhost:5000/auth", content);
 
-            return "DENY";
+                    if (response.IsSuccessStatusCode)
+                    {
+                        return await response.Content.ReadAsStringAsync();
+                    }
+                    else
+                    {
+                        return "DENY";
+                    }
+                }
+            }
+            catch (HttpRequestException ex)
+            {
+                // Log exception or handle it as needed
+                return $"Request error: {ex.Message}";
+            }
+            catch (TaskCanceledException ex)
+            {
+                // Handle timeout exception
+                return "Request timed out.";
+            }
+            catch (Exception ex)
+            {
+                // Handle any other exceptions
+                return $"An error occurred: {ex.Message}";
+            }
         }
     }
 }

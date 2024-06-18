@@ -1638,11 +1638,16 @@ namespace WindowsFormsApp1
             {
                 account_list.Items.Add(user_account[i]);
             }
+
+            account_list.Items.Add("12345678"); //계좌 기본값
+
             //매도 조건
             Fomula_list_sell.Items.AddRange(Condition);
+            Fomula_list_sell.Items.Add("123456789^TEST"); //조건식 기본값
 
             //매수 조건
             Fomula_list_buy_Checked_box.Items.AddRange(Condition);
+            Fomula_list_buy_Checked_box.Items.Add("123456789^TEST"); //조건식 기본값
         }
 
         private void mode_hoo()
