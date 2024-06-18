@@ -451,6 +451,63 @@ namespace WindowsFormsApp1
             //매도실현손익(제세금, 수수료 포함)
             today_profit_tax_load_seperate();
 
+            System.Threading.Thread.Sleep(300);
+
+            if(dtCondStock_hold.Rows.Count != 0)
+            {
+                DataRow[] findRows = dtCondStock.AsEnumerable().Where(row => row.Field<string>("상태") == "매수중" && row.Field<string>("보유수량").Split('/')[0] == row.Field<string>("보유수량").Split('/')[1]).ToArray();
+                if (findRows.Any())
+                {
+                    for (int i = 0; i < findRows.Length; i++)
+                    {
+                        DataRow[] findRows2 = dtCondStock_Transaction.AsEnumerable().Where(row => row.Field<string>("주문번호") == findRows[i]["주문번호"].ToString() && row.Field<string>("체결단가") != "0").ToArray();
+                        if (findRows2.Any())
+                        {
+                            findRows[i]["주문번호"] = findRows2[0]["주문번호"];
+                        }
+
+                    }
+                    //
+                    if (dataGridView1.InvokeRequired)
+                    {
+                        dataGridView1.Invoke((MethodInvoker)delegate {
+                            bindingSource.ResetBindings(false);
+                        });
+                    }
+                    else
+                    {
+                        bindingSource.ResetBindings(false);
+                    }
+                }
+            }
+
+            System.Threading.Thread.Sleep(300);
+
+            DataRow[] findRows3 = dtCondStock.AsEnumerable().Where(row => row.Field<string>("상태") == "매도중" && row.Field<string>("보유수량") == "0/0").ToArray();
+            if (findRows3.Any())
+            {
+                for (int i = 0; i < findRows3.Length; i++)
+                {
+                    DataRow[] findRows4 = dtCondStock_Transaction.AsEnumerable().Where(row => row.Field<string>("주문번호") == findRows3[i]["주문번호"].ToString() && row.Field<string>("체결단가") != "0").ToArray();
+                    if (findRows4.Any())
+                    {
+                        findRows3[i]["주문번호"] = findRows4[0]["주문번호"];
+                    }
+
+                }
+                //
+                if (dataGridView1.InvokeRequired)
+                {
+                    dataGridView1.Invoke((MethodInvoker)delegate {
+                        bindingSource.ResetBindings(false);
+                    });
+                }
+                else
+                {
+                    bindingSource.ResetBindings(false);
+                }
+            }
+
         }
 
         private void Select_cancel_Click(object sender, EventArgs e)
