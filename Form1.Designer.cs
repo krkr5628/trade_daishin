@@ -125,6 +125,7 @@ namespace WindowsFormsApp1
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
             this.select_cancel = new System.Windows.Forms.Button();
+            this.Match_btn = new System.Windows.Forms.Button();
             this.sell_condtion_method = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
             this.sell_condtion = new System.Windows.Forms.Label();
@@ -134,6 +135,7 @@ namespace WindowsFormsApp1
             this.buy_condition = new System.Windows.Forms.Label();
             this.label19 = new System.Windows.Forms.Label();
             this.trading_mode = new System.Windows.Forms.Label();
+            this.UI_UPDATE = new System.Windows.Forms.ComboBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.timer3 = new System.Windows.Forms.Timer(this.components);
             this.groupBox5 = new System.Windows.Forms.GroupBox();
@@ -171,7 +173,6 @@ namespace WindowsFormsApp1
             this.kospi_index = new System.Windows.Forms.Label();
             this.외국인선물누적 = new System.Windows.Forms.Label();
             this.timer2 = new System.Windows.Forms.Timer(this.components);
-            this.Match_btn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -241,7 +242,7 @@ namespace WindowsFormsApp1
             dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle3;
-            this.dataGridView1.Location = new System.Drawing.Point(4, 54);
+            this.dataGridView1.Location = new System.Drawing.Point(3, 52);
             this.dataGridView1.Name = "dataGridView1";
             dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
@@ -255,7 +256,7 @@ namespace WindowsFormsApp1
             dataGridViewCellStyle5.Font = new System.Drawing.Font("굴림", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle5;
             this.dataGridView1.RowTemplate.Height = 23;
-            this.dataGridView1.Size = new System.Drawing.Size(1682, 193);
+            this.dataGridView1.Size = new System.Drawing.Size(1682, 258);
             this.dataGridView1.TabIndex = 3;
             // 
             // tableLayoutPanel1
@@ -1457,36 +1458,38 @@ namespace WindowsFormsApp1
             this.groupBox3.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox3.Size = new System.Drawing.Size(1691, 252);
+            this.groupBox3.Size = new System.Drawing.Size(1691, 315);
             this.groupBox3.TabIndex = 16;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "실시간 조건검색 현황";
             // 
             // tableLayoutPanel6
             // 
-            this.tableLayoutPanel6.ColumnCount = 11;
-            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 9.090909F));
-            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 9.090909F));
-            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 9.090909F));
-            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 9.090909F));
-            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 9.090909F));
-            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 9.090909F));
-            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 9.090909F));
-            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 9.090909F));
-            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 9.090909F));
-            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 9.090909F));
-            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 9.090909F));
-            this.tableLayoutPanel6.Controls.Add(this.select_cancel, 10, 0);
-            this.tableLayoutPanel6.Controls.Add(this.sell_condtion_method, 8, 0);
-            this.tableLayoutPanel6.Controls.Add(this.label18, 7, 0);
-            this.tableLayoutPanel6.Controls.Add(this.sell_condtion, 6, 0);
-            this.tableLayoutPanel6.Controls.Add(this.label17, 5, 0);
-            this.tableLayoutPanel6.Controls.Add(this.buy_condtion_method, 4, 0);
-            this.tableLayoutPanel6.Controls.Add(this.label16, 3, 0);
-            this.tableLayoutPanel6.Controls.Add(this.buy_condition, 2, 0);
-            this.tableLayoutPanel6.Controls.Add(this.label19, 1, 0);
-            this.tableLayoutPanel6.Controls.Add(this.trading_mode, 0, 0);
-            this.tableLayoutPanel6.Controls.Add(this.Match_btn, 9, 0);
+            this.tableLayoutPanel6.ColumnCount = 12;
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 8.333333F));
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 8.333333F));
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 8.333333F));
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 8.333333F));
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 8.333333F));
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 8.333333F));
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 8.333333F));
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 8.333333F));
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 8.333333F));
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 8.333333F));
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 8.333333F));
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 8.333333F));
+            this.tableLayoutPanel6.Controls.Add(this.select_cancel, 11, 0);
+            this.tableLayoutPanel6.Controls.Add(this.Match_btn, 10, 0);
+            this.tableLayoutPanel6.Controls.Add(this.sell_condtion_method, 9, 0);
+            this.tableLayoutPanel6.Controls.Add(this.label18, 8, 0);
+            this.tableLayoutPanel6.Controls.Add(this.sell_condtion, 7, 0);
+            this.tableLayoutPanel6.Controls.Add(this.label17, 6, 0);
+            this.tableLayoutPanel6.Controls.Add(this.buy_condtion_method, 5, 0);
+            this.tableLayoutPanel6.Controls.Add(this.label16, 4, 0);
+            this.tableLayoutPanel6.Controls.Add(this.buy_condition, 3, 0);
+            this.tableLayoutPanel6.Controls.Add(this.label19, 2, 0);
+            this.tableLayoutPanel6.Controls.Add(this.trading_mode, 1, 0);
+            this.tableLayoutPanel6.Controls.Add(this.UI_UPDATE, 0, 0);
             this.tableLayoutPanel6.Location = new System.Drawing.Point(4, 19);
             this.tableLayoutPanel6.Margin = new System.Windows.Forms.Padding(2);
             this.tableLayoutPanel6.Name = "tableLayoutPanel6";
@@ -1501,13 +1504,27 @@ namespace WindowsFormsApp1
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.select_cancel.BackColor = System.Drawing.Color.SkyBlue;
-            this.select_cancel.Location = new System.Drawing.Point(1522, 2);
+            this.select_cancel.Location = new System.Drawing.Point(1542, 2);
             this.select_cancel.Margin = new System.Windows.Forms.Padding(2);
             this.select_cancel.Name = "select_cancel";
-            this.select_cancel.Size = new System.Drawing.Size(158, 26);
+            this.select_cancel.Size = new System.Drawing.Size(138, 26);
             this.select_cancel.TabIndex = 22;
             this.select_cancel.Text = "주문취소";
             this.select_cancel.UseVisualStyleBackColor = false;
+            // 
+            // Match_btn
+            // 
+            this.Match_btn.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.Match_btn.BackColor = System.Drawing.Color.Salmon;
+            this.Match_btn.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.Match_btn.Location = new System.Drawing.Point(1403, 3);
+            this.Match_btn.Name = "Match_btn";
+            this.Match_btn.Size = new System.Drawing.Size(134, 24);
+            this.Match_btn.TabIndex = 25;
+            this.Match_btn.Text = "Match";
+            this.Match_btn.UseVisualStyleBackColor = false;
             // 
             // sell_condtion_method
             // 
@@ -1517,10 +1534,10 @@ namespace WindowsFormsApp1
             this.sell_condtion_method.AutoSize = true;
             this.sell_condtion_method.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.sell_condtion_method.Font = new System.Drawing.Font("굴림", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.sell_condtion_method.Location = new System.Drawing.Point(1218, 0);
+            this.sell_condtion_method.Location = new System.Drawing.Point(1262, 0);
             this.sell_condtion_method.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.sell_condtion_method.Name = "sell_condtion_method";
-            this.sell_condtion_method.Size = new System.Drawing.Size(148, 30);
+            this.sell_condtion_method.Size = new System.Drawing.Size(136, 30);
             this.sell_condtion_method.TabIndex = 23;
             this.sell_condtion_method.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -1532,10 +1549,10 @@ namespace WindowsFormsApp1
             this.label18.AutoSize = true;
             this.label18.BackColor = System.Drawing.SystemColors.ScrollBar;
             this.label18.ForeColor = System.Drawing.Color.RoyalBlue;
-            this.label18.Location = new System.Drawing.Point(1066, 0);
+            this.label18.Location = new System.Drawing.Point(1122, 0);
             this.label18.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(148, 30);
+            this.label18.Size = new System.Drawing.Size(136, 30);
             this.label18.TabIndex = 17;
             this.label18.Text = "매도방식";
             this.label18.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1548,10 +1565,10 @@ namespace WindowsFormsApp1
             this.sell_condtion.AutoSize = true;
             this.sell_condtion.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.sell_condtion.Font = new System.Drawing.Font("굴림", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.sell_condtion.Location = new System.Drawing.Point(914, 0);
+            this.sell_condtion.Location = new System.Drawing.Point(982, 0);
             this.sell_condtion.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.sell_condtion.Name = "sell_condtion";
-            this.sell_condtion.Size = new System.Drawing.Size(148, 30);
+            this.sell_condtion.Size = new System.Drawing.Size(136, 30);
             this.sell_condtion.TabIndex = 21;
             this.sell_condtion.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -1563,10 +1580,10 @@ namespace WindowsFormsApp1
             this.label17.AutoSize = true;
             this.label17.BackColor = System.Drawing.SystemColors.ScrollBar;
             this.label17.ForeColor = System.Drawing.Color.RoyalBlue;
-            this.label17.Location = new System.Drawing.Point(762, 0);
+            this.label17.Location = new System.Drawing.Point(842, 0);
             this.label17.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(148, 30);
+            this.label17.Size = new System.Drawing.Size(136, 30);
             this.label17.TabIndex = 16;
             this.label17.Text = "매도조건";
             this.label17.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1579,10 +1596,10 @@ namespace WindowsFormsApp1
             this.buy_condtion_method.AutoSize = true;
             this.buy_condtion_method.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.buy_condtion_method.Font = new System.Drawing.Font("굴림", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.buy_condtion_method.Location = new System.Drawing.Point(610, 0);
+            this.buy_condtion_method.Location = new System.Drawing.Point(702, 0);
             this.buy_condtion_method.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.buy_condtion_method.Name = "buy_condtion_method";
-            this.buy_condtion_method.Size = new System.Drawing.Size(148, 30);
+            this.buy_condtion_method.Size = new System.Drawing.Size(136, 30);
             this.buy_condtion_method.TabIndex = 22;
             this.buy_condtion_method.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -1594,10 +1611,10 @@ namespace WindowsFormsApp1
             this.label16.AutoSize = true;
             this.label16.BackColor = System.Drawing.SystemColors.ScrollBar;
             this.label16.ForeColor = System.Drawing.Color.Crimson;
-            this.label16.Location = new System.Drawing.Point(458, 0);
+            this.label16.Location = new System.Drawing.Point(562, 0);
             this.label16.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(148, 30);
+            this.label16.Size = new System.Drawing.Size(136, 30);
             this.label16.TabIndex = 15;
             this.label16.Text = "매수방식";
             this.label16.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1610,10 +1627,10 @@ namespace WindowsFormsApp1
             this.buy_condition.AutoSize = true;
             this.buy_condition.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.buy_condition.Font = new System.Drawing.Font("굴림", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.buy_condition.Location = new System.Drawing.Point(306, 0);
+            this.buy_condition.Location = new System.Drawing.Point(422, 0);
             this.buy_condition.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.buy_condition.Name = "buy_condition";
-            this.buy_condition.Size = new System.Drawing.Size(148, 30);
+            this.buy_condition.Size = new System.Drawing.Size(136, 30);
             this.buy_condition.TabIndex = 20;
             this.buy_condition.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -1625,10 +1642,10 @@ namespace WindowsFormsApp1
             this.label19.AutoSize = true;
             this.label19.BackColor = System.Drawing.SystemColors.ScrollBar;
             this.label19.ForeColor = System.Drawing.Color.Crimson;
-            this.label19.Location = new System.Drawing.Point(154, 0);
+            this.label19.Location = new System.Drawing.Point(282, 0);
             this.label19.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(148, 30);
+            this.label19.Size = new System.Drawing.Size(136, 30);
             this.label19.TabIndex = 15;
             this.label19.Text = "매수조건";
             this.label19.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1641,12 +1658,24 @@ namespace WindowsFormsApp1
             this.trading_mode.AutoSize = true;
             this.trading_mode.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.trading_mode.Font = new System.Drawing.Font("굴림", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.trading_mode.Location = new System.Drawing.Point(2, 0);
+            this.trading_mode.Location = new System.Drawing.Point(142, 0);
             this.trading_mode.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.trading_mode.Name = "trading_mode";
-            this.trading_mode.Size = new System.Drawing.Size(148, 30);
+            this.trading_mode.Size = new System.Drawing.Size(136, 30);
             this.trading_mode.TabIndex = 24;
             this.trading_mode.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // UI_UPDATE
+            // 
+            this.UI_UPDATE.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.UI_UPDATE.FormattingEnabled = true;
+            this.UI_UPDATE.Location = new System.Drawing.Point(3, 3);
+            this.UI_UPDATE.Name = "UI_UPDATE";
+            this.UI_UPDATE.Size = new System.Drawing.Size(134, 21);
+            this.UI_UPDATE.TabIndex = 26;
+            this.UI_UPDATE.Text = "실시간";
             // 
             // groupBox4
             // 
@@ -1663,7 +1692,7 @@ namespace WindowsFormsApp1
             // 
             // timer3
             // 
-            this.timer3.Interval = 300;
+            this.timer3.Interval = 400;
             this.timer3.Tick += new System.EventHandler(this.Trade_Check_Event);
             // 
             // groupBox5
@@ -2219,24 +2248,10 @@ namespace WindowsFormsApp1
             this.timer2.Interval = 300;
             this.timer2.Tick += new System.EventHandler(this.Transfer_Timer);
             // 
-            // Match_btn
-            // 
-            this.Match_btn.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.Match_btn.BackColor = System.Drawing.Color.Salmon;
-            this.Match_btn.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.Match_btn.Location = new System.Drawing.Point(1371, 3);
-            this.Match_btn.Name = "Match_btn";
-            this.Match_btn.Size = new System.Drawing.Size(146, 24);
-            this.Match_btn.TabIndex = 25;
-            this.Match_btn.Text = "Match";
-            this.Match_btn.UseVisualStyleBackColor = false;
-            // 
             // Trade_Auto_Daishin
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(1714, 837);
+            this.ClientSize = new System.Drawing.Size(1714, 902);
             this.Controls.Add(this.tableLayoutPanel4);
             this.Controls.Add(this.groupBox9);
             this.Controls.Add(this.groupBox8);
@@ -2419,6 +2434,7 @@ namespace WindowsFormsApp1
         private System.Windows.Forms.Label label2;
         public System.Windows.Forms.Label Authentic;
         private System.Windows.Forms.Button Match_btn;
+        private System.Windows.Forms.ComboBox UI_UPDATE;
     }
 }
 

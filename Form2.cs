@@ -1818,6 +1818,8 @@ namespace WindowsFormsApp1
             //
             tmp.Add("Telegram_Last_Chat_update_id/" + Convert.ToString(Trade_Auto_Daishin.update_id));
             //
+            tmp.Add("GridView1_Refresh_Time/" + Convert.ToString(Trade_Auto_Daishin.UI_Refresh_interval));
+            //
             tmp.Add("Auth/" + Convert.ToString(Trade_Auto_Daishin.Authentication));
             //
 
@@ -1932,10 +1934,11 @@ namespace WindowsFormsApp1
             buy_condition_end.Text = buy_condition_tmp[3];
             buy_condition_index.Checked = Convert.ToBoolean(buy_condition_tmp[4]);
             //
-            if (!buy_condition_tmp[5].Equals("9999"))
+            string SelectedIndexTextJoin_temp = "";
+            //
+            if (!buy_condition_tmp[5].Equals("9999") && !buy_condition_tmp[5].Equals("") && !buy_condition_tmp[5].Equals("123456789")  && Fomula_list_buy_Checked_box.Items.Count != 0)
             {
                 string[] Selectedtext_temp = buy_condition_tmp[5].Split(',');
-                string SelectedIndexTextJoin_temp = "";
                 for (int i = 0; i < Selectedtext_temp.Length; i++)
                 {
                     for (int j = 0; j < Fomula_list_buy_Checked_box.Items.Count; j++)
@@ -1949,6 +1952,10 @@ namespace WindowsFormsApp1
                     }
                 }
                 if (!SelectedIndexTextJoin_temp.Equals("")) SelectedIndexTextJoin_temp = SelectedIndexTextJoin_temp.Remove(SelectedIndexTextJoin_temp.Length - 1);
+                Fomula_list_buy.Text = SelectedIndexTextJoin_temp;
+            }
+            else
+            {
                 Fomula_list_buy.Text = SelectedIndexTextJoin_temp;
             }
             //
