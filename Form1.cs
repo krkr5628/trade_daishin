@@ -83,7 +83,7 @@ namespace WindowsFormsApp1
         private int sample_balance = 500000; //500,000원(미인증 매매 금액 제한)
 
         //Delay
-        private int delay1 = 350;
+        private int delay1 = 300;
 
         //-----------------------------------storage----------------------------------------
 
@@ -543,32 +543,87 @@ namespace WindowsFormsApp1
         //------------------------------------------로그-------------------------------------------
 
         //로그창(System)
-        private void WriteLog_System(string message)
+        private async void WriteLog_System(string message)
         {
             string time = DateTime.Now.ToString("HH:mm:ss:fff");
-            log_window.AppendText($@"{"[" + time + "] " + message}");
-            log_full.Add($"[{time}][System] : {message}");
+            string logMessage = $"[{time}] {message}";
+            string fullLogMessage = $"[{time}][System] : {message}";
+
+            // UI 스레드에서 log_window 컨트롤에 접근
+            if (log_window.InvokeRequired)
+            {
+                log_window.Invoke(new Action(() =>
+                {
+                    log_window.AppendText(logMessage);
+                }));
+            }
+            else
+            {
+                log_window.AppendText(logMessage);
+            }
+
+            // 비동기적으로 로그를 리스트에 추가
+            await Task.Run(() => log_full.Add(fullLogMessage));
         }
 
         //로그창(Order)
-        private void WriteLog_Order(string message)
+        private async void WriteLog_Order(string message)
         {
             string time = DateTime.Now.ToString("HH:mm:ss:fff");
-            log_window3.AppendText($@"{"[" + time + "] " + message}");
-            log_full.Add($"[{time}][Order] : {message}");
-            log_trade.Add($"[{time}][Order] : {message}");
+            string logMessage = $"[{time}] {message}";
+            string fullLogMessage = $"[{time}][Order] : {message}";
+            string tradeLogMessage = $"[{time}][Order] : {message}";
+
+            // UI 스레드에서 log_window3 컨트롤에 접근
+            if (log_window3.InvokeRequired)
+            {
+                log_window3.Invoke(new Action(() =>
+                {
+                    log_window3.AppendText(logMessage);
+                }));
+            }
+            else
+            {
+                log_window3.AppendText(logMessage);
+            }
+
+            // 비동기적으로 로그를 리스트에 추가
+            await Task.Run(() =>
+            {
+                log_full.Add(fullLogMessage);
+                log_trade.Add(tradeLogMessage);
+            });
         }
 
         //로그창(Stock)
-        private void WriteLog_Stock(string message)
+        private async void WriteLog_Stock(string message)
         {
             string time = DateTime.Now.ToString("HH:mm:ss:fff");
-            log_window2.AppendText($@"{"[" + time + "] " + message}");
-            log_full.Add($"[{time}][Stock] : {message}");
+            string logMessage = $"[{time}] {message}";
+            string fullLogMessage = $"[{time}][Stock] : {message}";
+
+            // UI 스레드에서 log_window2 컨트롤에 접근
+            if (log_window2.InvokeRequired)
+            {
+                log_window2.Invoke(new Action(() =>
+                {
+                    log_window2.AppendText(logMessage);
+                }));
+            }
+            else
+            {
+                log_window2.AppendText(logMessage);
+            }
+
+            // 비동기적으로 로그를 리스트에 추가
+            await Task.Run(() =>
+            {
+                log_full.Add(fullLogMessage);
+            });
         }
 
         //telegram_chat
-        private void telegram_message(string message)
+        private async void telegram_message(string message)
         {
             if(!utility.Telegram_Allow) return;
             if(telegram_stop) return;
@@ -1544,11 +1599,12 @@ namespace WindowsFormsApp1
 
             System.Threading.Thread.Sleep(delay1);
 
-            //
+            /*
             if (utility.TradingView_Webhook)
             {
                 _ = Task.Run(() => TradingVIew_Listener_Start());
             }
+            */
 
             initial_process_complete = true;
         }
@@ -3498,6 +3554,13 @@ namespace WindowsFormsApp1
                 for (int i = 0; i < initial_num; i++)
                 {
                     string code = Convert.ToString(CssStgFind.GetDataValue(0, i));
+                    //
+                    if (dtCondStock.Rows.Count > 20)
+                    {
+                        WriteLog_Stock($"[신규편입불가/{condition_name}/{code}/초기] : 최대 감시 종목(20개) 초과 \n");
+                        break;
+                    }
+                    //
                     Stock_info(condition_name, code, "0", code, gubun_acc_fresh);
 
                     //
@@ -3603,9 +3666,10 @@ namespace WindowsFormsApp1
                     //운영시간 확인
                     DateTime t_now = DateTime.Now;
                     DateTime t_end = DateTime.Parse(utility.buy_condition_end);
-                    if (t_now > t_end)
+                    if (t_now > t_end && condition_name != "전일보유")
                     {
                         WriteLog_Stock($"[{condition_name}/편입] : {Code_name}({Code})\n매수 시간 이후 종목은 차트에 포함하지 않습니다.\n");
+                        return;
                     };
                     WriteLog_Stock($"[{condition_name}/편입] : {Code_name}({Code})\n");
                 }
@@ -3958,9 +4022,9 @@ namespace WindowsFormsApp1
                     //신규종목
                     if(!findRows1.Any())
                     {
-                        if (dtCondStock.Rows.Count > 100)
+                        if (dtCondStock.Rows.Count > 20)
                         {
-                            WriteLog_Stock($"[신규편입불가/{Condition_Name}/{Stock_Code}] : 최대 감시 종목(100개) 초과 \n");
+                            WriteLog_Stock($"[신규편입불가/{Condition_Name}/{Stock_Code}] : 최대 감시 종목(20개) 초과 \n");
                             return;
                         }
                         //
@@ -4031,9 +4095,9 @@ namespace WindowsFormsApp1
                         
                         if(issingle)
                         {
-                            if (dtCondStock.Rows.Count > 100)
+                            if (dtCondStock.Rows.Count > 20)
                             {
-                                WriteLog_Stock($"[신규편입불가/{Condition_Name}/{Stock_Code}] : 최대 감시 종목(100개) 초과 \n");
+                                WriteLog_Stock($"[신규편입불가/{Condition_Name}/{Stock_Code}] : 최대 감시 종목(20개) 초과 \n");
                                 return;
                             }
                             //
@@ -6100,6 +6164,11 @@ namespace WindowsFormsApp1
                     string[] condition = utility.Fomula_list_buy_text.Split(',');
                     for (int i = 0; i < condition.Length; i++)
                     {
+                        if(Condition_Profile[i] == null)
+                        {
+                            WriteLog_System($"[Condition/{condition }/{i}] : 등록된 조건식 객체 없음 \n");
+                            continue;
+                        }
                         CPSYSDIBLib.CssWatchStgControl CssWatchStgControl = Condition_Profile[i];
                         //
                         string[] tmp = condition[i].Split('^');
@@ -6194,6 +6263,11 @@ namespace WindowsFormsApp1
                     string[] condition = utility.Fomula_list_sell_text.Split(',');
                     for (int i = 0; i < condition.Length; i++)
                     {
+                        if(Condition_Profile2[i] == null)
+                        {
+                            WriteLog_System($"[Condition/{condition }/{i}] : 등록된 조건식 객체 없음 \n");
+                            continue;
+                        }
                         CPSYSDIBLib.CssWatchStgControl CssWatchStgControl = Condition_Profile2[i];
                         //
                         string[] tmp = condition[i].Split('^');
