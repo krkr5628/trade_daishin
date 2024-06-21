@@ -551,6 +551,5 @@ namespace WindowsFormsApp1
         {
             public string tot_rlzt_pfls { get; set; } //실현손익합계(수수료 제외한 금액)
         }
-
     }
 }
