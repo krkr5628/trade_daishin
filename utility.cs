@@ -191,6 +191,8 @@ namespace WindowsFormsApp1
         public static string type5_start_isa;
         public static string type5_end_isa;
         //
+        public static bool kiwooom_cmmunication;
+        //
         public static int Telegram_last_chat_update_id;
         //
         public static string GridView1_Refresh_Time;
@@ -632,6 +634,10 @@ namespace WindowsFormsApp1
             type5_selection_isa = Convert.ToBoolean(type5_selection_isa_tmp[1]);
             type5_start_isa = Convert.ToString(type5_selection_isa_tmp[2]);
             type5_end_isa = Convert.ToString(type5_selection_isa_tmp[3]);
+
+            //TradingView_Webhook_Index
+            String[] kiwooom_cmmunication_tmp = reader.ReadLine().Split('/');
+            kiwooom_cmmunication = Convert.ToBoolean(kiwooom_cmmunication_tmp[1]);
 
             //Telegram_Chat_Number
             String[] Telegram_last_chat_update_id_tmp = reader.ReadLine().Split('/');

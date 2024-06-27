@@ -1816,6 +1816,8 @@ namespace WindowsFormsApp1
             tmp.Add("type4_Dual/" + Convert.ToString(type4_selection_isa.Checked) + "/" + type4_isa_start.Text + "/" + type4_isa_end.Text);
             tmp.Add("type5_Dual/" + Convert.ToString(type5_selection_isa.Checked) + "/" + type5_isa_start.Text + "/" + type5_isa_end.Text);
             //
+            tmp.Add("kiwooom_cmmunication/" + Convert.ToString(kiwooom_cmmunication.Checked));
+            //
             tmp.Add("Telegram_Last_Chat_update_id/" + Convert.ToString(Trade_Auto_Daishin.update_id));
             //
             tmp.Add("GridView1_Refresh_Time/" + Convert.ToString(Trade_Auto_Daishin.UI_Refresh_interval));
@@ -2296,6 +2298,10 @@ namespace WindowsFormsApp1
             type5_selection_isa.Checked = Convert.ToBoolean(type5_selection_isa_tmp[1]);
             type5_isa_start.Text = Convert.ToString(type5_selection_isa_tmp[2]);
             type5_isa_end.Text = Convert.ToString(type5_selection_isa_tmp[3]);
+
+            //TradingView_Webhook_Index
+            String[] kiwooom_cmmunication_tmp = reader.ReadLine().Split('/');
+            kiwooom_cmmunication.Checked = Convert.ToBoolean(kiwooom_cmmunication_tmp[1]);
 
             reader.Close();
         }

@@ -305,6 +305,9 @@ namespace WindowsFormsApp1
             this.TradingView_Webhook_Start = new System.Windows.Forms.TextBox();
             this.주의사항 = new System.Windows.Forms.GroupBox();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.크레온_외국인선물_통신 = new System.Windows.Forms.GroupBox();
+            this.tableLayoutPanel32 = new System.Windows.Forms.TableLayoutPanel();
+            this.kiwooom_cmmunication = new System.Windows.Forms.CheckBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
@@ -352,6 +355,8 @@ namespace WindowsFormsApp1
             this.tableLayoutPanel30.SuspendLayout();
             this.tableLayoutPanel31.SuspendLayout();
             this.주의사항.SuspendLayout();
+            this.크레온_외국인선물_통신.SuspendLayout();
+            this.tableLayoutPanel32.SuspendLayout();
             this.SuspendLayout();
             // 
             // buy_per_price
@@ -4137,9 +4142,9 @@ namespace WindowsFormsApp1
             // 
             this.주의사항.Controls.Add(this.richTextBox1);
             this.주의사항.Font = new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.주의사항.Location = new System.Drawing.Point(1068, 398);
+            this.주의사항.Location = new System.Drawing.Point(1068, 424);
             this.주의사항.Name = "주의사항";
-            this.주의사항.Size = new System.Drawing.Size(267, 227);
+            this.주의사항.Size = new System.Drawing.Size(267, 201);
             this.주의사항.TabIndex = 29;
             this.주의사항.TabStop = false;
             this.주의사항.Text = "주의사항";
@@ -4155,15 +4160,54 @@ namespace WindowsFormsApp1
             this.richTextBox1.Location = new System.Drawing.Point(7, 16);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.ReadOnly = true;
-            this.richTextBox1.Size = new System.Drawing.Size(256, 202);
+            this.richTextBox1.Size = new System.Drawing.Size(256, 176);
             this.richTextBox1.TabIndex = 0;
             this.richTextBox1.Text = "";
+            // 
+            // 크레온_외국인선물_통신
+            // 
+            this.크레온_외국인선물_통신.Controls.Add(this.tableLayoutPanel32);
+            this.크레온_외국인선물_통신.Font = new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.크레온_외국인선물_통신.Location = new System.Drawing.Point(1068, 378);
+            this.크레온_외국인선물_통신.Name = "크레온_외국인선물_통신";
+            this.크레온_외국인선물_통신.Size = new System.Drawing.Size(267, 43);
+            this.크레온_외국인선물_통신.TabIndex = 30;
+            this.크레온_외국인선물_통신.TabStop = false;
+            this.크레온_외국인선물_통신.Text = "크레온_외국인선물_통신";
+            // 
+            // tableLayoutPanel32
+            // 
+            this.tableLayoutPanel32.ColumnCount = 2;
+            this.tableLayoutPanel32.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel32.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel32.Controls.Add(this.kiwooom_cmmunication, 0, 0);
+            this.tableLayoutPanel32.Location = new System.Drawing.Point(6, 13);
+            this.tableLayoutPanel32.Name = "tableLayoutPanel32";
+            this.tableLayoutPanel32.RowCount = 1;
+            this.tableLayoutPanel32.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel32.Size = new System.Drawing.Size(257, 24);
+            this.tableLayoutPanel32.TabIndex = 0;
+            // 
+            // kiwooom_cmmunication
+            // 
+            this.kiwooom_cmmunication.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.kiwooom_cmmunication.AutoSize = true;
+            this.kiwooom_cmmunication.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.kiwooom_cmmunication.Location = new System.Drawing.Point(3, 3);
+            this.kiwooom_cmmunication.Name = "kiwooom_cmmunication";
+            this.kiwooom_cmmunication.Size = new System.Drawing.Size(122, 18);
+            this.kiwooom_cmmunication.TabIndex = 0;
+            this.kiwooom_cmmunication.Text = "키움 통신 연결";
+            this.kiwooom_cmmunication.UseVisualStyleBackColor = false;
             // 
             // Setting
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(1347, 631);
+            this.Controls.Add(this.크레온_외국인선물_통신);
             this.Controls.Add(this.주의사항);
             this.Controls.Add(this.gru);
             this.Controls.Add(this.groupBox14);
@@ -4261,6 +4305,9 @@ namespace WindowsFormsApp1
             this.tableLayoutPanel31.ResumeLayout(false);
             this.tableLayoutPanel31.PerformLayout();
             this.주의사항.ResumeLayout(false);
+            this.크레온_외국인선물_통신.ResumeLayout(false);
+            this.tableLayoutPanel32.ResumeLayout(false);
+            this.tableLayoutPanel32.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -4541,5 +4588,8 @@ namespace WindowsFormsApp1
         private System.Windows.Forms.TextBox TradingView_Webhook_Start;
         private System.Windows.Forms.GroupBox 주의사항;
         private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.GroupBox 크레온_외국인선물_통신;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel32;
+        private System.Windows.Forms.CheckBox kiwooom_cmmunication;
     }
 }
