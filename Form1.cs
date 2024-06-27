@@ -1000,7 +1000,6 @@ namespace WindowsFormsApp1
             Match_btn.Click += Match_Click;
             select_cancel.Click += Select_cancel_Click;
             UI_UPDATE.TextChanged += UI_UPDATE_TextChanged;
-            Foreign .TextChanged += TriggerDataSend;
         }
 
         //--------------------------------------------------------------Main_Timer---------------------------------------------------------------
@@ -3041,61 +3040,33 @@ namespace WindowsFormsApp1
 
         private static NamedPipeServerStream server;
         private static StreamWriter writer;
-        private static StreamReader reader;
-        private static bool dataAvailable = false;
 
         private async Task KOR_FOREIGN_COMMUNICATION()
         {
+
             try
             {
                 // 서버 생성 (한 번만 생성)
                 server = new NamedPipeServerStream("testpipe", PipeDirection.InOut, 1, PipeTransmissionMode.Message, PipeOptions.Asynchronous);
-                WriteLog_System("[Foreign Commodity Sending] : server created and waiting for connection...\n");
 
                 while (true)
                 {
+                    WriteLog_System("[Foreign Commodity Sending] : server created and waiting for connection...\n");
+
                     await server.WaitForConnectionAsync();
+
                     WriteLog_System("[Foreign Commodity Sending] : connected to client\n");
 
                     writer = new StreamWriter(server) { AutoFlush = true };
-                    reader = new StreamReader(server);
-
-                    // 서버가 클라이언트에 초기 메시지 보내기
-                    await writer.WriteLineAsync("Connection_Check");
-
-                    // 클라이언트의 응답 기다리기 (60초 타임아웃)
-                    Task<string> readTask = reader.ReadLineAsync();
-                    if (await Task.WhenAny(readTask, Task.Delay(TimeSpan.FromSeconds(60))) == readTask)
-                    {
-                        if (readTask.Result.Equals("OK"))
-                        {
-                            WriteLog_System("[Foreign Commodity Sending] : connection established\n");
-                        }
-                        else
-                        {
-                            WriteLog_System("[Foreign Commodity Sending] : connection failed\n");
-                            server.Disconnect();
-                            return;
-                        }
-                    }
-                    else
-                    {
-                        WriteLog_System("[Foreign Commodity Sending] : connection timeout (60 seconds) => Retry\n");
-                        server.Disconnect();
-                        continue; // 다시 연결 대기
-                    }
 
                     // 데이터 전송 조건을 확인하여 전송
                     while (server.IsConnected)
                     {
                         try
                         {
-                            if (dataAvailable)
-                            {
-                                await writer.WriteLineAsync(Foreign.Text);
-                                dataAvailable = false;
-                            }
-                            await Task.Delay(30000); // 30초 대기
+                            await writer.WriteLineAsync(Foreign.Text);
+
+                            await Task.Delay(10000); // 10초 대기
                         }
                         catch (Exception ex)
                         {
@@ -3108,18 +3079,14 @@ namespace WindowsFormsApp1
                     server.Disconnect();
                 }
             }
+            catch (IOException ex)
+            {
+                WriteLog_System($"[Foreign Commodity Sending] : Error - {ex.Message}\n");
+                await KOR_FOREIGN_COMMUNICATION(); // 파이프가 끊어지면 다시 연결 시도
+            }
             catch (Exception ex)
             {
                 WriteLog_System($"[Foreign Commodity Sending] : Error - {ex.Message}\n");
-                return;
-            }
-        }
-
-        public void TriggerDataSend(object sender, EventArgs e)
-        {
-            lock (server)
-            {
-                dataAvailable = true;
             }
         }
 
