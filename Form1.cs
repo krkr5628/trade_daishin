@@ -627,7 +627,33 @@ namespace WindowsFormsApp1
             //
             string time = DateTime.Now.ToString("HH:mm:ss:fff");
             string message_edtied = "[" + time + "] " + message;
-            telegram_send(message_edtied);
+
+            //4000자 검증
+            string[] lines = message_edtied.Split(new[] { "\n" }, StringSplitOptions.None);
+            StringBuilder currentMessage = new StringBuilder();
+
+            foreach (string line in lines)
+            {
+                if (currentMessage.Length + line.Length + 1 > 4000)
+                {
+                    // 현재 메시지가 최대 길이를 초과하는 경우 전송하고 새 메시지 시작
+                    telegram_send(currentMessage.ToString());
+                    currentMessage.Clear();
+                }
+
+                // 현재 줄을 메시지에 추가
+                if (currentMessage.Length > 0)
+                {
+                    currentMessage.Append("\n");
+                }
+                currentMessage.Append(line);
+            }
+
+            // 마지막 메시지 전송
+            if (currentMessage.Length > 0)
+            {
+                telegram_send(currentMessage.ToString());
+            }
         }
 
         private bool telegram_stop = false;
