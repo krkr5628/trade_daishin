@@ -3082,7 +3082,6 @@ namespace WindowsFormsApp1
             catch (IOException ex)
             {
                 WriteLog_System($"[Foreign Commodity Sending] : Error - {ex.Message}\n");
-                await KOR_FOREIGN_COMMUNICATION(); // 파이프가 끊어지면 다시 연결 시도
             }
             catch (Exception ex)
             {
@@ -3973,6 +3972,7 @@ namespace WindowsFormsApp1
         private void Stock_real_price()
         {
             string price = Convert.ToString(StockCur.GetHeaderValue(13)); //새로운 현재가
+
             if (price.Equals("")) return;
 
             string Stock_code = StockCur.GetHeaderValue(0);//종목코드 => string
@@ -3987,29 +3987,30 @@ namespace WindowsFormsApp1
             {
                 for (int i = 0; i < findRows.Length; i++)
                 {
+                    //
+                    if (price.Equals(findRows[i]["현재가"].ToString().Replace(",", "")))
+                    {
+                        return;
+                    }
 
                     //신규 값 계산
-                    if (!price.Equals(""))
-                    {
-                        double native_price = Convert.ToDouble(price);
-                        native_percent = (native_price - Convert.ToDouble(findRows[i]["편입가"].ToString().Replace(",", ""))) / Convert.ToDouble(findRows[i]["편입가"].ToString().Replace(",", "")) * 100;
-                        percent = string.Format("{0:#,##0.00}%", Convert.ToDecimal(native_percent)); //새로운 수익률
-                    }
+                    double native_price = Convert.ToDouble(price);
+                    native_percent = (native_price - Convert.ToDouble(findRows[i]["편입가"].ToString().Replace(",", ""))) / Convert.ToDouble(findRows[i]["편입가"].ToString().Replace(",", "")) * 100;
+                    percent = string.Format("{0:#,##0.00}%", Convert.ToDecimal(native_percent)); //새로운 수익률
 
                     //신규 값 빈값 확인
-                    if (!price.Equals(""))
+                    findRows[i]["현재가"] = string.Format("{0:#,##0}", Convert.ToInt32(price)); //새로운 현재가
+                                                                                             //
+                    if (Convert.ToString(findRows[i]["상태"]) == "매수완료" && Convert.ToString(findRows[i]["상태"]) == "TS매수완료" && Convert.ToInt32(findRows[i]["편입최고"]) < Convert.ToInt32(price))
                     {
-                        findRows[i]["현재가"] = string.Format("{0:#,##0}", Convert.ToInt32(price)); //새로운 현재가
-                        //
-                        if (Convert.ToString(findRows[i]["상태"]) == "매수완료" && Convert.ToString(findRows[i]["상태"]) == "TS매수완료" && Convert.ToInt32(findRows[i]["편입최고"]) < Convert.ToInt32(price))
+                        findRows[i]["편입최고"] = string.Format("{0:#,##0}", Convert.ToInt32(price)); //새로운 현재가
+                        if (Convert.ToString(findRows[i]["상태"]) == "TS매수완료" && native_percent >= double.Parse(utility.profit_ts_text))
                         {
-                            findRows[i]["편입최고"] = string.Format("{0:#,##0}", Convert.ToInt32(price)); //새로운 현재가
-                            if (Convert.ToString(findRows[i]["상태"]) == "TS매수완료"  && native_percent >= double.Parse(utility.profit_ts_text))
-                            {
-                                findRows[i]["상태"] = "매수완료";
-                            }
+                            findRows[i]["상태"] = "매수완료";
                         }
                     }
+
+                    //
                     if (!amount.Equals(""))
                     {
                         findRows[i]["거래량"] = string.Format("{0:#,##0}", Convert.ToInt32(amount)); //새로운 거래량
