@@ -3038,54 +3038,61 @@ namespace WindowsFormsApp1
             }
         }
 
-        private static NamedPipeServerStream server;
-        private static StreamWriter writer;
-
         private async Task KOR_FOREIGN_COMMUNICATION()
         {
-
-            try
+            while (true)
             {
-                // 서버 생성 (한 번만 생성)
-                server = new NamedPipeServerStream("testpipe", PipeDirection.InOut, 1, PipeTransmissionMode.Message, PipeOptions.Asynchronous);
+                NamedPipeServerStream server = null;
 
-                while (true)
+                try
                 {
-                    WriteLog_System("[Foreign Commodity Sending] : server created and waiting for connection...\n");
-
-                    await server.WaitForConnectionAsync();
-
-                    WriteLog_System("[Foreign Commodity Sending] : connected to client\n");
-
-                    writer = new StreamWriter(server) { AutoFlush = true };
-
-                    // 데이터 전송 조건을 확인하여 전송
-                    while (server.IsConnected)
+                    using (server = new NamedPipeServerStream("testpipe", PipeDirection.InOut, 1, PipeTransmissionMode.Message, PipeOptions.Asynchronous))
                     {
-                        try
-                        {
-                            await writer.WriteLineAsync(Foreign.Text);
+                        WriteLog_System("[Foreign Commodity Sending] : server created and waiting for connection...\n");
 
-                            await Task.Delay(10000); // 10초 대기
-                        }
-                        catch (Exception ex)
+                        await server.WaitForConnectionAsync();
+
+                        WriteLog_System("[Foreign Commodity Sending] : connected to client\n");
+
+                        using (var writer = new StreamWriter(server) { AutoFlush = true })
                         {
-                            WriteLog_System($"[Foreign Commodity Sending] : Error in sending data - {ex.Message}\n");
-                            break; // 예외 발생 시 루프 종료
+                            // 데이터 전송 조건을 확인하여 전송
+                            while (server.IsConnected)
+                            {
+                                try
+                                {
+                                    await writer.WriteLineAsync(Foreign.Text);
+
+                                    await Task.Delay(10000); // 10초 대기
+                                }
+                                catch (Exception ex)
+                                {
+                                    WriteLog_System($"[Foreign Commodity Sending] : Error in sending data - {ex.Message}\n");
+                                    break; // 예외 발생 시 루프 종료
+                                }
+                            }
                         }
+
+                        WriteLog_System("[Foreign Commodity Sending] : client disconnected, waiting for new connection...\n");
                     }
-
-                    WriteLog_System("[Foreign Commodity Sending] : client disconnected, waiting for new connection...\n");
-                    server.Disconnect();
                 }
-            }
-            catch (IOException ex)
-            {
-                WriteLog_System($"[Foreign Commodity Sending] : Error - {ex.Message}\n");
-            }
-            catch (Exception ex)
-            {
-                WriteLog_System($"[Foreign Commodity Sending] : Error - {ex.Message}\n");
+                catch (IOException ex)
+                {
+                    if (ex.Message.StartsWith("파이프가 끊어졌습니다."))
+                    {
+                        WriteLog_System($"[Foreign Commodity Sending] : IOException - {ex.Message}\n");
+                    }
+                    else
+                    {
+                        WriteLog_System($"[Foreign Commodity Sending/재부팅] : IOException - {ex.Message}\n");
+                        return;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    WriteLog_System($"[Foreign Commodity Sending/재부팅] : Error - {ex.Message}\n");
+                    return;
+                }
             }
         }
 
