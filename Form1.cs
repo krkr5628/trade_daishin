@@ -5935,9 +5935,12 @@ namespace WindowsFormsApp1
                                 findRows[0]["매도시각"] = time;
                                 gridView1_refresh();
 
-                                //code 종목 실시간 해지
-                                StockCur.SetInputValue(0, findRows[0]["종목코드"]);
-                                StockCur.Unsubscribe();
+                                if(!utility.buy_INDEPENDENT  && !utility.buy_DUAL)
+                                {
+                                    //code 종목 실시간 해지
+                                    StockCur.SetInputValue(0, findRows[0]["종목코드"]);
+                                    StockCur.Unsubscribe();
+                                }
 
                                 //보유 수량 업데이트
                                 string[] hold_status = max_hoid.Text.Split('/');
@@ -6010,9 +6013,12 @@ namespace WindowsFormsApp1
                                 {
                                     findRows[0]["상태"] = "매도완료";
                                     //
-                                    //code 종목 실시간 해지
-                                    StockCur.SetInputValue(0, findRows[0]["종목코드"]);
-                                    StockCur.Unsubscribe();
+                                    if (!utility.buy_INDEPENDENT && !utility.buy_DUAL)
+                                    {
+                                        //code 종목 실시간 해지
+                                        StockCur.SetInputValue(0, findRows[0]["종목코드"]);
+                                        StockCur.Unsubscribe();
+                                    }
                                 }
                                 //
                                 //보유 수량 업데이트
