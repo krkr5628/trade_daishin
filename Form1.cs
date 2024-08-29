@@ -772,7 +772,7 @@ namespace WindowsFormsApp1
                 }
 
                 // 일정한 간격으로 API를 호출하여 새로운 메시지 확인
-                await Task.Delay(1000); // 1초마다 확인
+                await Task.Delay(1500); // 1초마다 확인
             }
             /*           
             {"ok":true,"result":
