@@ -81,7 +81,7 @@ namespace WindowsFormsApp1
         //-----------------------------------인증 관련 신호----------------------------------------
 
         public static string Authentication = "1ab2c3d4e5f6g7h8i9"; //인증코드에 백슬래시 및 쉼표 불가능
-        public static bool Authentication_Check = true; //미인증(false) / 인증(true)
+        public static bool Authentication_Check = false; //미인증(false) / 인증(true)
         private int sample_balance = 500000; //500,000원(미인증 매매 금액 제한)
 
         //Delay
@@ -772,7 +772,7 @@ namespace WindowsFormsApp1
                 }
 
                 // 일정한 간격으로 API를 호출하여 새로운 메시지 확인
-                await Task.Delay(1500); // 1초마다 확인
+                await Task.Delay(1200); // 1초마다 확인
             }
             /*           
             {"ok":true,"result":
