@@ -4752,7 +4752,7 @@ namespace WindowsFormsApp1
                 TimeSpan t_now = TimeSpan.Parse(time);
                 TimeSpan t_last = TimeSpan.Parse(last_buy_time);
 
-                if (t_now - t_last < TimeSpan.FromMilliseconds(800))
+                if (t_now - t_last < TimeSpan.FromMilliseconds(1000))
                 {
                     //WriteLog_Order($"[매수간격] 설정({utility.term_for_buy_text}), 현재({(t_now - t_last2).ToString()})\n");
                     return "대기";
