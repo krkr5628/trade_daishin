@@ -456,7 +456,7 @@ namespace WindowsFormsApp1
             {
                 for (int i = 0; i < findRows.Length; i++)
                 {
-                    DataRow[] findRows2 = dtCondStock_Transaction.AsEnumerable().Where(row => row.Field<string>("종목번호") == findRows[i]["종목번호"].ToString() && row.Field<string>("구분코드") == findRows[i]["구분코드"].ToString()  && row.Field<string>("체결단가") != "0").ToArray();
+                    DataRow[] findRows2 = dtCondStock_Transaction.AsEnumerable().Where(row => row.Field<string>("종목번호") == findRows[i]["종목번호"].ToString() && row.Field<string>("구분코드") == findRows[i]["구분코드"].ToString() && row.Field<string>("매매구분") == "매수" && row.Field<string>("체결단가") != "0").ToArray();
                     if (findRows2.Any())
                     {
                         findRows[i]["상태"] = "매수완료";
@@ -485,7 +485,7 @@ namespace WindowsFormsApp1
             {
                 for (int i = 0; i < findRows3.Length; i++)
                 {
-                    DataRow[] findRows4 = dtCondStock_Transaction.AsEnumerable().Where(row => row.Field<string>("주문번호") == findRows3[i]["주문번호"].ToString() && row.Field<string>("체결단가") != "0").ToArray();
+                    DataRow[] findRows4 = dtCondStock_Transaction.AsEnumerable().Where(row => row.Field<string>("주문번호") == findRows3[i]["주문번호"].ToString() && row.Field<string>("구분코드") == findRows[i]["구분코드"].ToString() && row.Field<string>("매매구분") == "매도" && row.Field<string>("체결단가") != "0").ToArray();
                     if (findRows4.Any())
                     {
                         findRows3[i]["상태"] = "매도완료";
