@@ -366,7 +366,7 @@ namespace WindowsFormsApp1
             this.buy_per_price.Location = new System.Drawing.Point(2, 74);
             this.buy_per_price.Margin = new System.Windows.Forms.Padding(2);
             this.buy_per_price.Name = "buy_per_price";
-            this.buy_per_price.Size = new System.Drawing.Size(133, 18);
+            this.buy_per_price.Size = new System.Drawing.Size(133, 20);
             this.buy_per_price.TabIndex = 0;
             this.buy_per_price.TabStop = true;
             this.buy_per_price.Text = "종목당 매수 금액";
@@ -380,7 +380,7 @@ namespace WindowsFormsApp1
             this.buy_per_amount.Location = new System.Drawing.Point(2, 98);
             this.buy_per_amount.Margin = new System.Windows.Forms.Padding(2);
             this.buy_per_amount.Name = "buy_per_amount";
-            this.buy_per_amount.Size = new System.Drawing.Size(133, 18);
+            this.buy_per_amount.Size = new System.Drawing.Size(133, 20);
             this.buy_per_amount.TabIndex = 1;
             this.buy_per_amount.TabStop = true;
             this.buy_per_amount.Text = "종목당 매수 수량";
@@ -484,7 +484,7 @@ namespace WindowsFormsApp1
             this.max_price.Location = new System.Drawing.Point(139, 218);
             this.max_price.Margin = new System.Windows.Forms.Padding(2);
             this.max_price.Name = "max_price";
-            this.max_price.Size = new System.Drawing.Size(118, 23);
+            this.max_price.Size = new System.Drawing.Size(118, 30);
             this.max_price.TabIndex = 18;
             // 
             // account_list
@@ -493,7 +493,7 @@ namespace WindowsFormsApp1
             this.account_list.Location = new System.Drawing.Point(139, 2);
             this.account_list.Margin = new System.Windows.Forms.Padding(2);
             this.account_list.Name = "account_list";
-            this.account_list.Size = new System.Drawing.Size(118, 21);
+            this.account_list.Size = new System.Drawing.Size(118, 28);
             this.account_list.TabIndex = 9;
             // 
             // min_price
@@ -502,7 +502,7 @@ namespace WindowsFormsApp1
             this.min_price.Location = new System.Drawing.Point(139, 194);
             this.min_price.Margin = new System.Windows.Forms.Padding(2);
             this.min_price.Name = "min_price";
-            this.min_price.Size = new System.Drawing.Size(118, 23);
+            this.min_price.Size = new System.Drawing.Size(118, 30);
             this.min_price.TabIndex = 15;
             // 
             // maxbuy_acc
@@ -511,7 +511,7 @@ namespace WindowsFormsApp1
             this.maxbuy_acc.Location = new System.Drawing.Point(139, 170);
             this.maxbuy_acc.Margin = new System.Windows.Forms.Padding(2);
             this.maxbuy_acc.Name = "maxbuy_acc";
-            this.maxbuy_acc.Size = new System.Drawing.Size(118, 23);
+            this.maxbuy_acc.Size = new System.Drawing.Size(118, 30);
             this.maxbuy_acc.TabIndex = 13;
             // 
             // maxbuy
@@ -520,7 +520,7 @@ namespace WindowsFormsApp1
             this.maxbuy.Location = new System.Drawing.Point(139, 146);
             this.maxbuy.Margin = new System.Windows.Forms.Padding(2);
             this.maxbuy.Name = "maxbuy";
-            this.maxbuy.Size = new System.Drawing.Size(118, 23);
+            this.maxbuy.Size = new System.Drawing.Size(118, 30);
             this.maxbuy.TabIndex = 12;
             // 
             // buy_per_percent
@@ -530,7 +530,7 @@ namespace WindowsFormsApp1
             this.buy_per_percent.Location = new System.Drawing.Point(2, 122);
             this.buy_per_percent.Margin = new System.Windows.Forms.Padding(2);
             this.buy_per_percent.Name = "buy_per_percent";
-            this.buy_per_percent.Size = new System.Drawing.Size(133, 18);
+            this.buy_per_percent.Size = new System.Drawing.Size(133, 20);
             this.buy_per_percent.TabIndex = 2;
             this.buy_per_percent.TabStop = true;
             this.buy_per_percent.Text = "종목당 매수 비율";
@@ -542,7 +542,7 @@ namespace WindowsFormsApp1
             this.buy_per_percent_text.Location = new System.Drawing.Point(139, 122);
             this.buy_per_percent_text.Margin = new System.Windows.Forms.Padding(2);
             this.buy_per_percent_text.Name = "buy_per_percent_text";
-            this.buy_per_percent_text.Size = new System.Drawing.Size(118, 23);
+            this.buy_per_percent_text.Size = new System.Drawing.Size(118, 30);
             this.buy_per_percent_text.TabIndex = 9;
             // 
             // buy_per_amount_text
@@ -551,7 +551,7 @@ namespace WindowsFormsApp1
             this.buy_per_amount_text.Location = new System.Drawing.Point(139, 98);
             this.buy_per_amount_text.Margin = new System.Windows.Forms.Padding(2);
             this.buy_per_amount_text.Name = "buy_per_amount_text";
-            this.buy_per_amount_text.Size = new System.Drawing.Size(118, 23);
+            this.buy_per_amount_text.Size = new System.Drawing.Size(118, 30);
             this.buy_per_amount_text.TabIndex = 11;
             // 
             // buy_per_price_text
@@ -560,7 +560,7 @@ namespace WindowsFormsApp1
             this.buy_per_price_text.Location = new System.Drawing.Point(139, 74);
             this.buy_per_price_text.Margin = new System.Windows.Forms.Padding(2);
             this.buy_per_price_text.Name = "buy_per_price_text";
-            this.buy_per_price_text.Size = new System.Drawing.Size(118, 23);
+            this.buy_per_price_text.Size = new System.Drawing.Size(118, 30);
             this.buy_per_price_text.TabIndex = 10;
             // 
             // initial_balance
@@ -569,7 +569,7 @@ namespace WindowsFormsApp1
             this.initial_balance.Location = new System.Drawing.Point(139, 50);
             this.initial_balance.Margin = new System.Windows.Forms.Padding(2);
             this.initial_balance.Name = "initial_balance";
-            this.initial_balance.Size = new System.Drawing.Size(118, 23);
+            this.initial_balance.Size = new System.Drawing.Size(118, 30);
             this.initial_balance.TabIndex = 16;
             // 
             // setting_account_number
@@ -578,7 +578,7 @@ namespace WindowsFormsApp1
             this.setting_account_number.Location = new System.Drawing.Point(139, 26);
             this.setting_account_number.Margin = new System.Windows.Forms.Padding(2);
             this.setting_account_number.Name = "setting_account_number";
-            this.setting_account_number.Size = new System.Drawing.Size(118, 23);
+            this.setting_account_number.Size = new System.Drawing.Size(118, 30);
             this.setting_account_number.TabIndex = 9;
             // 
             // label1
@@ -700,7 +700,7 @@ namespace WindowsFormsApp1
             this.market_end_time.Location = new System.Drawing.Point(178, 2);
             this.market_end_time.Margin = new System.Windows.Forms.Padding(2);
             this.market_end_time.Name = "market_end_time";
-            this.market_end_time.Size = new System.Drawing.Size(83, 23);
+            this.market_end_time.Size = new System.Drawing.Size(83, 30);
             this.market_end_time.TabIndex = 4;
             // 
             // textBox18
@@ -709,7 +709,7 @@ namespace WindowsFormsApp1
             this.textBox18.Location = new System.Drawing.Point(155, 2);
             this.textBox18.Margin = new System.Windows.Forms.Padding(2);
             this.textBox18.Name = "textBox18";
-            this.textBox18.Size = new System.Drawing.Size(19, 23);
+            this.textBox18.Size = new System.Drawing.Size(19, 30);
             this.textBox18.TabIndex = 4;
             this.textBox18.Text = "-";
             this.textBox18.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -719,7 +719,7 @@ namespace WindowsFormsApp1
             this.market_start_time.Location = new System.Drawing.Point(70, 2);
             this.market_start_time.Margin = new System.Windows.Forms.Padding(2);
             this.market_start_time.Name = "market_start_time";
-            this.market_start_time.Size = new System.Drawing.Size(81, 23);
+            this.market_start_time.Size = new System.Drawing.Size(81, 30);
             this.market_start_time.TabIndex = 3;
             // 
             // label9
@@ -796,7 +796,7 @@ namespace WindowsFormsApp1
             this.max_hold_text.Location = new System.Drawing.Point(181, 2);
             this.max_hold_text.Margin = new System.Windows.Forms.Padding(2);
             this.max_hold_text.Name = "max_hold_text";
-            this.max_hold_text.Size = new System.Drawing.Size(76, 23);
+            this.max_hold_text.Size = new System.Drawing.Size(76, 30);
             this.max_hold_text.TabIndex = 6;
             // 
             // before_time_deny
@@ -910,7 +910,7 @@ namespace WindowsFormsApp1
             this.setting_name.Margin = new System.Windows.Forms.Padding(2);
             this.setting_name.Name = "setting_name";
             this.setting_name.ReadOnly = true;
-            this.setting_name.Size = new System.Drawing.Size(269, 21);
+            this.setting_name.Size = new System.Drawing.Size(269, 28);
             this.setting_name.TabIndex = 1;
             // 
             // label5
@@ -972,7 +972,7 @@ namespace WindowsFormsApp1
             this.buy_condition_end.Location = new System.Drawing.Point(249, 2);
             this.buy_condition_end.Margin = new System.Windows.Forms.Padding(2);
             this.buy_condition_end.Name = "buy_condition_end";
-            this.buy_condition_end.Size = new System.Drawing.Size(122, 23);
+            this.buy_condition_end.Size = new System.Drawing.Size(122, 30);
             this.buy_condition_end.TabIndex = 21;
             // 
             // textBox40
@@ -982,7 +982,7 @@ namespace WindowsFormsApp1
             this.textBox40.Margin = new System.Windows.Forms.Padding(2);
             this.textBox40.Name = "textBox40";
             this.textBox40.ReadOnly = true;
-            this.textBox40.Size = new System.Drawing.Size(22, 23);
+            this.textBox40.Size = new System.Drawing.Size(22, 30);
             this.textBox40.TabIndex = 20;
             this.textBox40.Text = "~";
             this.textBox40.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -992,7 +992,7 @@ namespace WindowsFormsApp1
             this.buy_condition_start.Location = new System.Drawing.Point(95, 2);
             this.buy_condition_start.Margin = new System.Windows.Forms.Padding(2);
             this.buy_condition_start.Name = "buy_condition_start";
-            this.buy_condition_start.Size = new System.Drawing.Size(124, 23);
+            this.buy_condition_start.Size = new System.Drawing.Size(124, 30);
             this.buy_condition_start.TabIndex = 9;
             // 
             // buy_condition_index
@@ -1038,7 +1038,7 @@ namespace WindowsFormsApp1
             this.buy_set1.Location = new System.Drawing.Point(79, 2);
             this.buy_set1.Margin = new System.Windows.Forms.Padding(2);
             this.buy_set1.Name = "buy_set1";
-            this.buy_set1.Size = new System.Drawing.Size(73, 21);
+            this.buy_set1.Size = new System.Drawing.Size(73, 28);
             this.buy_set1.TabIndex = 21;
             // 
             // sell_set1
@@ -1047,7 +1047,7 @@ namespace WindowsFormsApp1
             this.sell_set1.Location = new System.Drawing.Point(79, 27);
             this.sell_set1.Margin = new System.Windows.Forms.Padding(2);
             this.sell_set1.Name = "sell_set1";
-            this.sell_set1.Size = new System.Drawing.Size(73, 21);
+            this.sell_set1.Size = new System.Drawing.Size(73, 28);
             this.sell_set1.TabIndex = 22;
             // 
             // buy_set2
@@ -1056,7 +1056,7 @@ namespace WindowsFormsApp1
             this.buy_set2.Location = new System.Drawing.Point(156, 2);
             this.buy_set2.Margin = new System.Windows.Forms.Padding(2);
             this.buy_set2.Name = "buy_set2";
-            this.buy_set2.Size = new System.Drawing.Size(74, 21);
+            this.buy_set2.Size = new System.Drawing.Size(74, 28);
             this.buy_set2.TabIndex = 23;
             // 
             // sell_set2
@@ -1065,7 +1065,7 @@ namespace WindowsFormsApp1
             this.sell_set2.Location = new System.Drawing.Point(156, 27);
             this.sell_set2.Margin = new System.Windows.Forms.Padding(2);
             this.sell_set2.Name = "sell_set2";
-            this.sell_set2.Size = new System.Drawing.Size(74, 21);
+            this.sell_set2.Size = new System.Drawing.Size(74, 28);
             this.sell_set2.TabIndex = 24;
             // 
             // label10
@@ -1128,7 +1128,7 @@ namespace WindowsFormsApp1
             this.sell_condition_end.Location = new System.Drawing.Point(249, 2);
             this.sell_condition_end.Margin = new System.Windows.Forms.Padding(2);
             this.sell_condition_end.Name = "sell_condition_end";
-            this.sell_condition_end.Size = new System.Drawing.Size(122, 23);
+            this.sell_condition_end.Size = new System.Drawing.Size(122, 30);
             this.sell_condition_end.TabIndex = 22;
             // 
             // sell_condition_start
@@ -1136,7 +1136,7 @@ namespace WindowsFormsApp1
             this.sell_condition_start.Location = new System.Drawing.Point(95, 2);
             this.sell_condition_start.Margin = new System.Windows.Forms.Padding(2);
             this.sell_condition_start.Name = "sell_condition_start";
-            this.sell_condition_start.Size = new System.Drawing.Size(124, 23);
+            this.sell_condition_start.Size = new System.Drawing.Size(124, 30);
             this.sell_condition_start.TabIndex = 21;
             // 
             // textBox39
@@ -1146,7 +1146,7 @@ namespace WindowsFormsApp1
             this.textBox39.Margin = new System.Windows.Forms.Padding(2);
             this.textBox39.Name = "textBox39";
             this.textBox39.ReadOnly = true;
-            this.textBox39.Size = new System.Drawing.Size(22, 23);
+            this.textBox39.Size = new System.Drawing.Size(22, 30);
             this.textBox39.TabIndex = 19;
             this.textBox39.Text = "~";
             this.textBox39.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -1216,7 +1216,7 @@ namespace WindowsFormsApp1
             this.textBox6.Location = new System.Drawing.Point(222, 50);
             this.textBox6.Margin = new System.Windows.Forms.Padding(2);
             this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(22, 20);
+            this.textBox6.Size = new System.Drawing.Size(22, 26);
             this.textBox6.TabIndex = 42;
             this.textBox6.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -1229,7 +1229,7 @@ namespace WindowsFormsApp1
             this.textBox5.Location = new System.Drawing.Point(222, 26);
             this.textBox5.Margin = new System.Windows.Forms.Padding(2);
             this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(22, 20);
+            this.textBox5.Size = new System.Drawing.Size(22, 26);
             this.textBox5.TabIndex = 41;
             this.textBox5.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -1242,7 +1242,7 @@ namespace WindowsFormsApp1
             this.textBox4.Location = new System.Drawing.Point(222, 2);
             this.textBox4.Margin = new System.Windows.Forms.Padding(2);
             this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(22, 20);
+            this.textBox4.Size = new System.Drawing.Size(22, 26);
             this.textBox4.TabIndex = 40;
             this.textBox4.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -1268,7 +1268,7 @@ namespace WindowsFormsApp1
             this.profit_percent_text.Location = new System.Drawing.Point(99, 2);
             this.profit_percent_text.Margin = new System.Windows.Forms.Padding(2);
             this.profit_percent_text.Name = "profit_percent_text";
-            this.profit_percent_text.Size = new System.Drawing.Size(119, 20);
+            this.profit_percent_text.Size = new System.Drawing.Size(119, 26);
             this.profit_percent_text.TabIndex = 13;
             // 
             // loss_percent
@@ -1293,7 +1293,7 @@ namespace WindowsFormsApp1
             this.loss_percent_text.Location = new System.Drawing.Point(346, 2);
             this.loss_percent_text.Margin = new System.Windows.Forms.Padding(2);
             this.loss_percent_text.Name = "loss_percent_text";
-            this.loss_percent_text.Size = new System.Drawing.Size(120, 20);
+            this.loss_percent_text.Size = new System.Drawing.Size(120, 26);
             this.loss_percent_text.TabIndex = 16;
             // 
             // profit_after1
@@ -1386,7 +1386,7 @@ namespace WindowsFormsApp1
             this.loss_won_text.Location = new System.Drawing.Point(346, 26);
             this.loss_won_text.Margin = new System.Windows.Forms.Padding(2);
             this.loss_won_text.Name = "loss_won_text";
-            this.loss_won_text.Size = new System.Drawing.Size(120, 20);
+            this.loss_won_text.Size = new System.Drawing.Size(120, 26);
             this.loss_won_text.TabIndex = 17;
             // 
             // profit_ts_text
@@ -1394,7 +1394,7 @@ namespace WindowsFormsApp1
             this.profit_ts_text.Location = new System.Drawing.Point(99, 50);
             this.profit_ts_text.Margin = new System.Windows.Forms.Padding(2);
             this.profit_ts_text.Name = "profit_ts_text";
-            this.profit_ts_text.Size = new System.Drawing.Size(119, 20);
+            this.profit_ts_text.Size = new System.Drawing.Size(119, 26);
             this.profit_ts_text.TabIndex = 14;
             // 
             // profit_won
@@ -1437,7 +1437,7 @@ namespace WindowsFormsApp1
             this.profit_won_text.Location = new System.Drawing.Point(99, 26);
             this.profit_won_text.Margin = new System.Windows.Forms.Padding(2);
             this.profit_won_text.Name = "profit_won_text";
-            this.profit_won_text.Size = new System.Drawing.Size(119, 20);
+            this.profit_won_text.Size = new System.Drawing.Size(119, 26);
             this.profit_won_text.TabIndex = 15;
             // 
             // textBox7
@@ -1449,7 +1449,7 @@ namespace WindowsFormsApp1
             this.textBox7.Location = new System.Drawing.Point(222, 74);
             this.textBox7.Margin = new System.Windows.Forms.Padding(2);
             this.textBox7.Name = "textBox7";
-            this.textBox7.Size = new System.Drawing.Size(22, 20);
+            this.textBox7.Size = new System.Drawing.Size(22, 26);
             this.textBox7.TabIndex = 43;
             this.textBox7.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -1472,7 +1472,7 @@ namespace WindowsFormsApp1
             // 
             this.profit_ts_text2.Location = new System.Drawing.Point(347, 51);
             this.profit_ts_text2.Name = "profit_ts_text2";
-            this.profit_ts_text2.Size = new System.Drawing.Size(118, 20);
+            this.profit_ts_text2.Size = new System.Drawing.Size(118, 26);
             this.profit_ts_text2.TabIndex = 45;
             // 
             // tableLayoutPanel10
@@ -1532,7 +1532,7 @@ namespace WindowsFormsApp1
             this.clear_sell_profit_text.Location = new System.Drawing.Point(113, 25);
             this.clear_sell_profit_text.Margin = new System.Windows.Forms.Padding(2);
             this.clear_sell_profit_text.Name = "clear_sell_profit_text";
-            this.clear_sell_profit_text.Size = new System.Drawing.Size(103, 20);
+            this.clear_sell_profit_text.Size = new System.Drawing.Size(103, 26);
             this.clear_sell_profit_text.TabIndex = 17;
             // 
             // clear_sell_end
@@ -1540,7 +1540,7 @@ namespace WindowsFormsApp1
             this.clear_sell_end.Location = new System.Drawing.Point(238, 2);
             this.clear_sell_end.Margin = new System.Windows.Forms.Padding(2);
             this.clear_sell_end.Name = "clear_sell_end";
-            this.clear_sell_end.Size = new System.Drawing.Size(107, 20);
+            this.clear_sell_end.Size = new System.Drawing.Size(107, 26);
             this.clear_sell_end.TabIndex = 16;
             // 
             // textBox29
@@ -1552,7 +1552,7 @@ namespace WindowsFormsApp1
             this.textBox29.Location = new System.Drawing.Point(220, 2);
             this.textBox29.Margin = new System.Windows.Forms.Padding(2);
             this.textBox29.Name = "textBox29";
-            this.textBox29.Size = new System.Drawing.Size(14, 20);
+            this.textBox29.Size = new System.Drawing.Size(14, 26);
             this.textBox29.TabIndex = 15;
             this.textBox29.Text = "~";
             this.textBox29.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -1562,7 +1562,7 @@ namespace WindowsFormsApp1
             this.clear_sell_start.Location = new System.Drawing.Point(113, 2);
             this.clear_sell_start.Margin = new System.Windows.Forms.Padding(2);
             this.clear_sell_start.Name = "clear_sell_start";
-            this.clear_sell_start.Size = new System.Drawing.Size(103, 20);
+            this.clear_sell_start.Size = new System.Drawing.Size(103, 26);
             this.clear_sell_start.TabIndex = 14;
             // 
             // clear_sell_loss_text
@@ -1570,7 +1570,7 @@ namespace WindowsFormsApp1
             this.clear_sell_loss_text.Location = new System.Drawing.Point(349, 25);
             this.clear_sell_loss_text.Margin = new System.Windows.Forms.Padding(2);
             this.clear_sell_loss_text.Name = "clear_sell_loss_text";
-            this.clear_sell_loss_text.Size = new System.Drawing.Size(116, 20);
+            this.clear_sell_loss_text.Size = new System.Drawing.Size(116, 26);
             this.clear_sell_loss_text.TabIndex = 18;
             // 
             // clear_sell_profit_after1
@@ -1701,7 +1701,7 @@ namespace WindowsFormsApp1
             this.textBox1.Location = new System.Drawing.Point(220, 25);
             this.textBox1.Margin = new System.Windows.Forms.Padding(2);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(14, 20);
+            this.textBox1.Size = new System.Drawing.Size(14, 26);
             this.textBox1.TabIndex = 36;
             this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -1714,7 +1714,7 @@ namespace WindowsFormsApp1
             this.textBox2.Location = new System.Drawing.Point(220, 48);
             this.textBox2.Margin = new System.Windows.Forms.Padding(2);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(14, 20);
+            this.textBox2.Size = new System.Drawing.Size(14, 26);
             this.textBox2.TabIndex = 37;
             this.textBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -1742,7 +1742,7 @@ namespace WindowsFormsApp1
             this.textBox3.Location = new System.Drawing.Point(220, 71);
             this.textBox3.Margin = new System.Windows.Forms.Padding(2);
             this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(14, 20);
+            this.textBox3.Size = new System.Drawing.Size(14, 26);
             this.textBox3.TabIndex = 39;
             this.textBox3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -1753,7 +1753,7 @@ namespace WindowsFormsApp1
             this.Fomula_list_buy.Location = new System.Drawing.Point(2, 2);
             this.Fomula_list_buy.Margin = new System.Windows.Forms.Padding(2);
             this.Fomula_list_buy.Name = "Fomula_list_buy";
-            this.Fomula_list_buy.Size = new System.Drawing.Size(464, 19);
+            this.Fomula_list_buy.Size = new System.Drawing.Size(464, 25);
             this.Fomula_list_buy.TabIndex = 11;
             // 
             // Fomula_list_sell
@@ -1763,7 +1763,7 @@ namespace WindowsFormsApp1
             this.Fomula_list_sell.Location = new System.Drawing.Point(4, 136);
             this.Fomula_list_sell.Margin = new System.Windows.Forms.Padding(2);
             this.Fomula_list_sell.Name = "Fomula_list_sell";
-            this.Fomula_list_sell.Size = new System.Drawing.Size(468, 19);
+            this.Fomula_list_sell.Size = new System.Drawing.Size(468, 25);
             this.Fomula_list_sell.TabIndex = 12;
             // 
             // tableLayoutPanel11
@@ -1797,7 +1797,7 @@ namespace WindowsFormsApp1
             this.term_for_non_buy_text.Location = new System.Drawing.Point(119, 28);
             this.term_for_non_buy_text.Margin = new System.Windows.Forms.Padding(2);
             this.term_for_non_buy_text.Name = "term_for_non_buy_text";
-            this.term_for_non_buy_text.Size = new System.Drawing.Size(113, 20);
+            this.term_for_non_buy_text.Size = new System.Drawing.Size(113, 26);
             this.term_for_non_buy_text.TabIndex = 26;
             // 
             // term_for_buy
@@ -1822,7 +1822,7 @@ namespace WindowsFormsApp1
             this.term_for_buy_text.Location = new System.Drawing.Point(119, 2);
             this.term_for_buy_text.Margin = new System.Windows.Forms.Padding(2);
             this.term_for_buy_text.Name = "term_for_buy_text";
-            this.term_for_buy_text.Size = new System.Drawing.Size(113, 20);
+            this.term_for_buy_text.Size = new System.Drawing.Size(113, 26);
             this.term_for_buy_text.TabIndex = 0;
             // 
             // term_for_non_sell
@@ -1881,7 +1881,7 @@ namespace WindowsFormsApp1
             this.term_for_sell_text.Location = new System.Drawing.Point(353, 2);
             this.term_for_sell_text.Margin = new System.Windows.Forms.Padding(2);
             this.term_for_sell_text.Name = "term_for_sell_text";
-            this.term_for_sell_text.Size = new System.Drawing.Size(113, 20);
+            this.term_for_sell_text.Size = new System.Drawing.Size(113, 26);
             this.term_for_sell_text.TabIndex = 24;
             // 
             // term_for_non_sell_text
@@ -1889,7 +1889,7 @@ namespace WindowsFormsApp1
             this.term_for_non_sell_text.Location = new System.Drawing.Point(353, 28);
             this.term_for_non_sell_text.Margin = new System.Windows.Forms.Padding(2);
             this.term_for_non_sell_text.Name = "term_for_non_sell_text";
-            this.term_for_non_sell_text.Size = new System.Drawing.Size(113, 20);
+            this.term_for_non_sell_text.Size = new System.Drawing.Size(113, 26);
             this.term_for_non_sell_text.TabIndex = 25;
             // 
             // groupBox1
@@ -2058,7 +2058,7 @@ namespace WindowsFormsApp1
             this.Fomula_list_buy_Checked_box.Location = new System.Drawing.Point(4, 73);
             this.Fomula_list_buy_Checked_box.Margin = new System.Windows.Forms.Padding(2);
             this.Fomula_list_buy_Checked_box.Name = "Fomula_list_buy_Checked_box";
-            this.Fomula_list_buy_Checked_box.Size = new System.Drawing.Size(468, 79);
+            this.Fomula_list_buy_Checked_box.Size = new System.Drawing.Size(468, 73);
             this.Fomula_list_buy_Checked_box.TabIndex = 25;
             this.Fomula_list_buy_Checked_box.Visible = false;
             // 
@@ -2327,7 +2327,7 @@ namespace WindowsFormsApp1
             this.type0_all_end.Location = new System.Drawing.Point(188, 2);
             this.type0_all_end.Margin = new System.Windows.Forms.Padding(2);
             this.type0_all_end.Name = "type0_all_end";
-            this.type0_all_end.Size = new System.Drawing.Size(64, 20);
+            this.type0_all_end.Size = new System.Drawing.Size(64, 26);
             this.type0_all_end.TabIndex = 49;
             // 
             // label41
@@ -2505,7 +2505,7 @@ namespace WindowsFormsApp1
             this.type5_all_start.Location = new System.Drawing.Point(102, 102);
             this.type5_all_start.Margin = new System.Windows.Forms.Padding(2);
             this.type5_all_start.Name = "type5_all_start";
-            this.type5_all_start.Size = new System.Drawing.Size(60, 20);
+            this.type5_all_start.Size = new System.Drawing.Size(60, 26);
             this.type5_all_start.TabIndex = 36;
             // 
             // type4_all_start
@@ -2516,7 +2516,7 @@ namespace WindowsFormsApp1
             this.type4_all_start.Location = new System.Drawing.Point(102, 82);
             this.type4_all_start.Margin = new System.Windows.Forms.Padding(2);
             this.type4_all_start.Name = "type4_all_start";
-            this.type4_all_start.Size = new System.Drawing.Size(60, 20);
+            this.type4_all_start.Size = new System.Drawing.Size(60, 26);
             this.type4_all_start.TabIndex = 16;
             // 
             // type3_all_start
@@ -2527,7 +2527,7 @@ namespace WindowsFormsApp1
             this.type3_all_start.Location = new System.Drawing.Point(102, 62);
             this.type3_all_start.Margin = new System.Windows.Forms.Padding(2);
             this.type3_all_start.Name = "type3_all_start";
-            this.type3_all_start.Size = new System.Drawing.Size(60, 20);
+            this.type3_all_start.Size = new System.Drawing.Size(60, 26);
             this.type3_all_start.TabIndex = 7;
             // 
             // type2_all_start
@@ -2538,7 +2538,7 @@ namespace WindowsFormsApp1
             this.type2_all_start.Location = new System.Drawing.Point(102, 43);
             this.type2_all_start.Margin = new System.Windows.Forms.Padding(2);
             this.type2_all_start.Name = "type2_all_start";
-            this.type2_all_start.Size = new System.Drawing.Size(60, 20);
+            this.type2_all_start.Size = new System.Drawing.Size(60, 26);
             this.type2_all_start.TabIndex = 12;
             // 
             // type5_all_end
@@ -2546,7 +2546,7 @@ namespace WindowsFormsApp1
             this.type5_all_end.Location = new System.Drawing.Point(188, 102);
             this.type5_all_end.Margin = new System.Windows.Forms.Padding(2);
             this.type5_all_end.Name = "type5_all_end";
-            this.type5_all_end.Size = new System.Drawing.Size(64, 20);
+            this.type5_all_end.Size = new System.Drawing.Size(64, 26);
             this.type5_all_end.TabIndex = 38;
             // 
             // type4_all_end
@@ -2554,7 +2554,7 @@ namespace WindowsFormsApp1
             this.type4_all_end.Location = new System.Drawing.Point(188, 82);
             this.type4_all_end.Margin = new System.Windows.Forms.Padding(2);
             this.type4_all_end.Name = "type4_all_end";
-            this.type4_all_end.Size = new System.Drawing.Size(64, 20);
+            this.type4_all_end.Size = new System.Drawing.Size(64, 26);
             this.type4_all_end.TabIndex = 18;
             // 
             // type3_all_end
@@ -2562,7 +2562,7 @@ namespace WindowsFormsApp1
             this.type3_all_end.Location = new System.Drawing.Point(188, 62);
             this.type3_all_end.Margin = new System.Windows.Forms.Padding(2);
             this.type3_all_end.Name = "type3_all_end";
-            this.type3_all_end.Size = new System.Drawing.Size(64, 20);
+            this.type3_all_end.Size = new System.Drawing.Size(64, 26);
             this.type3_all_end.TabIndex = 14;
             // 
             // type2_all_end
@@ -2570,7 +2570,7 @@ namespace WindowsFormsApp1
             this.type2_all_end.Location = new System.Drawing.Point(188, 43);
             this.type2_all_end.Margin = new System.Windows.Forms.Padding(2);
             this.type2_all_end.Name = "type2_all_end";
-            this.type2_all_end.Size = new System.Drawing.Size(64, 20);
+            this.type2_all_end.Size = new System.Drawing.Size(64, 26);
             this.type2_all_end.TabIndex = 10;
             // 
             // type1_all_end
@@ -2578,7 +2578,7 @@ namespace WindowsFormsApp1
             this.type1_all_end.Location = new System.Drawing.Point(188, 22);
             this.type1_all_end.Margin = new System.Windows.Forms.Padding(2);
             this.type1_all_end.Name = "type1_all_end";
-            this.type1_all_end.Size = new System.Drawing.Size(64, 20);
+            this.type1_all_end.Size = new System.Drawing.Size(64, 26);
             this.type1_all_end.TabIndex = 6;
             // 
             // label30
@@ -2679,7 +2679,7 @@ namespace WindowsFormsApp1
             this.type0_all_start.Location = new System.Drawing.Point(102, 2);
             this.type0_all_start.Margin = new System.Windows.Forms.Padding(2);
             this.type0_all_start.Name = "type0_all_start";
-            this.type0_all_start.Size = new System.Drawing.Size(60, 20);
+            this.type0_all_start.Size = new System.Drawing.Size(60, 26);
             this.type0_all_start.TabIndex = 47;
             // 
             // type1_all_start
@@ -2690,7 +2690,7 @@ namespace WindowsFormsApp1
             this.type1_all_start.Location = new System.Drawing.Point(102, 22);
             this.type1_all_start.Margin = new System.Windows.Forms.Padding(2);
             this.type1_all_start.Name = "type1_all_start";
-            this.type1_all_start.Size = new System.Drawing.Size(60, 20);
+            this.type1_all_start.Size = new System.Drawing.Size(60, 26);
             this.type1_all_start.TabIndex = 4;
             // 
             // tableLayoutPanel12
@@ -2891,7 +2891,7 @@ namespace WindowsFormsApp1
             this.type5_start.Location = new System.Drawing.Point(102, 97);
             this.type5_start.Margin = new System.Windows.Forms.Padding(2);
             this.type5_start.Name = "type5_start";
-            this.type5_start.Size = new System.Drawing.Size(58, 20);
+            this.type5_start.Size = new System.Drawing.Size(58, 26);
             this.type5_start.TabIndex = 36;
             // 
             // type4_start
@@ -2902,7 +2902,7 @@ namespace WindowsFormsApp1
             this.type4_start.Location = new System.Drawing.Point(102, 78);
             this.type4_start.Margin = new System.Windows.Forms.Padding(2);
             this.type4_start.Name = "type4_start";
-            this.type4_start.Size = new System.Drawing.Size(58, 20);
+            this.type4_start.Size = new System.Drawing.Size(58, 26);
             this.type4_start.TabIndex = 16;
             // 
             // type3_start
@@ -2913,7 +2913,7 @@ namespace WindowsFormsApp1
             this.type3_start.Location = new System.Drawing.Point(102, 59);
             this.type3_start.Margin = new System.Windows.Forms.Padding(2);
             this.type3_start.Name = "type3_start";
-            this.type3_start.Size = new System.Drawing.Size(58, 20);
+            this.type3_start.Size = new System.Drawing.Size(58, 26);
             this.type3_start.TabIndex = 12;
             // 
             // type2_start
@@ -2924,7 +2924,7 @@ namespace WindowsFormsApp1
             this.type2_start.Location = new System.Drawing.Point(102, 40);
             this.type2_start.Margin = new System.Windows.Forms.Padding(2);
             this.type2_start.Name = "type2_start";
-            this.type2_start.Size = new System.Drawing.Size(58, 20);
+            this.type2_start.Size = new System.Drawing.Size(58, 26);
             this.type2_start.TabIndex = 7;
             // 
             // type5_end
@@ -2932,7 +2932,7 @@ namespace WindowsFormsApp1
             this.type5_end.Location = new System.Drawing.Point(188, 97);
             this.type5_end.Margin = new System.Windows.Forms.Padding(2);
             this.type5_end.Name = "type5_end";
-            this.type5_end.Size = new System.Drawing.Size(63, 20);
+            this.type5_end.Size = new System.Drawing.Size(63, 26);
             this.type5_end.TabIndex = 38;
             // 
             // type4_end
@@ -2940,7 +2940,7 @@ namespace WindowsFormsApp1
             this.type4_end.Location = new System.Drawing.Point(188, 78);
             this.type4_end.Margin = new System.Windows.Forms.Padding(2);
             this.type4_end.Name = "type4_end";
-            this.type4_end.Size = new System.Drawing.Size(63, 20);
+            this.type4_end.Size = new System.Drawing.Size(63, 26);
             this.type4_end.TabIndex = 18;
             // 
             // label26
@@ -2963,7 +2963,7 @@ namespace WindowsFormsApp1
             this.type3_end.Location = new System.Drawing.Point(188, 59);
             this.type3_end.Margin = new System.Windows.Forms.Padding(2);
             this.type3_end.Name = "type3_end";
-            this.type3_end.Size = new System.Drawing.Size(63, 20);
+            this.type3_end.Size = new System.Drawing.Size(63, 26);
             this.type3_end.TabIndex = 14;
             // 
             // label12
@@ -2986,7 +2986,7 @@ namespace WindowsFormsApp1
             this.type2_end.Location = new System.Drawing.Point(188, 40);
             this.type2_end.Margin = new System.Windows.Forms.Padding(2);
             this.type2_end.Name = "type2_end";
-            this.type2_end.Size = new System.Drawing.Size(63, 20);
+            this.type2_end.Size = new System.Drawing.Size(63, 26);
             this.type2_end.TabIndex = 10;
             // 
             // type1_end
@@ -2994,7 +2994,7 @@ namespace WindowsFormsApp1
             this.type1_end.Location = new System.Drawing.Point(188, 21);
             this.type1_end.Margin = new System.Windows.Forms.Padding(2);
             this.type1_end.Name = "type1_end";
-            this.type1_end.Size = new System.Drawing.Size(63, 20);
+            this.type1_end.Size = new System.Drawing.Size(63, 26);
             this.type1_end.TabIndex = 6;
             // 
             // type1_start
@@ -3005,7 +3005,7 @@ namespace WindowsFormsApp1
             this.type1_start.Location = new System.Drawing.Point(102, 21);
             this.type1_start.Margin = new System.Windows.Forms.Padding(2);
             this.type1_start.Name = "type1_start";
-            this.type1_start.Size = new System.Drawing.Size(58, 20);
+            this.type1_start.Size = new System.Drawing.Size(58, 26);
             this.type1_start.TabIndex = 4;
             // 
             // label25
@@ -3102,7 +3102,7 @@ namespace WindowsFormsApp1
             this.type0_end.Location = new System.Drawing.Point(188, 2);
             this.type0_end.Margin = new System.Windows.Forms.Padding(2);
             this.type0_end.Name = "type0_end";
-            this.type0_end.Size = new System.Drawing.Size(63, 20);
+            this.type0_end.Size = new System.Drawing.Size(63, 26);
             this.type0_end.TabIndex = 47;
             // 
             // type0_start
@@ -3113,7 +3113,7 @@ namespace WindowsFormsApp1
             this.type0_start.Location = new System.Drawing.Point(102, 2);
             this.type0_start.Margin = new System.Windows.Forms.Padding(2);
             this.type0_start.Name = "type0_start";
-            this.type0_start.Size = new System.Drawing.Size(58, 20);
+            this.type0_start.Size = new System.Drawing.Size(58, 26);
             this.type0_start.TabIndex = 46;
             // 
             // tableLayoutPanel26
@@ -3186,7 +3186,7 @@ namespace WindowsFormsApp1
             this.Telegram_Allow.Font = new System.Drawing.Font("굴림", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.Telegram_Allow.Location = new System.Drawing.Point(5, 15);
             this.Telegram_Allow.Name = "Telegram_Allow";
-            this.Telegram_Allow.Size = new System.Drawing.Size(125, 15);
+            this.Telegram_Allow.Size = new System.Drawing.Size(158, 21);
             this.Telegram_Allow.TabIndex = 2;
             this.Telegram_Allow.Text = "Telegram_Allow";
             this.Telegram_Allow.UseVisualStyleBackColor = true;
@@ -3216,7 +3216,7 @@ namespace WindowsFormsApp1
             this.telegram_user_id.Location = new System.Drawing.Point(72, 2);
             this.telegram_user_id.Margin = new System.Windows.Forms.Padding(2);
             this.telegram_user_id.Name = "telegram_user_id";
-            this.telegram_user_id.Size = new System.Drawing.Size(183, 20);
+            this.telegram_user_id.Size = new System.Drawing.Size(183, 26);
             this.telegram_user_id.TabIndex = 2;
             // 
             // textBox45
@@ -3229,7 +3229,7 @@ namespace WindowsFormsApp1
             this.textBox45.Location = new System.Drawing.Point(2, 25);
             this.textBox45.Margin = new System.Windows.Forms.Padding(2);
             this.textBox45.Name = "textBox45";
-            this.textBox45.Size = new System.Drawing.Size(66, 20);
+            this.textBox45.Size = new System.Drawing.Size(66, 26);
             this.textBox45.TabIndex = 1;
             this.textBox45.Text = "TOKEN";
             this.textBox45.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -3240,7 +3240,7 @@ namespace WindowsFormsApp1
             this.telegram_token.Location = new System.Drawing.Point(72, 25);
             this.telegram_token.Margin = new System.Windows.Forms.Padding(2);
             this.telegram_token.Name = "telegram_token";
-            this.telegram_token.Size = new System.Drawing.Size(183, 20);
+            this.telegram_token.Size = new System.Drawing.Size(183, 26);
             this.telegram_token.TabIndex = 3;
             // 
             // textBox21
@@ -3253,7 +3253,7 @@ namespace WindowsFormsApp1
             this.textBox21.Location = new System.Drawing.Point(2, 2);
             this.textBox21.Margin = new System.Windows.Forms.Padding(2);
             this.textBox21.Name = "textBox21";
-            this.textBox21.Size = new System.Drawing.Size(66, 20);
+            this.textBox21.Size = new System.Drawing.Size(66, 26);
             this.textBox21.TabIndex = 0;
             this.textBox21.Text = "USER_ID";
             this.textBox21.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -3291,7 +3291,7 @@ namespace WindowsFormsApp1
             this.KIS_Independent.Font = new System.Drawing.Font("굴림", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.KIS_Independent.Location = new System.Drawing.Point(130, 18);
             this.KIS_Independent.Name = "KIS_Independent";
-            this.KIS_Independent.Size = new System.Drawing.Size(133, 15);
+            this.KIS_Independent.Size = new System.Drawing.Size(169, 21);
             this.KIS_Independent.TabIndex = 2;
             this.KIS_Independent.Text = "KIS_Independent";
             this.KIS_Independent.UseVisualStyleBackColor = true;
@@ -3302,7 +3302,7 @@ namespace WindowsFormsApp1
             this.KIS_Allow.Font = new System.Drawing.Font("굴림", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.KIS_Allow.Location = new System.Drawing.Point(5, 18);
             this.KIS_Allow.Name = "KIS_Allow";
-            this.KIS_Allow.Size = new System.Drawing.Size(87, 15);
+            this.KIS_Allow.Size = new System.Drawing.Size(110, 21);
             this.KIS_Allow.TabIndex = 1;
             this.KIS_Allow.Text = "KIS_Allow";
             this.KIS_Allow.UseVisualStyleBackColor = true;
@@ -3338,7 +3338,7 @@ namespace WindowsFormsApp1
             this.KIS_Account.Location = new System.Drawing.Point(70, 2);
             this.KIS_Account.Margin = new System.Windows.Forms.Padding(2);
             this.KIS_Account.Name = "KIS_Account";
-            this.KIS_Account.Size = new System.Drawing.Size(185, 20);
+            this.KIS_Account.Size = new System.Drawing.Size(185, 26);
             this.KIS_Account.TabIndex = 9;
             // 
             // label13
@@ -3382,7 +3382,7 @@ namespace WindowsFormsApp1
             this.kis_amount.Location = new System.Drawing.Point(70, 71);
             this.kis_amount.Margin = new System.Windows.Forms.Padding(2);
             this.kis_amount.Name = "kis_amount";
-            this.kis_amount.Size = new System.Drawing.Size(185, 20);
+            this.kis_amount.Size = new System.Drawing.Size(185, 26);
             this.kis_amount.TabIndex = 7;
             // 
             // appsecret
@@ -3394,7 +3394,7 @@ namespace WindowsFormsApp1
             this.appsecret.Location = new System.Drawing.Point(70, 48);
             this.appsecret.Margin = new System.Windows.Forms.Padding(2);
             this.appsecret.Name = "appsecret";
-            this.appsecret.Size = new System.Drawing.Size(185, 20);
+            this.appsecret.Size = new System.Drawing.Size(185, 26);
             this.appsecret.TabIndex = 6;
             // 
             // appkey
@@ -3403,7 +3403,7 @@ namespace WindowsFormsApp1
             this.appkey.Location = new System.Drawing.Point(70, 25);
             this.appkey.Margin = new System.Windows.Forms.Padding(2);
             this.appkey.Name = "appkey";
-            this.appkey.Size = new System.Drawing.Size(185, 20);
+            this.appkey.Size = new System.Drawing.Size(185, 26);
             this.appkey.TabIndex = 4;
             // 
             // kis_amount_text
@@ -3493,7 +3493,7 @@ namespace WindowsFormsApp1
             | System.Windows.Forms.AnchorStyles.Right)));
             this.real_cert_password_text.Location = new System.Drawing.Point(101, 47);
             this.real_cert_password_text.Name = "real_cert_password_text";
-            this.real_cert_password_text.Size = new System.Drawing.Size(153, 22);
+            this.real_cert_password_text.Size = new System.Drawing.Size(153, 30);
             this.real_cert_password_text.TabIndex = 5;
             // 
             // real_password_text
@@ -3503,7 +3503,7 @@ namespace WindowsFormsApp1
             | System.Windows.Forms.AnchorStyles.Right)));
             this.real_password_text.Location = new System.Drawing.Point(101, 25);
             this.real_password_text.Name = "real_password_text";
-            this.real_password_text.Size = new System.Drawing.Size(153, 22);
+            this.real_password_text.Size = new System.Drawing.Size(153, 30);
             this.real_password_text.TabIndex = 4;
             // 
             // label15
@@ -3561,7 +3561,7 @@ namespace WindowsFormsApp1
             | System.Windows.Forms.AnchorStyles.Right)));
             this.real_id_text.Location = new System.Drawing.Point(101, 3);
             this.real_id_text.Name = "real_id_text";
-            this.real_id_text.Size = new System.Drawing.Size(153, 22);
+            this.real_id_text.Size = new System.Drawing.Size(153, 30);
             this.real_id_text.TabIndex = 3;
             // 
             // groupBox13
@@ -3648,14 +3648,14 @@ namespace WindowsFormsApp1
             // 
             this.type0_isa_start.Location = new System.Drawing.Point(77, 3);
             this.type0_isa_start.Name = "type0_isa_start";
-            this.type0_isa_start.Size = new System.Drawing.Size(84, 21);
+            this.type0_isa_start.Size = new System.Drawing.Size(84, 28);
             this.type0_isa_start.TabIndex = 8;
             // 
             // type0_isa_end
             // 
             this.type0_isa_end.Location = new System.Drawing.Point(167, 3);
             this.type0_isa_end.Name = "type0_isa_end";
-            this.type0_isa_end.Size = new System.Drawing.Size(85, 21);
+            this.type0_isa_end.Size = new System.Drawing.Size(85, 28);
             this.type0_isa_end.TabIndex = 9;
             // 
             // type4_selection_isa
@@ -3697,7 +3697,7 @@ namespace WindowsFormsApp1
             | System.Windows.Forms.AnchorStyles.Right)));
             this.type4_isa_start.Location = new System.Drawing.Point(77, 95);
             this.type4_isa_start.Name = "type4_isa_start";
-            this.type4_isa_start.Size = new System.Drawing.Size(84, 21);
+            this.type4_isa_start.Size = new System.Drawing.Size(84, 28);
             this.type4_isa_start.TabIndex = 5;
             // 
             // type4_isa_end
@@ -3707,7 +3707,7 @@ namespace WindowsFormsApp1
             | System.Windows.Forms.AnchorStyles.Right)));
             this.type4_isa_end.Location = new System.Drawing.Point(167, 95);
             this.type4_isa_end.Name = "type4_isa_end";
-            this.type4_isa_end.Size = new System.Drawing.Size(85, 21);
+            this.type4_isa_end.Size = new System.Drawing.Size(85, 28);
             this.type4_isa_end.TabIndex = 6;
             // 
             // type2_isa_start
@@ -3717,7 +3717,7 @@ namespace WindowsFormsApp1
             | System.Windows.Forms.AnchorStyles.Right)));
             this.type2_isa_start.Location = new System.Drawing.Point(77, 49);
             this.type2_isa_start.Name = "type2_isa_start";
-            this.type2_isa_start.Size = new System.Drawing.Size(84, 21);
+            this.type2_isa_start.Size = new System.Drawing.Size(84, 28);
             this.type2_isa_start.TabIndex = 5;
             // 
             // type2_isa_end
@@ -3727,7 +3727,7 @@ namespace WindowsFormsApp1
             | System.Windows.Forms.AnchorStyles.Right)));
             this.type2_isa_end.Location = new System.Drawing.Point(167, 49);
             this.type2_isa_end.Name = "type2_isa_end";
-            this.type2_isa_end.Size = new System.Drawing.Size(85, 21);
+            this.type2_isa_end.Size = new System.Drawing.Size(85, 28);
             this.type2_isa_end.TabIndex = 6;
             // 
             // type1_selection_isa
@@ -3753,7 +3753,7 @@ namespace WindowsFormsApp1
             | System.Windows.Forms.AnchorStyles.Right)));
             this.type1_isa_start.Location = new System.Drawing.Point(77, 26);
             this.type1_isa_start.Name = "type1_isa_start";
-            this.type1_isa_start.Size = new System.Drawing.Size(84, 21);
+            this.type1_isa_start.Size = new System.Drawing.Size(84, 28);
             this.type1_isa_start.TabIndex = 2;
             // 
             // type1_isa_end
@@ -3763,7 +3763,7 @@ namespace WindowsFormsApp1
             | System.Windows.Forms.AnchorStyles.Right)));
             this.type1_isa_end.Location = new System.Drawing.Point(167, 26);
             this.type1_isa_end.Name = "type1_isa_end";
-            this.type1_isa_end.Size = new System.Drawing.Size(85, 21);
+            this.type1_isa_end.Size = new System.Drawing.Size(85, 28);
             this.type1_isa_end.TabIndex = 3;
             // 
             // type3_selection_isa
@@ -3789,7 +3789,7 @@ namespace WindowsFormsApp1
             | System.Windows.Forms.AnchorStyles.Right)));
             this.type3_isa_start.Location = new System.Drawing.Point(77, 72);
             this.type3_isa_start.Name = "type3_isa_start";
-            this.type3_isa_start.Size = new System.Drawing.Size(84, 21);
+            this.type3_isa_start.Size = new System.Drawing.Size(84, 28);
             this.type3_isa_start.TabIndex = 2;
             // 
             // type3_isa_end
@@ -3799,7 +3799,7 @@ namespace WindowsFormsApp1
             | System.Windows.Forms.AnchorStyles.Right)));
             this.type3_isa_end.Location = new System.Drawing.Point(167, 72);
             this.type3_isa_end.Name = "type3_isa_end";
-            this.type3_isa_end.Size = new System.Drawing.Size(85, 21);
+            this.type3_isa_end.Size = new System.Drawing.Size(85, 28);
             this.type3_isa_end.TabIndex = 3;
             // 
             // type5_selection_isa
@@ -3825,7 +3825,7 @@ namespace WindowsFormsApp1
             | System.Windows.Forms.AnchorStyles.Right)));
             this.type5_isa_start.Location = new System.Drawing.Point(77, 118);
             this.type5_isa_start.Name = "type5_isa_start";
-            this.type5_isa_start.Size = new System.Drawing.Size(84, 21);
+            this.type5_isa_start.Size = new System.Drawing.Size(84, 28);
             this.type5_isa_start.TabIndex = 2;
             // 
             // type5_isa_end
@@ -3835,7 +3835,7 @@ namespace WindowsFormsApp1
             | System.Windows.Forms.AnchorStyles.Right)));
             this.type5_isa_end.Location = new System.Drawing.Point(167, 118);
             this.type5_isa_end.Name = "type5_isa_end";
-            this.type5_isa_end.Size = new System.Drawing.Size(85, 21);
+            this.type5_isa_end.Size = new System.Drawing.Size(85, 28);
             this.type5_isa_end.TabIndex = 3;
             // 
             // tableLayoutPanel27
@@ -3895,7 +3895,7 @@ namespace WindowsFormsApp1
             | System.Windows.Forms.AnchorStyles.Right)));
             this.Dual_Time_Start.Location = new System.Drawing.Point(74, 3);
             this.Dual_Time_Start.Name = "Dual_Time_Start";
-            this.Dual_Time_Start.Size = new System.Drawing.Size(82, 21);
+            this.Dual_Time_Start.Size = new System.Drawing.Size(82, 28);
             this.Dual_Time_Start.TabIndex = 1;
             // 
             // Dual_Time_Stop
@@ -3905,7 +3905,7 @@ namespace WindowsFormsApp1
             | System.Windows.Forms.AnchorStyles.Right)));
             this.Dual_Time_Stop.Location = new System.Drawing.Point(162, 3);
             this.Dual_Time_Stop.Name = "Dual_Time_Stop";
-            this.Dual_Time_Stop.Size = new System.Drawing.Size(84, 21);
+            this.Dual_Time_Stop.Size = new System.Drawing.Size(84, 28);
             this.Dual_Time_Stop.TabIndex = 2;
             // 
             // tableLayoutPanel28
@@ -4010,7 +4010,7 @@ namespace WindowsFormsApp1
             this.sell_set1_after.Location = new System.Drawing.Point(76, 2);
             this.sell_set1_after.Margin = new System.Windows.Forms.Padding(2);
             this.sell_set1_after.Name = "sell_set1_after";
-            this.sell_set1_after.Size = new System.Drawing.Size(70, 21);
+            this.sell_set1_after.Size = new System.Drawing.Size(70, 28);
             this.sell_set1_after.TabIndex = 22;
             // 
             // sell_set2_after
@@ -4019,7 +4019,7 @@ namespace WindowsFormsApp1
             this.sell_set2_after.Location = new System.Drawing.Point(150, 2);
             this.sell_set2_after.Margin = new System.Windows.Forms.Padding(2);
             this.sell_set2_after.Name = "sell_set2_after";
-            this.sell_set2_after.Size = new System.Drawing.Size(71, 21);
+            this.sell_set2_after.Size = new System.Drawing.Size(71, 28);
             this.sell_set2_after.TabIndex = 24;
             // 
             // gru
@@ -4113,7 +4113,7 @@ namespace WindowsFormsApp1
             // 
             this.TradingView_Webhook_Stop.Location = new System.Drawing.Point(169, 3);
             this.TradingView_Webhook_Stop.Name = "TradingView_Webhook_Stop";
-            this.TradingView_Webhook_Stop.Size = new System.Drawing.Size(80, 21);
+            this.TradingView_Webhook_Stop.Size = new System.Drawing.Size(80, 28);
             this.TradingView_Webhook_Stop.TabIndex = 2;
             // 
             // label43
@@ -4135,7 +4135,7 @@ namespace WindowsFormsApp1
             // 
             this.TradingView_Webhook_Start.Location = new System.Drawing.Point(82, 3);
             this.TradingView_Webhook_Start.Name = "TradingView_Webhook_Start";
-            this.TradingView_Webhook_Start.Size = new System.Drawing.Size(81, 21);
+            this.TradingView_Webhook_Start.Size = new System.Drawing.Size(81, 28);
             this.TradingView_Webhook_Start.TabIndex = 1;
             // 
             // 주의사항

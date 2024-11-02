@@ -608,8 +608,8 @@ namespace WindowsFormsApp1
 
         private void ValidatedecimalInput(object sender, EventArgs e, TextBox textBox, string defaultValue)
         {
-            double max = -100;
-            double min = 100;
+            double max = 100;
+            double min = -100;
 
             if (double.TryParse(textBox.Text, out double result))
             {
