@@ -998,7 +998,7 @@ namespace WindowsFormsApp1
 
                 if (!buy_mode_or.Checked && Fomula_list_buy.Text.Split(',').Length != 2)
                 {
-                    MessageBox.Show("AND INDEPENDENT DUAL 모드에서 매수 조건식을 2개 선택하세요.");
+                    MessageBox.Show("AND INDEPENDENT 모드에서 매수 조건식을 2개 선택하세요.");
                     return true;
                 }
 
