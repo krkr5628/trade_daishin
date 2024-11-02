@@ -1383,7 +1383,7 @@ namespace WindowsFormsApp1
             }
             max_hoid.Text = "0/0";
             //
-            if (utility.buy_INDEPENDENT || utility.buy_DUAL)
+            if (utility.buy_INDEPENDENT)
             {
                 maxbuy_acc.Text = string.Concat(Enumerable.Repeat("0/", utility.Fomula_list_buy_text.Split(',').Length)) + utility.maxbuy_acc;
             }
@@ -1677,11 +1677,15 @@ namespace WindowsFormsApp1
         //https://money2.daishin.com/e5/mboard/ptype_basic/HTS_Plus_Helper/DW_Basic_Read.aspx?boardseq=291&seq=176&page=2&searchString=&p=&v=&m=
         private void GetCashInfo_Seperate(bool update)
         {
-            GetCashInfo(Master_code, update);
+
+            if (utility.buy_ISA) {
+                GetCashInfo(ISA_code, update);
+            }
+            else{
+                GetCashInfo(Master_code, update);
+            }
 
             System.Threading.Thread.Sleep(delay1);
-
-            if (utility.buy_DUAL) GetCashInfo(ISA_code, update);
         }
 
         private void GetCashInfo(string acc_gubun, bool update)
@@ -1863,11 +1867,16 @@ namespace WindowsFormsApp1
         //https://money2.daishin.com/e5/mboard/ptype_basic/HTS_Plus_Helper/DW_Basic_Read.aspx?boardseq=291&seq=264&page=1&searchString=&p=&v=&m=
         private void today_profit_tax_load_seperate()
         {
-            today_profit_tax_load("", Master_code);
+            if (utility.buy_ISA)
+            {
+                today_profit_tax_load("", ISA_code);
+            }
+            else
+            {
+                today_profit_tax_load("", Master_code);
+            }
 
             System.Threading.Thread.Sleep(delay1);
-
-            if (utility.buy_DUAL) today_profit_tax_load("", ISA_code);
         }
 
         private void today_profit_tax_load(string load_type, string acc_gubun)
@@ -1954,11 +1963,17 @@ namespace WindowsFormsApp1
         //https://money2.daishin.com/e5/mboard/ptype_basic/HTS_Plus_Helper/DW_Basic_Read.aspx?boardseq=291&seq=174&page=2&searchString=&p=&v=&m=
         private void Transaction_Detail_seperate(string order_number, string trade)
         {
-            Transaction_Detail(order_number, Master_code, trade);
+
+            if (utility.buy_ISA)
+            {
+                Transaction_Detail(order_number, ISA_code, trade);
+            }
+            else
+            {
+                Transaction_Detail(order_number, Master_code, trade);
+            }
 
             System.Threading.Thread.Sleep(delay1);
-
-            if (utility.buy_DUAL) Transaction_Detail(order_number, ISA_code, trade);
         }
 
         private void Transaction_Detail(string order_number, string gubun, string trade)
@@ -3228,16 +3243,6 @@ namespace WindowsFormsApp1
                     telegram_message("자동 매매 정지\n");
                     return;
                 }
-
-                //Dual 모드에서는 조건식이 2개
-                if (utility.buy_DUAL && condition_length != 2)
-                {
-                    WriteLog_System("DUAL 모드 조건식 2개 필요\n");
-                    telegram_message("DUAL 모드 조건식 2개 필요\n");
-                    WriteLog_System("자동 매매 정지\n");
-                    telegram_message("자동 매매 정지\n");
-                    return;
-                }
             }
 
             int condition_length2 = utility.Fomula_list_sell_text == "9999" ? 0 : 1;
@@ -3278,13 +3283,6 @@ namespace WindowsFormsApp1
 
             //실시간 편출입 받기
             CssAlert.Subscribe();
-
-            //DUAL 모드에서 계좌별 조건식 설정
-            if (utility.buy_DUAL)
-            {
-                string[] tmp = utility.Fomula_list_buy_text.Split(',');
-                ISA_Condition = tmp[1].Split('^')[1];
-            }
 
             //자동 매수 조건식 설정 여부
             if (utility.buy_condition)
@@ -3658,7 +3656,7 @@ namespace WindowsFormsApp1
                 //
                 //계좌 구분 코드
                 string gubun_acc_fresh = Master_code;
-                if (utility.buy_DUAL && condition_name.Equals(ISA_Condition))
+                if (utility.buy_ISA)
                 {
                     gubun_acc_fresh = ISA_code;
                 }
@@ -4115,7 +4113,7 @@ namespace WindowsFormsApp1
             //
             //계좌 구분 코드
             string gubun_acc_fresh = Master_code;
-            if (utility.buy_DUAL && Condition_Name.Equals(ISA_Condition))
+            if (utility.buy_ISA)
             {
                 gubun_acc_fresh = ISA_code;
             }
@@ -4169,7 +4167,7 @@ namespace WindowsFormsApp1
                         }
                     }
                     //기존에 포함됬던 종목
-                    else if (utility.buy_INDEPENDENT || utility.buy_DUAL)
+                    else if (utility.buy_INDEPENDENT)
                     {
                         bool isentry = false;
                         bool issingle = false;
@@ -4375,7 +4373,7 @@ namespace WindowsFormsApp1
                             gridView1_refresh();
                         }
                     }
-                    else if (utility.buy_INDEPENDENT || utility.buy_DUAL)
+                    else if (utility.buy_INDEPENDENT)
                     {
                         for (int i = 0; i < findRows.Length; i++)
                         {
@@ -4649,7 +4647,7 @@ namespace WindowsFormsApp1
             }
 
             //매수 시간 확인
-            if (utility.buy_DUAL && utility.Dual_Time && gubun == ISA_code)
+            if (utility.buy_ISA && utility.Dual_Time && gubun == ISA_code)
             {
                 TimeSpan t_code = TimeSpan.Parse(time);
                 TimeSpan t_start = TimeSpan.Parse(utility.Dual_Time_Start);
@@ -4685,7 +4683,7 @@ namespace WindowsFormsApp1
             if (hold >= hold_max) return "대기";
 
             //매매 횟수 확인
-            if (utility.buy_INDEPENDENT || utility.buy_DUAL)
+            if (utility.buy_INDEPENDENT)
             {
                 string[] trade_status = maxbuy_acc.Text.Split('/');
                 string[] condition_num = utility.Fomula_list_buy_text.Split(',');
@@ -4850,7 +4848,7 @@ namespace WindowsFormsApp1
                 }
 
                 //매매 횟수업데이트
-                if (utility.buy_INDEPENDENT || utility.buy_DUAL)
+                if (utility.buy_INDEPENDENT)
                 {
                     string[] trade_status = maxbuy_acc.Text.Split('/');
                     string[] condition_num = utility.Fomula_list_buy_text.Split(',');
@@ -4916,7 +4914,7 @@ namespace WindowsFormsApp1
                     }
 
                     //매매 횟수업데이트
-                    if (utility.buy_INDEPENDENT || utility.buy_DUAL)
+                    if (utility.buy_INDEPENDENT)
                     {
                         string[] trade_status = maxbuy_acc.Text.Split('/');
                         string[] condition_num = utility.Fomula_list_buy_text.Split(',');
@@ -5031,7 +5029,7 @@ namespace WindowsFormsApp1
                 }
 
                 //매매 횟수업데이트(Independent Mode)
-                if (utility.buy_INDEPENDENT || utility.buy_DUAL)
+                if (utility.buy_INDEPENDENT)
                 {
                     string[] trade_status = maxbuy_acc.Text.Split('/');
                     string[] condition_num = utility.Fomula_list_buy_text.Split(',');
@@ -5101,7 +5099,7 @@ namespace WindowsFormsApp1
                     }
 
                     //매매 횟수업데이트(Independent Mode)
-                    if (utility.buy_INDEPENDENT || utility.buy_DUAL)
+                    if (utility.buy_INDEPENDENT)
                     {
                         string[] trade_status = maxbuy_acc.Text.Split('/');
                         string[] condition_num = utility.Fomula_list_buy_text.Split(',');
@@ -5935,7 +5933,7 @@ namespace WindowsFormsApp1
                                 findRows[0]["매도시각"] = time;
                                 gridView1_refresh();
 
-                                if(!utility.buy_INDEPENDENT  && !utility.buy_DUAL)
+                                if(!utility.buy_INDEPENDENT)
                                 {
                                     //code 종목 실시간 해지
                                     StockCur.SetInputValue(0, findRows[0]["종목코드"]);
@@ -6013,7 +6011,7 @@ namespace WindowsFormsApp1
                                 {
                                     findRows[0]["상태"] = "매도완료";
                                     //
-                                    if (!utility.buy_INDEPENDENT && !utility.buy_DUAL)
+                                    if (!utility.buy_INDEPENDENT)
                                     {
                                         //code 종목 실시간 해지
                                         StockCur.SetInputValue(0, findRows[0]["종목코드"]);

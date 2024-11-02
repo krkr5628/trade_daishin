@@ -1036,9 +1036,9 @@ namespace WindowsFormsApp1
                 }
             }
 
-            if (buy_mode_dual.Checked)
+            if (buy_mode_ISA.Checked)
             {
-                MessageBox.Show("Dual 모드에서 ISA계좌가 없을시 오류가 발생할 수 있습니다.");
+                MessageBox.Show("ISA 모드에서 ISA계좌가 없을시 오류가 발생할 수 있습니다.");
             }
 
 
@@ -1108,7 +1108,6 @@ namespace WindowsFormsApp1
                     return true;
                 }
             }
-
 
             if (loss_percent.Checked)
             {
@@ -1733,7 +1732,7 @@ namespace WindowsFormsApp1
             tmp.Add("매수시간전검출매수금지/" + Convert.ToString(before_time_deny.Checked));
             tmp.Add("보유종목매수금지/" + Convert.ToString(hold_deny.Checked));
             //
-            tmp.Add("매수조건;" + Convert.ToString(buy_condition.Checked) + ";" + buy_condition_start.Text + ";" + buy_condition_end.Text + ";" + Convert.ToString(buy_condition_index.Checked) + ";" + (Fomula_list_buy.Text.Equals("") ? "9999" : Fomula_list_buy.Text) + ";" + Convert.ToString(buy_mode_or.Checked) + ";" + Convert.ToString(buy_mode_and.Checked) + ";" + Convert.ToString(buy_mode_independent.Checked) + ";" + Convert.ToString(buy_mode_dual.Checked));
+            tmp.Add("매수조건;" + Convert.ToString(buy_condition.Checked) + ";" + buy_condition_start.Text + ";" + buy_condition_end.Text + ";" + Convert.ToString(buy_condition_index.Checked) + ";" + (Fomula_list_buy.Text.Equals("") ? "9999" : Fomula_list_buy.Text) + ";" + Convert.ToString(buy_mode_or.Checked) + ";" + Convert.ToString(buy_mode_and.Checked) + ";" + Convert.ToString(buy_mode_independent.Checked) + ";" + Convert.ToString(buy_mode_ISA.Checked));
             tmp.Add("매도조건;" + Convert.ToString(sell_condition.Checked) + ";" + sell_condition_start.Text + ";" + sell_condition_end.Text + ";" + Convert.ToString(Fomula_list_sell.SelectedIndex) + ";" + (Fomula_list_sell.Text == "" ? "9999" : Fomula_list_sell.Text));
             tmp.Add("익절/" + Convert.ToString(profit_percent.Checked) + "/" + profit_percent_text.Text);
             tmp.Add("익절원/" + Convert.ToString(profit_won.Checked) + "/" + profit_won_text.Text);
@@ -1964,7 +1963,7 @@ namespace WindowsFormsApp1
             buy_mode_or.Checked = Convert.ToBoolean(buy_condition_tmp[6]);
             buy_mode_and.Checked = Convert.ToBoolean(buy_condition_tmp[7]);
             buy_mode_independent.Checked = Convert.ToBoolean(buy_condition_tmp[8]);
-            buy_mode_dual.Checked = Convert.ToBoolean(buy_condition_tmp[9]);
+            buy_mode_ISA.Checked = Convert.ToBoolean(buy_condition_tmp[9]);
 
             //매도조건
             String[] sell_condition_tmp = reader.ReadLine().Split(';');

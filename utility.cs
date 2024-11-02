@@ -49,7 +49,7 @@ namespace WindowsFormsApp1
         public static bool buy_OR;
         public static bool buy_AND;
         public static bool buy_INDEPENDENT;
-        public static bool buy_DUAL;
+        public static bool buy_ISA;
 
         public static bool sell_condition; //매도조건
         public static string sell_condition_start;
@@ -300,7 +300,7 @@ namespace WindowsFormsApp1
             buy_OR = Convert.ToBoolean(buy_condition_tmp[6]);
             buy_AND = Convert.ToBoolean(buy_condition_tmp[7]);
             buy_INDEPENDENT = Convert.ToBoolean(buy_condition_tmp[8]);
-            buy_DUAL = Convert.ToBoolean(buy_condition_tmp[9]);
+            buy_ISA = Convert.ToBoolean(buy_condition_tmp[9]);
 
             //매도조건
             String[] sell_condition_tmp = reader.ReadLine().Split(';');
